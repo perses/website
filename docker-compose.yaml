@@ -4,6 +4,11 @@ services:
     image: "docker.io/persesdev/perses:v0.28.0"
     ports:
       - "5000:8080"
+    environment:
+      PERSES_DATABASE_FILE_EXTENSION: "yaml"
+      PERSES_READONLY: true
+    volumes:
+      - "./local_db:/perses"
     labels:
       - "traefik.enable=true"
       # The domain the service will respond to
