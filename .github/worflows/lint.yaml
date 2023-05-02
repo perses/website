@@ -1,0 +1,14 @@
+name: Validate-YAML
+
+on:
+  push:
+    branches:
+  pull_request:
+
+jobs:
+  validate-yaml:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Validate YAML file
+        run: yamllint .
