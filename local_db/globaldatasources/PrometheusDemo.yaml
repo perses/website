@@ -10,4 +10,3 @@ spec:
         kind: "HTTPProxy"
         spec:
           url: "https://prometheus.demo.do.prometheus.io"
-
