@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   demo:
-    image: "docker.io/persesdev/perses:v0.29.0"
+    image: "docker.io/persesdev/perses:v0.30.0"
     ports:
       - "5000:8080"
     environment:
@@ -9,6 +9,7 @@ services:
       PERSES_READONLY: true
     volumes:
       - "./local_db:/perses"
+    restart: unless-stopped
     labels:
       - "traefik.enable=true"
       # The domain the service will respond to
