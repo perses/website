@@ -8,13 +8,28 @@ services:
       PERSES_DATABASE_FILE_EXTENSION: "yaml"
       PERSES_READONLY: true
     volumes:
-      - "./local_db:/perses"
+      - "./local_db_demo:/perses"
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
       # The domain the service will respond to
       - "traefik.http.routers.demo.rule=Host(`demo.perses.dev`)"
       - "traefik.http.routers.demo.tls.certresolver=myresolver"
+      
+  sandbox:
+    image: "docker.io/persesdev/perses:v0.39.0"
+    ports:
+      - "5001:8080"
+    environment:
+      PERSES_DATABASE_FILE_EXTENSION: "yaml"
+      PERSES_READONLY: false
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      # The domain the service will respond to
+      - "traefik.http.routers.sandbox.rule=Host(`sandbox.perses.dev`)"
+      - "traefik.http.routers.sandbox.tls.certresolver=myresolver"
+
   traefik:
     image: "docker.io/traefik:v2.9.10"
     command:
