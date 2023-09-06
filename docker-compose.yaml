@@ -15,7 +15,7 @@ services:
       # The domain the service will respond to
       - "traefik.http.routers.demo.rule=Host(`demo.perses.dev`)"
       - "traefik.http.routers.demo.tls.certresolver=myresolver"
-      
+
   sandbox:
     image: "docker.io/persesdev/perses:v0.39.0"
     ports:
