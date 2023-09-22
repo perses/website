@@ -1,0 +1,69 @@
+{
+  "kind": "Dashboard",
+  "metadata": {
+    "name": "GaugeChartPanel",
+    "createdAt": "2022-12-21T00:00:00Z",
+    "updatedAt": "2023-01-26T17:29:46.991965Z",
+    "version": 5,
+    "project": "Showcase"
+  },
+  "spec": {
+    "duration": "6h",
+    "panels": {
+      "SingleGauge": {
+        "kind": "Panel",
+        "spec": {
+          "display": {
+            "name": "Single Gauge",
+            "description": "Gauge chart with a single gauge"
+          },
+          "plugin": {
+            "kind": "GaugeChart",
+            "spec": {
+              "calculation": "mean",
+              "thresholds": {
+                "steps": [{
+                  "value": 20
+                }]
+              },
+              "format": {
+                "unit": "percent"
+              }
+            }
+          },
+          "queries": [{
+            "kind": "TimeSeriesQuery",
+            "spec": {
+              "plugin": {
+                "kind": "PrometheusTimeSeriesQuery",
+                "spec": {
+                  "query": "100 - ((node_memory_MemAvailable_bytes{env=\"demo\", instance=\"demo.do.prometheus.io:9100\"} * 100) / node_memory_MemTotal_bytes{env=\"demo\", instance=\"demo.do.prometheus.io:9100\"})"
+                }
+              }
+            }
+          }]
+        }
+      }
+    },
+    "layouts": [{
+      "kind": "Grid",
+      "spec": {
+        "display": {
+          "title": "Row 1",
+          "collapse": {
+            "open": true
+          }
+        },
+        "items": [{
+          "x": 0,
+          "y": 0,
+          "width": 9,
+          "height": 7,
+          "content": {
+            "$ref": "#/spec/panels/SingleGauge"
+          }
+        }]
+      }
+    }]
+  }
+}

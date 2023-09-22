@@ -1,0 +1,165 @@
+{
+  "kind": "Dashboard",
+  "metadata": {
+    "name": "MarkdownPanel",
+    "createdAt": "2022-12-21T00:00:00Z",
+    "updatedAt": "2023-01-26T20:03:02.724739Z",
+    "version": 3,
+    "project": "Showcase"
+  },
+  "spec": {
+    "duration": "6h",
+    "panels": {
+      "Code": {
+        "kind": "Panel",
+        "spec": {
+          "display": {
+            "name": "Code",
+            "description": "Markdown code formatting"
+          },
+          "plugin": {
+            "kind": "Markdown",
+            "spec": {
+              "text": "`Inline code` with backticks\n\n```\n# code block\nprint '3 backticks or'\nprint 'indent 4 spaces'\n```"
+            }
+          }
+        }
+      },
+      "Headings": {
+        "kind": "Panel",
+        "spec": {
+          "display": {
+            "name": "Headings",
+            "description": "Markdown headings"
+          },
+          "plugin": {
+            "kind": "Markdown",
+            "spec": {
+              "text": "# First header\n\nFirst header\n=========\n\n## Second header\n\nSecond header\n---------\n\n### Third header\n\n#### Fourth header"
+            }
+          }
+        }
+      },
+      "Links": {
+        "kind": "Panel",
+        "spec": {
+          "display": {
+            "name": "Links",
+            "description": "Markdown links"
+          },
+          "plugin": {
+            "kind": "Markdown",
+            "spec": {
+              "text": "\n[Link](http://a.com)\n\n[Link][1]\n\n[1]: http://b.org"
+            }
+          }
+        }
+      },
+      "Lists": {
+        "kind": "Panel",
+        "spec": {
+          "display": {
+            "name": "Lists",
+            "description": "Markdown lists"
+          },
+          "plugin": {
+            "kind": "Markdown",
+            "spec": {
+              "text": "* List\n* List\n* List\n\n- List\n- List\n- List\n\n1. One\n2. Two\n3. Three\n\n1) One\n2) Two\n3) Three"
+            }
+          }
+        }
+      },
+      "Tables": {
+        "kind": "Panel",
+        "spec": {
+          "display": {
+            "name": "Tables",
+            "description": "Markdown table"
+          },
+          "plugin": {
+            "kind": "Markdown",
+            "spec": {
+              "text": "| Name | Data |\n| -- | -- |\n| Row 1 | Hi |\n| Row 2 | Hi |"
+            }
+          }
+        }
+      },
+      "Text": {
+        "kind": "Panel",
+        "spec": {
+          "display": {
+            "name": "Text",
+            "description": "Markdown text formatting"
+          },
+          "plugin": {
+            "kind": "Markdown",
+            "spec": {
+              "text": "Unformatted\n\n*Italic*\n\n_Italic_\n\n**Bold**\n\n__Bold__\n\n> Blockquote\n\n---\n\n***"
+            }
+          }
+        }
+      }
+    },
+    "layouts": [{
+      "kind": "Grid",
+      "spec": {
+        "display": {
+          "title": "Row 1",
+          "collapse": {
+            "open": true
+          }
+        },
+        "items": [{
+          "x": 0,
+          "y": 0,
+          "width": 8,
+          "height": 10,
+          "content": {
+            "$ref": "#/spec/panels/Headings"
+          }
+        }, {
+          "x": 8,
+          "y": 0,
+          "width": 8,
+          "height": 10,
+          "content": {
+            "$ref": "#/spec/panels/Text"
+          }
+        }, {
+          "x": 0,
+          "y": 10,
+          "width": 8,
+          "height": 10,
+          "content": {
+            "$ref": "#/spec/panels/Code"
+          }
+        }, {
+          "x": 16,
+          "y": 10,
+          "width": 8,
+          "height": 10,
+          "content": {
+            "$ref": "#/spec/panels/Tables"
+          }
+        }, {
+          "x": 8,
+          "y": 10,
+          "width": 8,
+          "height": 10,
+          "content": {
+            "$ref": "#/spec/panels/Lists"
+          }
+        }, {
+          "x": 16,
+          "y": 0,
+          "width": 8,
+          "height": 10,
+          "content": {
+            "$ref": "#/spec/panels/Links"
+          }
+        }]
+      }
+    }]
+  }
+}
