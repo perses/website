@@ -1,0 +1,28 @@
+{
+  "kind": "GlobalVariable",
+  "metadata": {
+    "name": "job",
+    "createdAt": "2023-09-21T16:19:53.2938318Z",
+    "updatedAt": "2023-09-21T16:19:53.2938318Z",
+    "version": 0
+  },
+  "spec": {
+    "kind": "ListVariable",
+    "spec": {
+      "display": {
+        "name": "Job name",
+        "description": "Name of the job (= collection of targets)",
+        "hidden": false
+      },
+      "allowAllValue": true,
+      "allowMultiple": true,
+      "plugin": {
+        "kind": "PrometheusLabelValuesVariable",
+        "spec": {
+          "labelName": "job",
+          "matchers": ["up"]
+        }
+      }
+    }
+  }
+}

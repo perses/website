@@ -1,0 +1,268 @@
+{
+  "kind": "Dashboard",
+  "metadata": {
+    "name": "TimeSeriesChartPanel",
+    "createdAt": "2022-12-21T00:00:00Z",
+    "updatedAt": "2023-01-25T17:43:56.745494Z",
+    "version": 3,
+    "project": "Showcase"
+  },
+  "spec": {
+    "duration": "6h",
+    "panels": {
+      "SingleLine": {
+        "kind": "Panel",
+        "spec": {
+          "display": {
+            "name": "Single Line",
+            "description": "Time series chart with a single line"
+          },
+          "plugin": {
+            "kind": "TimeSeriesChart",
+            "spec": {}
+          },
+          "queries": [{
+            "kind": "TimeSeriesQuery",
+            "spec": {
+              "plugin": {
+                "kind": "PrometheusTimeSeriesQuery",
+                "spec": {
+                  "datasource": {
+                    "kind": "PrometheusDatasource",
+                    "name": "PrometheusDemo"
+                  },
+                  "query": "up{job=\"grafana\",instance=\"demo.do.prometheus.io:3000\"}"
+                }
+              }
+            }
+          }]
+        }
+      },
+      "LegendBottom": {
+        "kind": "Panel",
+        "spec": {
+          "display": {
+            "name": "Legend Position Bottom",
+            "description": "Time series chart with a default legend"
+          },
+          "plugin": {
+            "kind": "TimeSeriesChart",
+            "spec": {
+              "legend": {
+                "position": "bottom"
+              }
+            }
+          },
+          "queries": [{
+            "kind": "TimeSeriesQuery",
+            "spec": {
+              "plugin": {
+                "kind": "PrometheusTimeSeriesQuery",
+                "spec": {
+                  "datasource": {
+                    "kind": "PrometheusDatasource",
+                    "name": "PrometheusDemo"
+                  },
+                  "query": "up{job=\"grafana\",instance=\"demo.do.prometheus.io:3000\"}"
+                }
+              }
+            }
+          }]
+        }
+      },
+      "LegendRight": {
+        "kind": "Panel",
+        "spec": {
+          "display": {
+            "name": "Legend Position Right",
+            "description": "Time series chart with a legend positioned to the right"
+          },
+          "plugin": {
+            "kind": "TimeSeriesChart",
+            "spec": {
+              "legend": {
+                "position": "right"
+              }
+            }
+          },
+          "queries": [{
+            "kind": "TimeSeriesQuery",
+            "spec": {
+              "plugin": {
+                "kind": "PrometheusTimeSeriesQuery",
+                "spec": {
+                  "datasource": {
+                    "kind": "PrometheusDatasource",
+                    "name": "PrometheusDemo"
+                  },
+                  "query": "up{job=\"grafana\",instance=\"demo.do.prometheus.io:3000\"}"
+                }
+              }
+            }
+          }]
+        }
+      },
+      "LegendTallFormatted": {
+        "kind": "Panel",
+        "spec": {
+          "display": {
+            "name": "Legend Tall Formatted",
+            "description": "Time series chart with large legend and formatted series names"
+          },
+          "plugin": {
+            "kind": "TimeSeriesChart",
+            "spec": {
+              "legend": {
+                "position": "bottom"
+              }
+            }
+          },
+          "queries": [{
+            "kind": "TimeSeriesQuery",
+            "spec": {
+              "plugin": {
+                "kind": "PrometheusTimeSeriesQuery",
+                "spec": {
+                  "datasource": {
+                    "kind": "PrometheusDatasource",
+                    "name": "PrometheusDemo"
+                  },
+                  "query": "up{job=\"grafana\",instance=\"demo.do.prometheus.io:3000\"}",
+                  "seriesNameFormat": "formatted series name example - {{job}} job - instance {{instance}}"
+                }
+              }
+            }
+          }]
+        }
+      },
+      "CustomVisualOptions": {
+        "kind": "Panel",
+        "spec": {
+          "display": {
+            "name": "Custom Visual Options",
+            "description": "Time series chart with custom visual options"
+          },
+          "plugin": {
+            "kind": "TimeSeriesChart",
+            "spec": {
+              "visual": {
+                "areaOpacity": 0.5,
+                "pointRadius": 6,
+                "lineWidth": 3,
+                "connectNulls": false
+              }
+            }
+          },
+          "queries": [{
+            "kind": "TimeSeriesQuery",
+            "spec": {
+              "plugin": {
+                "kind": "PrometheusTimeSeriesQuery",
+                "spec": {
+                  "datasource": {
+                    "kind": "PrometheusDatasource",
+                    "name": "PrometheusDemo"
+                  },
+                  "query": "up{job=\"grafana\",instance=\"demo.do.prometheus.io:3000\"}"
+                }
+              }
+            }
+          }]
+        }
+      },
+      "ConnectedNulls": {
+        "kind": "Panel",
+        "spec": {
+          "display": {
+            "name": "Connected Nulls",
+            "description": "Time series chart with connected null values"
+          },
+          "plugin": {
+            "kind": "TimeSeriesChart",
+            "spec": {
+              "visual": {
+                "showPoints": "always",
+                "connectNulls": true
+              }
+            }
+          },
+          "queries": [{
+            "kind": "TimeSeriesQuery",
+            "spec": {
+              "plugin": {
+                "kind": "PrometheusTimeSeriesQuery",
+                "spec": {
+                  "datasource": {
+                    "kind": "PrometheusDatasource",
+                    "name": "PrometheusDemo"
+                  },
+                  "query": "fake_graphite_query_with_nulls"
+                }
+              }
+            }
+          }]
+        }
+      }
+    },
+    "layouts": [{
+      "kind": "Grid",
+      "spec": {
+        "display": {
+          "title": "Row 1",
+          "collapse": {
+            "open": true
+          }
+        },
+        "items": [{
+          "x": 0,
+          "y": 0,
+          "width": 8,
+          "height": 7,
+          "content": {
+            "$ref": "#/spec/panels/SingleLine"
+          }
+        }, {
+          "x": 8,
+          "y": 0,
+          "width": 8,
+          "height": 7,
+          "content": {
+            "$ref": "#/spec/panels/CustomVisualOptions"
+          }
+        }, {
+          "x": 16,
+          "y": 0,
+          "width": 8,
+          "height": 7,
+          "content": {
+            "$ref": "#/spec/panels/ConnectedNulls"
+          }
+        }, {
+          "x": 0,
+          "y": 7,
+          "width": 8,
+          "height": 7,
+          "content": {
+            "$ref": "#/spec/panels/LegendBottom"
+          }
+        }, {
+          "x": 8,
+          "y": 7,
+          "width": 8,
+          "height": 7,
+          "content": {
+            "$ref": "#/spec/panels/LegendRight"
+          }
+        }, {
+          "x": 16,
+          "y": 7,
+          "width": 8,
+          "height": 10,
+          "content": {
+            "$ref": "#/spec/panels/LegendTallFormatted"
+          }
+        }]
+      }
+    }]
+  }
+}
