@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   demo:
-    image: "docker.io/persesdev/perses:v0.40.0"
+    image: "docker.io/persesdev/perses:v0.40.1"
     ports:
       - "5000:8080"
     environment:
@@ -27,7 +27,7 @@ services:
       - "traefik.http.routers.demo.tls.certresolver=myresolver"
 
   sandbox:
-    image: "docker.io/persesdev/perses:v0.40.0"
+    image: "docker.io/persesdev/perses:v0.40.1"
     ports:
       - "5001:8080"
     environment:
