@@ -1,12 +1,16 @@
 version: '3.9'
 services:
   demo:
-    image: "docker.io/persesdev/perses:v0.40.1"
+    image: "docker.io/persesdev/perses:v0.42.1"
     ports:
       - "5000:8080"
     environment:
       PERSES_DATABASE_FILE_EXTENSION: "json"
-      PERSES_READONLY: true
+      PERSES_SECURITY_ENABLE_AUTH: true
+      PERSES_SECURITY_AUTHORIZATION_GUEST_PERMISSIONS_0_ACTIONS_0: "read"
+      PERSES_SECURITY_AUTHORIZATION_GUEST_PERMISSIONS_0_SCOPES_0: "*"
+      PERSES_SECURITY_AUTHORIZATION_GUEST_PERMISSIONS_1_ACTIONS_0: "create"
+      PERSES_SECURITY_AUTHORIZATION_GUEST_PERMISSIONS_1_SCOPES_0: "Project"
       PERSES_IMPORTANT_DASHBOARDS_0_PROJECT: "perses"
       PERSES_IMPORTANT_DASHBOARDS_0_DASHBOARD: "NodeExporterFull"
       PERSES_INFORMATION: |-
@@ -14,9 +18,6 @@ services:
 
         This public demo instance is here to give you of what Perses looks like,
         with some example dashboards & more.
-
-        This instance is readonly. If you wish to play with the edit mode,
-        go to the [Sandbox instance](https://sandbox.perses.dev/) instead.
     volumes:
       - ./local_db:/perses
     restart: unless-stopped
@@ -25,29 +26,6 @@ services:
       # The domain the service will respond to
       - "traefik.http.routers.demo.rule=Host(`demo.perses.dev`)"
       - "traefik.http.routers.demo.tls.certresolver=myresolver"
-
-  sandbox:
-    image: "docker.io/persesdev/perses:v0.40.1"
-    ports:
-      - "5001:8080"
-    environment:
-      PERSES_DATABASE_FILE_EXTENSION: "json"
-      PERSES_READONLY: false
-      PERSES_INFORMATION: |-
-        # Welcome to the Sandbox instance of Perses!
-
-        This public sandbox instance is here to let you play with Perses.
-        Create your own projects, dashboards & more!
-
-        If you just want to have a showcase of what's possible to create
-        in Perses, please go to the [Demo instance](https://demo.perses.dev/)
-        instead.
-    restart: unless-stopped
-    labels:
-      - "traefik.enable=true"
-      # The domain the service will respond to
-      - "traefik.http.routers.sandbox.rule=Host(`sandbox.perses.dev`)"
-      - "traefik.http.routers.sandbox.tls.certresolver=myresolver"
 
   traefik:
     image: "docker.io/traefik:v2.9.10"

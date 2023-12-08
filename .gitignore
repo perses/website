@@ -1,2 +1,4 @@
 letsencrypt/acme.json
 nohup.out
+
+.idea/
