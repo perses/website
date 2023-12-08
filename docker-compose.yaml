@@ -11,6 +11,7 @@ services:
       PERSES_SECURITY_AUTHORIZATION_GUEST_PERMISSIONS_0_SCOPES_0: "*"
       PERSES_SECURITY_AUTHORIZATION_GUEST_PERMISSIONS_1_ACTIONS_0: "create"
       PERSES_SECURITY_AUTHORIZATION_GUEST_PERMISSIONS_1_SCOPES_0: "Project"
+      PERSES_PROVISIONING_FOLDERS_0: "/etc/perses/provisioning"
       PERSES_IMPORTANT_DASHBOARDS_0_PROJECT: "perses"
       PERSES_IMPORTANT_DASHBOARDS_0_DASHBOARD: "NodeExporterFull"
       PERSES_INFORMATION: |-
@@ -19,7 +20,7 @@ services:
         This public demo instance is here to give you of what Perses looks like,
         with some example dashboards & more.
     volumes:
-      - ./local_db:/perses
+      - ./provisioning:/etc/perses/provisioning
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
