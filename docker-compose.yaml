@@ -1,7 +1,7 @@
 version: '3.9'
 services:
   demo:
-    image: "docker.io/persesdev/perses:v0.42.1"
+    image: "docker.io/persesdev/perses:main-2023-12-19-6a7acd38-distroless"
     ports:
       - "5000:8080"
     environment:
