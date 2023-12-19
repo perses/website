@@ -1,0 +1,23 @@
+version: 1
+
+inputDir: "$(INPUT_CONTENT_DIR)"
+outputDir: "$(OUTPUT_CONTENT_DIR)"
+
+gitIgnored: true
+localLinksStyle:
+  hugo:
+    indexFileName: "_index.md"
+
+transformations:
+  - glob: "*.md"
+    popHeader: true
+    frontMatter:
+      template: |
+        title: "{{ .Origin.FirstHeader }}"
+        lastmod: "{{ .Origin.LastMod }}"
+  - glob: "**/*.md"
+    popHeader: true
+    frontMatter:
+      template: |
+        title: "{{ .Origin.FirstHeader }}"
+        lastmod: "{{ .Origin.LastMod }}"
