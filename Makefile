@@ -1,6 +1,6 @@
 .PHONY: synchronize
 synchronize:
-	@bash ./scripts/synchronize.sh
+	@sh ./scripts/synchronize.sh
 
 .PHONY: website-install-depenencies
 website-install-depenencies:
