@@ -17,8 +17,9 @@ services:
       PERSES_INFORMATION: |-
         # Welcome to the Demo instance of Perses!
 
-        This public demo instance is here to give you of what Perses looks like,
-        with some example dashboards & more.
+        This public demo instance is here to show you what Perses looks like
+        and what's possible to do with it. You can have a look at the example
+        dashboards, or create your own ones!
     volumes:
       - ./provisioning:/etc/perses/provisioning
     restart: unless-stopped
