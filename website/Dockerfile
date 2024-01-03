@@ -5,8 +5,8 @@ COPY ./scripts ./scripts
 COPY Makefile .
 COPY .mdox.yaml .
 
-RUN go install github.com/bwplotka/mdox@latest
 RUN apt update && apt install -y git make
+RUN go install github.com/bwplotka/mdox@latest
 
 RUN make synchronize
 
@@ -21,7 +21,7 @@ RUN npm install --ignore-scripts
 
 RUN hugo --minify --gc --cleanDestinationDir
 
-FROM hugomods/hugo:nginx
+FROM docker.io/hugomods/hugo:nginx
 
 # Copy the generated files to keep the image as small as possible.
 COPY --from=builder /src/public /site
