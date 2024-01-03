@@ -4,7 +4,7 @@ ROOT_DIR=$(pwd)
 TAG_FILTER_RE="v(0|[1-9]\d*)\.([1-9]\d*).0"
 GREP=$(which ggrep 2>/dev/null || which grep)
 BASE_OUTPUT_DIR=$ROOT_DIR/website/content/docs
-REPOS_DIR=$ROOT_DIR/repos/
+REPOS_DIR=$ROOT_DIR/repos
 MDOX_CONFIG=".mdox.yaml"
 
 PERSES_REPO_URL="https://github.com/perses/perses"
@@ -19,7 +19,7 @@ rm -rf $REPOS_DIR && mkdir $REPOS_DIR
 ## This is useful for local development
 ## developers can set the USE_LOCAL_REPOSITORIES environment variable
 ## to use local repositories instead of cloning them from GitHub
-if [[ -z "$USE_LOCAL_REPOSITORIES" ]]; then
+if [ -z "$USE_LOCAL_REPOSITORIES" ]; then
   git clone $PERSES_REPO_URL -b main --depth 1 $PERSES_REPO_DIR
 else
   # Check the operating system
@@ -87,7 +87,7 @@ result=$($ROOT_DIR/scripts/semver_compare.sh $release_number "0.42.0")
 
 # We only care about the versions greater than 0.42.0
 # Because the documentation for the versions less than 0.42.0 is not available
-if [[ $result -eq 0 ]]; then
+if [ $result -eq 0 ]; then
   continue
 fi
 
