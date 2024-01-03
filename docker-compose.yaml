@@ -12,8 +12,8 @@ services:
     labels:
       - "traefik.enable=true"
       # The domain the service will respond to
-      - "traefik.http.routers.demo.rule=Host(`perses.dev`)"
-      - "traefik.http.routers.demo.tls.certresolver=myresolver"
+      - "traefik.http.routers.website.rule=Host(`perses.dev`)"
+      - "traefik.http.routers.website.tls.certresolver=myresolver"
 
   demo:
     image: "docker.io/persesdev/perses:main-2023-12-19-6a7acd38-distroless"
