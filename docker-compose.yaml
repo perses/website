@@ -5,7 +5,7 @@ services:
       context: .
       dockerfile: ./website/Dockerfile
       args:
-        - HUGO_BASEURL=http://localhost:5001
+        - HUGO_BASEURL=https://perses.dev
     restart: unless-stopped
     ports:
       - "5001:80"
