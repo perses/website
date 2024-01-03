@@ -265,5 +265,9 @@ $RECYCLE.BIN/
 
 /repos/perses
 
-/content/**/*.md
-!/content/**/_index.md
+/website/content/**/*.md
+!/website/content/**/_index.md
+
+/website/content/docs/perses/_index.md
+/website/content/docs/prologue/_index.md
+/website/static/images

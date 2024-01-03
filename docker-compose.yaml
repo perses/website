@@ -1,14 +1,14 @@
-version: '3.9'
+version: "3.9"
+
 services:
   website:
-    build:
-      context: .
-      dockerfile: ./website/Dockerfile
-      args:
-        - HUGO_BASEURL=https://perses.dev
+    image: hugomods/hugo
+    command: hugo server --watch --bind=0.0.0.0 --disableLiveReload=true --minify -environment production --baseURL https://perses.dev --appendPort=false
     restart: unless-stopped
     ports:
-      - "5001:80"
+      - 1313:1313
+    volumes:
+      - ./website:/src
     labels:
       - "traefik.enable=true"
       # The domain the service will respond to

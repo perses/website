@@ -1,7 +1,6 @@
 #!/bin/bash
 
 ROOT_DIR=$(pwd)
-TAG_FILTER_RE="v(0|[1-9]\d*)\.([1-9]\d*).0"
 GREP=$(which ggrep 2>/dev/null || which grep)
 BASE_OUTPUT_DIR=$ROOT_DIR/website/content/docs
 REPOS_DIR=$ROOT_DIR/repos
@@ -38,7 +37,7 @@ cd $PERSES_REPO_DIR
 git fetch --tags
 
 ## Get all the tags that match the filter
-RELEASE_TAGS=$(git tag --list | $GREP -E "${TAG_FILTER_RE}" | sort -V)  
+RELEASE_TAGS=$(git tag --list | grep -E 'v([0-9]+)\.([0-9]+)\.0' | grep -v -E 'v([0-9]+)\.([0-9]+)\.0-rc[0-9]+' | sort -V)
 
 ## Starting processing perses docs using mdox
 ##
@@ -101,7 +100,7 @@ TEMP_RELEASE_DIR="$TMP_DOCS_DIR/${release_tag}"
 mkdir -p $TEMP_RELEASE_DIR
 
 # Extract the archive
-tar -xjvf $TMP_DOCS_DIR/${release_tag}.tar.gz -C $TEMP_RELEASE_DIR
+tar -xzf $TMP_DOCS_DIR/${release_tag}.tar.gz -C $TEMP_RELEASE_DIR
 
 export INPUT_CONTENT_DIR=$TEMP_RELEASE_DIR/docs
 export OUTPUT_CONTENT_DIR=$BASE_OUTPUT_DIR/perses/${release_tag}
