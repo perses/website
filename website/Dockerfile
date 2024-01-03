@@ -1,4 +1,4 @@
-FROM golang:1.21 as synchronizer
+FROM docker.io/golang:1.21 as synchronizer
 
 COPY ./website ./website
 COPY ./scripts ./scripts
@@ -10,7 +10,7 @@ RUN apt update && apt install -y git make
 
 RUN make synchronize
 
-FROM hugomods/hugo:exts as builder
+FROM docker.io/hugomods/hugo:exts as builder
 
 ARG HUGO_BASEURL=
 ENV HUGO_BASEURL=${HUGO_BASEURL}
