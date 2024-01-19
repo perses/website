@@ -149,6 +149,7 @@ markdown_files=$(find $BASE_OUTPUT_DIR -iname "*.md")
 for markdown_file in $markdown_files; do
   # Use sed to replace the ../../images with /images in the image tags
   sed 's/\.\.\/\.\.\/images/\/images/g' "$markdown_file" > "$markdown_file.tmp" && mv "$markdown_file.tmp" "$markdown_file"
+  sed 's/```mermaid/```kroki {type=mermaid}/g' "$markdown_file" > "$markdown_file.tmp" && mv "$markdown_file.tmp" "$markdown_file"
 done
 ## End of fixing the image paths in the markdown files
 
