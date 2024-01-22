@@ -16,9 +16,10 @@ services:
       - "traefik.http.routers.website.tls.certresolver=myresolver"
 
   demo:
-    image: "docker.io/persesdev/perses:main-2023-12-19-6a7acd38-distroless"
+    image: "docker.io/persesdev/perses:v0.43.0-distroless"
     ports:
       - "5000:8080"
+    command: "--config=/etc/perses/config/secret.yaml"
     environment:
       PERSES_DATABASE_FILE_EXTENSION: "json"
       PERSES_SECURITY_ENABLE_AUTH: true
@@ -26,6 +27,7 @@ services:
       PERSES_SECURITY_AUTHORIZATION_GUEST_PERMISSIONS_0_SCOPES_0: "*"
       PERSES_SECURITY_AUTHORIZATION_GUEST_PERMISSIONS_1_ACTIONS_0: "create"
       PERSES_SECURITY_AUTHORIZATION_GUEST_PERMISSIONS_1_SCOPES_0: "Project"
+      PERSES_SECURITY_AUTHENTICATION_PROVIDERS_ENABLE_NATIVE: true
       PERSES_PROVISIONING_FOLDERS_0: "/etc/perses/provisioning"
       PERSES_IMPORTANT_DASHBOARDS_0_PROJECT: "perses"
       PERSES_IMPORTANT_DASHBOARDS_0_DASHBOARD: "NodeExporterFull"
@@ -37,6 +39,7 @@ services:
         dashboards, or create your own ones!
     volumes:
       - ./provisioning:/etc/perses/provisioning
+      - ./secret:/etc/perses/config
     restart: unless-stopped
     labels:
       - "traefik.enable=true"

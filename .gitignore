@@ -272,3 +272,7 @@ $RECYCLE.BIN/
 /website/content/docs/prologue/_index.md
 /website/static/images
 /website/resources/_gen
+
+# Docker compose config secret (ask maintainers)
+secret
+
