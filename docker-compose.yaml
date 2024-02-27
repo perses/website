@@ -16,7 +16,7 @@ services:
       - "traefik.http.routers.website.tls.certresolver=myresolver"
 
   demo:
-    image: "docker.io/persesdev/perses:v0.43.0-distroless"
+    image: "docker.io/persesdev/perses:v0.44.0-rc0-distroless"
     ports:
       - "5000:8080"
     command: "--config=/etc/perses/config/secret.yaml"
