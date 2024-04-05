@@ -4,6 +4,4 @@ This repository contains everything required to start the Perses demo and later 
 
 ## Instructions
 
-On the machine, just pull this repository and run `nohup podman-compose up &`
-
-`nohup` will keep the instance alive after killing the ssh session.
+On the machine, just pull this repository and run `podman-compose up demo -d`
