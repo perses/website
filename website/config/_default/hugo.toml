@@ -17,13 +17,13 @@ defaultContentLanguage = "en"
 disableLanguages = ["de", "nl"]
 defaultContentLanguageInSubdir = false
 
-copyRight = "Copyright (c) 2023 Perses"
+copyRight = "Copyright (c) 2024 Perses"
 
 [build.buildStats]
 enable = true
 
 [social]
-twitter = ""
+twitter = "https://twitter.com/PersesDev"
 
 [outputs]
 home = ["HTML", "RSS", "searchIndex"]
