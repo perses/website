@@ -60,7 +60,7 @@ mkdir -p $BASE_OUTPUT_DIR/perses
 
 ## Creating perses _index.md file for perses root folder
 echo "---
-title: perses
+title: Perses
 ---" > "$BASE_OUTPUT_DIR/perses/_index.md"
 
 # ## Copy the prologue section from the main branch
@@ -68,7 +68,7 @@ cp -R "$OUTPUT_CONTENT_DIR/prologue" $BASE_OUTPUT_DIR
 
 ## Creating prologue _index.md file for prologue root folder
 echo "---
-title: prologue
+title: Prologue
 ---" > "$BASE_OUTPUT_DIR/prologue/_index.md"
 
 # ## Copy images from the main branch
@@ -133,9 +133,27 @@ for folder in $sorted_folders; do
 if [ "$folder" != $release_tag ]; then
 WEIGHT_VALUE=$((WEIGHT_VALUE + 1))
 echo "---
-title: ${folder}
+title: ${folder^}
 weight: ${WEIGHT_VALUE}
 ---" > $OUTPUT_CONTENT_DIR/$folder/_index.md
+
+# Do the same for children folders
+sorted_children_folders=$(find $OUTPUT_CONTENT_DIR/$folder/ -maxdepth 1 -type d -exec basename {} \; | sort)
+CHILDREN_WEIGHT_VALUE=0
+
+for children_folder in $sorted_children_folders; do
+
+## TODO: handle unlimited depth of children folders
+# Add _index.md file for the children folder
+if [ "$children_folder" != $folder ]; then
+CHILDREN_WEIGHT_VALUE=$((CHILDREN_WEIGHT_VALUE + 1))
+echo "---
+title: ${children_folder^}
+weight: ${CHILDREN_WEIGHT_VALUE}
+---" > $OUTPUT_CONTENT_DIR/$folder/$children_folder/_index.md
+fi
+done
+
 fi
 done
 
