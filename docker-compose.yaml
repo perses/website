@@ -48,7 +48,12 @@ services:
       # The domain the service will respond to
       - "traefik.http.routers.demo.rule=Host(`demo.perses.dev`)"
       - "traefik.http.routers.demo.tls.certresolver=myresolver"
-
+  prometheus:
+    image: "docker.io/prom/prometheus:v2.51"
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
   traefik:
     image: "docker.io/traefik:v2.9.10"
     command:
