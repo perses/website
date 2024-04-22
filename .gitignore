@@ -2,6 +2,10 @@ letsencrypt/acme.json
 nohup.out
 
 .idea/
+scripts/repos/
+# data is the folder where the perses database is stored
+data/
+
 # Created by https://www.toptal.com/developers/gitignore/api/hugo,node,visualstudiocode,macos,linux,windows
 # Edit at https://www.toptal.com/developers/gitignore?templates=hugo,node,visualstudiocode,macos,linux,windows
 

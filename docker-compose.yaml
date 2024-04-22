@@ -22,10 +22,7 @@ services:
     command: "--config=/etc/perses/config/secret.yaml"
     environment:
       PERSES_DATABASE_FILE_EXTENSION: "json"
-      PERSES_SCHEMAS_PANELS_PATH: "/etc/perses/cue/schemas/panels"
-      PERSES_SCHEMAS_QUERIES_PATH: "/etc/perses/cue/schemas/queries"
-      PERSES_SCHEMAS_DATASOURCES_PATH: "/etc/perses/cue/schemas/datasources"
-      PERSES_SCHEMAS_VARIABLES_PATH: "/etc/perses/cue/schemas/variables"
+      PERSES_DATABASE_FILE_FOLDER: "/perses"
       PERSES_SECURITY_ENABLE_AUTH: true
       PERSES_SECURITY_AUTHORIZATION_GUEST_PERMISSIONS_0_ACTIONS_0: "read"
       PERSES_SECURITY_AUTHORIZATION_GUEST_PERMISSIONS_0_SCOPES_0: "*"
@@ -44,6 +41,7 @@ services:
     volumes:
       - ./provisioning:/etc/perses/provisioning
       - ./secret:/etc/perses/config
+      - ./data:/perses
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
