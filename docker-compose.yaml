@@ -6,7 +6,7 @@ services:
     command: hugo server --watch --bind=0.0.0.0 --disableLiveReload=true --minify -environment production --baseURL https://perses.dev --appendPort=false
     restart: unless-stopped
     ports:
-      - 1313:1313
+      - "1313:1313"
     volumes:
       - ./website:/src
     labels:
@@ -29,6 +29,7 @@ services:
       PERSES_SECURITY_AUTHORIZATION_GUEST_PERMISSIONS_1_ACTIONS_0: "create"
       PERSES_SECURITY_AUTHORIZATION_GUEST_PERMISSIONS_1_SCOPES_0: "Project"
       PERSES_SECURITY_AUTHENTICATION_PROVIDERS_ENABLE_NATIVE: true
+      PERSES_PROVISIONING_INTERVAL: "12h"
       PERSES_PROVISIONING_FOLDERS_0: "/etc/perses/provisioning"
       PERSES_IMPORTANT_DASHBOARDS_0_PROJECT: "perses"
       PERSES_IMPORTANT_DASHBOARDS_0_DASHBOARD: "NodeExporterFull"
