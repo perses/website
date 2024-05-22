@@ -16,7 +16,7 @@ services:
       - "traefik.http.routers.website.tls.certresolver=myresolver"
 
   demo:
-    image: "docker.io/persesdev/perses:v0.45.0-distroless"
+    image: "docker.io/persesdev/perses:v0.46.0-rc0-distroless"
     ports:
       - "5000:8080"
     command: "--config=/etc/perses/config/secret.yaml"
@@ -31,9 +31,9 @@ services:
       PERSES_SECURITY_AUTHENTICATION_PROVIDERS_ENABLE_NATIVE: true
       PERSES_PROVISIONING_INTERVAL: "12h"
       PERSES_PROVISIONING_FOLDERS_0: "/etc/perses/provisioning"
-      PERSES_IMPORTANT_DASHBOARDS_0_PROJECT: "perses"
-      PERSES_IMPORTANT_DASHBOARDS_0_DASHBOARD: "NodeExporterFull"
-      PERSES_INFORMATION: |-
+      PERSES_FRONTEND_IMPORTANT_DASHBOARDS_0_PROJECT: "perses"
+      PERSES_FRONTEND_IMPORTANT_DASHBOARDS_0_DASHBOARD: "NodeExporterFull"
+      PERSES_FRONTEND_INFORMATION: |-
         # Welcome to the Demo instance of Perses!
 
         This public demo instance is here to show you what Perses looks like
