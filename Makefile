@@ -12,4 +12,4 @@ website-preview: website-install-depenencies synchronize
 
 .PHONY: generate-config
 generate-config:
-	perl -MYAML=LoadFile,Dump -MHash::Merge::Simple=merge -E 'say Dump(merge(map{LoadFile($_)}@ARGV))' perses.yaml ./secret/secret.yaml > ./secret/config.yaml
+	@bash ./scripts/generate_config.sh
