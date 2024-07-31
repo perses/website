@@ -19,26 +19,7 @@ services:
     image: "docker.io/persesdev/perses:v0.47.0-rc0-distroless"
     ports:
       - "5000:8080"
-    command: "--config=/etc/perses/config/secret.yaml"
-    environment:
-      PERSES_DATABASE_FILE_EXTENSION: "json"
-      PERSES_DATABASE_FILE_FOLDER: "/perses"
-      PERSES_SECURITY_ENABLE_AUTH: true
-      PERSES_SECURITY_AUTHORIZATION_GUEST_PERMISSIONS_0_ACTIONS_0: "read"
-      PERSES_SECURITY_AUTHORIZATION_GUEST_PERMISSIONS_0_SCOPES_0: "*"
-      PERSES_SECURITY_AUTHORIZATION_GUEST_PERMISSIONS_1_ACTIONS_0: "create"
-      PERSES_SECURITY_AUTHORIZATION_GUEST_PERMISSIONS_1_SCOPES_0: "Project"
-      PERSES_SECURITY_AUTHENTICATION_PROVIDERS_ENABLE_NATIVE: true
-      PERSES_PROVISIONING_INTERVAL: "12h"
-      PERSES_PROVISIONING_FOLDERS_0: "/etc/perses/provisioning"
-      PERSES_FRONTEND_IMPORTANT_DASHBOARDS_0_PROJECT: "perses"
-      PERSES_FRONTEND_IMPORTANT_DASHBOARDS_0_DASHBOARD: "NodeExporterFull"
-      PERSES_FRONTEND_INFORMATION: |-
-        # Welcome to the Demo instance of Perses!
-
-        This public demo instance is here to show you what Perses looks like
-        and what's possible to do with it. You can have a look at the example
-        dashboards, or create your own ones!
+    command: "--config=/etc/perses/config/config.yaml"
     volumes:
       - ./provisioning:/etc/perses/provisioning
       - ./secret:/etc/perses/config
