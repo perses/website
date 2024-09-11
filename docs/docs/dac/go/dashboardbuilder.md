@@ -68,7 +68,7 @@ var panelGroupOptions []panelgroup.Option
 dashboard.AddPanelGroup("My Super Panel Group", panelGroupOptions...)
 ```
 
-Add a panel group to the dashboard. More info at [Panel Group](./panel-group.md).
+Add a panel group to the dashboard. More info at [Panel Group](panelgroupbuilder.md).
 
 ### AddDatasource
 
@@ -80,7 +80,7 @@ var datasourceOptions []datasource.Option
 dashboard.AddDatasource("MySuperDatasourceName", datasourceOptions...)
 ```
 
-Add a local datasource to the dashboard. More info at [Datasource](./datasource.md).
+Add a local datasource to the dashboard. More info at [Datasource](datasourcebuilder.md).
 
 ### AddVariable
 
@@ -92,7 +92,7 @@ var variableOptions []variable.Option
 dashboard.AddVariable("MySuperVariableName", variableOptions...)
 ```
 
-Add a local variable to the dashboard. More info at [Variable](./variable.md).
+Add a local variable to the dashboard. More info at [Variable](variablebuilder.md).
 
 ### AddVariableGroup
 
@@ -104,7 +104,7 @@ var variableGroupOptions []variablegroup.Option
 dashboard.AddVariableGroup(variableGroupOptions...)
 ```
 
-Add a group of variables to the dashboard. More info at [Variable Group](./variable-group.md).
+Add a group of variables to the dashboard. More info at [Variable Group](variablegroupbuilder.md).
 
 ## Example
 

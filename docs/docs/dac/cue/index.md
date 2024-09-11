@@ -2,7 +2,7 @@
 
 !!! info "Getting started with Dashboard as code"
 
-    To get started with Dashboard-as-Code in Perses, have a look at the [DaC user guide](../../user-guides/dashboard-as-code.md) first.
+    To get started with Dashboard-as-Code in Perses, have a look at the [DaC user guide](../../user-guides/dashboardascode.md) first.
 
 This section provides detailed information about the CUE SDK to develop dashboards as code in Perses.
 It's focusing on explaining how to use the different builders provided by the SDK, that you should rely on to simplify the coding.

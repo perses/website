@@ -64,7 +64,7 @@ import "github.com/perses/perses/go-sdk/variable"
 variable.Filter(variables...)
 ```
 
-Mainly used by [variable group](../../variable-group.md). It will filter the current variable with the provided variables.
+Mainly used by [variable group](variablegroupbuilder.md). It will filter the current variable with the provided variables.
 The filter will be applied only if matchers don't have curly brackets.
 
 ## Example

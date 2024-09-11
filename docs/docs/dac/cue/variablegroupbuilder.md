@@ -25,7 +25,7 @@ You can also pass to it variables for which the notion of dependencies don't/can
 
 | Field       | Type                                                             | Description                                                         |
 |-------------|------------------------------------------------------------------|---------------------------------------------------------------------|
-| `variables` | [...[Variable](../../../api/variable#variable-specification)] | The final list of variables objects, to be passed to the dashboard. |
+| `variables` | [...[Variable](../../api/variable.md#variable-specification)] | The final list of variables objects, to be passed to the dashboard. |
 
 ## Example
 

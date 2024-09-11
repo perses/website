@@ -32,7 +32,7 @@ variablegroup.AddVariable("MySuperVariableName", variableOptions...)
 ```
 
 Add a variable to the group, this variable will be filtered by variable already present in the group and will filter next variables added.
-More info at [Variable](./variable.md).
+More info at [Variable](variablebuilder.md).
 
 ### AddIgnoredVariable
 
@@ -45,7 +45,7 @@ variablegroup.AddIgnoredVariable("MySuperVariableName", variableOptions...)
 ```
 
 Add a variable to the group, this variable will be filtered by variable already present in the group.
-However, this variable will not filter next variables added. More info at [Variable](./variable.md).
+However, this variable will not filter next variables added. More info at [Variable](variablebuilder.md).
 
 ## Example
 

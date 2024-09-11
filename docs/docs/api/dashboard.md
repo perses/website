@@ -2,7 +2,7 @@
 
 Without any doubt, this is the principal resource of Perses.
 
-A `Dashboard` belongs to a `Project`. See the [project documentation](./project.md) to see how to create a project.
+A `Dashboard` belongs to a `Project`. See the [project documentation](project.md) to see how to create a project.
 
 It is defined like this:
 
@@ -98,7 +98,7 @@ kind: <string>
 spec: <Plugin specification>
 ```
 
-See the [Panel plugins](../plugins/panels.md) documentation to know more about the different panels supported by Perses.
+See the [Panel plugins](../plugins/panelplugins.md) documentation to know more about the different panels supported by Perses.
 
 #### Query specification
 
@@ -120,7 +120,7 @@ spec: <Plugin specification>
 ```
 
 Perses supports only Prometheus for the `TimeSeriesQuery` for the moment.
-Please look at the [Prometheus documentation](../plugins/prometheus.md#datasource) to know the spec for the `PrometheusTimeSeriesQuery`.
+Please look at the [Prometheus documentation](../plugins/prometheusplugins.md#datasource) to know the spec for the `PrometheusTimeSeriesQuery`.
 
 ### Layout specification
 

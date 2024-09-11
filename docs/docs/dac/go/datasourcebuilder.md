@@ -55,7 +55,7 @@ import promDs "github.com/perses/perses/go-sdk/prometheus/datasource"
 promDs.Prometheus(promDsOptions...)
 ```
 
-Set Prometheus plugin for the datasource. More info at [Prometheus Datasource](./prometheus/datasource.md).
+Set Prometheus plugin for the datasource. More info at [Prometheus Datasource](prometheusdatasourcebuilder.md).
 
 ## Example
 

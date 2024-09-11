@@ -27,7 +27,7 @@ import "github.com/perses/perses/go-sdk/prometheus/query"
 query.PromQL("max by (container) (container_memory_rss{})")
 ```
 
-Set Prometheus Query plugin for the query. More info at [Prometheus Query](./prometheus/query.md).
+Set Prometheus Query plugin for the query. More info at [Prometheus Query](prometheusquerybuilder.md).
 
 ## Example
 

@@ -15,7 +15,7 @@ theme:
     # Palette toggle for light mode
     - media: "(prefers-color-scheme: light)"
       primary: black
-      scheme: default 
+      scheme: default
       toggle:
         icon: material/brightness-7
         name: Switch to dark mode
@@ -30,7 +30,7 @@ theme:
   features:
     - navigation.tabs
     - content.code.copy
-markdown_extensions: 
+markdown_extensions:
   - attr_list
   - md_in_html
   - pymdownx.emoji:
@@ -87,38 +87,39 @@ nav:
           - 'User': 'docs/api/user.md'
           - 'Variable': 'docs/api/variable.md'
       - 'Dashboard as Code':
-        - 'Cue':
-            - 'Cue Reference': 'docs/dac/cue/index.md'
-            - 'Dashboard Builder': 'docs/dac/cue/dashboardbuilder.md'
-            - 'Filter Builder': 'docs/dac/cue/filterbuilder.md'
-            - 'Label Names Variable Builder': 'docs/dac/cue/labelnamesvariablebuilder.md'
-            - 'Label Values Variable Builder': 'docs/dac/cue/labelvaluesvariablebuilder.md'
-            - 'Panel Groups Builder': 'docs/dac/cue/panelgroupsbuilder.md'
-            - 'Prometheus Panel Builder': 'docs/dac/cue/prometheuspanelbuilder.md'
-            - 'PromQL Variable Builder': 'docs/dac/cue/promqlvariablebuilder.md'
-            - 'Static List Variable Builder': 'docs/dac/cue/staticlistvariablebuilder.md'
-            - 'Text Variable Builder': 'docs/dac/cue/textvariablebuilder.md'
-            - 'Variable Group Builder': 'docs/dac/cue/variablegroupbuilder.md'
-        - 'Go':
-            - 'Go Reference': 'docs/dac/go/index.md'
-            - 'Dashboard Builder': 'docs/dac/go/dashboardbuilder.md'
-            - 'Datasource Builder': 'docs/dac/go/datasourcebuilder.md'
-            - 'Panel Builder': 'docs/dac/go/panelbuilder.md'
-            - 'Panel Group Builder': 'docs/dac/go/panelgroupbuilder.md'
-            - 'Query Builder': 'docs/dac/go/querybuilder.md'
-           - 'Variable Builder': 'docs/dac/go/variablebuilder.md'
-            - 'Variable Group Builder': 'docs/dac/go/variablegroupbuilder.md'
-            - 'Bar Panel Builder': 'docs/dac/go/barpanelbuilder.md'
-            - 'Guage Panel Builder': 'docs/dac/go/guagepanelbuilder.md'
-            - 'Markdown Panel Builder': 'docs/dac/go/markdownpanelbuilder.md'
-            - 'Stat Panel Builder': 'docs/dac/go/statpanelbuilder.md'
-            - 'Time Series Panel Builder': 'docs/dac/go/timeseriespanelbuilder.md'
-            - 'HTTP Builder': 'docs/dac/go/httpbuilder.md'
-            - 'Prometheus Datasource Builder': 'docs/dac/go/prometheusdatasourcebuilder.md'
-            - 'Prometheus Query Builder': 'docs/dac/go/prometheusquerybuilder.md'
-            - 'PromQL Variable Builder': 'docs/dac/go/promqlvariablebuilder.md'
-            - 'Label Names Variable Builder': 'docs/dac/go/labelnamesvariablebuilder.md'
-            - 'Label Values Variable Builder': 'docs/dac/go/labelvaluesvariablebuilder.md'
+          - 'Cue':
+              - 'Cue Reference': 'docs/dac/cue/index.md'
+              - 'Dashboard Builder': 'docs/dac/cue/dashboardbuilder.md'
+              - 'Filter Builder': 'docs/dac/cue/filterbuilder.md'
+              - 'Label Names Variable Builder': 'docs/dac/cue/labelnamesvariablebuilder.md'
+              - 'Label Values Variable Builder': 'docs/dac/cue/labelvaluesvariablebuilder.md'
+              - 'Panel Builder': 'docs/dac/cue/panelbuilder.md'
+              - 'Panel Groups Builder': 'docs/dac/cue/panelgroupsbuilder.md'
+              - 'Prometheus Panel Builder': 'docs/dac/cue/prometheuspanelbuilder.md'
+              - 'PromQL Variable Builder': 'docs/dac/cue/promqlvariablebuilder.md'
+              - 'Static List Variable Builder': 'docs/dac/cue/staticlistvariablebuilder.md'
+              - 'Text Variable Builder': 'docs/dac/cue/textvariablebuilder.md'
+              - 'Variable Group Builder': 'docs/dac/cue/variablegroupbuilder.md'
+          - 'Go':
+              - 'Go Reference': 'docs/dac/go/index.md'
+              - 'Dashboard Builder': 'docs/dac/go/dashboardbuilder.md'
+              - 'Datasource Builder': 'docs/dac/go/datasourcebuilder.md'
+              - 'Panel Builder': 'docs/dac/go/panelbuilder.md'
+              - 'Panel Group Builder': 'docs/dac/go/panelgroupbuilder.md'
+              - 'Query Builder': 'docs/dac/go/querybuilder.md'
+              - 'Variable Builder': 'docs/dac/go/variablebuilder.md'
+              - 'Variable Group Builder': 'docs/dac/go/variablegroupbuilder.md'
+              - 'Bar Panel Builder': 'docs/dac/go/barpanelbuilder.md'
+              - 'Guage Panel Builder': 'docs/dac/go/guagepanelbuilder.md'
+              - 'Markdown Panel Builder': 'docs/dac/go/markdownpanelbuilder.md'
+              - 'Stat Panel Builder': 'docs/dac/go/statpanelbuilder.md'
+              - 'Time Series Panel Builder': 'docs/dac/go/timeseriespanelbuilder.md'
+              - 'HTTP Builder': 'docs/dac/go/httpbuilder.md'
+              - 'Prometheus Datasource Builder': 'docs/dac/go/prometheusdatasourcebuilder.md'
+              - 'Prometheus Query Builder': 'docs/dac/go/prometheusquerybuilder.md'
+              - 'PromQL Variable Builder': 'docs/dac/go/promqlvariablebuilder.md'
+              - 'Label Names Variable Builder': 'docs/dac/go/labelnamesvariablebuilder.md'
+              - 'Label Values Variable Builder': 'docs/dac/go/labelvaluesvariablebuilder.md'
       - 'Plugins':
           - 'Plugins Reference': 'docs/plugins/index.md'
           - 'CUE in Perses': 'docs/plugins/cue.md'
@@ -129,4 +130,7 @@ nav:
           - 'Perses CLI (percli)': 'docs/tooling/percli.md'
   - 'Demo': 'https://demo.perses.dev'
 
-copyright: The Linux Foundation has registered trademarks and uses trademarks. For a list of trademarks of The Linux Foundation, please see our <a href="https://www.linuxfoundation.org/legal/trademark-usage" target="_blank">Trademark Usage page</a>.
+copyright: |
+    The Linux Foundation has registered trademarks and uses trademarks.
+    For a list of trademarks of The Linux Foundation, please see our
+    <a href="https://www.linuxfoundation.org/legal/trademark-usage" target="_blank">Trademark Usage page</a>.

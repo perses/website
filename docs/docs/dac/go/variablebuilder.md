@@ -33,7 +33,7 @@ import "github.com/perses/perses/go-sdk/variable"
 variable.Filter(variables...)
 ```
 
-Mainly used by Mainly used by [variable group](variablegroupbuilder).. It will filter the current variable with the provided variables.
+Mainly used by Mainly used by [variable group](variablegroupbuilder.md).. It will filter the current variable with the provided variables.
 The filter implementation is defined by the variable plugin builder.
 
 ## Spec Options
@@ -216,7 +216,7 @@ var promqlVarOptions []promqlVar.Option
 promqlVar.PrometheusPromQL("group by (namespace) (kube_namespace_labels{})", promqlVarOptions...)
 ```
 
-Use a Prometheus query to populate the list variable. More info at [PromQL Variable](./prometheus/variable/promql.md).
+Use a Prometheus query to populate the list variable. More info at [PromQL Variable](promqlvariablebuilder.md).
 
 ##### Prometheus Label Name (List Variable)
 
@@ -227,7 +227,7 @@ var labelNamesVarOptions []labelNamesVar.Option
 labelNamesVar.PrometheusLabelNames(labelNamesVarOptions...)
 ```
 
-Use label names from a Prometheus datasource to populate the list variable. More info at [Label Names Variable](./prometheus/variable/label-names.md).
+Use label names from a Prometheus datasource to populate the list variable. More info at [Label Names Variable](labelnamesvariablebuilder.md).
 
 ##### Prometheus Label Values (List Variable)
 
@@ -238,7 +238,7 @@ var labelValuesVarOptions []labelValuesVar.Option
 labelValuesVar.PrometheusLabelValues("labelNames", labelNamesVarOptions...)
 ```
 
-Use label values from a Prometheus datasource to populate the list variable. More info at [Label Values Variable](./prometheus/variable/label-values.md).
+Use label values from a Prometheus datasource to populate the list variable. More info at [Label Values Variable](labelvaluesvariablebuilder.md).
 
 ## Example
 

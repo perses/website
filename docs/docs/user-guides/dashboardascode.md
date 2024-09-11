@@ -67,15 +67,15 @@ It's first strongly recommended to ramp up on CUE if you are not familiar with t
 - The [official website](https://cuelang.org/) of Cuelang.
 - [Cuetorials](https://cuetorials.com/), a 3rd party source of information that is a very good complement.
 
-You should then have a look at the [CUE SDK documentation](../dac/cue/) to better understand how to use the framework.
+You should then have a look at the [CUE SDK documentation](../dac/cue/index.md) to better understand how to use the framework.
 
-You can also check an example of DaC usage [here](../../internal/test/dac/input.cue).
+You can also check an example of DaC usage [here](../../internal/test/dac/input.cue) TODO.
 
 ## Getting started with Go SDK
 
 ### Prerequisites
 
-- `percli`, the [CLI of Perses](../tooling/cli.md).
+- `percli`, the [CLI of Perses](../tooling/percli.md).
 - `go`, the [programming language](https://go.dev/).
 
 ### Repository setup
@@ -109,7 +109,7 @@ You are now fully ready to start developing dashboards as code!
 It's first strongly recommended to ramp up on Go if you are not familiar with this technology. For this have a look at:
 - The [official website](https://go.dev/) of Go.
 
-You should then have a look at the [Go SDK documentation](../dac/go/) to better understand how to use the framework.
+You should then have a look at the [Go SDK documentation](../dac/go/index.md) to better understand how to use the framework.
 
 You can also check an example of DaC usage [here](../../internal/cli/cmd/dac/build/testdata/go/main.go).
 
