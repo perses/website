@@ -104,3 +104,4 @@ nav:
           - 'OAuth Helper': 'perses/docs/user-guides/oauth-configuration-helpers.md'
           - 'Provisioning': 'perses/docs/user-guides/provisioning.md'
   - Demo: 'https://demo.perses.dev'
+  
