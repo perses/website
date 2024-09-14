@@ -78,29 +78,29 @@ plugins:
 nav:
   - 'Home': 'index.md'
   - 'Docs':
-    - 'Introduction': 'perses/docs/prologue/introduction.md'
-    - 'API': 'perses/docs/api/README.md'
-    - 'Dashboard as Code':
-      - 'CUE': 'perses/docs/dac/cue'
-      - 'Go': 'perses/docs/dac/go'
-    - 'Design Docs':
-      - 'Authentication': 'perses/docs/design-docs/authentication.md'
-      - 'Authorization': 'perses/docs/design-docs/authorization.md'
-      - 'Perses on Kubernetes': 'perses/docs/design-docs/kubernetes.md'
-    - 'Plugins':
-      - 'Introduction': 'perses/docs/plugins/introduction.md'
-      - 'CUE in Perses': 'perses/docs/plugins/cue.md'
-      - 'Panel Plugin': 'perses/docs/plugins/panels.md'
-      - 'Prometheus Plugins': 'perses/docs/plugins/prometheus.md'
-    - 'Tooling':
-      - 'Perses CLI (percli)': 'perses/docs/tooling/cli.md'
-    - 'User Guides':
-      - 'Configuration': 'perses/docs/user-guides/configuration.md'
-      - 'Dashboards as Code': 'perses/docs/user-guides/dashboard-as-code.md'
-      - 'Embedding Perses Panels': 'perses/docs/user-guides/embedding-panels.md'
-      - 'Installation':
-        - 'Installing Perses from Source': 'perses/docs/user-guides/installing-perses-from-source.md'
-        - 'Installing Perses in a Container': 'perses/docs/user-guides/installing-perses-in-a-container.md'
-      - 'OAuth Helper': 'perses/docs/user-guides/oauth-configuration-helpers.md'
-      - 'Provisioning': 'perses/docs/user-guides/provisioning.md'
+      - 'Introduction': 'perses/docs/prologue/introduction.md'
+      - 'API': 'perses/docs/api/README.md'
+      - 'Dashboard as Code':
+          - 'CUE': 'perses/docs/dac/cue'
+          - 'Go': 'perses/docs/dac/go'
+      - 'Design Docs':
+          - 'Authentication': 'perses/docs/design-docs/authentication.md'
+          - 'Authorization': 'perses/docs/design-docs/authorization.md'
+          - 'Perses on Kubernetes': 'perses/docs/design-docs/kubernetes.md'
+      - 'Plugins':
+          - 'Introduction': 'perses/docs/plugins/introduction.md'
+          - 'CUE in Perses': 'perses/docs/plugins/cue.md'
+          - 'Panel Plugin': 'perses/docs/plugins/panels.md'
+          - 'Prometheus Plugins': 'perses/docs/plugins/prometheus.md'
+      - 'Tooling':
+          - 'Perses CLI (percli)': 'perses/docs/tooling/cli.md'
+      - 'User Guides':
+          - 'Configuration': 'perses/docs/user-guides/configuration.md'
+          - 'Dashboards as Code': 'perses/docs/user-guides/dashboard-as-code.md'
+          - 'Embedding Perses Panels': 'perses/docs/user-guides/embedding-panels.md'
+          - 'Installation':
+              - 'Installing Perses from Source': 'perses/docs/user-guides/installing-perses-from-source.md'
+              - 'Installing Perses in a Container': 'perses/docs/user-guides/installing-perses-in-a-container.md'
+          - 'OAuth Helper': 'perses/docs/user-guides/oauth-configuration-helpers.md'
+          - 'Provisioning': 'perses/docs/user-guides/provisioning.md'
   - Demo: 'https://demo.perses.dev'
