@@ -1,0 +1,106 @@
+site_name: Perses
+site_url: "https://perses.dev"
+repo_name: "Perses on GitHub"
+repo_url: "https://github.com/perses/perses"
+theme:
+  name: material
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      primary: black
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      primary: black
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      primary: black
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+  features:
+    - navigation.tabs
+    - content.code.copy
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - toc:
+      permalink: "#"
+  - admonition
+extra_css:
+  - 'css/style.css'
+# extra_javascript:
+#   - 'js/main.js'
+
+# Enable versioning
+extra:
+  version:
+    provider: mike
+
+
+# Multi repo support
+plugins:
+  - multirepo:
+      # (optional) tells multirepo to cleanup the temporary directory after site is built.
+      cleanup: true
+      # if set the docs directory will not be removed when importing docs.
+      # When using this with a nav section in an imported repo you must keep the
+      # docs directory in the path (e.g., docs/path/to/file.md).
+      keep_docs_dir: true
+      nav_repos:
+        - name: perses
+          import_url: https://github.com/perses/perses?branch=main
+          # forward slash is needed in '/README.md' so that only the README.md in the root
+          # directory is imported and not all README.md files.
+          imports: [docs/*]
+nav:
+  - 'Home': 'index.md'
+  - 'Docs':
+    - 'Introduction': 'perses/docs/prologue/introduction.md'
+    - 'API': 'perses/docs/api/README.md'
+    - 'Dashboard as Code':
+      - 'CUE': 'perses/docs/dac/cue'
+      - 'Go': 'perses/docs/dac/go'
+    - 'Design Docs':
+      - 'Authentication': 'perses/docs/design-docs/authentication.md'
+      - 'Authorization': 'perses/docs/design-docs/authorization.md'
+      - 'Perses on Kubernetes': 'perses/docs/design-docs/kubernetes.md'
+    - 'Plugins':
+      - 'Introduction': 'perses/docs/plugins/introduction.md'
+      - 'CUE in Perses': 'perses/docs/plugins/cue.md'
+      - 'Panel Plugin': 'perses/docs/plugins/panels.md'
+      - 'Prometheus Plugins': 'perses/docs/plugins/prometheus.md'
+    - 'Tooling':
+      - 'Perses CLI (percli)': 'perses/docs/tooling/cli.md'
+    - 'User Guides':
+      - 'Configuration': 'perses/docs/user-guides/configuration.md'
+      - 'Dashboards as Code': 'perses/docs/user-guides/dashboard-as-code.md'
+      - 'Embedding Perses Panels': 'perses/docs/user-guides/embedding-panels.md'
+      - 'Installation':
+        - 'Installing Perses from Source': 'perses/docs/user-guides/installing-perses-from-source.md'
+        - 'Installing Perses in a Container': 'perses/docs/user-guides/installing-perses-in-a-container.md'
+      - 'OAuth Helper': 'perses/docs/user-guides/oauth-configuration-helpers.md'
+      - 'Provisioning': 'perses/docs/user-guides/provisioning.md'
+  - Demo: 'https://demo.perses.dev'
