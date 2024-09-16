@@ -105,8 +105,30 @@ nav:
                   - 'Label Values': 'perses/docs/dac/cue/prometheus/variable/labelvalues.md'
                   - 'PromQL Variable': 'perses/docs/dac/cue/prometheus/variable/promql.md'
           - 'Go':
+              - 'Go SDK for Dashboards as Code': 'perses/docs/dac/go/README.md'
               - 'Dashboard': 'perses/docs/dac/go/dashboard.md'
+              - 'Datasource': 'perses/docs/dac/go/datasource.md'
               - 'Bar Panel Builder': 'perses/docs/dac/go/panel/bar.md'
+              - 'Panel Builder': 'perses/docs/dac/go/panel.md'
+              - 'Panel Group Builder': 'perses/docs/dac/go/panel-group.md'
+              - 'Query Builder': 'perses/docs/dac/go/query.md'
+              - 'Variable Builder': 'perses/docs/dac/go/variable.md'
+              - 'Variable Group Builder': 'perses/docs/dac/go/variable-group.md'
+              - 'HTTP Proxy Builder': 'perses/docs/dac/go/helper/http-proxy.md'
+              - 'Panels':
+                  - 'Guage': 'perses/docs/dac/go/panel/gauge.md'
+                  - 'Markdown': 'perses/docs/dac/go/panel/markdown.md'
+                  - 'Stat': 'perses/docs/dac/go/panel/stat.md'
+                  - 'Timeseries': 'perses/docs/dac/go/panel/time-series.md'
+              - 'Prometheus':
+                  - 'Datasource': 'perses/docs/dac/go/prometheus/datasource.md'
+                  - 'Query': 'perses/docs/dac/go/prometheus/query.md'
+                  - 'Label Names': 'perses/docs/dac/go/prometheus/variable/label-names.md'
+                  - 'Label Values': 'perses/docs/dac/go/prometheus/variable/label-values.md'
+                  - 'PromQL': 'perses/docs/dac/go/prometheus/variable/promql.md'
+                  - 'TLS and HTTP Datasource': 'perses/docs/troubleshooting/tls-plain-http-datasource.md'
+
+
       - 'Design Docs':
           - 'Authentication': 'perses/docs/design-docs/authentication.md'
           - 'Authorization': 'perses/docs/design-docs/authorization.md'
