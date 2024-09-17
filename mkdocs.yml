@@ -1,0 +1,152 @@
+site_name: Perses
+site_url: "https://perses.dev"
+repo_name: "Perses on GitHub"
+repo_url: "https://github.com/perses/perses"
+theme:
+  name: material
+  palette:
+    # Palette toggle for automatic mode
+    - media: "(prefers-color-scheme)"
+      primary: black
+      toggle:
+        icon: material/brightness-auto
+        name: Switch to light mode
+
+    # Palette toggle for light mode
+    - media: "(prefers-color-scheme: light)"
+      primary: black
+      scheme: default
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+
+    # Palette toggle for dark mode
+    - media: "(prefers-color-scheme: dark)"
+      primary: black
+      scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to system preference
+  features:
+    - navigation.tabs
+    - content.code.copy
+markdown_extensions:
+  - attr_list
+  - md_in_html
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - toc:
+      permalink: "#"
+  - admonition
+extra_css:
+  - 'css/style.css'
+# extra_javascript:
+#   - 'js/main.js'
+
+# Enable versioning
+extra:
+  version:
+    provider: mike
+
+
+# Multi repo support
+plugins:
+  - multirepo:
+      # (optional) tells multirepo to cleanup the temporary directory after site is built.
+      cleanup: true
+      # if set the docs directory will not be removed when importing docs.
+      # When using this with a nav section in an imported repo you must keep the
+      # docs directory in the path (e.g., docs/path/to/file.md).
+      keep_docs_dir: true
+      nav_repos:
+        - name: perses
+          import_url: https://github.com/perses/perses?branch=main
+          # forward slash is needed in '/README.md' so that only the README.md in the root
+          # directory is imported and not all README.md files.
+          imports: [docs/*]
+nav:
+  - 'Home': 'index.md'
+  - 'Docs':
+      - 'Introduction': 'perses/docs/prologue/introduction.md'
+      - 'API':
+          - 'Introduction': 'perses/docs/api/README.md'
+          - 'Dashboard': 'perses/docs/api/dashboard.md'
+          - 'Datasource': 'perses/docs/api/datasource.md'
+          - 'Ephemeral Dashboard': 'perses/docs/api/ephemeral-dashboard.md'
+          - 'Project': 'perses/docs/api/project.md'
+          - 'Role': 'perses/docs/api/role.md'
+          - 'Role Binding': 'perses/docs/api/rolebinding.md'
+          - 'Secret': 'perses/docs/api/secret.md'
+          - 'User': 'perses/docs/api/user.md'
+          - 'Variable': 'perses/docs/api/variable.md'
+      - 'Dashboard as Code':
+          - 'CUE':
+              - 'CUE SDK for Dashboards as Code': "perses/docs/dac/cue/README.md"
+              - 'Dashboard': 'perses/docs/dac/cue/dashboard.md'
+              - 'Panel Groups': 'perses/docs/dac/cue/panelgroups.md'
+              - 'Variable Group': 'perses/docs/dac/cue/variable/group.md'
+              - 'Static List Variable': 'perses/docs/dac/cue/variable/staticlist.md'
+              - 'Text Variable': 'perses/docs/dac/cue/variable/text.md'
+              - 'Prometheus':
+                  - 'Filter': 'perses/docs/dac/cue/prometheus/filter.md'
+                  - 'Panel': 'perses/docs/dac/cue/prometheus/panel.md'
+                  - 'Label Names': 'perses/docs/dac/cue/prometheus/variable/labelnames.md'
+                  - 'Label Values': 'perses/docs/dac/cue/prometheus/variable/labelvalues.md'
+                  - 'PromQL Variable': 'perses/docs/dac/cue/prometheus/variable/promql.md'
+          - 'Go':
+              - 'Go SDK for Dashboards as Code': 'perses/docs/dac/go/README.md'
+              - 'Dashboard': 'perses/docs/dac/go/dashboard.md'
+              - 'Datasource': 'perses/docs/dac/go/datasource.md'
+              - 'Bar Panel Builder': 'perses/docs/dac/go/panel/bar.md'
+              - 'Panel Builder': 'perses/docs/dac/go/panel.md'
+              - 'Panel Group Builder': 'perses/docs/dac/go/panel-group.md'
+              - 'Query Builder': 'perses/docs/dac/go/query.md'
+              - 'Variable Builder': 'perses/docs/dac/go/variable.md'
+              - 'Variable Group Builder': 'perses/docs/dac/go/variable-group.md'
+              - 'HTTP Proxy Builder': 'perses/docs/dac/go/helper/http-proxy.md'
+              - 'Panels':
+                  - 'Guage': 'perses/docs/dac/go/panel/gauge.md'
+                  - 'Markdown': 'perses/docs/dac/go/panel/markdown.md'
+                  - 'Stat': 'perses/docs/dac/go/panel/stat.md'
+                  - 'Timeseries': 'perses/docs/dac/go/panel/time-series.md'
+              - 'Prometheus':
+                  - 'Datasource': 'perses/docs/dac/go/prometheus/datasource.md'
+                  - 'Query': 'perses/docs/dac/go/prometheus/query.md'
+                  - 'Label Names': 'perses/docs/dac/go/prometheus/variable/label-names.md'
+                  - 'Label Values': 'perses/docs/dac/go/prometheus/variable/label-values.md'
+                  - 'PromQL': 'perses/docs/dac/go/prometheus/variable/promql.md'
+                  - 'TLS and HTTP Datasource': 'perses/docs/troubleshooting/tls-plain-http-datasource.md'
+
+
+      - 'Design Docs':
+          - 'Authentication': 'perses/docs/design-docs/authentication.md'
+          - 'Authorization': 'perses/docs/design-docs/authorization.md'
+          - 'Perses on Kubernetes': 'perses/docs/design-docs/kubernetes.md'
+      - 'Plugins':
+          - 'Introduction': 'perses/docs/plugins/introduction.md'
+          - 'CUE in Perses': 'perses/docs/plugins/cue.md'
+          - 'Panel Plugin': 'perses/docs/plugins/panels.md'
+          - 'Prometheus Plugins': 'perses/docs/plugins/prometheus.md'
+      - 'Tooling':
+          - 'Perses CLI (percli)': 'perses/docs/tooling/cli.md'
+      - 'User Guides':
+          - 'Configuration': 'perses/docs/user-guides/configuration.md'
+          - 'Dashboards as Code': 'perses/docs/user-guides/dashboard-as-code.md'
+          - 'Embedding Perses Panels': 'perses/docs/user-guides/embedding-panels.md'
+          - 'Installation':
+              - 'Installing Perses from Source': 'perses/docs/user-guides/installing-perses-from-source.md'
+              - 'Installing Perses in a Container': 'perses/docs/user-guides/installing-perses-in-a-container.md'
+          - 'OAuth Helper': 'perses/docs/user-guides/oauth-configuration-helpers.md'
+          - 'Provisioning': 'perses/docs/user-guides/provisioning.md'
+  - Demo: 'https://demo.perses.dev'
