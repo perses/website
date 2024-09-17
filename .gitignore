@@ -280,3 +280,4 @@ $RECYCLE.BIN/
 # Docker compose config secret (ask maintainers)
 secret
 
+/venv

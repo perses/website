@@ -1,9 +1,10 @@
 site_name: Perses
 site_url: "https://perses.dev"
-repo_name: "Perses on GitHub"
+repo_name: "perses/perses"
 repo_url: "https://github.com/perses/perses"
 theme:
   name: material
+  logo: assets/images/favicon.png
   palette:
     # Palette toggle for automatic mode
     - media: "(prefers-color-scheme)"
@@ -54,8 +55,23 @@ extra_css:
 # extra_javascript:
 #   - 'js/main.js'
 
-# Enable versioning
+copyright: |
+  The Linux Foundation® (TLF) has registered trademarks and uses trademarks. For a list of TLF trademarks, see <a href='https://www.linuxfoundation.org/trademark-usage/'>Trademark Usage</a>
+
 extra:
+  # used to remove the text "made with material for mkdocs: https://squidfunk.github.io/mkdocs-material/setup/setting-up-the-footer/#generator-notice"
+  generator: false
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/perses
+    - icon: fontawesome/brands/x-twitter
+      link: https://twitter.com/PersesDev
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/company/persesdev
+    - icon: fontawesome/brands/slack
+      link: https://cloud-native.slack.com/messages/C07KQR95WBE
+    - icon: fontawesome/brands/docker
+      link: https://hub.docker.com/r/persesdev/perses
   version:
     provider: mike
 
