@@ -72,9 +72,6 @@ extra:
       link: https://cloud-native.slack.com/messages/C07KQR95WBE
     - icon: fontawesome/brands/docker
       link: https://hub.docker.com/r/persesdev/perses
-  version:
-    provider: mike
-
 
 # Multi repo support
 plugins:

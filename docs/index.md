@@ -7,9 +7,9 @@ hide:
 ---
 
 <center>
-![perses logo](https://perses.dev/images/perses_logo_cropped.png)
+![perses logo](assets/images/favicon.png)
 
-# Open-source Apache-2.0 Licensed
+# Perses
 
 ##  An open specification for dashboards. The open dashboard tool for Prometheus and other data sources.
 </center>
@@ -41,3 +41,15 @@ hide:
     [:octicons-arrow-right-24: Link here](#)
 
 </div>
+
+<center>
+
+## Open Source
+
+Perses is 100% open source and community-driven. All components are available under the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0) on [GitHub](https://github.com/perses).
+
+Perses is a [Cloud Native Computing Foundation](https://cncf.io) sandbox project.
+
+[![CNCF Logo](assets/images/cncf_logo.png)](https://cncf.io)
+
+</center>
