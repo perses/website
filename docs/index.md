@@ -6,13 +6,13 @@ hide:
   - path
 ---
 
-<center>
-![perses logo](assets/images/favicon.png)
+<div class="centered" markdown>
+# ![perses logo](assets/images/favicon.png) Perses
 
-# Perses
+## An open specification for dashboards. The open dashboard tool for Prometheus and other data sources.
+</div>
 
-##  An open specification for dashboards. The open dashboard tool for Prometheus and other data sources.
-</center>
+![perses overview](assets/images/perses_overview.gif)
 
 <div class="grid cards" markdown>
 
