@@ -12,8 +12,8 @@ On the machine, just pull this repository and run `podman-compose up -d`
 We recommend you to create a python virtual environment.
 
 ```bash
-python3 -m env venv
-source ./venv/bin/activate
+python3 -m venv venv
+source ./venv/bin/activate # Scripts instead of bin on windows
 ```
 
 Then you can install de libs required to run the Perses website:
