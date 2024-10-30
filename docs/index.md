@@ -7,7 +7,7 @@ hide:
 ---
 
 <div class="centered" markdown>
-# ![perses logo](assets/images/favicon.png) Perses
+# ![perses logo dark mode](assets/images/perses-horizontal-color-white.png#only-dark) ![perses logo light mode](assets/images/perses-horizontal-color-black.png#only-light)
 
 ## An open specification for dashboards. The open dashboard tool for Prometheus and other data sources.
 </div>
