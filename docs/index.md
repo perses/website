@@ -16,13 +16,36 @@ hide:
 
 <div class="grid cards" markdown>
 
--   ## GitOps Native
+-   ## Observability display
 
     ---
 
-    Facilitates a seamless "dashboards as code" workflow by introducing an innovative and precisely defined dashboard definition model.
+    Perses is first and foremost a dashboard tool that you can use to display a variety of observability data. Today supports Prometheus metrics & Tempo traces.
 
-    [:octicons-arrow-right-24: Link here](#)
+-   ## Embeddable components
+
+    ---
+
+    You can used Perses as-is or embed parts of it in your own UI, from a single panel to a whole dashboard view.
+
+
+-   ## GitOps-friendly
+
+    ---
+
+    Perses offers a complete static validation of the dashboard format. It also with a CLI, `percli`, that can be used to perform actions in CICDs
+
+-   ## Scale-friendly 
+
+    ---
+
+    Perses dashboards can be written as-code using the provided SDKs. This allows you to extract any kind of components in libraries for reusage across as much dashboards as you want. 
+
+-   ## Kubernetes-native
+
+    ---
+
+    Use the Perses operator to manage your Perses deployments & dashboards as CRDs. Leverage on the datasource discovery to retrieve data from your datasource pods/services.
 
 -   ## Extensible
 
@@ -30,19 +53,11 @@ hide:
 
     Perses, with its plugin-based architecture, offers effortless extension and reuse of plugins across different projects.
 
-    [:octicons-arrow-right-24: Link here](#)
-
--   ## Static Validation
-
-    ---
-
-    Perses supports hassle-free dashboard-as-code usage with built-in static validation. Validate your dashboard in CI/CD using the Perses CLI (percli).
-
-    [:octicons-arrow-right-24: Link here](#)
-
 </div>
 
-<center>
+...and more to discover!
+
+<div class="centered" markdown>
 
 ## Open Source
 
@@ -52,4 +67,4 @@ Perses is a [Cloud Native Computing Foundation](https://cncf.io) sandbox project
 
 [![CNCF Logo](assets/images/cncf_logo.png)](https://cncf.io)
 
-</center>
+</div>
