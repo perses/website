@@ -7,7 +7,7 @@ hide:
 ---
 
 <div class="centered" markdown>
-# ![Perses logo](assets/images/logos/Perses_horizontal_color_white.png#only-dark) ![Perses logo](assets/images/logos/Perses_horizontal_color_black.png#only-light)
+# ![Perses logo](assets/images/logos/Perses_horizontal_color_dark_theme.png#only-dark) ![Perses logo](assets/images/logos/Perses_horizontal_color_light_theme.png#only-light)
 
 ## An open specification for dashboards. The open dashboard tool for Prometheus and other data sources.
 </div>
@@ -64,7 +64,7 @@ Perses is 100% open source and community-driven. All components are available un
 
 Perses is a [Cloud Native Computing Foundation](https://cncf.io) sandbox project.
 
-[![CNCF logo](assets/images/logos/CNCF_white.png#only-dark)](https://cncf.io) [![CNCF logo](assets/images/logos/CNCF_black.png#only-light)](https://cncf.io)
+[![CNCF logo](assets/images/logos/CNCF_dark_theme.png#only-dark)](https://cncf.io) [![CNCF logo](assets/images/logos/CNCF_light_theme.png#only-light)](https://cncf.io)
 
 </div>
 
@@ -76,10 +76,10 @@ Perses is a [Cloud Native Computing Foundation](https://cncf.io) sandbox project
 
 <div class="grid cards image-grid" markdown>
 
--   [![Amadeus logo](assets/images/logos/Amadeus_white.png#only-dark)](https://amadeus.com) [![Amadeus logo](assets/images/logos/Amadeus_color.png#only-light)](https://amadeus.com)
--   [![Chronosphere logo](assets/images/logos/Chronosphere_white.svg#only-dark)](https://chronosphere.io/) [![Chronosphere logo](assets/images/logos/Chronosphere_black.svg#only-light)](https://chronosphere.io/)
+-   [![Amadeus logo](assets/images/logos/Amadeus_dark_theme.png#only-dark)](https://amadeus.com) [![Amadeus logo](assets/images/logos/Amadeus_light_theme.png#only-light)](https://amadeus.com)
+-   [![Chronosphere logo](assets/images/logos/Chronosphere_dark_theme.svg#only-dark)](https://chronosphere.io/) [![Chronosphere logo](assets/images/logos/Chronosphere_light_theme.svg#only-light)](https://chronosphere.io/)
 -   [![Dash0 logo](assets/images/logos/Dash0.svg)](https://www.dash0.com/)
--   [![Greptime logo](assets/images/logos/Greptime_white.svg#only-dark)](https://greptime.com/) [![Greptime logo](assets/images/logos/Greptime_black.svg#only-light)](https://greptime.com/)
--   [![RedHat logo](assets/images/logos/RedHat_white.png#only-dark)](https://www.redhat.com) [![RedHat logo](assets/images/logos/RedHat_black.png#only-light)](https://www.redhat.com)
+-   [![Greptime logo](assets/images/logos/Greptime_dark_theme.svg#only-dark)](https://greptime.com/) [![Greptime logo](assets/images/logos/Greptime_light_theme.svg#only-light)](https://greptime.com/)
+-   [![RedHat logo](assets/images/logos/RedHat_dark_theme.png#only-dark)](https://www.redhat.com) [![RedHat logo](assets/images/logos/RedHat_light_theme.png#only-light)](https://www.redhat.com)
 
 </div>
