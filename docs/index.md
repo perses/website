@@ -26,20 +26,19 @@ hide:
 
     ---
 
-    You can used Perses as-is or embed parts of it in your own UI, from a single panel to a whole dashboard view.
-
+    You can use Perses as-is or embed parts of it in your own UI, could it be a single panel or a whole dashboard view.
 
 -   ## GitOps-friendly
 
     ---
 
-    Perses offers a complete static validation of the dashboard format. It also with a CLI, `percli`, that can be used to perform actions in CICDs
+    Perses offers a complete static validation of the dashboard format. It also comes with a CLI, `percli`, that can be used to perform actions in CI/CD pipelines.
 
 -   ## Scale-friendly 
 
     ---
 
-    Perses dashboards can be written as-code using the provided SDKs. This allows you to extract any kind of components in libraries for reusage across as much dashboards as you want. 
+    Perses dashboards can be written as-code using the provided SDKs. This enables to define any kind of components in libraries, from simple color codes to complex templates, for reusage across as much dashboards as you want. 
 
 -   ## Kubernetes-native
 
