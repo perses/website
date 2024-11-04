@@ -1,3 +1,18 @@
 .centered {
     text-align: center
 }
+
+.grid.cards a {
+    display: flex;
+    justify-content: center;
+}
+
+.grid.cards img {
+    max-width: 90%;
+    max-height: 80px;
+    object-fit: contain;
+}
+
+.grid.cards.image-grid {
+    grid-template-columns: repeat(4, 1fr); /* Four columns for the image grid */
+}
