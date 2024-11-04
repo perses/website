@@ -16,3 +16,21 @@
 .grid.cards.image-grid {
     grid-template-columns: repeat(4, 1fr); /* Four columns for the image grid */
 }
+
+@media (max-width: 1024px) {
+    .grid.cards.image-grid {
+        grid-template-columns: repeat(3, 1fr); /* Three columns on smaller screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .grid.cards.image-grid {
+        grid-template-columns: repeat(2, 1fr); /* Two columns on tablets */
+    }
+}
+
+@media (max-width: 480px) {
+    .grid.cards.image-grid {
+        grid-template-columns: 1fr; /* Single column on mobile */
+    }
+}
