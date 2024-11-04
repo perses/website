@@ -80,6 +80,7 @@ Perses is a [Cloud Native Computing Foundation](https://cncf.io) sandbox project
 -   [![Chronosphere logo](assets/images/logos/Chronosphere_white.svg#only-dark)](https://chronosphere.io/) [![Chronosphere logo](assets/images/logos/Chronosphere_black.svg#only-light)](https://chronosphere.io/)
 -   [![Dash0 logo](assets/images/logos/Dash0.svg)](https://www.dash0.com/)
 -   [![Greptime logo](assets/images/logos/Greptime_white.svg#only-dark)](https://greptime.com/) [![Greptime logo](assets/images/logos/Greptime_black.svg#only-light)](https://greptime.com/)
+-   [![Millersoft logo](assets/images/logos/Millersoft.png)](https://www.millersoft.ltd.uk/)
 -   [![RedHat logo](assets/images/logos/RedHat_white.png#only-dark)](https://www.redhat.com) [![RedHat logo](assets/images/logos/RedHat_black.png#only-light)](https://www.redhat.com)
 
 </div>
