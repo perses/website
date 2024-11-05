@@ -91,7 +91,6 @@ plugins:
 nav:
   - 'Home': 'index.md'
   - 'Docs':
-      - 'Introduction': 'perses/docs/prologue/introduction.md'
       - 'API':
           - 'Introduction': 'perses/docs/api/README.md'
           - 'Dashboard': 'perses/docs/api/dashboard.md'
