@@ -102,7 +102,7 @@ nav:
           - 'Secret': 'perses/docs/api/secret.md'
           - 'User': 'perses/docs/api/user.md'
           - 'Variable': 'perses/docs/api/variable.md'
-      - 'Dashboard as Code':
+      - 'Dashboard-as-Code':
           - 'CUE':
               - 'CUE SDK for Dashboards as Code': "perses/docs/dac/cue/README.md"
               - 'Dashboard': 'perses/docs/dac/cue/dashboard.md'
