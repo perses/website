@@ -30,7 +30,7 @@ services:
       - "traefik.http.routers.demo.rule=Host(`demo.perses.dev`)"
       - "traefik.http.routers.demo.tls.certresolver=myresolver"
   prometheus:
-    image: "docker.io/prom/prometheus:v2.51.2"
+    image: "docker.io/prom/prometheus:v3.0.0-rc.0"
     ports:
       - "9090:9090"
     volumes:
