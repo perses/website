@@ -31,6 +31,8 @@ theme:
   features:
     - navigation.tabs
     - content.code.copy
+    - search.suggest
+    - search.highlight
 markdown_extensions:
   - attr_list
   - md_in_html
@@ -75,6 +77,7 @@ extra:
 
 # Multi repo support
 plugins:
+  - search
   - multirepo:
       # (optional) tells multirepo to cleanup the temporary directory after site is built.
       cleanup: true
