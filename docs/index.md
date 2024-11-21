@@ -4,11 +4,17 @@ hide:
   - toc
   - search
   - path
+title: Perses
 ---
+<!-- below css is required to remove the empty header that is generated automatically by mkdocs ref: https://github.com/squidfunk/mkdocs-material/issues/2163#issuecomment-2109733111-->
+<style>
+.md-content .md-typeset h1 {
+      display: none;
+  }
+</style>
 
-<div class="centered" markdown>
-# ![Perses logo](assets/images/logos/Perses_dark_theme.png#only-dark) ![Perses logo](assets/images/logos/Perses_light_theme.png#only-light)
-
+<div class="centered image" markdown>
+![Perses logo](assets/images/logos/Perses_dark_theme.png#only-dark) ![Perses logo](assets/images/logos/Perses_light_theme.png#only-light)
 ## An open specification for dashboards. The open dashboard tool for Prometheus and other data sources.
 </div>
 
