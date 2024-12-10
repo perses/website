@@ -6,7 +6,6 @@ This repository contains everything required to start the Perses demo, the docum
 
 On the machine, just pull this repository and run `podman-compose up -d`
 
-
 ### Start the website locally
 
 We recommend you to create a python virtual environment.
@@ -39,7 +38,25 @@ mkdocs build
 Then you can run:
 
 ```bash
-docker-compose up -d website
+podman-compose up -d website
 ```
 
 Then website is available at the url http://localhost:1313
+
+### Restart the demo
+
+In case you need to restart the demo server after a config change:
+
+1. build the new config:
+
+```bash
+sh scripts/generate_config.sh
+```
+
+2. restart the demo server:
+
+```bash
+podman-compose down demo
+# wait a bit, otherwise the old instance could still be running and you'd get an "address already in use" error
+podman-compose up -d demo
+```

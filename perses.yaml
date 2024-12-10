@@ -24,7 +24,7 @@ schemas:
   variables_path: "/etc/perses/cue/schemas/variables"
   interval: "5m"
 
-ephemeral_dashboard":
+ephemeral_dashboard:
   enable: true
   cleanup_interval: "1h"
 
