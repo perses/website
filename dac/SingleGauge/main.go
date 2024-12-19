@@ -41,6 +41,18 @@ func main() {
 					query.PromQL("100 - ((node_memory_MemAvailable_bytes{env=\"demo\", instance=\"demo.do.prometheus.io:9100\"} * 100) / node_memory_MemTotal_bytes{env=\"demo\", instance=\"demo.do.prometheus.io:9100\"})"),
 				),
 			),
+			panelgroup.AddPanel("Second Gauge",
+				gauge.Chart(
+					gauge.Calculation(common.LastCalculation),
+					gauge.Format(common.Format{
+						Unit: common.BytesUnit,
+					}),
+					gauge.Max(20),
+				),
+				panel.AddQuery(
+					query.PromQL("100 - ((node_memory_MemAvailable_bytes{env=\"demo\", instance=\"demo.do.prometheus.io:9100\"} * 100) / node_memory_MemTotal_bytes{env=\"demo\", instance=\"demo.do.prometheus.io:9100\"})"),
+				),
+			),
 		),
 	)
 
