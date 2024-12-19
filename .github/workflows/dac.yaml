@@ -1,0 +1,23 @@
+name: Dashboard-as-Code workflow
+
+on:
+  workflow_dispatch:  # Allow manual triggering
+  push:
+    branches:
+      - main
+      - release/*
+      - snapshot/*
+    tags:
+      - v*
+  pull_request:
+  merge_group:
+jobs:
+  dac:
+    uses: perses/github-actions/.github/workflows/dac.yaml@main
+    with:
+      url: https://demo.perses.dev
+      directory: ./dac
+      server-validation: true
+    secrets:
+      username: ${{ secrets.TEST_USERNAME }}
+      password: ${{ secrets.TEST_PASSWORD }}
