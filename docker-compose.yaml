@@ -15,7 +15,7 @@ services:
       - "traefik.http.routers.website.tls.certresolver=myresolver"
 
   demo:
-    image: "docker.io/persesdev/perses:v0.49.0-distroless"
+    image: "docker.io/persesdev/perses:v0.50.0-rc.1-distroless"
     ports:
       - "5000:8080"
     command: "--config=/etc/perses/config/config.yaml"
@@ -30,7 +30,7 @@ services:
       - "traefik.http.routers.demo.rule=Host(`demo.perses.dev`)"
       - "traefik.http.routers.demo.tls.certresolver=myresolver"
   prometheus:
-    image: "docker.io/prom/prometheus:v3.0.0-rc.0"
+    image: "docker.io/prom/prometheus:v3.1.0"
     ports:
       - "9090:9090"
     volumes:
