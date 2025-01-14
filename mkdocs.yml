@@ -78,6 +78,7 @@ extra:
 # Multi repo support
 plugins:
   - search
+  - blog
   - multirepo:
       # (optional) tells multirepo to cleanup the temporary directory after site is built.
       cleanup: true
@@ -93,6 +94,8 @@ plugins:
           imports: [docs/*]
 nav:
   - 'Home': 'index.md'
+  - 'Blog':
+      - blog/index.md
   - 'Docs':
       - 'API':
           - 'Introduction': 'perses/docs/api/README.md'
