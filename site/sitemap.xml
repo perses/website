@@ -2,230 +2,246 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://perses.dev/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
+    </url>
+    <url>
+         <loc>https://perses.dev/blog/</loc>
+         <lastmod>2025-01-15</lastmod>
+    </url>
+    <url>
+         <loc>https://perses.dev/blog/2025/01/15/release-v0500/</loc>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/api/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/api/dashboard/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/api/datasource/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/api/ephemeral-dashboard/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/api/project/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/api/role/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/api/rolebinding/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/api/secret/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/api/user/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/api/variable/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/dac/cue/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/dac/cue/dashboard/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/dac/cue/panelgroups/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/dac/cue/prometheus/filter/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/dac/cue/prometheus/panel/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/dac/cue/prometheus/variable/labelnames/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/dac/cue/prometheus/variable/labelvalues/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/dac/cue/prometheus/variable/promql/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/dac/cue/variable/group/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/dac/cue/variable/staticlist/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/dac/cue/variable/text/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/dac/go/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/dac/go/dashboard/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/dac/go/datasource/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/dac/go/panel-group/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/dac/go/panel/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/dac/go/query/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/dac/go/variable-group/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/dac/go/variable/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/dac/go/helper/http-proxy/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/dac/go/panel/bar/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/dac/go/panel/gauge/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/dac/go/panel/markdown/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/dac/go/panel/stat/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/dac/go/panel/time-series/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/dac/go/prometheus/datasource/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/dac/go/prometheus/query/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/dac/go/prometheus/variable/label-names/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/dac/go/prometheus/variable/label-values/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/dac/go/prometheus/variable/promql/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/design-docs/authentication/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/design-docs/authorization/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/design-docs/kubernetes/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/plugins/cue/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/plugins/introduction/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/plugins/panels/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/plugins/prometheus/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/tooling/cli/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/troubleshooting/tls-plain-http-datasource/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/user-guides/configuration/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/user-guides/dashboard-as-code/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/user-guides/embedding-panels/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/user-guides/installing-perses-from-source/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/user-guides/installing-perses-in-a-container/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/user-guides/oauth-configuration-helpers/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
     </url>
     <url>
          <loc>https://perses.dev/perses/docs/user-guides/provisioning/</loc>
-         <lastmod>2024-11-21</lastmod>
+         <lastmod>2025-01-15</lastmod>
+    </url>
+    <url>
+         <loc>https://perses.dev/blog/archive/2025/</loc>
+         <lastmod>2025-01-15</lastmod>
+    </url>
+    <url>
+         <loc>https://perses.dev/blog/category/release/</loc>
+         <lastmod>2025-01-15</lastmod>
     </url>
 </urlset>
