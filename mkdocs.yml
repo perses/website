@@ -97,75 +97,78 @@ nav:
   - 'Blog':
       - blog/index.md
   - 'Docs':
-      - 'API':
-          - 'Introduction': 'perses/docs/api/README.md'
-          - 'Dashboard': 'perses/docs/api/dashboard.md'
-          - 'Datasource': 'perses/docs/api/datasource.md'
-          - 'Ephemeral Dashboard': 'perses/docs/api/ephemeral-dashboard.md'
-          - 'Project': 'perses/docs/api/project.md'
-          - 'Role': 'perses/docs/api/role.md'
-          - 'Role Binding': 'perses/docs/api/rolebinding.md'
-          - 'Secret': 'perses/docs/api/secret.md'
-          - 'User': 'perses/docs/api/user.md'
-          - 'Variable': 'perses/docs/api/variable.md'
-      - 'Dashboard-as-Code':
-          - 'CUE':
-              - 'CUE SDK for Dashboards as Code': "perses/docs/dac/cue/README.md"
-              - 'Dashboard': 'perses/docs/dac/cue/dashboard.md'
-              - 'Panel Groups': 'perses/docs/dac/cue/panelgroups.md'
-              - 'Variable':
-                  - 'Variable Group': 'perses/docs/dac/cue/variable/group.md'
-                  - 'Static List Variable': 'perses/docs/dac/cue/variable/staticlist.md'
-                  - 'Text Variable': 'perses/docs/dac/cue/variable/text.md'
-              - 'Prometheus':
-                  - 'Filter': 'perses/docs/dac/cue/prometheus/filter.md'
-                  - 'Panel': 'perses/docs/dac/cue/prometheus/panel.md'
-                  - 'Label Names Variable': 'perses/docs/dac/cue/prometheus/variable/labelnames.md'
-                  - 'Label Values Variable': 'perses/docs/dac/cue/prometheus/variable/labelvalues.md'
-                  - 'PromQL Variable': 'perses/docs/dac/cue/prometheus/variable/promql.md'
-          - 'Go':
-              - 'Go SDK for Dashboards as Code': 'perses/docs/dac/go/README.md'
-              - 'Dashboard': 'perses/docs/dac/go/dashboard.md'
-              - 'Datasource': 'perses/docs/dac/go/datasource.md'
-              - 'Panel': 'perses/docs/dac/go/panel.md'
-              - 'Panel Plugins':
-                  - 'Bar': 'perses/docs/dac/go/panel/bar.md'
-                  - 'Gauge': 'perses/docs/dac/go/panel/gauge.md'
-                  - 'Markdown': 'perses/docs/dac/go/panel/markdown.md'
-                  - 'Stat': 'perses/docs/dac/go/panel/stat.md'
-                  - 'Timeseries': 'perses/docs/dac/go/panel/time-series.md'
-              - 'Panel Group': 'perses/docs/dac/go/panel-group.md'
-              - 'Query': 'perses/docs/dac/go/query.md'
-              - 'Variable': 'perses/docs/dac/go/variable.md'
-              - 'Variable Group': 'perses/docs/dac/go/variable-group.md'
-              - 'Helpers':
-                  - 'HTTP Proxy': 'perses/docs/dac/go/helper/http-proxy.md'
-              - 'Prometheus':
-                  - 'Datasource': 'perses/docs/dac/go/prometheus/datasource.md'
-                  - 'Query': 'perses/docs/dac/go/prometheus/query.md'
-                  - 'Label Names Variable': 'perses/docs/dac/go/prometheus/variable/label-names.md'
-                  - 'Label Values Variable': 'perses/docs/dac/go/prometheus/variable/label-values.md'
-                  - 'PromQL Variable': 'perses/docs/dac/go/prometheus/variable/promql.md'
+      - 'Concepts':
+          - 'Plugins': 'perses/docs/plugins/introduction.md'
+          - 'Datasource & Variable scopes': 'perses/docs/datasource-and-variable-scopes.md'
+      - 'User Docs':
+          - 'Installation':
+              - 'Installing Perses from Source': 'perses/docs/installation/from-source.md'
+              - 'Installing Perses in a Container': 'perses/docs/installation/in-a-container.md'
+          - 'Configuration':
+              - 'General': 'perses/docs/configuration/configuration.md'
+              - 'OAuth Helper': 'perses/docs/configuration/oauth-configuration-helpers.md'
+              - 'Provisioning': 'perses/docs/configuration/provisioning.md'
+          - 'Dashboard-as-Code':
+              - 'Getting started': 'perses/docs/dac/dashboard-as-code.md'
+              - 'CUE':
+                  - 'CUE SDK for Dashboards as Code': "perses/docs/dac/cue/README.md"
+                  - 'Dashboard': 'perses/docs/dac/cue/dashboard.md'
+                  - 'Panel Groups': 'perses/docs/dac/cue/panelgroups.md'
+                  - 'Variable':
+                      - 'Variable Group': 'perses/docs/dac/cue/variable/group.md'
+                      - 'Static List Variable': 'perses/docs/dac/cue/variable/staticlist.md'
+                      - 'Text Variable': 'perses/docs/dac/cue/variable/text.md'
+                  - 'Prometheus':
+                      - 'Filter': 'perses/docs/dac/cue/prometheus/filter.md'
+                      - 'Panel': 'perses/docs/dac/cue/prometheus/panel.md'
+                      - 'Label Names Variable': 'perses/docs/dac/cue/prometheus/variable/labelnames.md'
+                      - 'Label Values Variable': 'perses/docs/dac/cue/prometheus/variable/labelvalues.md'
+                      - 'PromQL Variable': 'perses/docs/dac/cue/prometheus/variable/promql.md'
+              - 'Go':
+                  - 'Go SDK for Dashboards as Code': 'perses/docs/dac/go/README.md'
+                  - 'Dashboard': 'perses/docs/dac/go/dashboard.md'
+                  - 'Datasource': 'perses/docs/dac/go/datasource.md'
+                  - 'Panel': 'perses/docs/dac/go/panel.md'
+                  - 'Panel Plugins':
+                      - 'Bar': 'perses/docs/dac/go/panel/bar.md'
+                      - 'Gauge': 'perses/docs/dac/go/panel/gauge.md'
+                      - 'Markdown': 'perses/docs/dac/go/panel/markdown.md'
+                      - 'Stat': 'perses/docs/dac/go/panel/stat.md'
+                      - 'Timeseries': 'perses/docs/dac/go/panel/time-series.md'
+                  - 'Panel Group': 'perses/docs/dac/go/panel-group.md'
+                  - 'Query': 'perses/docs/dac/go/query.md'
+                  - 'Variable': 'perses/docs/dac/go/variable.md'
+                  - 'Variable Group': 'perses/docs/dac/go/variable-group.md'
+                  - 'Helpers':
+                      - 'HTTP Proxy': 'perses/docs/dac/go/helper/http-proxy.md'
+                  - 'Prometheus':
+                      - 'Datasource': 'perses/docs/dac/go/prometheus/datasource.md'
+                      - 'Query': 'perses/docs/dac/go/prometheus/query.md'
+                      - 'Label Names Variable': 'perses/docs/dac/go/prometheus/variable/label-names.md'
+                      - 'Label Values Variable': 'perses/docs/dac/go/prometheus/variable/label-values.md'
+                      - 'PromQL Variable': 'perses/docs/dac/go/prometheus/variable/promql.md'
+          - 'Perses CLI (percli)': 'perses/docs/cli.md'
+          - 'Troubleshooting':
+              - 'TLS and HTTP Datasource': 'perses/docs/troubleshooting-tls-plain-http-datasource.md'
+      - 'Developer Docs':
+          - 'API':
+              - 'Introduction': 'perses/docs/api/README.md'
+              - 'Dashboard': 'perses/docs/api/dashboard.md'
+              - 'Datasource': 'perses/docs/api/datasource.md'
+              - 'Ephemeral Dashboard': 'perses/docs/api/ephemeral-dashboard.md'
+              - 'Project': 'perses/docs/api/project.md'
+              - 'Role': 'perses/docs/api/role.md'
+              - 'Role Binding': 'perses/docs/api/rolebinding.md'
+              - 'Secret': 'perses/docs/api/secret.md'
+              - 'User': 'perses/docs/api/user.md'
+              - 'Variable': 'perses/docs/api/variable.md'
+          - 'Embedding Perses Panels': 'perses/docs/embedding-panels.md'
+          - 'Plugins':
+              - 'CUE in Perses': 'perses/docs/plugins/cue.md'
+              - 'Panel Plugins': 'perses/docs/plugins/panels.md'
+              - 'Prometheus Plugins': 'perses/docs/plugins/prometheus.md'
       - 'Design Docs':
           - 'Authentication': 'perses/docs/design-docs/authentication.md'
           - 'Authorization': 'perses/docs/design-docs/authorization.md'
           - 'Perses on Kubernetes': 'perses/docs/design-docs/kubernetes.md'
-      - 'Plugins':
-          - 'Introduction': 'perses/docs/plugins/introduction.md'
-          - 'CUE in Perses': 'perses/docs/plugins/cue.md'
-          - 'Panel Plugin': 'perses/docs/plugins/panels.md'
-          - 'Prometheus Plugins': 'perses/docs/plugins/prometheus.md'
-      - 'Tooling':
-          - 'Perses CLI (percli)': 'perses/docs/tooling/cli.md'
-      - 'Troubleshooting':
-          - 'TLS and HTTP Datasource': 'perses/docs/troubleshooting/tls-plain-http-datasource.md'
-      - 'User Guides':
-          - 'Configuration': 'perses/docs/user-guides/configuration.md'
-          - 'Dashboard-as-Code': 'perses/docs/user-guides/dashboard-as-code.md'
-          - 'Embedding Perses Panels': 'perses/docs/user-guides/embedding-panels.md'
-          - 'Installation':
-              - 'Installing Perses from Source': 'perses/docs/user-guides/installing-perses-from-source.md'
-              - 'Installing Perses in a Container': 'perses/docs/user-guides/installing-perses-in-a-container.md'
-          - 'OAuth Helper': 'perses/docs/user-guides/oauth-configuration-helpers.md'
-          - 'Provisioning': 'perses/docs/user-guides/provisioning.md'
   - Demo: 'https://demo.perses.dev'
