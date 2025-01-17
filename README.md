@@ -60,3 +60,7 @@ podman-compose down demo
 # wait a bit, otherwise the old instance could still be running and you'd get an "address already in use" error
 podman-compose up -d demo
 ```
+
+### Pushing changes to the website
+
+the documentation website "compiled" files are stored in git. To update the website you thus have to run `mkdocs build` & commit the changes it produces.
