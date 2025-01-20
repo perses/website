@@ -97,6 +97,7 @@ nav:
   - 'Blog':
     - blog/index.md
   - 'Docs':
+    - 'Overview': 'perses/docs/overview.md'
     - 'Concepts':
       - 'Plugins': 'perses/docs/plugins/introduction.md'
       - 'Datasource & Variable scopes': 'perses/docs/datasource-and-variable-scopes.md'
