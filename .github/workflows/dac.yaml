@@ -13,7 +13,7 @@ on:
   merge_group:
 jobs:
   dac:
-    uses: perses/github-actions/.github/workflows/dac.yaml@main
+    uses: perses/cli-actions/.github/workflows/dac.yaml@v0.1.0
     with:
       url: https://demo.perses.dev
       directory: ./dac
