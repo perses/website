@@ -82,7 +82,7 @@ plugins:
   - multirepo:
       # (optional) tells multirepo to cleanup the temporary directory after site is built.
       cleanup: true
-      # if set the docs directory will not be removed when importing docs.
+      # If set, the docs directory will not be removed when importing docs.
       # When using this with a nav section in an imported repo you must keep the
       # docs directory in the path (e.g., docs/path/to/file.md).
       keep_docs_dir: true
@@ -92,6 +92,9 @@ plugins:
           # forward slash is needed in '/README.md' so that only the README.md in the root
           # directory is imported and not all README.md files.
           imports: [docs/*]
+        - name: "plugins"
+          import_url: https://github.com/perses/plugins?branch=main
+          imports: [docs/*]
 nav:
   - Home: index.md
   - Blog:
@@ -99,11 +102,13 @@ nav:
   - Docs:
       - Overview: perses/docs/overview.md
       - Concepts:
-          - Plugins: perses/docs/plugins/introduction.md
+          - Plugins: perses/docs/concepts/plugins.md
           - Dashboard-as-Code: perses/docs/dac/introduction.md
-          - Datasource & Variable scopes: perses/docs/datasource-and-variable-scopes.md
-          - Authentication: perses/docs/auth/authentication.md
-          - Authorization: perses/docs/auth/authorization.md
+          - Datasource & Variable scopes: perses/docs/concepts/datasource-and-variable-scopes.md
+          - Authentication: perses/docs/concepts/authentication.md
+          - Authorization: perses/docs/concepts/authorization.md
+          - Proxy: perses/docs/concepts/proxy.md
+          - Ephemeral Dashboards: perses/docs/concepts/ephemeral-dashboards.md
       - User Docs:
           - Installation:
               - Installing Perses from Source: perses/docs/installation/from-source.md
@@ -112,6 +117,9 @@ nav:
               - General: perses/docs/configuration/configuration.md
               - OAuth Helper: perses/docs/configuration/oauth-configuration-helpers.md
               - Provisioning: perses/docs/configuration/provisioning.md
+              - Custom Lint Rules: perses/docs/configuration/custom-lint-rules.md
+              - Datasource Discovery: perses/docs/configuration/datasource-discovery.md
+              - Loading Plugin: perses/docs/configuration/load-plugin.md
           - Dashboard-as-Code:
               - Getting started: perses/docs/dac/getting-started.md
               - CUE:
@@ -152,6 +160,7 @@ nav:
                       - Label Values Variable: perses/docs/dac/go/prometheus/variable/label-values.md
                       - PromQL Variable: perses/docs/dac/go/prometheus/variable/promql.md
           - Perses CLI (percli): perses/docs/cli.md
+          - Migrate from Grafana: perses/docs/migration.md
           - Troubleshooting:
               - TLS and HTTP Datasource: perses/docs/troubleshooting-tls-plain-http-datasource.md
       - Developer Docs:
@@ -169,6 +178,7 @@ nav:
           - Embedding Perses Panels: perses/docs/embedding-panels.md
           - Plugins:
               - CUE in Perses: perses/docs/plugins/cue.md
-              - Panel Plugins: perses/docs/plugins/panels.md
-              - Prometheus Plugins: perses/docs/plugins/prometheus.md
+              - Panel Plugins: plugins/docs/panels.md
+              - Prometheus Plugins: plugins/docs/prometheus.md
+              - Structure: perses/docs/plugins/structure.md
   - Demo: https://demo.perses.dev
