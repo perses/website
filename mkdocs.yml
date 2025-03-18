@@ -103,7 +103,7 @@ nav:
       - Overview: perses/docs/overview.md
       - Concepts:
           - Plugins: perses/docs/concepts/plugins.md
-          - Dashboard-as-Code: perses/docs/dac/introduction.md
+          - Dashboard-as-Code: perses/docs/concepts/dashboard-as-code.md
           - Datasource & Variable scopes: perses/docs/concepts/datasource-and-variable-scopes.md
           - Authentication: perses/docs/concepts/authentication.md
           - Authorization: perses/docs/concepts/authorization.md
@@ -123,42 +123,45 @@ nav:
           - Dashboard-as-Code:
               - Getting started: perses/docs/dac/getting-started.md
               - CUE:
-                  - CUE SDK for Dashboards as Code: perses/docs/dac/cue/README.md
+                  - CUE SDK for Dashboard-as-Code: perses/docs/dac/cue/README.md
                   - Dashboard: perses/docs/dac/cue/dashboard.md
                   - Panel Groups: perses/docs/dac/cue/panelgroups.md
                   - Variable:
                       - Variable Group: perses/docs/dac/cue/variable/group.md
-                      - Static List Variable: perses/docs/dac/cue/variable/staticlist.md
                       - Text Variable: perses/docs/dac/cue/variable/text.md
-                  - Prometheus:
-                      - Filter: perses/docs/dac/cue/prometheus/filter.md
-                      - Panel: perses/docs/dac/cue/prometheus/panel.md
-                      - Label Names Variable: perses/docs/dac/cue/prometheus/variable/labelnames.md
-                      - Label Values Variable: perses/docs/dac/cue/prometheus/variable/labelvalues.md
-                      - PromQL Variable: perses/docs/dac/cue/prometheus/variable/promql.md
+                  - Plugins:
+                      - Prometheus:
+                          - Filter: plugins/docs/prometheus/cue-sdk/filter.md
+                          - Panel: plugins/docs/prometheus/cue-sdk/panel.md
+                          - Label Names Variable: plugins/docs/prometheus/cue-sdk/variable/labelnames.md
+                          - Label Values Variable: plugins/docs/prometheus/cue-sdk/variable/labelvalues.md
+                          - PromQL Variable: plugins/docs/prometheus/cue-sdk/variable/promql.md
+                      - Static List Variable: plugins/docs/staticlistvariable/cue-sdk.md
               - Go:
-                  - Go SDK for Dashboards as Code: perses/docs/dac/go/README.md
+                  - Go SDK for Dashboard-as-Code: perses/docs/dac/go/README.md
                   - Dashboard: perses/docs/dac/go/dashboard.md
                   - Datasource: perses/docs/dac/go/datasource.md
                   - Panel: perses/docs/dac/go/panel.md
-                  - Panel Plugins:
-                      - Bar: perses/docs/dac/go/panel/bar.md
-                      - Gauge: perses/docs/dac/go/panel/gauge.md
-                      - Markdown: perses/docs/dac/go/panel/markdown.md
-                      - Stat: perses/docs/dac/go/panel/stat.md
-                      - Timeseries: perses/docs/dac/go/panel/time-series.md
                   - Panel Group: perses/docs/dac/go/panel-group.md
                   - Query: perses/docs/dac/go/query.md
                   - Variable: perses/docs/dac/go/variable.md
                   - Variable Group: perses/docs/dac/go/variable-group.md
                   - Helpers:
                       - HTTP Proxy: perses/docs/dac/go/helper/http-proxy.md
-                  - Prometheus:
-                      - Datasource: perses/docs/dac/go/prometheus/datasource.md
-                      - Query: perses/docs/dac/go/prometheus/query.md
-                      - Label Names Variable: perses/docs/dac/go/prometheus/variable/label-names.md
-                      - Label Values Variable: perses/docs/dac/go/prometheus/variable/label-values.md
-                      - PromQL Variable: perses/docs/dac/go/prometheus/variable/promql.md
+                  - Plugins:
+                      - Panel Plugins:
+                          - Bar Chart: plugins/docs/barchart/go-sdk.md
+                          - Gauge Chart: plugins/docs/gaugechart/go-sdk.md
+                          - Markdown: plugins/docs/markdown/go-sdk.md
+                          - Stat Chart: plugins/docs/statchart/go-sdk.md
+                          - Time Series Chart: plugins/docs/timeserieschart/go-sdk.md
+                      - Prometheus:
+                          - Datasource: plugins/docs/prometheus/go-sdk/datasource.md
+                          - Query: plugins/docs/prometheus/go-sdk/query.md
+                          - Label Names Variable: plugins/docs/prometheus/go-sdk/variable/label-names.md
+                          - Label Values Variable: plugins/docs/prometheus/go-sdk/variable/label-values.md
+                          - PromQL Variable: plugins/docs/prometheus/go-sdk/variable/promql.md
+                      - Static List Variable: plugins/docs/staticlistvariable/go-sdk.md
           - Perses CLI (percli): perses/docs/cli.md
           - Migrate from Grafana: perses/docs/migration.md
           - Troubleshooting:
@@ -177,8 +180,24 @@ nav:
               - Variable: perses/docs/api/variable.md
           - Embedding Perses Panels: perses/docs/embedding-panels.md
           - Plugins:
+              - Models:
+                  - Panel Plugins:
+                      - Bar Chart: plugins/docs/barchart/model.md
+                      - Gauge Chart: plugins/docs/gaugechart/model.md
+                      - Markdown: plugins/docs/markdown/model.md
+                      - Pie Chart: plugins/docs/piechart/model.md
+                      - Scatter Chart: plugins/docs/scatterchart/model.md
+                      - Stat Chart: plugins/docs/statchart/model.md
+                      - Status History Chart: plugins/docs/statushistorychart/model.md
+                      - Table: plugins/docs/table/model.md
+                      - Time Series Chart: plugins/docs/timeserieschart/model.md
+                      - Time Series Table: plugins/docs/timeseriestable/model.md
+                      - Trace Table: plugins/docs/tracetable/model.md
+                      - Tracing Gantt Chart: plugins/docs/tracingganttchart/model.md
+                  - Prometheus Plugins: plugins/docs/prometheus/model.md
+                  - Static List Variable: plugins/docs/staticlistvariable/model.md
+                  - Tempo Plugins: plugins/docs/tempo/model.md
+                  - Common definitions: perses/docs/plugins/common.md
               - CUE in Perses: perses/docs/plugins/cue.md
-              - Panel Plugins: plugins/docs/panels.md
-              - Prometheus Plugins: plugins/docs/prometheus.md
               - Structure: perses/docs/plugins/structure.md
   - Demo: https://demo.perses.dev
