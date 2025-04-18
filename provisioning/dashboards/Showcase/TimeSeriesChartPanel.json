@@ -31,7 +31,7 @@
                     "kind": "PrometheusDatasource",
                     "name": "PrometheusDemo"
                   },
-                  "query": "up{job=\"grafana\",instance=\"demo.do.prometheus.io:3000\"}"
+                  "query": "up{job=\"grafana\",instance=\"demo.prometheus.io:3000\"}"
                 }
               }
             }
@@ -63,7 +63,7 @@
                     "kind": "PrometheusDatasource",
                     "name": "PrometheusDemo"
                   },
-                  "query": "up{job=\"grafana\",instance=\"demo.do.prometheus.io:3000\"}"
+                  "query": "up{job=\"grafana\",instance=\"demo.prometheus.io:3000\"}"
                 }
               }
             }
@@ -95,7 +95,7 @@
                     "kind": "PrometheusDatasource",
                     "name": "PrometheusDemo"
                   },
-                  "query": "up{job=\"grafana\",instance=\"demo.do.prometheus.io:3000\"}"
+                  "query": "up{job=\"grafana\",instance=\"demo.prometheus.io:3000\"}"
                 }
               }
             }
@@ -127,7 +127,7 @@
                     "kind": "PrometheusDatasource",
                     "name": "PrometheusDemo"
                   },
-                  "query": "up{job=\"grafana\",instance=\"demo.do.prometheus.io:3000\"}",
+                  "query": "up{job=\"grafana\",instance=\"demo.prometheus.io:3000\"}",
                   "seriesNameFormat": "formatted series name example - {{job}} job - instance {{instance}}"
                 }
               }
@@ -163,7 +163,7 @@
                     "kind": "PrometheusDatasource",
                     "name": "PrometheusDemo"
                   },
-                  "query": "up{job=\"grafana\",instance=\"demo.do.prometheus.io:3000\"}"
+                  "query": "up{job=\"grafana\",instance=\"demo.prometheus.io:3000\"}"
                 }
               }
             }
