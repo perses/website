@@ -38,7 +38,7 @@ func main() {
 					}),
 				),
 				panel.AddQuery(
-					query.PromQL("100 - ((node_memory_MemAvailable_bytes{env=\"demo\", instance=\"demo.do.prometheus.io:9100\"} * 100) / node_memory_MemTotal_bytes{env=\"demo\", instance=\"demo.do.prometheus.io:9100\"})"),
+					query.PromQL("100 - ((node_memory_MemAvailable_bytes{env=\"demo\", instance=\"demo.prometheus.io:9100\"} * 100) / node_memory_MemTotal_bytes{env=\"demo\", instance=\"demo.prometheus.io:9100\"})"),
 				),
 			),
 			panelgroup.AddPanel("Second Gauge",
@@ -50,7 +50,7 @@ func main() {
 					gauge.Max(20),
 				),
 				panel.AddQuery(
-					query.PromQL("100 - ((node_memory_MemAvailable_bytes{env=\"demo\", instance=\"demo.do.prometheus.io:9100\"} * 100) / node_memory_MemTotal_bytes{env=\"demo\", instance=\"demo.do.prometheus.io:9100\"})"),
+					query.PromQL("100 - ((node_memory_MemAvailable_bytes{env=\"demo\", instance=\"demo.prometheus.io:9100\"} * 100) / node_memory_MemTotal_bytes{env=\"demo\", instance=\"demo.prometheus.io:9100\"})"),
 				),
 			),
 		),
