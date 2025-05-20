@@ -6,6 +6,7 @@ hide:
   - path
 title: Perses
 ---
+
 <!-- below css is required to remove the empty header that is generated automatically by mkdocs ref: https://github.com/squidfunk/mkdocs-material/issues/2163#issuecomment-2109733111-->
 <style>
 .md-content .md-typeset h1 {
@@ -26,7 +27,8 @@ title: Perses
 
     ---
 
-    Perses is first and foremost a dashboard tool that you can use to display a variety of observability data. Today supports Prometheus metrics & Tempo traces.
+    Perses is first and foremost a dashboard tool that you can use to display a variety of observability data. Today
+    supports Prometheus metrics & Tempo traces.
 
 -   ## Embeddable components
 
@@ -38,25 +40,29 @@ title: Perses
 
     ---
 
-    Perses offers a complete static validation of the dashboard format. It also comes with a CLI, `percli`, that can be used to perform actions in CI/CD pipelines.
+    Perses offers a complete static validation of the dashboard format. It also comes with a CLI, `percli`, that can be
+    used to perform actions in CI/CD pipelines.
 
--   ## Scale-friendly 
+-   ## Scale-friendly
 
     ---
 
-    Perses dashboards can be written as-code using the provided SDKs. This enables to define any kind of components in libraries, from simple color codes to complex templates, for reusage across as much dashboards as you want. 
+    Perses dashboards can be written as-code using the provided SDKs. This enables to define any kind of components in
+    libraries, from simple color codes to complex templates, for reusage across as much dashboards as you want.
 
 -   ## Kubernetes-native
 
     ---
 
-    Use the Perses operator to manage your Perses deployments & dashboards as CRDs. Leverage on the datasource discovery to retrieve data from your datasource pods/services.
+    Use the Perses operator to manage your Perses deployments & dashboards as CRDs. Leverage on the datasource discovery
+    to retrieve data from your datasource pods/services.
 
 -   ## Extensible
 
     ---
 
-    Perses, with its plugin-based architecture, offers effortless extension and reuse of plugins across different projects.
+    Perses, with its plugin-based architecture, offers effortless extension and reuse of plugins across different
+    projects.
 
 </div>
 
@@ -66,7 +72,8 @@ title: Perses
 
 ## Open Source
 
-Perses is 100% open source and community-driven. All components are available under the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0) on [GitHub](https://github.com/perses).
+Perses is 100% open source and community-driven. All components are available under
+the [Apache 2.0 License](http://www.apache.org/licenses/LICENSE-2.0) on [GitHub](https://github.com/perses).
 
 Perses is a [Cloud Native Computing Foundation](https://cncf.io) sandbox project.
 
@@ -76,16 +83,17 @@ Perses is a [Cloud Native Computing Foundation](https://cncf.io) sandbox project
 
 <div class="centered" markdown>
 
-## Used by
+## Adopters
 
 </div>
 
 <div class="grid cards image-grid" markdown>
 
--   [![Amadeus logo](assets/images/logos/Amadeus_dark_theme.png#only-dark)](https://amadeus.com) [![Amadeus logo](assets/images/logos/Amadeus_light_theme.png#only-light)](https://amadeus.com)
--   [![Chronosphere logo](assets/images/logos/Chronosphere_dark_theme.svg#only-dark)](https://chronosphere.io/) [![Chronosphere logo](assets/images/logos/Chronosphere_light_theme.svg#only-light)](https://chronosphere.io/)
--   [![Dash0 logo](assets/images/logos/Dash0.svg)](https://www.dash0.com/)
--   [![Greptime logo](assets/images/logos/Greptime_dark_theme.svg#only-dark)](https://greptime.com/) [![Greptime logo](assets/images/logos/Greptime_light_theme.svg#only-light)](https://greptime.com/)
--   [![RedHat logo](assets/images/logos/RedHat_dark_theme.png#only-dark)](https://www.redhat.com) [![RedHat logo](assets/images/logos/RedHat_light_theme.png#only-light)](https://www.redhat.com)
+- [![Amadeus logo](assets/images/logos/Amadeus_dark_theme.png#only-dark)](https://amadeus.com) [![Amadeus logo](assets/images/logos/Amadeus_light_theme.png#only-light)](https://amadeus.com)
+- [![Chronosphere logo](assets/images/logos/Chronosphere_dark_theme.svg#only-dark)](https://chronosphere.io/) [![Chronosphere logo](assets/images/logos/Chronosphere_light_theme.svg#only-light)](https://chronosphere.io/)
+- [![Dash0 logo](assets/images/logos/Dash0.svg)](https://www.dash0.com/)
+- [![Greptime logo](assets/images/logos/Greptime_dark_theme.svg#only-dark)](https://greptime.com/) [![Greptime logo](assets/images/logos/Greptime_light_theme.svg#only-light)](https://greptime.com/)
+- [![RedHat logo](assets/images/logos/RedHat_dark_theme.png#only-dark)](https://www.redhat.com) [![RedHat logo](assets/images/logos/RedHat_light_theme.png#only-light)](https://www.redhat.com)
+- [Your company logo here](./adopters.md)
 
 </div>
