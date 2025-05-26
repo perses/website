@@ -4,7 +4,26 @@ This repository contains everything required to start the Perses demo, the docum
 
 ## Instructions
 
-On the machine, just pull this repository and run `podman-compose up -d`
+On the machine, in case you are doing a maintenance and at some point you will shut down all containers, you can't just
+run `podman-compose up -d`.
+That's because when you will kill the ssh connection, all containers will be stopped because it will send a signal
+SIGHUP that will stop all processes in the current session.
+
+Instead you will have to run the following command:
+
+```bash
+nohup podman-compose up &
+```
+
+In case you just want to restart a container. You can do the following command:
+
+```bash
+podman-compose down <container_name>
+podman-compose up -d <container_name>
+```
+
+No need to use `nohup` in this case, as the podman-compose is still running in the background.
+The process is killed if you are shutting down all containers.
 
 ### Start the website locally
 
@@ -63,4 +82,5 @@ podman-compose up -d demo
 
 ### Pushing changes to the website
 
-the documentation website "compiled" files are stored in git. To update the website you thus have to run `mkdocs build` & commit the changes it produces.
+the documentation website "compiled" files are stored in git. To update the website you thus have to run
+`mkdocs build` & commit the changes it produces.
