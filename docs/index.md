@@ -94,6 +94,7 @@ Perses is a [Cloud Native Computing Foundation](https://cncf.io) sandbox project
 - [![Dash0 logo](assets/images/logos/Dash0.svg)](https://www.dash0.com/)
 - [![Greptime logo](assets/images/logos/Greptime_dark_theme.svg#only-dark)](https://greptime.com/) [![Greptime logo](assets/images/logos/Greptime_light_theme.svg#only-light)](https://greptime.com/)
 - [![RedHat logo](assets/images/logos/RedHat_dark_theme.png#only-dark)](https://www.redhat.com) [![RedHat logo](assets/images/logos/RedHat_light_theme.png#only-light)](https://www.redhat.com)
+- [![SAP logo](assets/images/logos/SAP.svg)](https://www.sap.com)
 - [Your company logo here](./adopters.md)
 
 </div>
