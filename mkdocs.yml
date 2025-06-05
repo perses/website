@@ -179,6 +179,9 @@ nav:
               - Secret: perses/docs/api/secret.md
               - User: perses/docs/api/user.md
               - Variable: perses/docs/api/variable.md
+              - Migrate: perses/docs/api/migrate.md
+              - Plugins: perses/docs/api/plugins.md
+              - Validate: perses/docs/api/validate.md
           - Embedding Perses Panels: perses/docs/embedding-panels.md
           - Plugins:
               - Models:
@@ -200,5 +203,7 @@ nav:
                   - Tempo Plugins: plugins/docs/tempo/model.md
                   - Common definitions: perses/docs/plugins/common.md
               - CUE in Perses: perses/docs/plugins/cue.md
-              - Structure: perses/docs/plugins/structure.md
+              - Create a plugin: perses/docs/plugins/creation.md
+      - Materials: perses/docs/materials.md
+      - Adopters: adopters.md
   - Demo: https://demo.perses.dev
