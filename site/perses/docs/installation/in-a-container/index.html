@@ -1008,15 +1008,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
-    <span class="md-ellipsis">
-      What's next?
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -2741,6 +2732,69 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/migrate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Migrate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/plugins/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Plugins
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/validate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Validate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -3264,11 +3318,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../plugins/structure/" class="md-nav__link">
+      <a href="../../plugins/creation/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Structure
+    Create a plugin
   </span>
   
 
@@ -3289,6 +3343,48 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../materials/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Materials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../adopters/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Adopters
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -3380,15 +3476,6 @@
   
 </li>
       
-        <li class="md-nav__item">
-  <a href="#whats-next" class="md-nav__link">
-    <span class="md-ellipsis">
-      What's next?
-    </span>
-  </a>
-  
-</li>
-      
     </ul>
   
 </nav>
@@ -3462,6 +3549,18 @@ but you need to map to container port 8080.</p>
 <p>Open the Perses UI at http://localhost:8080.</p>
 <p>You are presented with the home page, in light mode.
 For fun, you can optionally flip the switch in the top right corner to enable dark mode.</p>
+<h1 id="building-your-own-container-image">Building your own container image<a class="headerlink" href="#building-your-own-container-image" title="Permanent link">#</a></h1>
+<p>If you want to build your own container image, you can use <a href="https://github.com/perses/perses/blob/main/Dockerfile.dev"><code>Dockerfile.dev</code></a>.
+This container will include the Perses binary, percli, Perses UI and it will download the core <a href="https://github.com/perses/plugins">plugins</a> at build time.</p>
+<p>To build your own container image, and run it you can use the following commands:</p>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># podman command.</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>$<span class="w"> </span>podman<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>perses-test<span class="w"> </span>-f<span class="w"> </span>Dockerfile.dev<span class="w"> </span>.
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>$<span class="w"> </span>podman<span class="w"> </span>run<span class="w"> </span>--name<span class="w"> </span>perses<span class="w"> </span>--rm<span class="w"> </span>-p<span class="w"> </span><span class="m">127</span>.0.0.1:8080:8080<span class="w"> </span>perses-test
+</span></code></pre></div>
+<div class="language-shell highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># docker command.</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>$<span class="w"> </span>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>perses-test<span class="w"> </span>-f<span class="w"> </span>Dockerfile.dev<span class="w"> </span>.
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>$<span class="w"> </span>docker<span class="w"> </span>run<span class="w"> </span>--name<span class="w"> </span>perses<span class="w"> </span>--rm<span class="w"> </span>-p<span class="w"> </span><span class="m">127</span>.0.0.1:8080:8080<span class="w"> </span>perses-test
+</span></code></pre></div>
 <h2 id="whats-next">What's next?<a class="headerlink" href="#whats-next" title="Permanent link">#</a></h2>
 <p>Explore the online <a href="https://perses.dev/">Perses documentation</a></p>
 

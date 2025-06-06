@@ -8,11 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://perses.dev/perses/docs/plugins/structure/">
+        <link rel="canonical" href="https://perses.dev/perses/docs/plugins/creation/">
       
       
         <link rel="prev" href="../cue/">
       
+      
+        <link rel="next" href="../../materials/">
       
       
       <link rel="icon" href="../../../../assets/images/favicon.png">
@@ -20,7 +22,7 @@
     
     
       
-        <title>Structure - Perses</title>
+        <title>Create a plugin - Perses</title>
       
     
     
@@ -74,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#plugin-structure" class="md-skip">
+        <a href="#creating-a-perses-plugin" class="md-skip">
           Skip to content
         </a>
       
@@ -107,7 +109,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Structure
+              Create a plugin
             
           </span>
         </div>
@@ -2655,6 +2657,69 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/migrate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Migrate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/plugins/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Plugins
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/validate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Validate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -3193,7 +3258,7 @@
           
   
   <span class="md-ellipsis">
-    Structure
+    Create a plugin
   </span>
   
 
@@ -3204,7 +3269,7 @@
         
   
   <span class="md-ellipsis">
-    Structure
+    Create a plugin
   </span>
   
 
@@ -3226,9 +3291,171 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#plugin-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Plugin types
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plugin-module-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Plugin module structure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Plugin module structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#archive-structure" class="md-nav__link">
     <span class="md-ellipsis">
       Archive structure
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perses-cli-plugin-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      Perses CLI plugin commands
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#steps-to-create-a-plugin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Steps to create a plugin
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Steps to create a plugin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implement
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implement">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datasource-plugin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Datasource plugin
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#query-plugin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Query plugin
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variable-plugin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Variable plugin
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#panel-plugin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel plugin
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#explore-plugin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explore plugin
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build" class="md-nav__link">
+    <span class="md-ellipsis">
+      Build
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#types-of-integrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Types of integrations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Examples
     </span>
   </a>
   
@@ -3254,6 +3481,48 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../materials/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Materials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../adopters/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Adopters
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -3313,9 +3582,171 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#plugin-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      Plugin types
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#plugin-module-structure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Plugin module structure
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Plugin module structure">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#archive-structure" class="md-nav__link">
     <span class="md-ellipsis">
       Archive structure
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#perses-cli-plugin-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      Perses CLI plugin commands
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#steps-to-create-a-plugin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Steps to create a plugin
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Steps to create a plugin">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#implement" class="md-nav__link">
+    <span class="md-ellipsis">
+      Implement
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Implement">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datasource-plugin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Datasource plugin
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#query-plugin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Query plugin
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variable-plugin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Variable plugin
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#panel-plugin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Panel plugin
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#explore-plugin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Explore plugin
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#test" class="md-nav__link">
+    <span class="md-ellipsis">
+      Test
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#build" class="md-nav__link">
+    <span class="md-ellipsis">
+      Build
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#types-of-integrations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Types of integrations
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Examples
     </span>
   </a>
   
@@ -3339,12 +3770,38 @@
   
 
 
-<h1 id="plugin-structure">Plugin structure<a class="headerlink" href="#plugin-structure" title="Permanent link">#</a></h1>
-<p>In Perses, each plugin must be provided as an archive file containing the plugin's frontend and backend parts.</p>
+<h1 id="creating-a-perses-plugin">Creating a Perses plugin<a class="headerlink" href="#creating-a-perses-plugin" title="Permanent link">#</a></h1>
+<h2 id="plugin-types">Plugin types<a class="headerlink" href="#plugin-types" title="Permanent link">#</a></h2>
+<p>Perses supports the following types of plugins:</p>
 <ul>
-<li>The backend part is only the Cuelang schema that will be used to validate the plugin data model when a dashboard is
-  stored.</li>
-<li>The frontend parts are the React components that will be used to render the plugin in the dashboard. These files
+<li><strong>Datasource</strong>: A datasource plugin is a plugin that can be used to fetch data from an external source. It can be used to
+  connect to a database, an API, or any other data source. Requires a schema to validate the data model.</li>
+<li><strong>Query</strong>: A query plugin is a plugin that binds datasources and panels together. It can be used to create queries that can
+  be used to fetch data from a datasource and render it in a panel. Requires a schema to validate the data model.</li>
+<li><strong>Panel</strong>: A panel plugin is a plugin that can be used to render data in a specific way. It can be used to create charts,
+  tables, or any other type of visualization.</li>
+<li><strong>Variable</strong>: A variable plugin is a plugin that can be used to create variables that can be used in queries. It can be used to
+  fill data into dropdowns or replace variables in queries. Requires a schema to validate the data model.</li>
+<li><strong>Explore</strong>: An explore plugin is a plugin that can be used to create an explore view. It can be used to create a view that allows
+  users to explore data in a specific way. It is a special type of panel plugin that is used in the explore view.</li>
+</ul>
+<p>One or many plugins can be distributed as a single Plugin Module. This allows to group plugins that are related to each other
+and can be used together. For example, the Prometheus plugin module has a datasource plugin, an explore plugin, a query plugin and various variables plugins.</p>
+<h2 id="architecture">Architecture<a class="headerlink" href="#architecture" title="Permanent link">#</a></h2>
+<p>Perses plugins are built using the following architecture:</p>
+<ul>
+<li><strong>Backend</strong>: The backend is responsible for validating the plugin data model using Cuelang schemas. Optionally, it is also responsible
+  for migrating the data model from a Grafana plugin to its Perses equivalent.</li>
+<li><strong>Frontend</strong>: The frontend is responsible for rendering the plugin using React components. It is also responsible for
+  communicating with the backend to fetch data and send queries. The frontend is built using <code>rsbuild</code> and is served using
+  remote module federation.</li>
+</ul>
+<h2 id="plugin-module-structure">Plugin module structure<a class="headerlink" href="#plugin-module-structure" title="Permanent link">#</a></h2>
+<p>In Perses, a plugin module must be provided as an archive file containing the plugins frontend and backend parts.</p>
+<ul>
+<li>The backend part is only the <a href="../cue/">Cuelang schema</a> that will be used to validate the plugin data model when a dashboard is
+  stored. Is also used to migrate the data model from a Grafana plugin to the Perses version.</li>
+<li>The frontend parts are the React components that will be used to render the plugin in the dashboard or fetch data. These files
   should be built using <code>rsbuild</code>.</li>
 </ul>
 <p>Regarding the archive formats, Perses only supports the following ones:</p>
@@ -3353,26 +3810,103 @@
 <li>.tar</li>
 <li>.tar.gz</li>
 </ul>
-<h2 id="archive-structure">Archive structure<a class="headerlink" href="#archive-structure" title="Permanent link">#</a></h2>
+<h3 id="archive-structure">Archive structure<a class="headerlink" href="#archive-structure" title="Permanent link">#</a></h3>
 <p>The archive must have the following structure:</p>
 <div class="language-text highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>.
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>├── package.json # The plugin package.json file that contains the name of the module and the list of the plugins contained
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>├── mf-stats.json
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>├── mf-manifest.json # The manifest file required for the frontend
-</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>├── static # The frontend files
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>├── __mf # The frontend files for loading the plugin using remote module federation
 </span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>│   ├── css
-</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>│   ├── js
-</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>├── schemas # The schema files if required (depending on the plugin)
-</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>│   ├── schema.cue # The Cuelang schema file
-</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>│   ├── migrate
-</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>│   │   ├── migrate.cue # The Cuelang schema file for the migration from the associated Grafana plugin to the Perses version
-</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>├── cue.mod
-</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>│   ├── module.cue
-</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>│   ├── pkg # Folder containing the Cuelang dependencies if any are used by the schemas
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>│   ├── font
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>│   ├── js
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>├── lib # The frontend files for loading the plugin as an npm dependency
+</span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>│   ├── cjs
+</span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>├── schemas # The schema files if required (depending on the type of plugin, see #Plugin types)
+</span><span id="__span-0-12"><a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>│   ├── &lt;plugin-a&gt;
+</span><span id="__span-0-13"><a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>│   │   ├── &lt;plugin-a&gt;.cue # The Cuelang schema file
+</span><span id="__span-0-14"><a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>│   │   ├── &lt;plugin-a&gt;.json # A JSON example of the schema
+</span><span id="__span-0-15"><a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>│   │   ├── migrate
+</span><span id="__span-0-16"><a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>│   │   │   ├── migrate.cue # The Cuelang schema file for the migration from the associated Grafana plugin to the Perses version
+</span><span id="__span-0-17"><a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>│   ├── &lt;plugin-b&gt;
+</span><span id="__span-0-18"><a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>│   │   ├── ...
+</span><span id="__span-0-19"><a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>├── cue.mod
+</span><span id="__span-0-20"><a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>│   ├── module.cue
+</span><span id="__span-0-21"><a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>│   ├── pkg # Folder containing the Cuelang dependencies if any are used by the schemas, usually installed with the `percli plugin build` command
 </span></code></pre></div>
-<p>The CLI can help you to respect and verify this structure with the commands <code>percli plugin build</code> and
-<code>percli plugin validate</code>.
-Check the associated <a href="../../cli/">documentation</a> for more details.</p>
+<h2 id="perses-cli-plugin-commands">Perses CLI plugin commands<a class="headerlink" href="#perses-cli-plugin-commands" title="Permanent link">#</a></h2>
+<p>Perses CLI (<code>percli</code>) has a plugin option that helps you create and manage your plugins with the following commands:</p>
+<ul>
+<li><code>percli plugin generate --module.org=&lt;plugin module org&gt; --module.name=&lt;plugin module name&gt; --plugin.type=&lt;plugin type&gt; --plugin.name=&lt;plugin name&gt; [&lt;plugin module directory&gt;]</code>: Creates a new plugin module if does not exist and generates a plugin inside it. This command can be used several times to add more plugins to the same module. A single plugin can be generated at a time.</li>
+<li><code>--module.name</code>: The plugin module name, required only when the module does not exist, ignored otherwise.</li>
+<li><code>--module.org</code>: The organization name on which the plugin module will be created, useful for publising the plugin. This is required only when the module does not exist, ignored otherwise.</li>
+<li><code>--plugin.name</code>: The plugin name. A pascal case and kebab case variants will be generated inside the templates. If a plugin with the same name already exists, it will be overwritten.</li>
+<li><code>--plugin.type</code>: The plugin type can be one of
+    <code>Datasource</code>, <code>TimeSeriesQuery</code>, <code>Variable</code>, <code>Panel</code>, or <code>Explore</code>.</li>
+<li><code>--plugin.display-name</code>: The more human name of the plugin to be used in the UI. If not provided, the plugin name will be used.</li>
+<li><code>[&lt;plugin module directory&gt;]</code>: The plugin module directory is optional and the current directory will be used if not provided.</li>
+<li><code>percli plugin build</code>: Build the plugin module and create the archive file.</li>
+</ul>
+<p>Check the <a href="../../cli/">CLI documentation</a> for more details.</p>
+<h2 id="steps-to-create-a-plugin">Steps to create a plugin<a class="headerlink" href="#steps-to-create-a-plugin" title="Permanent link">#</a></h2>
+<h3 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">#</a></h3>
+<ul>
+<li>Create a new plugin module and plugin using the <code>percli plugin generate</code> command. This will create a new folder with the required structure and files.</li>
+<li>Optionally, add more plugins to the module using the same command. This will edit and add the necessary files, keeping the required plugin module structure.</li>
+<li>Install the required dependencies using <code>npm install</code>.</li>
+</ul>
+<h3 id="implement">Implement<a class="headerlink" href="#implement" title="Permanent link">#</a></h3>
+<p>The implementation is mostly similar across all plugin types.</p>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>For more info on the Cuelang part (model &amp; migrate files), please refer to <a href="../cue/">CUE in Perses</a>.</p>
+</div>
+<h4 id="datasource-plugin">Datasource plugin<a class="headerlink" href="#datasource-plugin" title="Permanent link">#</a></h4>
+<ul>
+<li>Edit the datasource client to connect it to your datasource.</li>
+<li>Edit the CUE schema file in the <code>schemas/datasources/&lt;plugin-name&gt;</code> folder to define the data model of your plugin. This schema must belong to the <code>model</code> package.</li>
+<li>Edit the JSON example of the schema in the same folder.</li>
+<li>To enable Grafana migration, create a <code>schemas/datasources/&lt;plugin-name&gt;/migrate</code> folder and define the migration logic as a CUE schema file. This schema must belong to the <code>migrate</code> package.</li>
+<li>Implement your datasource as a React component located in the <code>src/datasources/&lt;plugin-name&gt;</code> folder.</li>
+</ul>
+<h4 id="query-plugin">Query plugin<a class="headerlink" href="#query-plugin" title="Permanent link">#</a></h4>
+<ul>
+<li>Edit the CUE schema file in the <code>schemas/queries/&lt;plugin-name&gt;</code> folder to define the data model of your plugin. This schema must belong to the <code>model</code> package.</li>
+<li>Edit the JSON example of the schema in the same folder.</li>
+<li>To enable Grafana migration, create a <code>schemas/queries/&lt;plugin-name&gt;/migrate</code> folder and define the migration logic as a CUE schema file. This schema must belong to the <code>migrate</code> package.</li>
+<li>Implement your query as a React component located in the <code>src/queries/&lt;plugin-name&gt;</code> folder.</li>
+</ul>
+<h4 id="variable-plugin">Variable plugin<a class="headerlink" href="#variable-plugin" title="Permanent link">#</a></h4>
+<ul>
+<li>Edit the CUE schema file in the <code>schemas/variables/&lt;plugin-name&gt;</code> folder to define the data model of your plugin. This schema must belong to the <code>model</code> package.</li>
+<li>Edit the JSON example of the schema in the same folder.</li>
+<li>To enable Grafana migration, create a <code>schemas/variables/&lt;plugin-name&gt;/migrate</code> folder and define the migration logic as a CUE schema file. This schema must belong to the <code>migrate</code> package.</li>
+<li>Implement your variable as a React component located in the <code>src/variables/&lt;plugin-name&gt;</code> folder.</li>
+</ul>
+<h4 id="panel-plugin">Panel plugin<a class="headerlink" href="#panel-plugin" title="Permanent link">#</a></h4>
+<ul>
+<li>Edit the CUE schema file in the <code>schemas/panels/&lt;plugin-name&gt;</code> folder to define the data model of your plugin. This schema must belong to the <code>model</code> package.</li>
+<li>Edit the JSON example of the schema in the same folder.</li>
+<li>To enable Grafana migration, create a <code>schemas/panels/&lt;plugin-name&gt;/migrate</code> folder and define the migration logic as a CUE schema file. This schema must belong to the <code>migrate</code> package.</li>
+<li>Implement your panel as a React component located in the <code>src/panels/&lt;plugin-name&gt;</code> folder.</li>
+</ul>
+<h4 id="explore-plugin">Explore plugin<a class="headerlink" href="#explore-plugin" title="Permanent link">#</a></h4>
+<ul>
+<li><em>There's no CUE part in the case of Explore plugins.</em></li>
+<li>Implement your Explore plugin as a React component located in the <code>src/explore</code> folder.</li>
+</ul>
+<h3 id="test">Test<a class="headerlink" href="#test" title="Permanent link">#</a></h3>
+<p>Test your plugin using the <code>percli plugin start</code> command. This will start a local server that will serve your plugin and allow you to test it in the Perses UI.</p>
+<h3 id="build">Build<a class="headerlink" href="#build" title="Permanent link">#</a></h3>
+<p>Build your plugin using the <code>percli plugin build</code> command. This will create an archive file containing your plugin ready for distribution.</p>
+<h2 id="types-of-integrations">Types of integrations<a class="headerlink" href="#types-of-integrations" title="Permanent link">#</a></h2>
+<p>There are two main types of integrations:</p>
+<ul>
+<li><strong>Install in a Perses server</strong>: After creating a plugin you can install it in a Perses server, so its available in the Perses UI. When running from Perses UI the plugin is loaded using <a href="https://rspack.dev/guide/features/module-federation">module federation</a>.</li>
+<li><strong>Embed in a React application</strong>: You can also embed a plugin and parts of the Perses UI in your own React application. This is useful if you want to create a custom dashboard or application that uses Perses plugins. See the <a href="../../embedding-panels/">Embedding documentation</a> for more details.</li>
+</ul>
+<h2 id="examples">Examples<a class="headerlink" href="#examples" title="Permanent link">#</a></h2>
+<p>See the <a href="https://github.com/perses/examples-plugin">Examples repository</a> or the core <a href="http://github.com/perses/plugins">Perses plugins repository</a></p>
 
 
 

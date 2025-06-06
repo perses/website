@@ -2879,6 +2879,69 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/migrate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Migrate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/plugins/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Plugins
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/validate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Validate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -3402,11 +3465,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../plugins/structure/" class="md-nav__link">
+      <a href="../../plugins/creation/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Structure
+    Create a plugin
   </span>
   
 
@@ -3427,6 +3490,48 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../materials/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Materials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../adopters/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Adopters
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -3702,11 +3807,8 @@
 </span></code></pre></div>
 <p>See the <a href="https://cuelang.org/docs/concept/modules-packages-instances/">CUE documentation</a> for more information about this step.</p>
 <h4 id="2-install-the-perses-sdk">2. Install the Perses SDK<a class="headerlink" href="#2-install-the-perses-sdk" title="Permanent link">#</a></h4>
-<p>First, log in to the Central Registry of CUE. This will allow to install the Perses SDK afterwards (as it consists of importing the <code>github.com/perses/perses/cue</code> CUE module). ⚠️ For now this login step is only possible using a Github account.</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>cue<span class="w"> </span>login
-</span></code></pre></div>
 <p>Now you can run the setup command that percli provides in order to install the SDK:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>percli<span class="w"> </span>dac<span class="w"> </span>setup
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>percli<span class="w"> </span>dac<span class="w"> </span>setup
 </span></code></pre></div>
 <p>Check the helper of that command to see the different flags available (e.g to define the SDK version to install).</p>
 <h3 id="develop-dashboards">Develop dashboards<a class="headerlink" href="#develop-dashboards" title="Permanent link">#</a></h3>
@@ -3723,11 +3825,11 @@
 <p class="admonition-title">Note</p>
 <p>To resolve the dependencies added after the initial setup, use <code>cue mod tidy</code>.</p>
 </div>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>package mydac
-</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>import tsModel &quot;github.com/perses/plugins/timeserieschart/schemas@v0:model&quot;
-</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
-</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>spec: tsModel.spec &amp; { legend: position: &quot;right&quot; }
+<div class="language-text highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>package mydac
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>import tsModel &quot;github.com/perses/plugins/timeserieschart/schemas@v0:model&quot;
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>spec: tsModel.spec &amp; { legend: position: &quot;right&quot; }
 </span></code></pre></div>
 <h2 id="getting-started-with-the-go-sdk">Getting started with the Go SDK<a class="headerlink" href="#getting-started-with-the-go-sdk" title="Permanent link">#</a></h2>
 <h3 id="prerequisites_1">Prerequisites<a class="headerlink" href="#prerequisites_1" title="Permanent link">#</a></h3>
@@ -3739,12 +3841,12 @@
 <p>Create a new folder that will become your DaC repository, then follow the steps below:</p>
 <h4 id="1-initialize-the-go-module">1. Initialize the Go module<a class="headerlink" href="#1-initialize-the-go-module" title="Permanent link">#</a></h4>
 <p>You first have to initialize a Go module in order to be able to import the SDK dependency afterwards:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>go<span class="w"> </span>mod<span class="w"> </span>init<span class="w"> </span>&lt;module<span class="w"> </span>name&gt;
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>go<span class="w"> </span>mod<span class="w"> </span>init<span class="w"> </span>&lt;module<span class="w"> </span>name&gt;
 </span></code></pre></div>
 <p>See the <a href="https://go.dev/doc/tutorial/create-module">Go documentation</a> for more information about this step.</p>
 <h4 id="2-install-the-perses-sdk_1">2. Install the Perses SDK<a class="headerlink" href="#2-install-the-perses-sdk_1" title="Permanent link">#</a></h4>
 <p>Now you can run the setup command that percli provides in order to install the SDK:</p>
-<div class="language-bash highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>percli<span class="w"> </span>dac<span class="w"> </span>setup<span class="w"> </span>--language<span class="w"> </span>go
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>percli<span class="w"> </span>dac<span class="w"> </span>setup<span class="w"> </span>--language<span class="w"> </span>go
 </span></code></pre></div>
 <p>Check the helper of that command to see the different flags available (e.g to define the SDK version to install).</p>
 <h3 id="develop-dashboards_1">Develop dashboards<a class="headerlink" href="#develop-dashboards_1" title="Permanent link">#</a></h3>
@@ -3769,55 +3871,55 @@
 <p>To resolve the dependencies added after the initial setup, use either <code>go mod tidy</code> or <code>go get ...</code>.</p>
 </div>
 <p>Quick start example:</p>
-<div class="language-golang highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
-</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
-</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="kn">import</span><span class="w"> </span><span class="p">(</span>
-</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="s">&quot;flag&quot;</span>
-</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
-</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">    </span><span class="s">&quot;github.com/perses/perses/go-sdk/dashboard&quot;</span>
-</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">    </span><span class="s">&quot;github.com/perses/perses/go-sdk/panel&quot;</span>
-</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">    </span><span class="nx">listVar</span><span class="w"> </span><span class="s">&quot;github.com/perses/perses/go-sdk/variable/list-variable&quot;</span>
-</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">    </span><span class="nx">promDs</span><span class="w"> </span><span class="s">&quot;github.com/perses/plugins/prometheus/sdk/go/datasource&quot;</span>
-</span><span id="__span-6-10"><a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">    </span><span class="s">&quot;github.com/perses/plugins/prometheus/sdk/go/query&quot;</span>
-</span><span id="__span-6-11"><a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">    </span><span class="nx">labelValuesVar</span><span class="w"> </span><span class="s">&quot;github.com/perses/plugins/prometheus/sdk/go/variable/label-values&quot;</span>
-</span><span id="__span-6-12"><a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a><span class="w">    </span><span class="nx">timeSeriesPanel</span><span class="w"> </span><span class="s">&quot;github.com/perses/plugins/timeserieschart/sdk/go&quot;</span>
-</span><span id="__span-6-13"><a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a><span class="p">)</span>
-</span><span id="__span-6-14"><a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>
-</span><span id="__span-6-15"><a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-6-16"><a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a><span class="w">    </span><span class="nx">flag</span><span class="p">.</span><span class="nx">Parse</span><span class="p">()</span>
-</span><span id="__span-6-17"><a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a><span class="w">    </span><span class="nx">exec</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sdk</span><span class="p">.</span><span class="nx">NewExec</span><span class="p">()</span>
-</span><span id="__span-6-18"><a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a><span class="w">    </span><span class="nx">builder</span><span class="p">,</span><span class="w"> </span><span class="nx">buildErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">dashboard</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;ContainersMonitoring&quot;</span><span class="p">,</span>
-</span><span id="__span-6-19"><a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a><span class="w">        </span><span class="nx">dashboard</span><span class="p">.</span><span class="nx">ProjectName</span><span class="p">(</span><span class="s">&quot;MyProject&quot;</span><span class="p">),</span>
-</span><span id="__span-6-20"><a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>
-</span><span id="__span-6-21"><a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a><span class="w">        </span><span class="nx">dashboard</span><span class="p">.</span><span class="nx">AddVariable</span><span class="p">(</span><span class="s">&quot;stack&quot;</span><span class="p">,</span>
-</span><span id="__span-6-22"><a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a><span class="w">            </span><span class="nx">listVar</span><span class="p">.</span><span class="nx">List</span><span class="p">(</span>
-</span><span id="__span-6-23"><a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a><span class="w">                </span><span class="nx">labelValuesVar</span><span class="p">.</span><span class="nx">PrometheusLabelValues</span><span class="p">(</span><span class="s">&quot;paas&quot;</span><span class="p">,</span>
-</span><span id="__span-6-24"><a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a><span class="w">                    </span><span class="nx">labelValuesVar</span><span class="p">.</span><span class="nx">Matchers</span><span class="p">(</span><span class="s">&quot;thanos_build_info{}&quot;</span><span class="p">),</span>
-</span><span id="__span-6-25"><a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a><span class="w">                    </span><span class="nx">labelValuesVar</span><span class="p">.</span><span class="nx">Datasource</span><span class="p">(</span><span class="s">&quot;promDemo&quot;</span><span class="p">),</span>
-</span><span id="__span-6-26"><a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a><span class="w">                </span><span class="p">),</span>
-</span><span id="__span-6-27"><a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a><span class="w">                </span><span class="nx">listVar</span><span class="p">.</span><span class="nx">DisplayName</span><span class="p">(</span><span class="s">&quot;My Super PaaS&quot;</span><span class="p">),</span>
-</span><span id="__span-6-28"><a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a><span class="w">            </span><span class="p">),</span>
-</span><span id="__span-6-29"><a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a><span class="w">        </span><span class="p">),</span>
-</span><span id="__span-6-30"><a id="__codelineno-6-30" name="__codelineno-6-30" href="#__codelineno-6-30"></a>
-</span><span id="__span-6-31"><a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a><span class="w">        </span><span class="nx">dashboard</span><span class="p">.</span><span class="nx">AddPanelGroup</span><span class="p">(</span><span class="s">&quot;Resource usage&quot;</span><span class="p">,</span>
-</span><span id="__span-6-32"><a id="__codelineno-6-32" name="__codelineno-6-32" href="#__codelineno-6-32"></a><span class="w">            </span><span class="nx">panelgroup</span><span class="p">.</span><span class="nx">PanelsPerLine</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
-</span><span id="__span-6-33"><a id="__codelineno-6-33" name="__codelineno-6-33" href="#__codelineno-6-33"></a><span class="w">            </span><span class="nx">panelgroup</span><span class="p">.</span><span class="nx">AddPanel</span><span class="p">(</span><span class="s">&quot;Container memory&quot;</span><span class="p">,</span>
-</span><span id="__span-6-34"><a id="__codelineno-6-34" name="__codelineno-6-34" href="#__codelineno-6-34"></a><span class="w">                </span><span class="nx">timeSeriesPanel</span><span class="p">.</span><span class="nx">Chart</span><span class="p">(),</span>
-</span><span id="__span-6-35"><a id="__codelineno-6-35" name="__codelineno-6-35" href="#__codelineno-6-35"></a><span class="w">                </span><span class="nx">panel</span><span class="p">.</span><span class="nx">AddQuery</span><span class="p">(</span>
-</span><span id="__span-6-36"><a id="__codelineno-6-36" name="__codelineno-6-36" href="#__codelineno-6-36"></a><span class="w">                    </span><span class="nx">query</span><span class="p">.</span><span class="nx">PromQL</span><span class="p">(</span><span class="s">&quot;max by (container) (container_memory_rss{paas=\&quot;$paas\&quot;,namespace=\&quot;$namespace\&quot;,pod=\&quot;$pod\&quot;,container=\&quot;$container\&quot;})&quot;</span><span class="p">),</span>
-</span><span id="__span-6-37"><a id="__codelineno-6-37" name="__codelineno-6-37" href="#__codelineno-6-37"></a><span class="w">                </span><span class="p">),</span>
-</span><span id="__span-6-38"><a id="__codelineno-6-38" name="__codelineno-6-38" href="#__codelineno-6-38"></a><span class="w">            </span><span class="p">),</span>
-</span><span id="__span-6-39"><a id="__codelineno-6-39" name="__codelineno-6-39" href="#__codelineno-6-39"></a><span class="w">        </span><span class="p">),</span>
-</span><span id="__span-6-40"><a id="__codelineno-6-40" name="__codelineno-6-40" href="#__codelineno-6-40"></a>
-</span><span id="__span-6-41"><a id="__codelineno-6-41" name="__codelineno-6-41" href="#__codelineno-6-41"></a><span class="w">        </span><span class="nx">dashboard</span><span class="p">.</span><span class="nx">AddDatasource</span><span class="p">(</span><span class="s">&quot;promDemo&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">promDs</span><span class="p">.</span><span class="nx">Prometheus</span><span class="p">(</span><span class="nx">promDs</span><span class="p">.</span><span class="nx">HTTPProxy</span><span class="p">(</span><span class="s">&quot;https://demo.prometheus.com&quot;</span><span class="p">))),</span>
-</span><span id="__span-6-42"><a id="__codelineno-6-42" name="__codelineno-6-42" href="#__codelineno-6-42"></a><span class="w">    </span><span class="p">)</span>
-</span><span id="__span-6-43"><a id="__codelineno-6-43" name="__codelineno-6-43" href="#__codelineno-6-43"></a><span class="w">    </span><span class="nx">exec</span><span class="p">.</span><span class="nx">BuildDashboard</span><span class="p">(</span><span class="nx">builder</span><span class="p">,</span><span class="w"> </span><span class="nx">buildErr</span><span class="p">)</span>
-</span><span id="__span-6-44"><a id="__codelineno-6-44" name="__codelineno-6-44" href="#__codelineno-6-44"></a><span class="p">}</span>
+<div class="language-golang highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="s">&quot;flag&quot;</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">    </span><span class="s">&quot;github.com/perses/perses/go-sdk/dashboard&quot;</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="w">    </span><span class="s">&quot;github.com/perses/perses/go-sdk/panel&quot;</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="w">    </span><span class="nx">listVar</span><span class="w"> </span><span class="s">&quot;github.com/perses/perses/go-sdk/variable/list-variable&quot;</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="nx">promDs</span><span class="w"> </span><span class="s">&quot;github.com/perses/plugins/prometheus/sdk/go/datasource&quot;</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="w">    </span><span class="s">&quot;github.com/perses/plugins/prometheus/sdk/go/query&quot;</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="w">    </span><span class="nx">labelValuesVar</span><span class="w"> </span><span class="s">&quot;github.com/perses/plugins/prometheus/sdk/go/variable/label-values&quot;</span>
+</span><span id="__span-5-12"><a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="w">    </span><span class="nx">timeSeriesPanel</span><span class="w"> </span><span class="s">&quot;github.com/perses/plugins/timeserieschart/sdk/go&quot;</span>
+</span><span id="__span-5-13"><a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="p">)</span>
+</span><span id="__span-5-14"><a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>
+</span><span id="__span-5-15"><a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-5-16"><a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="w">    </span><span class="nx">flag</span><span class="p">.</span><span class="nx">Parse</span><span class="p">()</span>
+</span><span id="__span-5-17"><a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="w">    </span><span class="nx">exec</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sdk</span><span class="p">.</span><span class="nx">NewExec</span><span class="p">()</span>
+</span><span id="__span-5-18"><a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="w">    </span><span class="nx">builder</span><span class="p">,</span><span class="w"> </span><span class="nx">buildErr</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">dashboard</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;ContainersMonitoring&quot;</span><span class="p">,</span>
+</span><span id="__span-5-19"><a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a><span class="w">        </span><span class="nx">dashboard</span><span class="p">.</span><span class="nx">ProjectName</span><span class="p">(</span><span class="s">&quot;MyProject&quot;</span><span class="p">),</span>
+</span><span id="__span-5-20"><a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>
+</span><span id="__span-5-21"><a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="w">        </span><span class="nx">dashboard</span><span class="p">.</span><span class="nx">AddVariable</span><span class="p">(</span><span class="s">&quot;stack&quot;</span><span class="p">,</span>
+</span><span id="__span-5-22"><a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a><span class="w">            </span><span class="nx">listVar</span><span class="p">.</span><span class="nx">List</span><span class="p">(</span>
+</span><span id="__span-5-23"><a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="w">                </span><span class="nx">labelValuesVar</span><span class="p">.</span><span class="nx">PrometheusLabelValues</span><span class="p">(</span><span class="s">&quot;paas&quot;</span><span class="p">,</span>
+</span><span id="__span-5-24"><a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a><span class="w">                    </span><span class="nx">labelValuesVar</span><span class="p">.</span><span class="nx">Matchers</span><span class="p">(</span><span class="s">&quot;thanos_build_info{}&quot;</span><span class="p">),</span>
+</span><span id="__span-5-25"><a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a><span class="w">                    </span><span class="nx">labelValuesVar</span><span class="p">.</span><span class="nx">Datasource</span><span class="p">(</span><span class="s">&quot;promDemo&quot;</span><span class="p">),</span>
+</span><span id="__span-5-26"><a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a><span class="w">                </span><span class="p">),</span>
+</span><span id="__span-5-27"><a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a><span class="w">                </span><span class="nx">listVar</span><span class="p">.</span><span class="nx">DisplayName</span><span class="p">(</span><span class="s">&quot;My Super PaaS&quot;</span><span class="p">),</span>
+</span><span id="__span-5-28"><a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a><span class="w">            </span><span class="p">),</span>
+</span><span id="__span-5-29"><a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a><span class="w">        </span><span class="p">),</span>
+</span><span id="__span-5-30"><a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a>
+</span><span id="__span-5-31"><a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a><span class="w">        </span><span class="nx">dashboard</span><span class="p">.</span><span class="nx">AddPanelGroup</span><span class="p">(</span><span class="s">&quot;Resource usage&quot;</span><span class="p">,</span>
+</span><span id="__span-5-32"><a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a><span class="w">            </span><span class="nx">panelgroup</span><span class="p">.</span><span class="nx">PanelsPerLine</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span>
+</span><span id="__span-5-33"><a id="__codelineno-5-33" name="__codelineno-5-33" href="#__codelineno-5-33"></a><span class="w">            </span><span class="nx">panelgroup</span><span class="p">.</span><span class="nx">AddPanel</span><span class="p">(</span><span class="s">&quot;Container memory&quot;</span><span class="p">,</span>
+</span><span id="__span-5-34"><a id="__codelineno-5-34" name="__codelineno-5-34" href="#__codelineno-5-34"></a><span class="w">                </span><span class="nx">timeSeriesPanel</span><span class="p">.</span><span class="nx">Chart</span><span class="p">(),</span>
+</span><span id="__span-5-35"><a id="__codelineno-5-35" name="__codelineno-5-35" href="#__codelineno-5-35"></a><span class="w">                </span><span class="nx">panel</span><span class="p">.</span><span class="nx">AddQuery</span><span class="p">(</span>
+</span><span id="__span-5-36"><a id="__codelineno-5-36" name="__codelineno-5-36" href="#__codelineno-5-36"></a><span class="w">                    </span><span class="nx">query</span><span class="p">.</span><span class="nx">PromQL</span><span class="p">(</span><span class="s">&quot;max by (container) (container_memory_rss{paas=\&quot;$paas\&quot;,namespace=\&quot;$namespace\&quot;,pod=\&quot;$pod\&quot;,container=\&quot;$container\&quot;})&quot;</span><span class="p">),</span>
+</span><span id="__span-5-37"><a id="__codelineno-5-37" name="__codelineno-5-37" href="#__codelineno-5-37"></a><span class="w">                </span><span class="p">),</span>
+</span><span id="__span-5-38"><a id="__codelineno-5-38" name="__codelineno-5-38" href="#__codelineno-5-38"></a><span class="w">            </span><span class="p">),</span>
+</span><span id="__span-5-39"><a id="__codelineno-5-39" name="__codelineno-5-39" href="#__codelineno-5-39"></a><span class="w">        </span><span class="p">),</span>
+</span><span id="__span-5-40"><a id="__codelineno-5-40" name="__codelineno-5-40" href="#__codelineno-5-40"></a>
+</span><span id="__span-5-41"><a id="__codelineno-5-41" name="__codelineno-5-41" href="#__codelineno-5-41"></a><span class="w">        </span><span class="nx">dashboard</span><span class="p">.</span><span class="nx">AddDatasource</span><span class="p">(</span><span class="s">&quot;promDemo&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">promDs</span><span class="p">.</span><span class="nx">Prometheus</span><span class="p">(</span><span class="nx">promDs</span><span class="p">.</span><span class="nx">HTTPProxy</span><span class="p">(</span><span class="s">&quot;https://demo.prometheus.com&quot;</span><span class="p">))),</span>
+</span><span id="__span-5-42"><a id="__codelineno-5-42" name="__codelineno-5-42" href="#__codelineno-5-42"></a><span class="w">    </span><span class="p">)</span>
+</span><span id="__span-5-43"><a id="__codelineno-5-43" name="__codelineno-5-43" href="#__codelineno-5-43"></a><span class="w">    </span><span class="nx">exec</span><span class="p">.</span><span class="nx">BuildDashboard</span><span class="p">(</span><span class="nx">builder</span><span class="p">,</span><span class="w"> </span><span class="nx">buildErr</span><span class="p">)</span>
+</span><span id="__span-5-44"><a id="__codelineno-5-44" name="__codelineno-5-44" href="#__codelineno-5-44"></a><span class="p">}</span>
 </span></code></pre></div>
 <h2 id="build-dashboards">Build dashboards<a class="headerlink" href="#build-dashboards" title="Permanent link">#</a></h2>
 <p>Anytime you want to build the final dashboard definition (i.e: Perses dashboard in JSON or YAML format) corresponding to your as-code definition, you can use the <code>dac build</code> command, as the following:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>percli dac build -f main.go -ojson
-</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>percli dac build -f my_dashboard.cue -ojson
+<div class="language-text highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>percli dac build -f main.go -ojson
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>percli dac build -f my_dashboard.cue -ojson
 </span></code></pre></div>
 <p>If the build is successful, the result can be found in the generated <code>built</code> folder.</p>
 <div class="admonition note">
@@ -3826,11 +3928,11 @@
 </div>
 <h3 id="build-multiple-dashboards-at-once">Build multiple dashboards at once<a class="headerlink" href="#build-multiple-dashboards-at-once" title="Permanent link">#</a></h3>
 <p>If you want to develop multiple dashboards as code, you should have <strong>1 dashboard per file</strong> and then call the build command with the directory option:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>percli dac build -d my_dashboards
+<div class="language-text highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>percli dac build -d my_dashboards
 </span></code></pre></div>
 <h2 id="deploy-dashboards">Deploy dashboards<a class="headerlink" href="#deploy-dashboards" title="Permanent link">#</a></h2>
 <p>Once you are satisfied with the result of your DaC definition for a given dashboard, you can finally deploy it to Perses with the <code>apply</code> command:</p>
-<div class="language-text highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>percli apply -f built/my_dashboard.json
+<div class="language-text highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>percli apply -f built/my_dashboard.json
 </span></code></pre></div>
 <h3 id="cicd-setup">CI/CD setup<a class="headerlink" href="#cicd-setup" title="Permanent link">#</a></h3>
 <p>Setting up a CI/CD pipeline for your Dashboard-as-Code workflow is straightforward, as <a href="../../cli/">percli</a> provides all the necessary commands to automate the process. You can integrate percli with any CI/CD technology of your choice: Jenkins, CircleCI, GitLab CI/CD, etc.</p>
@@ -3845,26 +3947,26 @@
 <li>
 <p>A pre-configured workflow designed for common DaC CI/CD setups, making it easy to adopt without extensive configuration. </p>
 <p>Example of usage:
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">jobs</span><span class="p">:</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="nt">dac</span><span class="p">:</span>
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">   </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">perses/cli-actions/.github/workflows/dac.yaml@v0.1.0</span>
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">   </span><span class="nt">with</span><span class="p">:</span>
-</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">     </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://demo.perses.dev</span>
-</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">     </span><span class="nt">directory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./dac</span>
-</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">     </span><span class="nt">server-validation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="w">   </span><span class="nt">secrets</span><span class="p">:</span>
-</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">     </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.USR }}</span>
-</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="w">     </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.PWD }}</span>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nt">jobs</span><span class="p">:</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="nt">dac</span><span class="p">:</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">   </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">perses/cli-actions/.github/workflows/dac.yaml@v0.1.0</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">   </span><span class="nt">with</span><span class="p">:</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">     </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://demo.perses.dev</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">     </span><span class="nt">directory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./dac</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">     </span><span class="nt">server-validation</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">   </span><span class="nt">secrets</span><span class="p">:</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="w">     </span><span class="nt">username</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.USR }}</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="w">     </span><span class="nt">password</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">${{ secrets.PWD }}</span>
 </span></code></pre></div></p>
 </li>
 <li>
 <p>Independent actions for each CLI command, allowing you to build customized workflows.</p>
 <p>Example of usage:
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nt">steps</span><span class="p">:</span>
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy the dashboards</span>
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">perses/cli-actions/actions/apply_resources@v0.1.0</span>
-</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span><span class="nt">with</span><span class="p">:</span>
-</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">      </span><span class="nt">directory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./testdata/dashboards_folder</span>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nt">steps</span><span class="p">:</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Deploy the dashboards</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">perses/cli-actions/actions/apply_resources@v0.1.0</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="nt">with</span><span class="p">:</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">      </span><span class="nt">directory</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">./testdata/dashboards_folder</span>
 </span></code></pre></div></p>
 <p>The full list of actions is available <a href="https://github.com/perses/cli-actions/blob/main/README.md#actions">here</a>.</p>
 </li>

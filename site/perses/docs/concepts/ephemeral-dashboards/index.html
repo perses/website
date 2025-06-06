@@ -2757,6 +2757,69 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/migrate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Migrate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/plugins/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Plugins
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/validate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Validate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -3280,11 +3343,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../plugins/structure/" class="md-nav__link">
+      <a href="../../plugins/creation/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Structure
+    Create a plugin
   </span>
   
 
@@ -3305,6 +3368,48 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../materials/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Materials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../adopters/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Adopters
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -3446,11 +3551,11 @@
 <p>An ephemeral dashboard is a standalone dashboard with a time-to-live (TTL), which is why it's referred to as 'ephemeral'.</p>
 <p>Using this feature, a user can create a real, but temporary, dashboard, that can be shared with others and will be automatically removed from the database, after a specified period.</p>
 <h2 id="why-you-might-need-it">Why you might need it<a class="headerlink" href="#why-you-might-need-it" title="Permanent link">#</a></h2>
-<p>The Ephemeral Dashboard resource addresses the need of generating preview dashboards when working with <a href="../dashboard-as-code/">Dashboard-as-Code</a>. </p>
+<p>The Ephemeral Dashboard resource addresses the need of generating preview dashboards when working with <a href="../dashboard-as-code/">Dashboard-as-Code</a>.</p>
 <h2 id="how-it-can-be-used">How it can be used<a class="headerlink" href="#how-it-can-be-used" title="Permanent link">#</a></h2>
 <h3 id="in-the-cli">In the CLI:<a class="headerlink" href="#in-the-cli" title="Permanent link">#</a></h3>
 <p>The ephemeral dashboard was introduced with the continuous integration use-case in mind, hence why it integrates with <a href="../../cli/">percli</a>.</p>
-<p><div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$<span class="w"> </span>percli<span class="w"> </span>dac<span class="w"> </span>preview<span class="w"> </span>-h
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>$<span class="w"> </span>percli<span class="w"> </span>dac<span class="w"> </span>preview<span class="w"> </span>-h
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>Creates<span class="w"> </span>ephemeral<span class="w"> </span>dashboard<span class="o">(</span>s<span class="o">)</span><span class="w"> </span>based<span class="w"> </span>on<span class="w"> </span>the<span class="w"> </span>dashboard<span class="o">(</span>s<span class="o">)</span><span class="w"> </span>built<span class="w"> </span>locally.<span class="w"> </span>As<span class="w"> </span>a<span class="w"> </span>response<span class="w"> </span>it<span class="w"> </span>provides<span class="w"> </span>a<span class="w"> </span>list<span class="w"> </span>with<span class="w"> </span>the<span class="w"> </span>URL<span class="w"> </span>of<span class="w"> </span>each<span class="w"> </span>dashboard<span class="w"> </span>preview<span class="w"> </span>generated.
 </span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
@@ -3462,7 +3567,7 @@
 </span><span id="__span-0-10"><a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
 </span><span id="__span-0-11"><a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>$<span class="w"> </span>percli<span class="w"> </span>dac<span class="w"> </span>preview<span class="w"> </span>-d<span class="w"> </span>./build
 </span></code></pre></div>
-It's thus also integrated in the <a href="https://github.com/perses/cli-actions/blob/main/README.md#dac">standard workflow for Dashboard-as-Code</a> since it relies on percli.</p>
+<p>It's thus also integrated in the <a href="https://github.com/perses/cli-actions/blob/main/README.md#dac">standard workflow for Dashboard-as-Code</a> since it relies on percli.</p>
 <h3 id="in-the-perses-ui">In the Perses UI:<a class="headerlink" href="#in-the-perses-ui" title="Permanent link">#</a></h3>
 <p>When duplicating a dashboard in the Perses UI, you have the possibility to make it ephemeral by providing a time-to-live(TTL):</p>
 <p><img alt="temporary copy" src="https://github.com/user-attachments/assets/3d2cb1e6-958e-42d2-8964-4419b7490653" /></p>
@@ -3472,8 +3577,8 @@ It's thus also integrated in the <a href="https://github.com/perses/cli-actions/
 <ul>
 <li><a href="../../api/ephemeral-dashboard/">Ephemeral Dashboard API</a></li>
 <li><a href="../../cli/">Perses CLI</a></li>
-<li><a href="../../dac/getting-started/">Dashboard-as-Code user guide</a> </li>
-<li><a href="https://github.com/perses/cli-actions">GitHub Actions library</a>   </li>
+<li><a href="../../dac/getting-started/">Dashboard-as-Code user guide</a></li>
+<li><a href="https://github.com/perses/cli-actions">GitHub Actions library</a></li>
 </ul>
 
 

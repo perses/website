@@ -2,3 +2,4 @@ database:
   file:
     folder: "/perses"
     extension: "json"
+    

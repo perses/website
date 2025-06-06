@@ -2708,6 +2708,69 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/migrate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Migrate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/plugins/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Plugins
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../api/validate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Validate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -3231,11 +3294,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../plugins/structure/" class="md-nav__link">
+      <a href="../../plugins/creation/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Structure
+    Create a plugin
   </span>
   
 
@@ -3256,6 +3319,48 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../materials/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Materials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../adopters/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Adopters
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -3348,7 +3453,8 @@ folder can be set using the following configuration:</p>
 <div class="language-yaml highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nt">plugin</span><span class="p">:</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="nt">archive_path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/path/to/archive/folder</span>
 </span></code></pre></div>
-<p>Note: to know how to build a plugin archive, please refer to the <a href="../../plugins/structure/">plugin structure documentation</a>.</p>
+<p>Note: to know how to build a plugin archive, please refer to
+the <a href="../../plugins/creation/">plugin creation documentation</a>.</p>
 <p>By default, the plugin archive folder is set to <code>plugins-archive</code> or to <code>/etc/perses/plugins-archive</code> if it's running in
 a container.</p>
 <p>Perses will extract every archive contained in this folder and will put the data into another folder. This folder can be
@@ -3363,16 +3469,16 @@ This file contains the list of the plugins that can be used by the frontend.</p>
 <p>This file is used to serve the HTTP endpoint <code>/api/v1/plugins</code>. The frontend calls this endpoint to get the list of the
 plugins to be loaded.</p>
 <h2 id="load-plugin-in-development-mode">Load plugin in development mode<a class="headerlink" href="#load-plugin-in-development-mode" title="Permanent link">#</a></h2>
-<p>While you are implementing a plugin, you probably would like to see it alive in Perses using the dev server of <code>rsbuild</code>.</p>
-<p>Perses is able to load a plugin served by the <code>rsbuild</code> dev server. To do so, you need to set the following configuration:</p>
-<div class="language-yaml highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nt">plugin</span><span class="p">:</span>
-</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">  </span><span class="nt">dev_environment</span><span class="p">:</span>
-</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="nt">plugins</span><span class="p">:</span>
-</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">&lt;plugin_module_name&gt;</span><span class="w"> </span><span class="c1"># Like Prometheus</span>
-</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">        </span><span class="nt">url</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">http://localhost:3005</span><span class="w"> </span><span class="c1"># The URL of the rsbuild dev server</span>
-</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">        </span><span class="nt">disable_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span><span class="w"> </span><span class="c1"># If you want to disable the schema loading</span>
-</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">        </span><span class="nt">absolute_path</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/path/to/plugin/folder&quot;</span><span class="w"> </span><span class="c1"># The absolute path of the plugin folder. Required if disable_schema is false</span>
+<p>While you are implementing a plugin, you probably would like to see it alive in Perses using the dev server of
+<code>rsbuild</code>.</p>
+<p>Perses is able to load a plugin served by the <code>rsbuild</code> dev server. To do so, you should use the CLI like this:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Log in to the Perses backend</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>percli<span class="w"> </span>login<span class="w"> </span>http://localhost:8080
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="c1"># Start the plugin in development mode</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>percli<span class="w"> </span>plugin<span class="w"> </span>start<span class="w"> </span>./path/to/plugin
 </span></code></pre></div>
+<p>It will start the dev server of <code>rsbuild</code> and will also register the plugin in the Perses backend.</p>
+<p>Refer to the help of the <code>percli plugin start</code> command to see all the options available.</p>
 
 
 

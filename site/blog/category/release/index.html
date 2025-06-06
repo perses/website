@@ -2669,6 +2669,69 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../perses/docs/api/migrate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Migrate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../perses/docs/api/plugins/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Plugins
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../perses/docs/api/validate/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Validate
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -3192,11 +3255,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../perses/docs/plugins/structure/" class="md-nav__link">
+      <a href="../../../perses/docs/plugins/creation/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Structure
+    Create a plugin
   </span>
   
 
@@ -3217,6 +3280,48 @@
           </ul>
         </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../perses/docs/materials/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Materials
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../adopters/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Adopters
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -3281,6 +3386,274 @@
       <header class="md-typeset">
         <h1 id="release">release<a class="headerlink" href="#release" title="Permanent link">#</a></h1>
       </header>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2025-06-06 00:00:00">June 6, 2025</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="./" class="md-meta__link">release</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              10 min read
+            
+          </li>
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="release-v0510"><a class="toclink" href="../../2025/06/06/release-v0510/">Release v0.51.0</a></h2>
+<p>We are excited to announce the release of Perses v0.51.0!</p>
+<p>This release brings several new features, improvements, and bug fixes to enhance your experience with Perses.</p>
+<p>It is a significant step forward in the evolution of Perses, and we are thrilled to share it with you. We have
+been working hard to bring you a more powerful and flexible platform for your observability needs.</p>
+<p>This release includes a new plugin architecture, new panel, new variable, a new
+repository <a href="https://github.com/perses/plugins">perses/plugins</a>
+containing all default plugins supported by Perses.</p>
+<p>We have also made significant improvements to the documentation, highlighting features that were implemented some time
+ago but not well advertised, such as datasource discovery and ephemeral dashboards.</p>
+<h3 id="new-plugins-system"><a class="toclink" href="../../2025/06/06/release-v0510/#new-plugins-system">New Plugins system</a></h3>
+<p>Big news from us at Perses! We've rolled out a brand-new plugin system, and it's all about making things more flexible
+and expandable.
+Our goal? To provide a more flexible and extensible way to scaffold, develop and distribute plugins in Perses so we can
+expand the possibilities for sources of data, visualization and interactions within the platform.</p>
+<h4 id="whats-under-the-hood"><a class="toclink" href="../../2025/06/06/release-v0510/#whats-under-the-hood">What's Under the Hood?</a></h4>
+<p>Leveraging <a href="https://rspack.dev/guide/features/module-federation">module federation</a> plugins can now operate
+independently of the main Perses code.
+Opening up a world of possibilities for developers to create and share plugins without being tied down to the core
+codebase.
+Plugins can be grouped into <strong>Plugin Modules</strong>, which are essentially collections of related plugins that can be
+developed and distributed together.
+Underneath it all, the system has a backend that handles data validation and migrations using Cuelang schemas, and a
+frontend that brings everything to life with React components.</p>
+<h4 id="easier-plugin-development"><a class="toclink" href="../../2025/06/06/release-v0510/#easier-plugin-development">Easier Plugin Development</a></h4>
+<p>To make life easier for developers, we've built some handy <code>plugin</code> commands right into our command-line interface,
+<a href="https://perses.dev/perses/docs/cli/"><code>percli</code></a>.
+The CLI will do all the heavy lifting from setting up your project, getting your development environment ready, to
+building your plugins.
+That way, you can kick back and focus on the exciting part: actually creating awesome plugin features!</p>
+<h4 id="how-does-it-work"><a class="toclink" href="../../2025/06/06/release-v0510/#how-does-it-work">How Does It Work?</a></h4>
+<p>The new plugin system is designed to be super user-friendly.
+You can scaffold a plugin using the <code>percli plugin generate</code> command, which will set up the new plugin files for you.
+This command can be used several times to create multiple plugins in the same plugin module.
+Then you can start developing your plugin using <code>percli plugin start</code> to run it in development mode and test it out in
+your local Perses instance. Finally, compile it with <code>percli plugin build</code> to prepare it for distribution.</p>
+<p>You can follow the <a href="https://perses.dev/perses/docs/plugins/creation">documentation</a> for details and examples to get
+started with creating your own plugins.</p>
+<h4 id="where-to-find-plugins"><a class="toclink" href="../../2025/06/06/release-v0510/#where-to-find-plugins">Where to Find Plugins</a></h4>
+<p>Thanks to this new setup, our main Perses plugins have moved to their own dedicated home
+at <a href="https://github.com/perses/plugins">perses/plugins</a>. And speaking of plugins, the system supports a bunch of
+different types:</p>
+<ul>
+<li>Datasource: Perfect for grabbing data from all sorts of places.</li>
+<li>Query: This one links your datasources to your panels.</li>
+<li>Panel: Your go-to for making data look good through various visualizations.</li>
+<li>Variable: For when you need dynamic values in your queries.</li>
+<li>Explore: A special kind of panel designed for diving deep into your data.</li>
+</ul>
+<p>You just use <code>percli</code> to get started, test your creations, and then build them up to distribute as archive files or npm
+packages.
+After that, they're ready to be installed on a Perses server or even embedded directly into other React apps.</p>
+<p>So, what kind of plugin are you dreaming of building first?</p>
+<h4 id="which-plugins-are-available-in-perses"><a class="toclink" href="../../2025/06/06/release-v0510/#which-plugins-are-available-in-perses">Which plugins are available in Perses</a></h4>
+<p>All plugins that are available in the repository <a href="https://github.com/perses/plugins">perses/plugins</a> are installed by
+default in Perses.</p>
+<p>You can find the list of available plugins at runtime in the UI, in the <strong>Configuration</strong> page, under the <strong>Plugins</strong>
+tab.</p>
+<p><img alt="PluginsList" src="../../../assets/images/blog/v051/plugins-list.png" /></p>
+<p>You can also use the CLI command <code>percli plugin list</code> to get the list of available plugins.</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>percli<span class="w"> </span>plugin<span class="w"> </span>list
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">        </span>NAME<span class="w">        </span>│<span class="w">   </span>VERSION<span class="w">   </span>│<span class="w">     </span>TYPE<span class="w">     </span>│<span class="w"> </span>LOADED<span class="w"> </span>│<span class="w"> </span>FROM<span class="w"> </span>DEV
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>────────────────────┼─────────────┼──────────────┼────────┼──────────
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w"> </span>DatasourceVariable<span class="w"> </span>│<span class="w"> </span><span class="m">0</span>.1.2<span class="w">       </span>│<span class="w"> </span>Variable<span class="w">     </span>│<span class="w"> </span><span class="nb">true</span><span class="w">   </span>│<span class="w"> </span><span class="nb">false</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="w"> </span>GaugeChart<span class="w">         </span>│<span class="w"> </span><span class="m">0</span>.7.1<span class="w">       </span>│<span class="w"> </span>Panel<span class="w">        </span>│<span class="w"> </span><span class="nb">true</span><span class="w">   </span>│<span class="w"> </span><span class="nb">false</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="w"> </span>Markdown<span class="w">           </span>│<span class="w"> </span><span class="m">0</span>.7.1<span class="w">       </span>│<span class="w"> </span>Panel<span class="w">        </span>│<span class="w"> </span><span class="nb">true</span><span class="w">   </span>│<span class="w"> </span><span class="nb">false</span>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="w"> </span>Prometheus<span class="w">         </span>│<span class="w"> </span><span class="m">0</span>.51.0-rc.1<span class="w"> </span>│<span class="w"> </span>PluginModule<span class="w"> </span>│<span class="w"> </span><span class="nb">true</span><span class="w">   </span>│<span class="w"> </span><span class="nb">false</span>
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="w"> </span>ScatterChart<span class="w">       </span>│<span class="w"> </span><span class="m">0</span>.6.1<span class="w">       </span>│<span class="w"> </span>Panel<span class="w">        </span>│<span class="w"> </span><span class="nb">true</span><span class="w">   </span>│<span class="w"> </span><span class="nb">false</span>
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="w"> </span>StaticListVariable<span class="w"> </span>│<span class="w"> </span><span class="m">0</span>.3.1<span class="w">       </span>│<span class="w"> </span>Variable<span class="w">     </span>│<span class="w"> </span><span class="nb">true</span><span class="w">   </span>│<span class="w"> </span><span class="nb">false</span>
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="w"> </span>Table<span class="w">              </span>│<span class="w"> </span><span class="m">0</span>.6.1<span class="w">       </span>│<span class="w"> </span>Panel<span class="w">        </span>│<span class="w"> </span><span class="nb">true</span><span class="w">   </span>│<span class="w"> </span><span class="nb">false</span>
+</span><span id="__span-14-12"><a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="w"> </span>HistogramChart<span class="w">     </span>│<span class="w"> </span><span class="m">0</span>.7.2<span class="w">       </span>│<span class="w"> </span>Panel<span class="w">        </span>│<span class="w"> </span><span class="nb">true</span><span class="w">   </span>│<span class="w"> </span><span class="nb">false</span>
+</span><span id="__span-14-13"><a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="w"> </span>PieChart<span class="w">           </span>│<span class="w"> </span><span class="m">0</span>.7.1<span class="w">       </span>│<span class="w"> </span>Panel<span class="w">        </span>│<span class="w"> </span><span class="nb">true</span><span class="w">   </span>│<span class="w"> </span><span class="nb">false</span>
+</span><span id="__span-14-14"><a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="w"> </span>TimeSeriesChart<span class="w">    </span>│<span class="w"> </span><span class="m">0</span>.8.0<span class="w">       </span>│<span class="w"> </span>Panel<span class="w">        </span>│<span class="w"> </span><span class="nb">true</span><span class="w">   </span>│<span class="w"> </span><span class="nb">false</span>
+</span><span id="__span-14-15"><a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a><span class="w"> </span>TimeSeriesTable<span class="w">    </span>│<span class="w"> </span><span class="m">0</span>.7.1<span class="w">       </span>│<span class="w"> </span>Panel<span class="w">        </span>│<span class="w"> </span><span class="nb">true</span><span class="w">   </span>│<span class="w"> </span><span class="nb">false</span>
+</span><span id="__span-14-16"><a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a><span class="w"> </span>TraceTable<span class="w">         </span>│<span class="w"> </span><span class="m">0</span>.6.1<span class="w">       </span>│<span class="w"> </span>Panel<span class="w">        </span>│<span class="w"> </span><span class="nb">true</span><span class="w">   </span>│<span class="w"> </span><span class="nb">false</span>
+</span><span id="__span-14-17"><a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a><span class="w"> </span>BarChart<span class="w">           </span>│<span class="w"> </span><span class="m">0</span>.7.1<span class="w">       </span>│<span class="w"> </span>Panel<span class="w">        </span>│<span class="w"> </span><span class="nb">true</span><span class="w">   </span>│<span class="w"> </span><span class="nb">false</span>
+</span><span id="__span-14-18"><a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a><span class="w"> </span>TracingGanttChart<span class="w">  </span>│<span class="w"> </span><span class="m">0</span>.6.1<span class="w">       </span>│<span class="w"> </span>Panel<span class="w">        </span>│<span class="w"> </span><span class="nb">true</span><span class="w">   </span>│<span class="w"> </span><span class="nb">false</span>
+</span><span id="__span-14-19"><a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a><span class="w"> </span>StatChart<span class="w">          </span>│<span class="w"> </span><span class="m">0</span>.7.1<span class="w">       </span>│<span class="w"> </span>Panel<span class="w">        </span>│<span class="w"> </span><span class="nb">true</span><span class="w">   </span>│<span class="w"> </span><span class="nb">false</span>
+</span><span id="__span-14-20"><a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a><span class="w"> </span>StatusHistoryChart<span class="w"> </span>│<span class="w"> </span><span class="m">0</span>.7.2<span class="w">       </span>│<span class="w"> </span>Panel<span class="w">        </span>│<span class="w"> </span><span class="nb">true</span><span class="w">   </span>│<span class="w"> </span><span class="nb">false</span>
+</span><span id="__span-14-21"><a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a><span class="w"> </span>Tempo<span class="w">              </span>│<span class="w"> </span><span class="m">0</span>.51.0-rc.1<span class="w"> </span>│<span class="w"> </span>PluginModule<span class="w"> </span>│<span class="w"> </span><span class="nb">true</span><span class="w">   </span>│<span class="w"> </span><span class="nb">false</span>
+</span></code></pre></div>
+<h3 id="new-plugins"><a class="toclink" href="../../2025/06/06/release-v0510/#new-plugins">New Plugins</a></h3>
+<h4 id="datasource-variable"><a class="toclink" href="../../2025/06/06/release-v0510/#datasource-variable">Datasource variable</a></h4>
+<p>Thanks to the community contributions, we are introducing a new plugin: the <strong>Datasource Variable</strong>.
+This plugin allows the possibility to use a datasource as a variable in your dashboard, specially in the queries of your
+panels.</p>
+<p>This is particularly useful when you have multiple datasources of the same type, such as multiple Prometheus instances,
+and you would like to switch between them without having to modify each panel query.
+<img alt="DatasourceVariable" src="../../../assets/images/blog/v051/datasourceVariable.gif" /></p>
+<p>Of course, this plugin is not limited to Prometheus; it can be used with any datasource.</p>
+<p>Note: If you are familiar with Grafana this feature wont will feel particularly new to you.
+It's a valuable addition to Perses, helping to bring feature parity and making it a strong alternative for those
+considering or exploring a
+transition.</p>
+<h4 id="histogram-chart"><a class="toclink" href="../../2025/06/06/release-v0510/#histogram-chart">Histogram Chart</a></h4>
+<p>This release introduces a new plugin: the <strong>Histogram Chart</strong>. This plugin allows you to visualize Prometheus Native
+Histograms, providing a clear and concise way to understand the distribution of your histogram buckets.</p>
+<p><img alt="Histogram Panel" src="../../../assets/images/blog/v051/histogram-panel.png" /></p>
+<p>This panel is supporting thresholds, which allow you to colorize the chart based on specific values, making it easier to
+understand your data.</p>
+<p><img alt="Histogram with thresholds" src="../../../assets/images/blog/v051/histogram-thresholds.png" /></p>
+<p>This chart is also used in <strong>TimeSeriesTable</strong> panel to display histogram details, allowing the Explore page to display
+histograms.</p>
+<p><img alt="Explore page with histograms" src="../../../assets/images/blog/v051/histogram-explore.png" /></p>
+<p>In next releases, we are planning to add exponential mode support, add support for Prometheus classic histograms and
+summaries and thresholds on bucket counts.
+Feel free to give us ideas on how to improve this plugin, with issues or discussions on
+the <a href="https://github.com/perses/perses">Perses GitHub repository</a>.
+Spoiler: the heatmap panel is coming next release 🤫</p>
+<h3 id="breaking-change-in-dashboard-as-code"><a class="toclink" href="../../2025/06/06/release-v0510/#breaking-change-in-dashboard-as-code">Breaking Change in Dashboard as Code</a></h3>
+<p>As previously mentioned, we have relocated the default plugins to a new repository. This includes not only the frontend
+code, which has been transferred there, but also the corresponding Go SDK and CUE SDK for each plugin.</p>
+<p>This move is a breaking change for the Dashboard as Code feature as when upgraded to the last version, you will no
+longer have the plugin code from perses/perses repository.</p>
+<p>All imports will have to be updated to point to the new repository. We created a module for each plugin so you can
+import only the ones you need.</p>
+<p>For example, in Go SDK, in case you are using the plugin <code>label-values</code> from the <code>Prometheus</code> module, you will need to
+<code>go get</code> the plugin first:</p>
+<div class="language-bash highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>go<span class="w"> </span>get<span class="w"> </span>github.com/perses/plugins/prometheus
+</span></code></pre></div>
+<p>Then, in your Go code, you will have to change the import path from:</p>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kn">import</span><span class="w"> </span><span class="nx">labelValuesVar</span><span class="w"> </span><span class="s">&quot;github.com/perses/perses/go-sdk/prometheus/variable/label-values&quot;</span>
+</span></code></pre></div>
+<p>to:</p>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="kn">import</span><span class="w"> </span><span class="nx">labelValuesVar</span><span class="w"> </span><span class="s">&quot;github.com/perses/plugins/prometheus/sdk/go/variable/label-values&quot;</span>
+</span></code></pre></div>
+<p>As a complete example, this PR: https://github.com/perses/community-dashboards/pull/69 is demonstrating the required
+changes you will have to do in your code when upgrading to the v0.51.0 of Perses.</p>
+<p>In the case of CUE SDK, we are also leveraging on the new dependency management introduced by CUE v0.12.0.
+Where we previously had a custom-made schema retrieval achieved by <code>percli dac setup</code>, Perses is now fully aligned with
+the new <a href="https://cuelang.org/docs/reference/modules/">CUE modules</a>.</p>
+<p>To continue using the CUE SDK, you will need to update your CUE files to import the new modules, but also to <strong>upgrade</strong>
+the
+<strong>cue</strong> version you are using to at least <strong>v0.12.0</strong>.</p>
+<h3 id="custom-lint-rules"><a class="toclink" href="../../2025/06/06/release-v0510/#custom-lint-rules">Custom Lint rules</a></h3>
+<p>As you may know, to validate your dashboard, we have implemented a set of rules.
+These rules are executed when you save your dashboard during the unmarshalling step from JSON or YAML or during the
+validation of each plugin using Cuelang.</p>
+<p>In this release, we have added the ability to create custom lint rules. This allows you to enforce specific standards or
+practices within your organization.</p>
+<p>These custom rules should be defined in the configuration file of your Perses instance, typically located at
+<code>/etc/perses/config.yaml</code>. The rules are defined under the <code>dashboard.custom_lint_rules</code> section.</p>
+<p>Here is an example of how to define custom lint rules for dashboards:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-18-1"><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nt">dashboard</span><span class="p">:</span>
+</span><span id="__span-18-2"><a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">  </span><span class="nt">custom_lint_rules</span><span class="p">:</span>
+</span><span id="__span-18-3"><a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Dashboard</span><span class="nv"> </span><span class="s">Naming</span><span class="nv"> </span><span class="s">Convention&quot;</span>
+</span><span id="__span-18-4"><a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">      </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;$.metadata.name&quot;</span>
+</span><span id="__span-18-5"><a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">      </span><span class="nt">assertion</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;value.matches(&#39;^[a-z]+(-[a-z]+)*$&#39;)&quot;</span>
+</span><span id="__span-18-6"><a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="w">      </span><span class="nt">message</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Dashboard</span><span class="nv"> </span><span class="s">name</span><span class="nv"> </span><span class="s">must</span><span class="nv"> </span><span class="s">be</span><span class="nv"> </span><span class="s">all</span><span class="nv"> </span><span class="s">lowercase</span><span class="nv"> </span><span class="s">letters</span><span class="nv"> </span><span class="s">with</span><span class="nv"> </span><span class="s">hyphens</span><span class="nv"> </span><span class="s">only.&quot;</span>
+</span><span id="__span-18-7"><a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="w">      </span><span class="nt">disable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</span><span id="__span-18-8"><a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>
+</span><span id="__span-18-9"><a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="w">    </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;At</span><span class="nv"> </span><span class="s">Least</span><span class="nv"> </span><span class="s">One</span><span class="nv"> </span><span class="s">Panel</span><span class="nv"> </span><span class="s">Exists&quot;</span>
+</span><span id="__span-18-10"><a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="w">      </span><span class="nt">target</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;$.spec.panels&quot;</span>
+</span><span id="__span-18-11"><a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="w">      </span><span class="nt">assertion</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;value.size()</span><span class="nv"> </span><span class="s">&gt;</span><span class="nv"> </span><span class="s">0&quot;</span>
+</span><span id="__span-18-12"><a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a><span class="w">      </span><span class="nt">message</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;Dashboard</span><span class="nv"> </span><span class="s">must</span><span class="nv"> </span><span class="s">contain</span><span class="nv"> </span><span class="s">at</span><span class="nv"> </span><span class="s">least</span><span class="nv"> </span><span class="s">one</span><span class="nv"> </span><span class="s">panel.&quot;</span>
+</span><span id="__span-18-13"><a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a><span class="w">      </span><span class="nt">disable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
+</span></code></pre></div>
+<p>We are using the <a href="https://goessner.net/articles/JsonPath/">JSONPath</a> syntax to target specific parts of the dashboard
+JSON structure, and the assertion is a <a href="https://github.com/google/cel-spec/blob/master/doc/langdef.md">CEL</a> expression.</p>
+<p>To know more about the syntax of the rules, please refer to
+the <a href="https://perses.dev/perses/docs/configuration/custom-lint-rules">documentation</a></p>
+<h3 id="disable-datasource-and-variable"><a class="toclink" href="../../2025/06/06/release-v0510/#disable-datasource-and-variable">Disable datasource and variable</a></h3>
+<p>In Perses, it is possible to create datasource and variables at three different levels: global, project, and dashboard.</p>
+<p>Usually, for security and governance reasons, you may want to prevent people to create datasource and variables at
+various levels. For global and project levels, this is already possible using the RBAC system.</p>
+<p>But before this release, it was not possible to disable the creation of datasource and variables at the dashboard level.</p>
+<p>In this release, we are introducing the ability to disable the manipulation of datasources and variables at any level.
+For that, you need to modify the configuration file of your Perses instance, and add the following section:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-19-1"><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nt">datasource</span><span class="p">:</span>
+</span><span id="__span-19-2"><a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">  </span><span class="nt">global</span><span class="p">:</span>
+</span><span id="__span-19-3"><a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">    </span><span class="nt">disable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-19-4"><a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">  </span><span class="nt">project</span><span class="p">:</span>
+</span><span id="__span-19-5"><a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="w">    </span><span class="nt">disable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-19-6"><a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="w">  </span><span class="nt">disable_local</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span></code></pre></div>
+<p>This configuration is preventing the usage of datasources at any level and disable the associated HTTP route in the
+Perses proxy.</p>
+<p>Of course, this config is silly because without datasources, you cannot use dashboards, but it is a good example of how
+to disable datasources.</p>
+<p>The same example applies for variables:</p>
+<div class="language-yaml highlight"><pre><span></span><code><span id="__span-20-1"><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nt">variable</span><span class="p">:</span>
+</span><span id="__span-20-2"><a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="w">  </span><span class="nt">global</span><span class="p">:</span>
+</span><span id="__span-20-3"><a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">    </span><span class="nt">disable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-20-4"><a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">  </span><span class="nt">project</span><span class="p">:</span>
+</span><span id="__span-20-5"><a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="w">    </span><span class="nt">disable</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span><span id="__span-20-6"><a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="w">  </span><span class="nt">disable_local</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+</span></code></pre></div>
+<h3 id="improvement-of-the-datasource-discovery"><a class="toclink" href="../../2025/06/06/release-v0510/#improvement-of-the-datasource-discovery">Improvement of the datasource discovery</a></h3>
+<p>One year ago, we introduced the datasource discovery feature, which allows you to automatically discover remote
+datasources from the Kubernetes API or from a generic HTTP endpoint.
+And so far we never got feedback about it until a couple of months ago when <a href="https://www.sap.com/">SAP</a> started using
+it.</p>
+<h4 id="overview"><a class="toclink" href="../../2025/06/06/release-v0510/#overview">Overview</a></h4>
+<p>We didn't have the opportunity to highlight this feature, so here is a quick overview of how it works.</p>
+<p>Datasource discovery is useful when you have a large number of datasources, and you don't want to manually register
+them in your application. Note that this feature can only be used when registering Global Datasources.</p>
+<p>We are supporting two types of discovery:</p>
+<ul>
+<li><strong>Kubernetes API</strong>: This allows you to discover datasources that are registered in the Kubernetes API, such as
+  Prometheus, Loki, and others. You can configure the discovery by specifying the namespace where the datasources are
+  located, the label selector to filter the datasources and the type of the discovery you would like to use: service,
+  pod, endpoint.</li>
+<li><strong>HTTP Endpoint</strong>: This allows you to discover datasources from a generic HTTP endpoint. You can configure the
+  discovery by specifying the URL of the endpoint. The endpoint should return a JSON array of Global Datasource.</li>
+</ul>
+<p>If you want to learn more about this feature, please refer to
+the <a href="https://perses.dev/perses/docs/configuration/datasource-discovery/">documentation</a>.</p>
+<h4 id="improvements"><a class="toclink" href="../../2025/06/06/release-v0510/#improvements">Improvements</a></h4>
+<ul>
+<li>We made a mistake about how the label selector was converted from the configuration file to the Kubernetes
+  API. The label selector was not correctly formatted, which prevented the discovery from working properly.</li>
+<li>When converting a service to a global datasource, there was a corner case where the global datasource was not
+  correctly created. And then Perses was not able to load the datasource.</li>
+</ul>
+<p>Thanks to these little improvements, the datasource discovery feature is now more reliable and easier to use.</p>
+<h3 id="community-dashboards"><a class="toclink" href="../../2025/06/06/release-v0510/#community-dashboards">Community Dashboards</a></h3>
+<p>Fresh off our talk at KubeCon EU 2025 in
+London - <a href="http://youtube.com/watch?v=7h70Olo5Uzk">Limitless Possibilities, Consistent Design: Crafting Dashboards With Perses DAC</a>,
+given by two perses maintainers, Nicolas Takashi and Antoine Thébaud, we are happy to introduce
+the <a href="https://github.com/perses/community-dashboards">community-dashboards</a> repository.</p>
+<p>Here we provide support for commonly used Mixin Dashboards, like Prometheus, Kubernetes and Thanos, build on top of
+<strong>Dashboard as Code</strong> capabilities provided by Perses. We’ll dive deeper into the community-dashboards in our upcoming
+blog post, but starting today, you can begin using them right away — whether by:</p>
+<ul>
+<li>
+<p>Importing them directly into your Perses instance;</p>
+</li>
+<li>
+<p>Using them as a starting point to build your own dashboards;</p>
+</li>
+<li>
+<p>Or reusing individual panels in your own dashboards-as-code workflows.</p>
+</li>
+</ul>
+<p>We're also welcoming the community to help us support and extent the community-dashboards. So if there are additional
+dashboards you’d like to see supported, feel free to reach out to the team - or even better, help us extend the
+supported dashboards with feedback or improvements to the dashboards. Your input helps shape what comes next!</p>
+    
+  </div>
+</article>
       
         <article class="md-post md-post--excerpt">
   <header class="md-post__header">
