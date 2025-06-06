@@ -3640,6 +3640,20 @@ blog post, but starting today, you can begin using them right away — whether b
 <p>We're also welcoming the community to help us support and extent the community-dashboards. So if there are additional
 dashboards you’d like to see supported, feel free to reach out to the team - or even better, help us extend the
 supported dashboards with feedback or improvements to the dashboards. Your input helps shape what comes next!</p>
+<h3 id="support-oauth2-authentication-for-datasource"><a class="toclink" href="2025/06/06/release-v0510/#support-oauth2-authentication-for-datasource">Support OAuth2 authentication for Datasource</a></h3>
+<p>Another cool contribution from the community is the support for OAuth2 authentication for datasources.</p>
+<p>Before this release, the only way to authenticate to a datasource was to use a token, basic authentication and/or TLS
+configuration (like client certificate).</p>
+<p>But in real world scenarios, you may want to use OAuth2 authentication to access your datasources and this is now
+possible!</p>
+<p><img alt="Datasource OAuth2" src="../assets/images/blog/v051/datasource-oauth2.png" /></p>
+<h3 id="support-yaml-and-yaml-k8s-custom-resource-format-for-dashboard"><a class="toclink" href="2025/06/06/release-v0510/#support-yaml-and-yaml-k8s-custom-resource-format-for-dashboard">Support YAML and YAML K8s Custom Resource format for Dashboard</a></h3>
+<p><img align="left" alt="Dashboard YAML" src="../assets/images/blog/v051/dashboard-yaml.png" width="350" /></p>
+<p>Finally, but not least, we are introducing the support for YAML and YAML K8s Custom Resource format when exporting a
+dashboard from the UI.</p>
+<p>The YAML CR format is directly compatible with the <code>perses-operator</code> and can be used in your GitOps workflow.</p>
+<p>In future releases, we will also support the YAML format for all other resources, so you can export a panel or variable
+in a YAML format.</p>
     
   </div>
 </article>
