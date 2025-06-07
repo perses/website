@@ -44,7 +44,7 @@ This approach also lowers the barrier to achieving consistency across dashboards
 
 ## How to build composable dashboards - a practical example
 
-Here we have an example of how to define a panel of Time Series type below. More detailed info about the available option for Time Series Panels can be found [here](https://pkg.go.dev/github.com/perses/perses/go-sdk/panel/time-series) and [PromQLBuilder](https://pkg.go.dev/github.com/perses/promql-builder).
+Here we have an example of how to define a panel of Time Series type below. More detailed info about the available option for Time Series Panels can be found [here](https://pkg.go.dev/github.com/perses/plugins/timeserieschart) and [PromQLBuilder](https://pkg.go.dev/github.com/perses/promql-builder).
 
 ```go
 // Define your panel
