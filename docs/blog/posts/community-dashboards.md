@@ -44,7 +44,7 @@ This approach also lowers the barrier to achieving consistency across dashboards
 
 ## How to build composable dashboards - a practical example
 
-Here we have an example of how to define a panel of Time Series type below. More detailed info about the available option for Time Series Panels can be found [here](https://perses.dev/perses/docs/dac/go/panel/time-series/).
+Here we have an example of how to define a panel of Time Series type below. More detailed info about the available option for Time Series Panels can be found [here](https://pkg.go.dev/github.com/perses/perses/go-sdk/panel/time-series) and [PromQLBuilder](https://pkg.go.dev/github.com/perses/promql-builder).
 
 ```go
 // Define your panel
@@ -129,6 +129,8 @@ func BuildWorkloadOverview(project string, datasource string, clusterLabelName s
 	).Component("workload")
 }
 ```
+
+For more on the SDK please check [perses/go-sdk](https://pkg.go.dev/github.com/perses/perses/go-sdk), and [community-dashboards](https://pkg.go.dev/github.com/perses/community-dashboards).
 
 ## Beyond Copy-Pasting - Cleaner and Smarter way to building Dashboards
 
