@@ -14,13 +14,13 @@ The Mixins Dashboards helped bring about a sense of relief, as users now could u
 
 * Jsonnet has a steep learning curve. It’s not a conventional Turing-complete programming language, and often makes it hard for downstream users of mixins to be able to do any sort of customization on their dashboards;
 
-* Mixin jsonnet is completely detached from the actual application code. It was introduced as a way to maintain dashboarding config for code that you are deploying side by side, to ensure it never goes out of sync. However, many mixins are rarely updated, even when the code is - sometimes these are maintained out of the tree. And jsonnet cannot use Go structs, so there is no automatic validation during code changes. Thus keeping mixins accurate and reliable demands a lot of effort.;
+* Mixin Jsonnet is completely detached from the actual application code. It was introduced as a way to maintain dashboarding config for code that you are deploying side by side, to ensure it never goes out of sync. However, many mixins are rarely updated, even when the code is - sometimes these are maintained out of the tree. And Jsonnet cannot use Go structs, so there is no automatic validation during code changes. Thus keeping mixins accurate and reliable demands a lot of effort.;
 
 * Adoption has also been uneven. A good example of this is kube-prometheus stack, built with Jsonnet, where many users bypass it entirely and only fetch the rendered YAML from that repository, then doing any sort of changes with tools like Kustomize instead. This undermines the original goal of reuse and standardization.
 
-In the end the result is, despite the promise of reusable dashboards, the reality is there’s still not a widely used solution for automatic dashboards creation.
+The end result is, that despite the promise of reusable dashboards, the reality is there’s still not a widely used solution for automatic dashboards creation.
 
-## Perses Kubecon Recap - Maybe there’s a better way to build Dashboards 
+## Perses KubeCon EU Recap - Maybe there’s a better way to build Dashboards 
 
 During **KubeCon EU 2025** in London, two of Perses’ core maintainers, Nicolas Takashi and Antoine Thébaud, shared how Perses is changing the way engineers develop and manage dashboards as code. Their talk covered the power of the Open Dashboard Model, how to use strongly typed code with the Perses Go SDK, and why this approach fits naturally into CI/CD pipelines using modern GitOps practices. If you didn’t get a chance to watch it live, you can watch the full session [here](http://youtube.com/watch?v=7h70Olo5Uzk).
 
@@ -28,13 +28,13 @@ They also mentioned the **Community Dashboards** Project, but didn’t have time
 
 ## Moving away from rebuilding the same dashboards to composable dashboards
 
-With the limitations of mixins in mind, the Perses community decided to take a different path. As a project based in Go, where both configuration and plugins are defined with Go structs, Perses therefore provides an opportunity to think about building dashboards in a more efficient manner. Taking full advantage of the Go structs imported from Perses, with its robust SDK that has the methods and constructs to build dashboards. This approach then ensures consistency with the core project, safe versioning, both for the dashboard data model and each individual panel plugins, and type-safe dashboard construction and customization.
+With the limitations of mixins in mind, the Perses community decided to take a different path. Since Perses is written in Go, with both its configuration and plugins defined using Go structs, it presents an opportunity to design dashboards in a more efficient and structured way. This approach takes full advantage of the Go structs imported from Perses, with its robust SDK that has the methods and constructs to build dashboards. This then ensures consistency with the core project, safe versioning, both for the dashboard data model and each individual panel plugins, and type-safe dashboard construction and customization.
 
 Introducing the [community-dashboards](https://github.com/perses/community-dashboards) repository. Maintained by community contributors, it offers the following dashboards in type-safe modular Go SDK based Dashboards as Code:
 
 ![Dashboard overview](../../assets/images/blog/community-dashboards/perses-dashboards-overview.png)
 
-The goal of the community-dashboards library isn't just to provide ready-to-use YAML dashboards (though you can use them as-is), but to empower users to import the project as a Go module, generate tailored subsets of dashboards, and customize or extend them to meet specific needs.
+The goal of the community-dashboards library isn't just to provide ready-to-use YAML dashboards (though you can use them as-is), but to empower users to import the project as a Go module in their downstream configuration, generate tailored subsets of dashboards, and customize or extend them to meet specific needs (similar to what mixins originally intended).
 
 A core strength of the Perses Community Dashboards is its modular, reusable panel library. These panels—such as Go CPU Usage and Memory Consumption—serve as building blocks that can be composed into new dashboards. Instead of starting from scratch, users can leverage these community-maintained components to quickly build dashboards suited to their applications and workloads.
 
@@ -91,7 +91,7 @@ func CPUUsage(datasourceName string, labelMatchers ...*labels.Matcher) panelgrou
 }
 ```
 
-Next after you have your first panel it’s time to add to a dashboard - here’s how to add to dashboard named `Workload / Overview`:
+Next after you have your first panel, it’s time to add it to a dashboard - here’s how to add to a dashboard named `Workload / Overview`:
 
 ```go
 // Use the panel in a dashboard
@@ -145,10 +145,10 @@ Also considering the most commonly used dashboard across platforms and teams, li
 
 ## Next Steps for the Community Dashboards
 
-We’re committed to expanding support for more CNCF projects, while continuing to enhance the existing panel libraries. By adding more features and improving the quality of reusable panels, we enable users to gain deeper insights from their dashboards—because the faster you can pinpoint an issue in your telemetry data, the better.
+We’re committed to expanding support for more CNCF and other OSS projects while continuing to enhance the existing panel libraries. By adding more features and improving the quality of reusable panels, we enable users to gain deeper insights from their dashboards because the faster you can pinpoint an issue in your telemetry data, the better.
 
-Also we aim to ensure proper documentation for all dashboards.Whether you're importing full dashboards or using panel libraries as building blocks, we want to make the process as seamless as possible. That means clear, well-commented code and guidance, so modularity is not only guaranteed but also easy to work with, without needing to dig through the entire codebase.
+Also, we aim to ensure proper documentation for all dashboards. Whether you're importing full dashboards or using panel libraries as building blocks, we want to make the process as seamless as possible. That means clear, well-commented code and guidance, so modularity is not only guaranteed but also easy to work with, without needing to dig through the entire codebase.
 
 Ultimately, this is a community effort, and we invite everyone to help grow this project. So if you have a dashboard you’ve rewritten more than once, or any mixin dashboard you use, but want to ensure it becomes modular, easily used and want to increase adoption of it. Whether it’s opening an issue or submitting a contribution, all help is moving forward so we can all, very soon, stop rebuilding the same dashboards. 
 
-Let’s stop duplicating effort and start building shared observability standards. 
+Let’s stop duplicating efforts and start building shared observability standards! 
