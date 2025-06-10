@@ -1,5 +1,5 @@
 ---
-date: 2025-06-XX # need to decide when to publish
+date: 2025-06-10
 categories:
   - community-dashboards
 ---

@@ -555,6 +555,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../category/community-dashboards/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    community-dashboards
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
       <a href="../../category/release/" class="md-nav__link">
         
   
@@ -3386,6 +3409,160 @@
       <header class="md-typeset">
         <h1 id="2025">2025<a class="headerlink" href="#2025" title="Permanent link">#</a></h1>
       </header>
+      
+        <article class="md-post md-post--excerpt">
+  <header class="md-post__header">
+    
+    <div class="md-post__meta md-meta">
+      <ul class="md-meta__list">
+        <li class="md-meta__item">
+          <time datetime="2025-06-10 00:00:00">June 10, 2025</time></li>
+        
+          <li class="md-meta__item">
+            in
+            
+              <a href="../../category/community-dashboards/" class="md-meta__link">community-dashboards</a></li>
+        
+        
+          
+          <li class="md-meta__item">
+            
+              6 min read
+            
+          </li>
+        
+      </ul>
+      
+    </div>
+  </header>
+  <div class="md-post__content md-typeset">
+    <h2 id="composable-dashboards-lessons-from-building-perses-community-dashboards"><a class="toclink" href="../../2025/06/10/composable-dashboards----lessons-from-building-perses-community-dashboards/">Composable Dashboards -  Lessons from building Perses Community Dashboards</a></h2>
+<h3 id="why-we-keep-rewriting-the-same-dashboards"><a class="toclink" href="../../2025/06/10/composable-dashboards----lessons-from-building-perses-community-dashboards/#why-we-keep-rewriting-the-same-dashboards">Why we keep rewriting the same dashboards</a></h3>
+<p>Every CNCF User/Developer/Contributor has, at some point, to endure the frustration of trying to salvage an outdated dashboard, or adapting upstream YAML, only to get to the point of wondering why it doesn't work on their setup. This leads to a recurring pattern: everyone ends up rebuilding the same dashboards, over and over again, each slightly different.</p>
+<p>The Mixins Dashboards helped bring about a sense of relief, as users now could use dashboards and alerts packaged together with the code they are deployed with. In theory, this promised consistency and easier integration. In practical terms, as the concept of mixins relies on Jsonnet, and even though it’s a suitable language for configuration management, it leads to a few issues:</p>
+<ul>
+<li>
+<p>Jsonnet has a steep learning curve. It’s not a conventional Turing-complete programming language, and often makes it hard for downstream users of mixins to be able to do any sort of customization on their dashboards;</p>
+</li>
+<li>
+<p>Mixin Jsonnet is completely detached from the actual application code. It was introduced as a way to maintain dashboarding config for code that you are deploying side by side, to ensure it never goes out of sync. However, many mixins are rarely updated, even when the code is - sometimes these are maintained out of the tree. And Jsonnet cannot use Go structs, so there is no automatic validation during code changes. Thus keeping mixins accurate and reliable demands a lot of effort.;</p>
+</li>
+<li>
+<p>Adoption has also been uneven. A good example of this is kube-prometheus stack, built with Jsonnet, where many users bypass it entirely and only fetch the rendered YAML from that repository, then doing any sort of changes with tools like Kustomize instead. This undermines the original goal of reuse and standardization.</p>
+</li>
+</ul>
+<p>The end result is, that despite the promise of reusable dashboards, the reality is there’s still not a widely used solution for automatic dashboards creation.</p>
+<h3 id="perses-kubecon-eu-recap-maybe-theres-a-better-way-to-build-dashboards"><a class="toclink" href="../../2025/06/10/composable-dashboards----lessons-from-building-perses-community-dashboards/#perses-kubecon-eu-recap-maybe-theres-a-better-way-to-build-dashboards">Perses KubeCon EU Recap - Maybe there’s a better way to build Dashboards</a></h3>
+<p>During <strong>KubeCon EU 2025</strong> in London, two of Perses’ core maintainers, Nicolas Takashi and Antoine Thébaud, shared how Perses is changing the way engineers develop and manage dashboards as code. Their talk covered the power of the Open Dashboard Model, how to use strongly typed code with the Perses Go SDK, and why this approach fits naturally into CI/CD pipelines using modern GitOps practices. If you didn’t get a chance to watch it live, you can watch the full session <a href="http://youtube.com/watch?v=7h70Olo5Uzk">here</a>.</p>
+<p>They also mentioned the <strong>Community Dashboards</strong> Project, but didn’t have time to dive into it during the session. With that in mind is our belief that such an important topic deserves more space, and as so we bring this into live here.</p>
+<h3 id="moving-away-from-rebuilding-the-same-dashboards-to-composable-dashboards"><a class="toclink" href="../../2025/06/10/composable-dashboards----lessons-from-building-perses-community-dashboards/#moving-away-from-rebuilding-the-same-dashboards-to-composable-dashboards">Moving away from rebuilding the same dashboards to composable dashboards</a></h3>
+<p>With the limitations of mixins in mind, the Perses community decided to take a different path. Since Perses is written in Go, with both its configuration and plugins defined using Go structs, it presents an opportunity to design dashboards in a more efficient and structured way. This approach takes full advantage of the Go structs imported from Perses, with its robust SDK that has the methods and constructs to build dashboards. This then ensures consistency with the core project, safe versioning, both for the dashboard data model and each individual panel plugins, and type-safe dashboard construction and customization.</p>
+<p>Introducing the <a href="https://github.com/perses/community-dashboards">community-dashboards</a> repository. Maintained by community contributors, it offers the following dashboards in type-safe modular Go SDK based Dashboards as Code:</p>
+<p><img alt="Dashboard overview" src="../../../assets/images/blog/community-dashboards/perses-dashboards-overview.png" /></p>
+<p>The goal of the community-dashboards library isn't just to provide ready-to-use YAML dashboards (though you can use them as-is), but to empower users to import the project as a Go module in their downstream configuration, generate tailored subsets of dashboards, and customize or extend them to meet specific needs (similar to what mixins originally intended).</p>
+<p>A core strength of the Perses Community Dashboards is its modular, reusable panel library. These panels—such as Go CPU Usage and Memory Consumption—serve as building blocks that can be composed into new dashboards. Instead of starting from scratch, users can leverage these community-maintained components to quickly build dashboards suited to their applications and workloads.</p>
+<p>This approach also lowers the barrier to achieving consistency across dashboards. By reusing the same patterns to build and display common metrics, dashboards remain aligned across teams and services. This makes it easier to compare environments, onboard new engineers, and scale observability practices—without reinventing the wheel.</p>
+<p><img alt="AM overview" src="../../../assets/images/blog/community-dashboards/perses-dashboards-am.png" /></p>
+<h3 id="how-to-build-composable-dashboards-a-practical-example"><a class="toclink" href="../../2025/06/10/composable-dashboards----lessons-from-building-perses-community-dashboards/#how-to-build-composable-dashboards-a-practical-example">How to build composable dashboards - a practical example</a></h3>
+<p>Here we have an example of how to define a panel of Time Series type below. More detailed info about the available option for Time Series Panels can be found <a href="https://pkg.go.dev/github.com/perses/plugins/timeserieschart">here</a> and <a href="https://pkg.go.dev/github.com/perses/promql-builder">PromQLBuilder</a>.</p>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">// Define your panel</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kd">func</span><span class="w"> </span><span class="nx">CPUUsage</span><span class="p">(</span><span class="nx">datasourceName</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">labelMatchers</span><span class="w"> </span><span class="o">...*</span><span class="nx">labels</span><span class="p">.</span><span class="nx">Matcher</span><span class="p">)</span><span class="w"> </span><span class="nx">panelgroup</span><span class="p">.</span><span class="nx">Option</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">panelgroup</span><span class="p">.</span><span class="nx">AddPanel</span><span class="p">(</span><span class="s">&quot;CPU Usage&quot;</span><span class="p">,</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="w">        </span><span class="nx">panel</span><span class="p">.</span><span class="nx">Description</span><span class="p">(</span><span class="s">&quot;Shows the CPU usage of the component.&quot;</span><span class="p">),</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="w">        </span><span class="nx">timeSeriesPanel</span><span class="p">.</span><span class="nx">Chart</span><span class="p">(</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">            </span><span class="nx">timeSeriesPanel</span><span class="p">.</span><span class="nx">WithYAxis</span><span class="p">(</span><span class="nx">timeSeriesPanel</span><span class="p">.</span><span class="nx">YAxis</span><span class="p">{</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="w">                </span><span class="nx">Format</span><span class="p">:</span><span class="w"> </span><span class="o">&amp;</span><span class="nx">commonSdk</span><span class="p">.</span><span class="nx">Format</span><span class="p">{</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="w">                    </span><span class="nx">Unit</span><span class="p">:</span><span class="w"> </span><span class="nb">string</span><span class="p">(</span><span class="nx">commonSdk</span><span class="p">.</span><span class="nx">DecimalUnit</span><span class="p">),</span>
+</span><span id="__span-2-9"><a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">                </span><span class="p">},</span>
+</span><span id="__span-2-10"><a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">            </span><span class="p">}),</span>
+</span><span id="__span-2-11"><a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="w">            </span><span class="nx">timeSeriesPanel</span><span class="p">.</span><span class="nx">WithLegend</span><span class="p">(</span><span class="nx">timeSeriesPanel</span><span class="p">.</span><span class="nx">Legend</span><span class="p">{</span>
+</span><span id="__span-2-12"><a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="w">                </span><span class="nx">Position</span><span class="p">:</span><span class="w"> </span><span class="nx">timeSeriesPanel</span><span class="p">.</span><span class="nx">BottomPosition</span><span class="p">,</span>
+</span><span id="__span-2-13"><a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">                </span><span class="nx">Mode</span><span class="p">:</span><span class="w">     </span><span class="nx">timeSeriesPanel</span><span class="p">.</span><span class="nx">TableMode</span><span class="p">,</span>
+</span><span id="__span-2-14"><a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">                </span><span class="nx">Values</span><span class="p">:</span><span class="w">   </span><span class="p">[]</span><span class="nx">commonSdk</span><span class="p">.</span><span class="nx">Calculation</span><span class="p">{</span><span class="nx">commonSdk</span><span class="p">.</span><span class="nx">LastCalculation</span><span class="p">},</span>
+</span><span id="__span-2-15"><a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="w">            </span><span class="p">}),</span>
+</span><span id="__span-2-16"><a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="w">            </span><span class="nx">timeSeriesPanel</span><span class="p">.</span><span class="nx">WithVisual</span><span class="p">(</span><span class="nx">timeSeriesPanel</span><span class="p">.</span><span class="nx">Visual</span><span class="p">{</span>
+</span><span id="__span-2-17"><a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="w">                </span><span class="nx">Display</span><span class="p">:</span><span class="w">      </span><span class="nx">timeSeriesPanel</span><span class="p">.</span><span class="nx">LineDisplay</span><span class="p">,</span>
+</span><span id="__span-2-18"><a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="w">                </span><span class="nx">ConnectNulls</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+</span><span id="__span-2-19"><a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="w">                </span><span class="nx">LineWidth</span><span class="p">:</span><span class="w">    </span><span class="mf">0.25</span><span class="p">,</span>
+</span><span id="__span-2-20"><a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="w">                </span><span class="nx">AreaOpacity</span><span class="p">:</span><span class="w">  </span><span class="mf">0.5</span><span class="p">,</span>
+</span><span id="__span-2-21"><a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="w">                </span><span class="nx">Palette</span><span class="p">:</span><span class="w">      </span><span class="nx">timeSeriesPanel</span><span class="p">.</span><span class="nx">Palette</span><span class="p">{</span><span class="nx">Mode</span><span class="p">:</span><span class="w"> </span><span class="nx">timeSeriesPanel</span><span class="p">.</span><span class="nx">AutoMode</span><span class="p">},</span>
+</span><span id="__span-2-22"><a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="w">            </span><span class="p">}),</span>
+</span><span id="__span-2-23"><a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="w">        </span><span class="p">),</span>
+</span><span id="__span-2-24"><a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="w">        </span><span class="nx">panel</span><span class="p">.</span><span class="nx">AddQuery</span><span class="p">(</span>
+</span><span id="__span-2-25"><a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a><span class="w">            </span><span class="nx">query</span><span class="p">.</span><span class="nx">PromQL</span><span class="p">(</span>
+</span><span id="__span-2-26"><a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a><span class="w">                </span><span class="nx">promql</span><span class="p">.</span><span class="nx">SetLabelMatchersV2</span><span class="p">(</span>
+</span><span id="__span-2-27"><a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a><span class="w">                    </span><span class="nx">promqlbuilder</span><span class="p">.</span><span class="nx">Rate</span><span class="p">(</span>
+</span><span id="__span-2-28"><a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a><span class="w">                        </span><span class="nx">matrix</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span>
+</span><span id="__span-2-29"><a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a><span class="w">                            </span><span class="nx">vector</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span>
+</span><span id="__span-2-30"><a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a><span class="w">                                </span><span class="nx">vector</span><span class="p">.</span><span class="nx">WithMetricName</span><span class="p">(</span><span class="s">&quot;process_cpu_seconds_total&quot;</span><span class="p">),</span>
+</span><span id="__span-2-31"><a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="w">                            </span><span class="p">),</span>
+</span><span id="__span-2-32"><a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a><span class="w">                            </span><span class="nx">matrix</span><span class="p">.</span><span class="nx">WithRangeAsVariable</span><span class="p">(</span><span class="s">&quot;$__rate_interval&quot;</span><span class="p">),</span>
+</span><span id="__span-2-33"><a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a><span class="w">                        </span><span class="p">),</span>
+</span><span id="__span-2-34"><a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a><span class="w">                    </span><span class="p">),</span>
+</span><span id="__span-2-35"><a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a><span class="w">                    </span><span class="nx">labelMatchers</span><span class="p">,</span>
+</span><span id="__span-2-36"><a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a><span class="w">                </span><span class="p">).</span><span class="nx">Pretty</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+</span><span id="__span-2-37"><a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a><span class="w">                </span><span class="nx">dashboards</span><span class="p">.</span><span class="nx">AddQueryDataSource</span><span class="p">(</span><span class="nx">datasourceName</span><span class="p">),</span>
+</span><span id="__span-2-38"><a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a><span class="w">                </span><span class="nx">query</span><span class="p">.</span><span class="nx">SeriesNameFormat</span><span class="p">(</span><span class="s">&quot;{{pod}}&quot;</span><span class="p">),</span>
+</span><span id="__span-2-39"><a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a><span class="w">            </span><span class="p">),</span>
+</span><span id="__span-2-40"><a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a><span class="w">        </span><span class="p">),</span>
+</span><span id="__span-2-41"><a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a><span class="w">    </span><span class="p">)</span>
+</span><span id="__span-2-42"><a id="__codelineno-2-42" name="__codelineno-2-42" href="#__codelineno-2-42"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>Next after you have your first panel, it’s time to add it to a dashboard - here’s how to add to a dashboard named <code>Workload / Overview</code>:</p>
+<div class="language-go highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">// Use the panel in a dashboard</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kd">func</span><span class="w"> </span><span class="nx">withResources</span><span class="p">(</span><span class="nx">datasource</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">clusterLabelMatcher</span><span class="w"> </span><span class="o">*</span><span class="nx">labels</span><span class="p">.</span><span class="nx">Matcher</span><span class="p">)</span><span class="w"> </span><span class="nx">dashboard</span><span class="p">.</span><span class="nx">Option</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nx">labelMatchersToUse</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="p">[]</span><span class="o">*</span><span class="nx">labels</span><span class="p">.</span><span class="nx">Matcher</span><span class="p">{</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">        </span><span class="nx">promql</span><span class="p">.</span><span class="nx">JobVarV2</span><span class="p">,</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="nx">labelMatchersToUse</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nb">append</span><span class="p">(</span><span class="nx">labelMatchersToUse</span><span class="p">,</span><span class="w"> </span><span class="nx">clusterLabelMatcher</span><span class="p">)</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">dashboard</span><span class="p">.</span><span class="nx">AddPanelGroup</span><span class="p">(</span><span class="s">&quot;CPU Usage&quot;</span><span class="p">,</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">        </span><span class="nx">panelgroup</span><span class="p">.</span><span class="nx">PanelsPerLine</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">        </span><span class="nx">panelgroup</span><span class="p">.</span><span class="nx">PanelHeight</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">        </span><span class="nx">panelsGostats</span><span class="p">.</span><span class="nx">CPUUsage</span><span class="p">(</span><span class="nx">datasource</span><span class="p">,</span><span class="w"> </span><span class="nx">labelMatchersToUse</span><span class="o">...</span><span class="p">),</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">    </span><span class="p">)</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="p">}</span>
+</span><span id="__span-3-14"><a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>
+</span><span id="__span-3-15"><a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="c1">// Build the dashboard and add the time series panel withResources</span>
+</span><span id="__span-3-16"><a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="kd">func</span><span class="w"> </span><span class="nx">BuildWorkloadOverview</span><span class="p">(</span><span class="nx">project</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">datasource</span><span class="w"> </span><span class="kt">string</span><span class="p">,</span><span class="w"> </span><span class="nx">clusterLabelName</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="nx">dashboards</span><span class="p">.</span><span class="nx">DashboardResult</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-3-17"><a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="nx">clusterLabelMatcher</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">dashboards</span><span class="p">.</span><span class="nx">GetClusterLabelMatcherV2</span><span class="p">(</span><span class="nx">clusterLabelName</span><span class="p">)</span>
+</span><span id="__span-3-18"><a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nx">dashboards</span><span class="p">.</span><span class="nx">NewDashboardResult</span><span class="p">(</span>
+</span><span id="__span-3-19"><a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">        </span><span class="nx">dashboard</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;workload-overview&quot;</span><span class="p">,</span>
+</span><span id="__span-3-20"><a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="w">            </span><span class="nx">dashboard</span><span class="p">.</span><span class="nx">ProjectName</span><span class="p">(</span><span class="nx">project</span><span class="p">),</span>
+</span><span id="__span-3-21"><a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a><span class="w">            </span><span class="nx">dashboard</span><span class="p">.</span><span class="nx">Name</span><span class="p">(</span><span class="s">&quot;Workload / Overview&quot;</span><span class="p">),</span>
+</span><span id="__span-3-22"><a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="w">            </span><span class="nx">dashboard</span><span class="p">.</span><span class="nx">AddVariable</span><span class="p">(</span><span class="s">&quot;job&quot;</span><span class="p">,</span>
+</span><span id="__span-3-23"><a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="w">                </span><span class="nx">listvariable</span><span class="p">.</span><span class="nx">List</span><span class="p">(</span>
+</span><span id="__span-3-24"><a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="w">                    </span><span class="nx">labelvalues</span><span class="p">.</span><span class="nx">PrometheusLabelValues</span><span class="p">(</span><span class="s">&quot;job&quot;</span><span class="p">,</span>
+</span><span id="__span-3-25"><a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a><span class="w">                        </span><span class="nx">labelvalues</span><span class="p">.</span><span class="nx">Matchers</span><span class="p">(</span><span class="s">&quot;workload_build_info{}&quot;</span><span class="p">),</span>
+</span><span id="__span-3-26"><a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a><span class="w">                        </span><span class="nx">dashboards</span><span class="p">.</span><span class="nx">AddVariableDatasource</span><span class="p">(</span><span class="nx">datasource</span><span class="p">),</span>
+</span><span id="__span-3-27"><a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a><span class="w">                    </span><span class="p">),</span>
+</span><span id="__span-3-28"><a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="w">                    </span><span class="nx">listvariable</span><span class="p">.</span><span class="nx">DisplayName</span><span class="p">(</span><span class="s">&quot;job&quot;</span><span class="p">),</span>
+</span><span id="__span-3-29"><a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="w">                </span><span class="p">),</span>
+</span><span id="__span-3-30"><a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="w">            </span><span class="p">),</span>
+</span><span id="__span-3-31"><a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="w">            </span><span class="nx">withResources</span><span class="p">(</span><span class="nx">datasource</span><span class="p">,</span><span class="w"> </span><span class="nx">clusterLabelMatcher</span><span class="p">),</span>
+</span><span id="__span-3-32"><a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a><span class="w">        </span><span class="p">),</span>
+</span><span id="__span-3-33"><a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a><span class="w">    </span><span class="p">).</span><span class="nx">Component</span><span class="p">(</span><span class="s">&quot;workload&quot;</span><span class="p">)</span>
+</span><span id="__span-3-34"><a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a><span class="p">}</span>
+</span></code></pre></div>
+<p>For more on the SDK please check <a href="https://pkg.go.dev/github.com/perses/perses/go-sdk">perses/go-sdk</a>, and <a href="https://pkg.go.dev/github.com/perses/community-dashboards">community-dashboards</a>.</p>
+<h3 id="beyond-copy-pasting-cleaner-and-smarter-way-to-building-dashboards"><a class="toclink" href="../../2025/06/10/composable-dashboards----lessons-from-building-perses-community-dashboards/#beyond-copy-pasting-cleaner-and-smarter-way-to-building-dashboards">Beyond Copy-Pasting - Cleaner and Smarter way to building Dashboards</a></h3>
+<p>Going back to the idea of copy-pasting raw YAML or JSON, although it might seem quicker, it leads to painful maintenance over time. The Go SDK offers a better path:</p>
+<ul>
+<li><strong>Type safety</strong> - You get compile-time feedback if something is wrong. No more mystery errors buried in JSON blobs.</li>
+<li><strong>Reusability</strong> - Define a panel once and reuse it wherever you want. Avoid duplication and drift.</li>
+<li><strong>Maintainability</strong> -  When a panel definition needs an update, you can do it in one place and apply it across all dashboards.</li>
+<li><strong>CI/CD friendly</strong> - Code is easier to version, review, and test. It fits naturally into modern GitOps workflows.</li>
+</ul>
+<p>Combining the use of panel libraries and the SDK, you get a flexible and scalable way to manage dashboards, while saving time, reducing errors, and staying consistent across your observability stack. This allows a community of dashboards users to have their lives made easier with these features. </p>
+<p>Also considering the most commonly used dashboard across platforms and teams, like <strong>Kubernetes</strong>, <strong>Prometheus</strong> and exporters like <strong>Node Exporter</strong>, <strong>Blackbox Exporter</strong>, also projects like <strong>Thanos</strong> dashboards as it tends to be a power duo within the Prometheus ecosystem, we have from the get go some core dashboards that will help you in the long term in your observability journey.</p>
+<h3 id="next-steps-for-the-community-dashboards"><a class="toclink" href="../../2025/06/10/composable-dashboards----lessons-from-building-perses-community-dashboards/#next-steps-for-the-community-dashboards">Next Steps for the Community Dashboards</a></h3>
+<p>We’re committed to expanding support for more CNCF and other OSS projects while continuing to enhance the existing panel libraries. By adding more features and improving the quality of reusable panels, we enable users to gain deeper insights from their dashboards because the faster you can pinpoint an issue in your telemetry data, the better.</p>
+<p>Also, we aim to ensure proper documentation for all dashboards. Whether you're importing full dashboards or using panel libraries as building blocks, we want to make the process as seamless as possible. That means clear, well-commented code and guidance, so modularity is not only guaranteed but also easy to work with, without needing to dig through the entire codebase.</p>
+<p>Ultimately, this is a community effort, and we invite everyone to help grow this project. So if you have a dashboard you’ve rewritten more than once, or any mixin dashboard you use, but want to ensure it becomes modular, easily used and want to increase adoption of it. Whether it’s opening an issue or submitting a contribution, all help is moving forward so we can all, very soon, stop rebuilding the same dashboards. </p>
+<p>Let’s stop duplicating efforts and start building shared observability standards! </p>
+    
+  </div>
+</article>
       
         <article class="md-post md-post--excerpt">
   <header class="md-post__header">
