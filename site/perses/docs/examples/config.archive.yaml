@@ -1,4 +1,0 @@
-database:
-  file:
-    folder: "./data"
-    extension: "json"
