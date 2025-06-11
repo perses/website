@@ -106,6 +106,7 @@ nav:
           - Plugins: perses/docs/concepts/plugins.md
           - Dashboard-as-Code: perses/docs/concepts/dashboard-as-code.md
           - Datasource & Variable scopes: perses/docs/concepts/datasource-and-variable-scopes.md
+          - Datasources: perses/docs/concepts/datasources.md
           - Authentication: perses/docs/concepts/authentication.md
           - Authorization: perses/docs/concepts/authorization.md
           - Proxy: perses/docs/concepts/proxy.md
