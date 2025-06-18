@@ -20,6 +20,8 @@ The Mixins Dashboards helped bring about a sense of relief, as users now could u
 
 The end result is, that despite the promise of reusable dashboards, the reality is there’s still not a widely used solution for automatic dashboards creation.
 
+<!-- more -->
+
 ## Perses KubeCon EU Recap - Maybe there’s a better way to build Dashboards 
 
 During **KubeCon EU 2025** in London, two of Perses’ core maintainers, Nicolas Takashi and Antoine Thébaud, shared how Perses is changing the way engineers develop and manage dashboards as code. Their talk covered the power of the Open Dashboard Model, how to use strongly typed code with the Perses Go SDK, and why this approach fits naturally into CI/CD pipelines using modern GitOps practices. If you didn’t get a chance to watch it live, you can watch the full session [here](http://youtube.com/watch?v=7h70Olo5Uzk).
