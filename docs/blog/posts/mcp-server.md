@@ -28,7 +28,7 @@ As you can see, the possibilities are endless. The Perses MCP Server allows you 
 This diagram visually represents how the Perses MCP Server acts as an intermediary between your AI Agent and the Perses Application.
 
 
-### What is MCP? The Model Context Protocol Explained
+### What is MCP - The Model Context Protocol Explained
 
 You might be wondering what makes this all possible. The magic behind the scenes is the Model Context Protocol (MCP), an open standard pioneered by Anthropic that is quickly gaining industry-wide adoption. 
 
