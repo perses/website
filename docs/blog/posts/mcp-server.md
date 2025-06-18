@@ -20,7 +20,7 @@ Imagine being able to prompt your favorite AI Agent with questions like:
     - Suggest me some improvements to panels and PromQL queries in this dashboard
 
 As you can see, the possibilities are endless. The Perses MCP Server allows you to interact with Perses in ways that were previously not possible.
-
+<!-- more -->
 <picture>
   <img alt="Fallback image description" src="https://github.com/user-attachments/assets/416409df-9045-41f3-b10b-91df3020af1f">
 </picture>
