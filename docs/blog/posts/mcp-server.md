@@ -7,7 +7,7 @@ categories:
 
 # Introducing the Perses MCP Server
 
-We are excited to announce that the Perses MCP Server is now available in public beta. This new tool empowers you to interact with your Perses instances using natural language, opening up a world of possibilities for monitoring and visualization.
+We're thrilled to introduce the **Perses MCP Server**, now available in public beta. This new tool empowers you to interact with your Perses instances using natural language, opening up a world of possibilities for monitoring and visualization.
 
 With the Perses MCP Server, users can use AI Agents to understand, query and interact with Perses APIs in a standardized and secure manner. 
 
