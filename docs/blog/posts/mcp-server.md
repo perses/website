@@ -41,8 +41,8 @@ Major players like Google, Microsoft, and OpenAI have already committed to suppo
 
 Using the Perses MCP Server is simple and straightforward. 
 
-1. Follow this [User Guide](https://github.com/perses/mcp-server/blob/main/README.md#usage) to install and configure the MCP Server
-2. **Ask a Question**: Pose a natural language question to your favorite AI agent, such as, "When was 'Dashboard A' in 'Project B' last updated?"
+1. Follow this [User Guide](https://github.com/perses/mcp-server/blob/main/README.md#usage) to install and configure the MCP Server;
+2. **Ask a Question**: Pose a natural language question to your favorite AI agent, such as, "When was 'Dashboard A' in 'Project B' last updated?";
 3. **Get an Answer**: The MCP Server instantly gets to work, querying the Perses API and delivering the answer back to your AI agent in seconds.
 
 Check out this short demo to see it in action:
@@ -56,8 +56,8 @@ Check out this short demo to see it in action:
 
 Ready to dive in? Here are the resources you'll need:
 
-- **Perses MCP Server GitHub Repository:** Explore the code, read the documentation, and find the installation instructions [here]( https://github.com/perses/mcp-server)
-- **Perses Official Website:** Discover more about the Perses, its features, blog posts and documentation [here](https://perses.dev)
+- **Perses MCP Server GitHub Repository:** Explore the code, read the documentation, and find the installation instructions [here]( https://github.com/perses/mcp-server);
+- **Perses Official Website:** Discover more about the Perses, its features, blog posts and documentation [here](https://perses.dev).
 
 
 ### What's next?
