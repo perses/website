@@ -92,6 +92,7 @@ Perses is a [Cloud Native Computing Foundation](https://cncf.io) sandbox project
 - [![Amadeus logo](assets/images/logos/Amadeus_dark_theme.png#only-dark)](https://amadeus.com) [![Amadeus logo](assets/images/logos/Amadeus_light_theme.png#only-light)](https://amadeus.com)
 - [![Chronosphere logo](assets/images/logos/Chronosphere_dark_theme.svg#only-dark)](https://chronosphere.io/) [![Chronosphere logo](assets/images/logos/Chronosphere_light_theme.svg#only-light)](https://chronosphere.io/)
 - [![Dash0 logo](assets/images/logos/Dash0.svg)](https://www.dash0.com/)
+- [![Enlighten logo](assets/images/logos/Enlighten_dark_theme.png#only-dark)](https://enlighten.com) [![Enlighten logo](assets/images/logos/Enlighten_light_theme.png#only-light)](https://enlighten.com)
 - [![GIGAPIPE logo](assets/images/logos/Gigapipe.svg)](https://gigapipe.com)
 - [![Greptime logo](assets/images/logos/Greptime_dark_theme.svg#only-dark)](https://greptime.com/) [![Greptime logo](assets/images/logos/Greptime_light_theme.svg#only-light)](https://greptime.com/)
 - [![Pydantic logo](assets/images/logos/Pydantic_dark_theme.png#only-dark)](https://pydantic.dev/) [![Pydantic logo](assets/images/logos/Pydantic_light_theme.png#only-light)](https://pydantic.dev/)
