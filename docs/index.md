@@ -70,91 +70,44 @@ title: Perses
 
 <div class="features-showcase-wrapper" markdown>
 
-## Features Showcase
+{{ feature(
+    title="Observability Display", 
+    description="Perses is first and foremost a dashboard tool that you can use to display a variety of observability data. Today supports Prometheus metrics & Tempo traces.", 
+    image="assets/images/feature1.png"
+) }}
 
-<div class="feature-section" markdown>
-<div class="feature-content" markdown>
-<div class="feature-title" markdown>
-### Observability Display
-</div>
-<div class="feature-text" markdown>
-Perses is first and foremost a dashboard tool that you can use to display a variety of observability data. Today supports Prometheus metrics & Tempo traces.
-</div>
-</div>
-<div class="feature-image" markdown>
-![Observability](assets/images/feature1.png)
-</div>
-</div>
+{{ feature(
+    title="Embeddable Components", 
+    description="You can use Perses as-is or embed parts of it in your own UI, could it be a single panel or a whole dashboard view.", 
+    image="assets/images/feature2.png", 
+    reverse=True
+) }}
 
-<div class="feature-section reverse" markdown>
-<div class="feature-content" markdown>
-<div class="feature-title" markdown>
-### Embeddable Components
-</div>
-<div class="feature-text" markdown>
-You can use Perses as-is or embed parts of it in your own UI, could it be a single panel or a whole dashboard view.
-</div>
-</div>
-<div class="feature-image" markdown>
-![Embeddable](assets/images/feature2.png)
-</div>
-</div>
+{{ feature(
+    title="GitOps-friendly", 
+    description="Perses offers a complete static validation of the dashboard format. It also comes with a CLI, `percli`, that can be used to perform actions in CI/CD pipelines.", 
+    image="assets/images/feature3.png"
+) }}
 
-<div class="feature-section" markdown>
-<div class="feature-content" markdown>
-<div class="feature-title" markdown>
-### GitOps-friendly
-</div>
-<div class="feature-text" markdown>
-Perses offers a complete static validation of the dashboard format. It also comes with a CLI, `percli`, that can be used to perform actions in CI/CD pipelines.
-</div>
-</div>
-<div class="feature-image" markdown>
-![GitOps](assets/images/feature3.png)
-</div>
-</div>
+{{ feature(
+    title="Scale-friendly", 
+    description="Perses dashboards can be written as-code using the provided SDKs. This enables to define any kind of components in libraries, from simple color codes to complex templates, for reusage across as much dashboards as you want.", 
+    image="assets/images/feature4.png", 
+    reverse=True
+) }}
 
-<div class="feature-section reverse" markdown>
-<div class="feature-content" markdown>
-<div class="feature-title" markdown>
-### Scale-friendly
-</div>
-<div class="feature-text" markdown>
-Perses dashboards can be written as-code using the provided SDKs. This enables to define any kind of components in libraries, from simple color codes to complex templates, for reusage across as much dashboards as you want.
-</div>
-</div>
-<div class="feature-image" markdown>
-![Scale](assets/images/feature4.png)
-</div>
-</div>
+{{ feature(
+    title="Kubernetes-native", 
+    description="Use the Perses operator to manage your Perses deployments & dashboards as CRDs. Leverage on the datasource discovery to retrieve data from your datasource pods/services.", 
+    image="assets/images/feature5.png"
+) }}
 
-<div class="feature-section" markdown>
-<div class="feature-content" markdown>
-<div class="feature-title" markdown>
-### Kubernetes-native
-</div>
-<div class="feature-text" markdown>
-Use the Perses operator to manage your Perses deployments & dashboards as CRDs. Leverage on the datasource discovery to retrieve data from your datasource pods/services.
-</div>
-</div>
-<div class="feature-image" markdown>
-![Kubernetes](assets/images/feature5.png)
-</div>
-</div>
-
-<div class="feature-section reverse" markdown>
-<div class="feature-content" markdown>
-<div class="feature-title" markdown>
-### Extensible
-</div>
-<div class="feature-text" markdown>
-Perses, with its plugin-based architecture, offers effortless extension and reuse of plugins across different projects.
-</div>
-</div>
-<div class="feature-image" markdown>
-![Extensible](assets/images/feature6.png)
-</div>
-</div>
+{{ feature(
+    title="Extensible", 
+    description="Perses, with its plugin-based architecture, offers effortless extension and reuse of plugins across different projects.", 
+    image="assets/images/feature6.png", 
+    reverse=True
+) }}
 
 </div>
 

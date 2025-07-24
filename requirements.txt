@@ -1,3 +1,4 @@
 mkdocs-multirepo-plugin
 mkdocs-material == 9.5.34
+mkdocs-macros-plugin
 mike == 2.1.3

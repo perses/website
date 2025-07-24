@@ -80,6 +80,7 @@ extra:
 plugins:
   - search
   - blog
+  - macros
   - multirepo:
       # (optional) tells multirepo to cleanup the temporary directory after site is built.
       cleanup: true
