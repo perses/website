@@ -34,3 +34,98 @@
         grid-template-columns: 1fr; /* Single column on mobile */
     }
 }
+
+/* Feature showcase alternating layout */
+.features-showcase-wrapper {
+    position: relative;
+    margin: 2rem 0;
+}
+
+.features-showcase-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    right: 50%;
+    bottom: 0;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    background-color: rgba(0, 0, 0, 0.05);
+    z-index: -1;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .features-showcase-wrapper::before {
+        background-color: rgba(255, 255, 255, 0.05);
+    }
+}
+
+/* Force light mode styles for specific themes */
+[data-md-color-scheme="default"] .features-showcase-wrapper::before {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Force dark mode styles for specific themes */
+[data-md-color-scheme="slate"] .features-showcase-wrapper::before {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.feature-section {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin: 0;
+    padding: 2rem;
+}
+
+.feature-section.reverse {
+    flex-direction: row-reverse;
+}
+
+.feature-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.feature-title {
+    margin-bottom: 1rem;
+}
+
+.feature-text {
+    margin-top: 0;
+}
+
+.feature-image {
+    flex: 1;
+    text-align: center;
+}
+
+.feature-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+@media (max-width: 768px) {
+    .feature-section,
+    .feature-section.reverse {
+        flex-direction: column;
+    }
+    
+    .feature-content {
+        display: contents; /* This makes the children behave as direct children of feature-section */
+    }
+    
+    .feature-title {
+        order: 1; /* Title first */
+    }
+    
+    .feature-image {
+        order: 2; /* Image second */
+    }
+    
+    .feature-text {
+        order: 3; /* Text third */
+    }
+}
