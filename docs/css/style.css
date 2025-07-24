@@ -35,7 +35,6 @@
     }
 }
 
-/* Feature showcase alternating layout */
 .features-showcase-wrapper {
     position: relative;
     margin: 2rem 0;
@@ -50,15 +49,7 @@
     bottom: 0;
     margin-left: -50vw;
     margin-right: -50vw;
-    background-color: rgba(0, 0, 0, 0.05);
     z-index: -1;
-}
-
-/* Dark mode support */
-@media (prefers-color-scheme: dark) {
-    .features-showcase-wrapper::before {
-        background-color: rgba(255, 255, 255, 0.05);
-    }
 }
 
 /* Force light mode styles for specific themes */
@@ -75,8 +66,7 @@
     display: flex;
     align-items: center;
     gap: 2rem;
-    margin: 0;
-    padding: 2rem;
+    padding-bottom: 1rem;
 }
 
 .feature-section.reverse {
@@ -107,6 +97,7 @@
     height: auto;
 }
 
+/* On mobile, display title then image then description */
 @media (max-width: 768px) {
     .feature-section,
     .feature-section.reverse {
@@ -118,14 +109,14 @@
     }
     
     .feature-title {
-        order: 1; /* Title first */
+        order: 1;
     }
     
     .feature-image {
-        order: 2; /* Image second */
+        order: 2;
     }
     
     .feature-text {
-        order: 3; /* Text third */
+        order: 3;
     }
 }
