@@ -89,12 +89,14 @@ title: Perses
     title="Embeddable components",
     description="Perses provides various npm packages that allow developers to embed panels and dashboards into their own UIs, giving the flexibility to integrate Perses components without running the full application.",
     image="assets/images/perses_overview.gif",
+    learn_more="/perses/docs/embedding-panels/"
 ) }}
 
 {{ feature(
     title="Plugins",
     description="Perses supports multiple kinds of plugins, enabling users to extend the tool’s native capabilities to suit specific needs.",
     image="assets/images/perses_overview.gif",
+    learn_more="/perses/docs/concepts/plugins/",
     reverse=True
 ) }}
 
@@ -104,12 +106,14 @@ title: Perses
     title="percli",
     description="Perses comes with a native CLI, `percli`, that can be used to perform many kind of actions in CI/CD pipelines.",
     image="assets/images/perses_overview.gif",
+    learn_more="/perses/docs/cli/",
 ) }}
 
 {{ feature(
     title="Dashboard-as-Code",
     description="Perses dashboards can be written as code using the provided SDKs. This enables you to define reusable components in libraries or leverage existing community libraries, from simple color codes to complex templates, for reuse across as many dashboards as you want.",
     image="assets/images/perses_overview.gif",
+    learn_more="/perses/docs/concepts/dashboard-as-code/",
     reverse=True
 ) }}
 
@@ -117,12 +121,14 @@ title: Perses
     title="Static validation",
     description="Perses offers a complete static validation of the dashboard format, that you can also extend with custom lint rules.",
     image="assets/images/perses_overview.gif",
+    learn_more="/perses/docs/cli/#linter",
 ) }}
 
 {{ feature(
     title="Perses operator",
     description="Deploy and manage Perses instances and dashboards declaratively using Kubernetes Custom Resources, enabling GitOps workflows and seamless integration with your existing K8s infrastructure.",
     image="assets/images/perses_overview.gif",
+    learn_more="https://github.com/perses/perses-operator/blob/main/docs/api.md",
     reverse=True
 ) }}
 
@@ -130,6 +136,7 @@ title: Perses
     title="Datasource discovery",
     description="Automatically discover and register datasources through HTTP services or Kubernetes API, eliminating manual configuration effort in dynamic environments.",
     image="assets/images/perses_overview.gif",
+    learn_more="/perses/docs/configuration/datasource-discovery/",
 ) }}
 
 ## And more
@@ -138,6 +145,7 @@ title: Perses
     title="Secure your access",
     description="Perses provides comprehensive authentication and authorization capabilities. Choose from native user management or integrate with external OIDC/OAuth identity providers. Control access with Kubernetes-inspired RBAC system featuring roles, role bindings, and fine-grained permissions across projects and global resources.",
     image="assets/images/perses_overview.gif",
+    learn_more="/perses/docs/concepts/authentication/",
     reverse=True
 ) }}
 
@@ -145,12 +153,14 @@ title: Perses
     title="Grafana migration",
     description="Seamlessly migrate your existing Grafana dashboards to Perses, using either the web UI to import JSON files directly or leveraging `percli` for batch migrations. The migration process translates Grafana definitions to their Perses equivalents on a best-effort basis.",
     image="assets/images/perses_overview.gif",
+    learn_more="/perses/docs/migration/"
 ) }}
 
 {{ feature(
     title="Resources scopes",
     description="Organize datasources and variables across three hierarchical scopes: global (available everywhere), project (shared within a project), and dashboard (specific to one dashboard). Lower scopes automatically override higher ones, enabling flexible resource reuse while allowing targeted customization for specific use cases.",
     image="assets/images/perses_overview.gif",
+    learn_more="/perses/docs/concepts/datasource-and-variable-scopes/",
     reverse=True
 ) }}
 
