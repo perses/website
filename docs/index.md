@@ -74,8 +74,6 @@ title: Perses
     image="assets/images/perses_overview.gif",
 ) }}
 
-...more data sources to come!
-
 ## Open ecosystem
 
 {{ feature(
@@ -88,7 +86,7 @@ title: Perses
 {{ feature(
     title="Embeddable components",
     description="Perses provides various npm packages that allow developers to embed panels and dashboards into their own UIs, giving the flexibility to integrate Perses components without running the full application.",
-    image="assets/images/perses_overview.gif",
+    image="https://github.com/user-attachments/assets/406baddf-0ddd-4d45-bced-01ee71772908",
     learn_more="/perses/docs/embedding-panels/"
 ) }}
 
@@ -127,7 +125,7 @@ title: Perses
 {{ feature(
     title="Perses operator",
     description="Deploy and manage Perses instances and dashboards declaratively using Kubernetes Custom Resources, enabling GitOps workflows and seamless integration with your existing K8s infrastructure.",
-    image="assets/images/perses_overview.gif",
+    image="https://github.com/user-attachments/assets/e4d20574-db3c-498e-8d23-31384731172c",
     learn_more="https://github.com/perses/perses-operator/blob/main/docs/api.md",
     reverse=True
 ) }}
@@ -159,33 +157,10 @@ title: Perses
 {{ feature(
     title="Resources scopes",
     description="Organize datasources and variables across three hierarchical scopes: global (available everywhere), project (shared within a project), and dashboard (specific to one dashboard). Lower scopes automatically override higher ones, enabling flexible resource reuse while allowing targeted customization for specific use cases.",
-    image="assets/images/perses_overview.gif",
+    image="https://github.com/user-attachments/assets/8765c092-c484-4417-a301-ed44fd5b9822",
     learn_more="/perses/docs/concepts/datasource-and-variable-scopes/",
     reverse=True
 ) }}
-
-<!--
-
-An Observability frontend
-    Metrics
-    Traces
-    Profiling
-    (Explorer)
-An open platform
-    Open spec for dashboards
-    Extend the spec by providing your own plugin
-    Embeddable Components
-GitOps-friendly
-    Percli
-    Dashboard as Code
-    Operator / CRD
-    Datasource Discovery
-...And more features!
-    Secure your access
-    Grafana migration
-    Resources scopes
-
--->
 
 </div>
 
