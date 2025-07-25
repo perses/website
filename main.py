@@ -26,13 +26,13 @@ def define_env(env):
         return f'''<div class="feature-section{reverse_class}" markdown>
 <div class="feature-content" markdown>
 <div class="feature-title" markdown>
-### {title}
+## {title}
 </div>
 <div class="feature-text" markdown>
 {description}
 </div>
 </div>
-<div class="feature-image" markdown>
-![{title}]({image})
+<div class="feature-image">
+<img alt="{title}" src="{image}"/>
 </div>
 </div>'''
