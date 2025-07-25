@@ -116,6 +116,10 @@
 
 /* On mobile, display title then image then description */
 @media (max-width: 768px) {
+    .features-showcase-wrapper > h2 {
+        margin-bottom: 0;
+    }
+
     .feature-section,
     .feature-section.reverse {
         gap: 0;
