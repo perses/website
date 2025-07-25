@@ -42,7 +42,14 @@
 
 .features-showcase-wrapper {
     position: relative;
-    margin: 2rem 0;
+    padding-top: 2rem;
+}
+
+.features-showcase-wrapper > h2 {
+    margin-top: 0;
+    text-align: center;
+    font-size: 1.75rem;
+    color: gray;
 }
 
 .features-showcase-wrapper::before {
@@ -69,9 +76,6 @@
 
 .feature-section {
     display: flex;
-    align-items: center;
-    gap: 2rem;
-    padding-bottom: 1rem;
 }
 
 .feature-section.reverse {
@@ -84,8 +88,8 @@
     flex-direction: column;
 }
 
-.feature-title {
-    margin-bottom: 1rem;
+.feature-title > h2 {
+    font-weight: bold;
 }
 
 .feature-text {
@@ -102,10 +106,19 @@
     height: auto;
 }
 
+@media (min-width: 768px) {
+    .feature-section,
+    .feature-section.reverse {
+        gap: 2rem;
+        padding-bottom: 2rem;
+    }
+}
+
 /* On mobile, display title then image then description */
 @media (max-width: 768px) {
     .feature-section,
     .feature-section.reverse {
+        gap: 0;
         flex-direction: column;
     }
     
