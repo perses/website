@@ -24,50 +24,147 @@ title: Perses
 <div class="grid cards" markdown>
 
 -   ## Observability display
-
     ---
-
-    Perses is first and foremost a dashboard tool that you can use to display a variety of observability data. Today
-    supports Prometheus metrics & Tempo traces.
+    Perses is first and foremost a dashboard tool that you can use to display a variety of observability data. Today supports Prometheus metrics, Tempo traces & Pyroscope profiles.
 
 -   ## Embeddable components
-
     ---
-
     You can use Perses as-is or embed parts of it in your own UI, could it be a single panel or a whole dashboard view.
 
--   ## GitOps-friendly
-
+-   ## DevOps-ready
     ---
-
-    Perses offers a complete static validation of the dashboard format. It also comes with a CLI, `percli`, that can be
-    used to perform actions in CI/CD pipelines.
+    Perses offers a complete static validation of the dashboard format. It also comes with a CLI, `percli`, that can be used to perform actions in CI/CD pipelines.
 
 -   ## Scale-friendly
-
     ---
-
-    Perses dashboards can be written as-code using the provided SDKs. This enables to define any kind of components in
-    libraries, from simple color codes to complex templates, for reusage across as much dashboards as you want.
+    Perses dashboards can be written as code using the provided SDKs, enabling you to manage large numbers of dashboards at scale.
 
 -   ## Kubernetes-native
-
     ---
-
-    Use the Perses operator to manage your Perses deployments & dashboards as CRDs. Leverage on the datasource discovery
-    to retrieve data from your datasource pods/services.
+    Use the Perses operator to manage your Perses deployments & dashboards as CRDs. Leverage on the datasource discovery to retrieve data from your datasource pods/services.
 
 -   ## Extensible
-
     ---
-
-    Perses, with its plugin-based architecture, offers effortless extension and reuse of plugins across different
-    projects.
+    Perses, with its plugin-based architecture, offers effortless extension and reuse of plugins across different projects.
 
 </div>
 
 ...and more to discover!
 
+<div class="features-showcase-wrapper" markdown>
+
+## Visualize your data
+
+{{ feature(
+    title="Monitoring with Prometheus",
+    description="Perses provides comprehensive Prometheus support with specialized panels for metrics visualization. It also comes with a built-in metrics explorer and a PromQL debugger that mirror Prometheus's native UI experience.",
+    image="assets/images/perses_overview.gif"
+) }}
+
+{{ feature(
+    title="Tracing with Tempo",
+    description="Deep dive into your Tempo traces and display them in several ways: scatter plots, Gantt charts, or tables.",
+    image="assets/images/perses_overview.gif",
+    reverse=True
+) }}
+
+{{ feature(
+    title="Profiling with Pyroscope",
+    description="Visualize your Pyroscope profiling data through interactive flame graphs.",
+    image="assets/images/perses_overview.gif",
+) }}
+
+## Open ecosystem
+
+{{ feature(
+    title="Open specification for dashboards",
+    description="Perses is also an initiative to define a standardized dashboard specification, fostering interoperability across observability tools.",
+    image="assets/images/perses_overview.gif",
+    reverse=True
+) }}
+
+{{ feature(
+    title="Embeddable components",
+    description="Perses provides various npm packages that allow developers to embed panels and dashboards into their own UIs, giving the flexibility to integrate Perses components without running the full application.",
+    image="https://github.com/user-attachments/assets/406baddf-0ddd-4d45-bced-01ee71772908",
+    learn_more="/perses/docs/embedding-panels/"
+) }}
+
+{{ feature(
+    title="Plugins",
+    description="Perses supports multiple kinds of plugins, enabling users to extend the tool’s native capabilities to suit specific needs.",
+    image="assets/images/perses_overview.gif",
+    learn_more="/perses/docs/concepts/plugins/",
+    reverse=True
+) }}
+
+## DevOps-ready
+
+{{ feature(
+    title="percli",
+    description="Perses comes with a native CLI, `percli`, that can be used to perform many kind of actions in CI/CD pipelines.",
+    image="assets/images/perses_overview.gif",
+    learn_more="/perses/docs/cli/",
+) }}
+
+{{ feature(
+    title="Dashboard-as-Code",
+    description="Perses dashboards can be written as code using the provided SDKs. This enables you to define reusable components in libraries or leverage existing community libraries, from simple color codes to complex templates, for reuse across as many dashboards as you want.",
+    image="assets/images/perses_overview.gif",
+    learn_more="/perses/docs/concepts/dashboard-as-code/",
+    reverse=True
+) }}
+
+{{ feature(
+    title="Static validation",
+    description="Perses offers a complete static validation of the dashboard format, that you can also extend with custom lint rules.",
+    image="assets/images/perses_overview.gif",
+    learn_more="/perses/docs/cli/#linter",
+) }}
+
+{{ feature(
+    title="Perses operator",
+    description="Deploy and manage Perses instances and dashboards declaratively using Kubernetes Custom Resources, enabling GitOps workflows and seamless integration with your existing K8s infrastructure.",
+    image="https://github.com/user-attachments/assets/e4d20574-db3c-498e-8d23-31384731172c",
+    learn_more="https://github.com/perses/perses-operator/blob/main/docs/api.md",
+    reverse=True
+) }}
+
+{{ feature(
+    title="Datasource discovery",
+    description="Automatically discover and register datasources through HTTP services or Kubernetes API, eliminating manual configuration effort in dynamic environments.",
+    image="assets/images/perses_overview.gif",
+    learn_more="/perses/docs/configuration/datasource-discovery/",
+) }}
+
+## And more
+
+{{ feature(
+    title="Secure your access",
+    description="Perses provides comprehensive authentication and authorization capabilities. Choose from native user management or integrate with external OIDC/OAuth identity providers. Control access with Kubernetes-inspired RBAC system featuring roles, role bindings, and fine-grained permissions across projects and global resources.",
+    image="assets/images/perses_overview.gif",
+    learn_more="/perses/docs/concepts/authentication/",
+    reverse=True
+) }}
+
+{{ feature(
+    title="Grafana migration",
+    description="Seamlessly migrate your existing Grafana dashboards to Perses, using either the web UI to import JSON files directly or leveraging `percli` for batch migrations. The migration process translates Grafana definitions to their Perses equivalents on a best-effort basis.",
+    image="assets/images/perses_overview.gif",
+    learn_more="/perses/docs/migration/"
+) }}
+
+{{ feature(
+    title="Resources scopes",
+    description="Organize datasources and variables across three hierarchical scopes: global (available everywhere), project (shared within a project), and dashboard (specific to one dashboard). Lower scopes automatically override higher ones, enabling flexible resource reuse while allowing targeted customization for specific use cases.",
+    image="https://github.com/user-attachments/assets/8765c092-c484-4417-a301-ed44fd5b9822",
+    learn_more="/perses/docs/concepts/datasource-and-variable-scopes/",
+    reverse=True
+) }}
+
+</div>
+
+<!-- Add more features as needed, alternating image and text order for each block -->
 <div class="centered" markdown>
 
 ## Open Source
