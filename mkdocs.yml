@@ -80,7 +80,9 @@ extra:
 plugins:
   - search
   - blog
-  - macros
+  - macros:
+      render_by_default: false
+      force_render_paths: index.md
   - multirepo:
       # (optional) tells multirepo to cleanup the temporary directory after site is built.
       cleanup: true
