@@ -8,16 +8,16 @@ def define_env(env):
     """
     
     @env.macro
-    def feature(title, description, image, learn_more=None, reverse=False):
+    def feature(title, description, media, learn_more=None, reverse=False):
         """
-        Create a feature section with title, description, and image
+        Create a feature section with title, description, and media (image/video)
         
         Args:
             title: The feature title (e.g., "Observability Display")
             description: The feature description
-            image: Path to the image (e.g., "assets/images/feature1.png")
+            media: Path to the media file (e.g., "assets/images/feature1.png", "assets/videos/demo.mp4"..)
             learn_more: Optional URL for "Learn more" link
-            reverse: Boolean, if True creates reverse layout (text-image instead of image-text)
+            reverse: Boolean, if True creates reverse layout (text-media instead of media-text)
         
         Returns:
             HTML string for the feature section
@@ -27,6 +27,12 @@ def define_env(env):
         learn_more_link = ""
         if learn_more:
             learn_more_link = f'[→ Learn more]({learn_more})'
+        
+        # Check if the media is a video file
+        if media.lower().endswith(('.mp4', '.webm', '.mov')):
+            media_element = f'<video autoplay muted loop playsinline onclick="this.paused ? this.play() : this.pause()"><source src="{media}" type="video/mp4"></video>'
+        else:
+            media_element = f'<img alt="{title}" src="{media}"/>'
         
         return f'''<div class="feature-section{reverse_class}" markdown>
 <div class="feature-content" markdown>
@@ -40,6 +46,6 @@ def define_env(env):
 </div>
 </div>
 <div class="feature-image">
-<img alt="{title}" src="{image}"/>
+{media_element}
 </div>
 </div>'''
