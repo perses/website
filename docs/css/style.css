@@ -76,10 +76,12 @@
 
 .feature-section {
     display: flex;
+    align-items: center;
 }
 
 .feature-section.reverse {
     flex-direction: row-reverse;
+    /* align-items: center; */
 }
 
 .feature-content {
@@ -90,6 +92,7 @@
 
 .feature-title > h2 {
     font-weight: bold;
+    margin: 0;
 }
 
 .feature-text {
@@ -132,6 +135,11 @@
     
     .feature-title {
         order: 1;
+    }
+    
+    .feature-title > h2 {
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
     }
     
     .feature-image {
