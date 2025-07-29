@@ -102,7 +102,7 @@ title: Perses
 
 {{ feature(
     title="percli",
-    description="Perses comes with a native CLI, `percli`, that can be used to perform many kind of actions in CI/CD pipelines.",
+    description="Perses comes with a native CLI, `percli`, which can be used to perform many kinds of actions in CI/CD pipelines.",
     media="assets/images/home/percli.png",
     learn_more="perses/docs/cli.md",
 ) }}
@@ -117,7 +117,7 @@ title: Perses
 
 {{ feature(
     title="Static validation",
-    description="Perses offers a complete static validation of the dashboard format, that you can also extend with custom lint rules.",
+    description="Perses offers complete static validation of the dashboard format, which you can also extend with custom lint rules.",
     media="assets/images/home/static_validation.png",
     learn_more="perses/docs/cli.md#linter",
 ) }}
