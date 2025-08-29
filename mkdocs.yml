@@ -103,14 +103,15 @@ nav:
   - Docs:
       - Overview: perses/docs/overview.md
       - Concepts:
-          - Plugins: perses/docs/concepts/plugins.md
+          - Plugin: perses/docs/concepts/plugin.md
           - Dashboard-as-Code: perses/docs/concepts/dashboard-as-code.md
+          - Datasource: perses/docs/concepts/datasource.md
+          - Variable: perses/docs/concepts/variable.md
           - Datasource & Variable scopes: perses/docs/concepts/datasource-and-variable-scopes.md
-          - Datasources: perses/docs/concepts/datasources.md
           - Authentication: perses/docs/concepts/authentication.md
           - Authorization: perses/docs/concepts/authorization.md
           - Proxy: perses/docs/concepts/proxy.md
-          - Ephemeral Dashboards: perses/docs/concepts/ephemeral-dashboards.md
+          - Ephemeral Dashboard: perses/docs/concepts/ephemeral-dashboard.md
       - User Docs:
           - Installation:
               - Installing Perses from Source: perses/docs/installation/from-source.md
