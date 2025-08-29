@@ -1,12 +1,12 @@
 {
   "kind": "GlobalDatasource",
   "metadata": {
-    "name": "PrometheusDemo"
+    "name": "PrometheusPerses"
   },
   "spec": {
     "display": {
-      "name": "Prometheus Demo instance",
-      "description": "The official Prometheus demo instance maintained by Prometheus org"
+      "name": "Prometheus Perses",
+      "description": "A Prometheus demo instance hosted by Perses org"
     },
     "default": true,
     "plugin": {
@@ -15,7 +15,7 @@
         "proxy": {
           "kind": "HTTPProxy",
           "spec": {
-            "url": "https://prometheus.demo.prometheus.io"
+            "url": "http://prometheus:9090"
           }
         }
       }
