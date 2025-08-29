@@ -2,6 +2,11 @@
     text-align: center
 }
 
+/* Force permalink anchors to stay inline with headings */
+.headerlink {
+    display: inline !important;
+}
+
 .grid.cards a {
     display: flex;
     justify-content: center;
@@ -32,5 +37,116 @@
 @media (max-width: 480px) {
     .grid.cards.image-grid {
         grid-template-columns: 1fr; /* Single column on mobile */
+    }
+}
+
+.features-showcase-wrapper {
+    position: relative;
+    padding-top: 2rem;
+}
+
+.features-showcase-wrapper > h2 {
+    margin-top: 0;
+    text-align: center;
+    font-size: 1.75rem;
+    color: gray;
+}
+
+.features-showcase-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    right: 50%;
+    bottom: 0;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    z-index: -1;
+}
+
+/* Force light mode styles for specific themes */
+[data-md-color-scheme="default"] .features-showcase-wrapper::before {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* Force dark mode styles for specific themes */
+[data-md-color-scheme="slate"] .features-showcase-wrapper::before {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.feature-section {
+    display: flex;
+    align-items: center;
+}
+
+.feature-section.reverse {
+    flex-direction: row-reverse;
+    /* align-items: center; */
+}
+
+.feature-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.feature-title > h2 {
+    font-weight: bold;
+    margin: 0;
+}
+
+.feature-text {
+    margin-top: 0;
+}
+
+.feature-image {
+    flex: 1;
+    text-align: center;
+}
+
+.feature-image img {
+    max-width: 100%;
+    height: auto;
+}
+
+@media (min-width: 768px) {
+    .feature-section,
+    .feature-section.reverse {
+        gap: 2rem;
+        padding-bottom: 2rem;
+    }
+}
+
+/* On mobile, display title then image then description */
+@media (max-width: 768px) {
+    .features-showcase-wrapper > h2 {
+        margin-bottom: 0;
+    }
+
+    .feature-section,
+    .feature-section.reverse {
+        gap: 0;
+        flex-direction: column;
+    }
+    
+    .feature-content {
+        display: contents; /* This makes the children behave as direct children of feature-section */
+    }
+    
+    .feature-title {
+        order: 1;
+    }
+    
+    .feature-title > h2 {
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .feature-image {
+        order: 2;
+    }
+    
+    .feature-text {
+        order: 3;
     }
 }
