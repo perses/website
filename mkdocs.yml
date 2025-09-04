@@ -166,6 +166,8 @@ nav:
                           - PromQL Variable: plugins/docs/prometheus/go-sdk/variable/promql.md
                       - Static List Variable: plugins/docs/staticlistvariable/go-sdk.md
           - Perses CLI (percli): perses/docs/cli.md
+          - Plugins:
+              - Prometheus: plugins/docs/prometheus/README.md
           - Migrate from Grafana: perses/docs/migration.md
           - Troubleshooting:
               - TLS and HTTP Datasource: perses/docs/troubleshooting-tls-plain-http-datasource.md
