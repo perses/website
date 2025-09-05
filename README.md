@@ -54,6 +54,9 @@ To build the website, run:
 mkdocs build
 ```
 
+⚠️ as a prerequisite, you may have to install the `macros` plugin to make the build work:
+`pip install mkdocs-macros-plugin`
+
 Then you can run:
 
 ```bash
