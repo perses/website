@@ -88,7 +88,7 @@ title: Perses
     title="Plugins",
     description="Perses supports multiple kinds of plugins, enabling users to extend the tool’s native capabilities to suit specific needs.",
     media="assets/images/home/plugins.png",
-    learn_more="perses/docs/concepts/plugins.md",
+    learn_more="perses/docs/concepts/plugin.md",
     reverse=True
 ) }}
 

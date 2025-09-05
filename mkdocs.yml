@@ -137,7 +137,6 @@ nav:
                       - Variable Group: perses/docs/dac/cue/variable/group.md
                       - List Variable: perses/docs/dac/cue/variable/list.md
                       - Text Variable: perses/docs/dac/cue/variable/text.md
-                      - List Variable: perses/docs/dac/cue/variable/list.md
                   - Plugins:
                       - Prometheus:
                           - Filter: plugins/docs/prometheus/cue-sdk/filter.md
