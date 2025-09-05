@@ -25,7 +25,7 @@ title: Perses
 
 -   ## Observability display
     ---
-    Perses is first and foremost a dashboard tool that you can use to display a variety of observability data. Today supports Prometheus metrics, Tempo traces & Pyroscope profiles.
+    Perses is first and foremost a dashboard tool that you can use to display a variety of observability data. Today supports Prometheus metrics & Tempo traces.
 
 -   ## Embeddable components
     ---
@@ -66,12 +66,6 @@ title: Perses
     description="Deep dive into your Tempo traces and display them in several ways: scatter plots, Gantt charts, or tables.",
     media="assets/images/home/tracing.mp4",
     reverse=True
-) }}
-
-{{ feature(
-    title="Profiling with Pyroscope",
-    description="Visualize your Pyroscope profiling data through interactive flame graphs.",
-    media="assets/images/home/profiling.mp4",
 ) }}
 
 ## Open ecosystem
