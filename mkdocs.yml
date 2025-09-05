@@ -107,6 +107,7 @@ nav:
           - Dashboard-as-Code: perses/docs/concepts/dashboard-as-code.md
           - Datasource: perses/docs/concepts/datasource.md
           - Variable: perses/docs/concepts/variable.md
+          - Project: perses/docs/concepts/project.md
           - Datasource & Variable scopes: perses/docs/concepts/datasource-and-variable-scopes.md
           - Authentication: perses/docs/concepts/authentication.md
           - Authorization: perses/docs/concepts/authorization.md
@@ -131,6 +132,7 @@ nav:
                   - Panel Groups: perses/docs/dac/cue/panelgroups.md
                   - Variable:
                       - Variable Group: perses/docs/dac/cue/variable/group.md
+                      - List Variable: perses/docs/dac/cue/variable/list.md
                       - Text Variable: perses/docs/dac/cue/variable/text.md
                   - Plugins:
                       - Prometheus:
