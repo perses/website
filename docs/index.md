@@ -58,7 +58,8 @@ title: Perses
 {{ feature(
     title="Monitoring with Prometheus",
     description="Perses provides comprehensive Prometheus support with specialized panels for metrics visualization. It also comes with a built-in metrics explorer and a PromQL debugger that mirror Prometheus's native UI experience.",
-    media="assets/images/home/monitoring.mp4"
+    media="assets/images/home/monitoring.mp4",
+    learn_more="plugins/docs/prometheus/README.md"
 ) }}
 
 {{ feature(
