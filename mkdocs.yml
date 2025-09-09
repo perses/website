@@ -135,8 +135,8 @@ nav:
                       - Prometheus:
                           - Filter: plugins/docs/prometheus/cue-sdk/filter.md
                           - Panel: plugins/docs/prometheus/cue-sdk/panel.md
-                          - Label Names Variable: plugins/docs/prometheus/cue-sdk/variable/labelnames.md
-                          - Label Values Variable: plugins/docs/prometheus/cue-sdk/variable/labelvalues.md
+                          - Label Names Variable: plugins/docs/prometheus/cue-sdk/variable/label-names.md
+                          - Label Values Variable: plugins/docs/prometheus/cue-sdk/variable/label-values.md
                           - PromQL Variable: plugins/docs/prometheus/cue-sdk/variable/promql.md
                       - Static List Variable: plugins/docs/staticlistvariable/cue-sdk.md
               - Go:
