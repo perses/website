@@ -80,6 +80,9 @@ extra:
 plugins:
   - search
   - blog
+  - macros:
+      render_by_default: false
+      force_render_paths: index.md
   - multirepo:
       # (optional) tells multirepo to cleanup the temporary directory after site is built.
       cleanup: true
@@ -103,14 +106,17 @@ nav:
   - Docs:
       - Overview: perses/docs/overview.md
       - Concepts:
-          - Plugins: perses/docs/concepts/plugin.md
+          - Plugin: perses/docs/concepts/plugin.md
           - Dashboard-as-Code: perses/docs/concepts/dashboard-as-code.md
+          - Datasource: perses/docs/concepts/datasource.md
+          - Variable: perses/docs/concepts/variable.md
+          - Project: perses/docs/concepts/project.md
           - Datasource & Variable scopes: perses/docs/concepts/datasource-and-variable-scopes.md
           - Datasources: perses/docs/concepts/datasource.md
           - Authentication: perses/docs/concepts/authentication.md
           - Authorization: perses/docs/concepts/authorization.md
           - Proxy: perses/docs/concepts/proxy.md
-          - Ephemeral Dashboards: perses/docs/concepts/ephemeral-dashboard.md
+          - Ephemeral Dashboard: perses/docs/concepts/ephemeral-dashboard.md
       - User Docs:
           - Installation:
               - Installing Perses from Source: perses/docs/installation/from-source.md
@@ -130,6 +136,7 @@ nav:
                   - Panel Groups: perses/docs/dac/cue/panelgroups.md
                   - Variable:
                       - Variable Group: perses/docs/dac/cue/variable/group.md
+                      - List Variable: perses/docs/dac/cue/variable/list.md
                       - Text Variable: perses/docs/dac/cue/variable/text.md
                   - Plugins:
                       - Prometheus:
@@ -165,6 +172,8 @@ nav:
                           - PromQL Variable: plugins/docs/prometheus/go-sdk/variable/promql.md
                       - Static List Variable: plugins/docs/staticlistvariable/go-sdk.md
           - Perses CLI (percli): perses/docs/cli.md
+          - Plugins:
+              - Prometheus: plugins/docs/prometheus/README.md
           - Migrate from Grafana: perses/docs/migration.md
           - Troubleshooting:
               - TLS and HTTP Datasource: perses/docs/troubleshooting-tls-plain-http-datasource.md

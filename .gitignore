@@ -282,4 +282,5 @@ secret
 
 /venv
 /site
-__pycache__/
+
+/__pycache__
