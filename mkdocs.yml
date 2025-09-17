@@ -99,6 +99,9 @@ plugins:
         - name: "plugins"
           import_url: https://github.com/perses/plugins?branch=main
           imports: [docs/*]
+        - name: "helm-charts"
+          import_url: https://github.com/perses/helm-charts?branch=main
+          imports: [docs/*]
 nav:
   - Home: index.md
   - Blog:
@@ -121,6 +124,7 @@ nav:
           - Installation:
               - Installing Perses from Source: perses/docs/installation/from-source.md
               - Installing Perses in a Container: perses/docs/installation/in-a-container.md
+              - Installing Perses with Helm: helm-charts/docs/installation.md
           - Configuration:
               - General: perses/docs/configuration/configuration.md
               - OAuth Helper: perses/docs/configuration/oauth-configuration-helpers.md
@@ -171,6 +175,12 @@ nav:
                           - Label Values Variable: plugins/docs/prometheus/go-sdk/variable/label-values.md
                           - PromQL Variable: plugins/docs/prometheus/go-sdk/variable/promql.md
                       - Static List Variable: plugins/docs/staticlistvariable/go-sdk.md
+          - Helm Charts:
+              - Overview: helm-charts/docs/overview.md
+              - Managing Resources:
+                  - Using ConfigMaps: helm-charts/docs/managing-resources-with-configmaps.md
+                  - Using OCI Artifacts: helm-charts/docs/packaging-resources-as-oci-artifacts.md
+              - Upgrade Guide: helm-charts/docs/upgrade-guide.md
           - Perses CLI (percli): perses/docs/cli.md
           - Plugins:
               - Prometheus: plugins/docs/prometheus/README.md
