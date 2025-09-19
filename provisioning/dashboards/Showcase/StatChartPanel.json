@@ -32,7 +32,7 @@
               "plugin": {
                 "kind": "PrometheusTimeSeriesQuery",
                 "spec": {
-                  "query": "avg without (cpu)(rate(node_cpu_seconds_total{job=\"node\",instance=~\"demo.prometheus.io:9100\",mode!=\"nice\",mode!=\"steal\",mode!=\"irq\"}[5m]))",
+                  "query": "avg without (cpu)(rate(node_cpu_seconds_total{job=\"nodeexporter\",mode!=\"nice\",mode!=\"steal\",mode!=\"irq\"}[5m]))",
                   "seriesNameFormat": "{{mode}} mode "
                 }
               }
@@ -63,7 +63,7 @@
               "plugin": {
                 "kind": "PrometheusTimeSeriesQuery",
                 "spec": {
-                  "query": "avg without (cpu)(rate(node_cpu_seconds_total{job=\"node\",instance=~\"demo.prometheus.io:9100\",mode!=\"nice\",mode!=\"steal\",mode!=\"irq\"}[5m]))",
+                  "query": "avg without (cpu)(rate(node_cpu_seconds_total{job=\"nodeexporter\",mode!=\"nice\",mode!=\"steal\",mode!=\"irq\"}[5m]))",
                   "seriesNameFormat": "{{mode}} mode "
                 }
               }
@@ -93,7 +93,7 @@
               "plugin": {
                 "kind": "PrometheusTimeSeriesQuery",
                 "spec": {
-                  "query": "avg(node_load15{job=\"node\",instance=~\"demo.prometheus.io:9100\"}) /  count(count(node_cpu_seconds_total{job=\"node\",instance=~\"demo.prometheus.io:9100\"}) by (cpu)) * 100"
+                  "query": "avg(node_load15{job=\"nodeexporter\"}) /  count(count(node_cpu_seconds_total{job=\"nodeexporter\"}) by (cpu)) * 100"
                 }
               }
             }
@@ -121,7 +121,7 @@
               "plugin": {
                 "kind": "PrometheusTimeSeriesQuery",
                 "spec": {
-                  "query": "avg(node_load15{job=\"node\",instance=~\"demo.prometheus.io:9100\"}) /  count(count(node_cpu_seconds_total{job=\"node\",instance=~\"demo.prometheus.io:9100\"}) by (cpu)) * 100"
+                  "query": "avg(node_load15{job=\"nodeexporter\"}) /  count(count(node_cpu_seconds_total{job=\"nodeexporter\"}) by (cpu)) * 100"
                 }
               }
             }

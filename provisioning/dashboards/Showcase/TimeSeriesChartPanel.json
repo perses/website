@@ -28,10 +28,9 @@
                 "kind": "PrometheusTimeSeriesQuery",
                 "spec": {
                   "datasource": {
-                    "kind": "PrometheusDatasource",
-                    "name": "PrometheusDemo"
+                    "kind": "PrometheusDatasource"
                   },
-                  "query": "up{job=\"grafana\",instance=\"demo.prometheus.io:3000\"}"
+                  "query": "up{job=\"perses\"}"
                 }
               }
             }
@@ -60,10 +59,9 @@
                 "kind": "PrometheusTimeSeriesQuery",
                 "spec": {
                   "datasource": {
-                    "kind": "PrometheusDatasource",
-                    "name": "PrometheusDemo"
+                    "kind": "PrometheusDatasource"
                   },
-                  "query": "up{job=\"grafana\",instance=\"demo.prometheus.io:3000\"}"
+                  "query": "up{job=\"perses\"}"
                 }
               }
             }
@@ -92,10 +90,9 @@
                 "kind": "PrometheusTimeSeriesQuery",
                 "spec": {
                   "datasource": {
-                    "kind": "PrometheusDatasource",
-                    "name": "PrometheusDemo"
+                    "kind": "PrometheusDatasource"
                   },
-                  "query": "up{job=\"grafana\",instance=\"demo.prometheus.io:3000\"}"
+                  "query": "up{job=\"perses\"}"
                 }
               }
             }
@@ -124,10 +121,9 @@
                 "kind": "PrometheusTimeSeriesQuery",
                 "spec": {
                   "datasource": {
-                    "kind": "PrometheusDatasource",
-                    "name": "PrometheusDemo"
+                    "kind": "PrometheusDatasource"
                   },
-                  "query": "up{job=\"grafana\",instance=\"demo.prometheus.io:3000\"}",
+                  "query": "up{job=\"perses\"}",
                   "seriesNameFormat": "formatted series name example - {{job}} job - instance {{instance}}"
                 }
               }
@@ -160,10 +156,9 @@
                 "kind": "PrometheusTimeSeriesQuery",
                 "spec": {
                   "datasource": {
-                    "kind": "PrometheusDatasource",
-                    "name": "PrometheusDemo"
+                    "kind": "PrometheusDatasource"
                   },
-                  "query": "up{job=\"grafana\",instance=\"demo.prometheus.io:3000\"}"
+                  "query": "up{job=\"perses\"}"
                 }
               }
             }
@@ -193,8 +188,7 @@
                 "kind": "PrometheusTimeSeriesQuery",
                 "spec": {
                   "datasource": {
-                    "kind": "PrometheusDatasource",
-                    "name": "PrometheusDemo"
+                    "kind": "PrometheusDatasource"
                   },
                   "query": "fake_graphite_query_with_nulls"
                 }
