@@ -29,3 +29,6 @@ scrape_configs:
   - job_name: "perses"
     static_configs:
       - targets: ["demo:8080"]
+  - job_name: "node-exporter"
+    static_configs:
+      - targets: ["172.17.0.1:9100"]
