@@ -123,6 +123,7 @@ nav:
       - User Docs:
           - Installation:
               - Installing Perses from Source: perses/docs/installation/from-source.md
+              - Installing Perses with package managers: perses/docs/installation/third-party.md
               - Installing Perses in a Container: perses/docs/installation/in-a-container.md
               - Installing Perses with Helm: helm-charts/docs/installation.md
           - Configuration:
