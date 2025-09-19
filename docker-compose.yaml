@@ -39,8 +39,11 @@ services:
     image: "docker.io/traefik:v2.9.10"
     command:
       - "--providers.docker=true"
+      - "--metrics.prometheus=true"
+      - "--metrics.prometheus.entrypoint=metrics"
       # https://doc.traefik.io/traefik/user-guides/docker-compose/acme-tls/
       - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.metrics.address=:8080"
       - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
       - "--certificatesresolvers.myresolver.acme.email=perses-team@googlegroups.com"
       - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
