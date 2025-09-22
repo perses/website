@@ -201,6 +201,6 @@ Perses is a [Cloud Native Computing Foundation](https://cncf.io) sandbox project
 - [![Pydantic logo](assets/images/logos/Pydantic_dark_theme.png#only-dark)](https://pydantic.dev/) [![Pydantic logo](assets/images/logos/Pydantic_light_theme.png#only-light)](https://pydantic.dev/)
 - [![RedHat logo](assets/images/logos/RedHat_dark_theme.png#only-dark)](https://www.redhat.com) [![RedHat logo](assets/images/logos/RedHat_light_theme.png#only-light)](https://www.redhat.com)
 - [![SAP logo](assets/images/logos/SAP.svg)](https://www.sap.com)
-- [Your company logo here](./adopters.md)
+- <div style="display: flex; align-items: center; justify-content: center; height: 100%;"><a href="./adopters.md">Want your company logo here?</a></div>
 
 </div>
