@@ -1,7 +1,7 @@
 ---
 date: 2025-06-10
 categories:
-  - community-dashboards
+  - Community
 ---
 
 # Composable Dashboards -  Lessons from building Perses Community Dashboards
