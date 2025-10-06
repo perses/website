@@ -115,7 +115,6 @@ nav:
           - Variable: perses/docs/concepts/variable.md
           - Project: perses/docs/concepts/project.md
           - Datasource & Variable scopes: perses/docs/concepts/datasource-and-variable-scopes.md
-          - Datasources: perses/docs/concepts/datasource.md
           - Authentication: perses/docs/concepts/authentication.md
           - Authorization: perses/docs/concepts/authorization.md
           - Proxy: perses/docs/concepts/proxy.md
