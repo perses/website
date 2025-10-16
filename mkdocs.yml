@@ -143,13 +143,16 @@ nav:
                       - List Variable: perses/docs/dac/cue/variable/list.md
                       - Text Variable: perses/docs/dac/cue/variable/text.md
                   - Plugins:
-                      - Prometheus:
-                          - Filter: plugins/docs/prometheus/cue-sdk/filter.md
-                          - Panel: plugins/docs/prometheus/cue-sdk/panel.md
-                          - Label Names Variable: plugins/docs/prometheus/cue-sdk/variable/label-names.md
-                          - Label Values Variable: plugins/docs/prometheus/cue-sdk/variable/label-values.md
-                          - PromQL Variable: plugins/docs/prometheus/cue-sdk/variable/promql.md
-                      - Static List Variable: plugins/docs/staticlistvariable/cue-sdk.md
+                      - Data sources:
+                          - Prometheus:
+                              - Filter: plugins/docs/prometheus/cue-sdk/filter.md
+                              - Panel: plugins/docs/prometheus/cue-sdk/panel.md
+                              - Label Names Variable: plugins/docs/prometheus/cue-sdk/variable/label-names.md
+                              - Label Values Variable: plugins/docs/prometheus/cue-sdk/variable/label-values.md
+                              - PromQL Variable: plugins/docs/prometheus/cue-sdk/variable/promql.md
+                      - Variables:
+                          - Datasource Variable: plugins/docs/datasourcevariable/cue-sdk.md
+                          - Static List Variable: plugins/docs/staticlistvariable/cue-sdk.md
               - Go:
                   - Go SDK for Dashboard-as-Code: perses/docs/dac/go/README.md
                   - Dashboard: perses/docs/dac/go/dashboard.md
@@ -162,19 +165,53 @@ nav:
                   - Helpers:
                       - HTTP Proxy: perses/docs/dac/go/helper/http-proxy.md
                   - Plugins:
-                      - Panel Plugins:
+                      - Data sources:
+                          - ClickHouse:
+                              - Datasource: plugins/docs/clickhouse/go-sdk/datasource.md
+                              - Log Query: plugins/docs/clickhouse/go-sdk/log-query.md
+                              - Time Series Query: plugins/docs/clickhouse/go-sdk/timeseries-query.md
+                          - Loki:
+                              - Datasource: plugins/docs/loki/go-sdk/datasource.md
+                              - Log Query: plugins/docs/loki/go-sdk/log-query.md
+                              - Time Series Query: plugins/docs/loki/go-sdk/timeseries-query.md
+                          - Prometheus:
+                              - Datasource: plugins/docs/prometheus/go-sdk/datasource.md
+                              - Query: plugins/docs/prometheus/go-sdk/query.md
+                              - Label Names Variable: plugins/docs/prometheus/go-sdk/variable/label-names.md
+                              - Label Values Variable: plugins/docs/prometheus/go-sdk/variable/label-values.md
+                              - PromQL Variable: plugins/docs/prometheus/go-sdk/variable/promql.md
+                          - Pyroscope:
+                              - Datasource: plugins/docs/pyroscope/go-sdk/datasource.md
+                              - Query: plugins/docs/pyroscope/go-sdk/query.md
+                          - Tempo:
+                              - Datasource: plugins/docs/tempo/go-sdk/datasource.md
+                              - Query: plugins/docs/tempo/go-sdk/query.md
+                          - VictoriaLogs:
+                              - Datasource: plugins/docs/victorialogs/go-sdk/datasource.md
+                              - Field Names Variable: plugins/docs/victorialogs/go-sdk/variable/field-names.md
+                              - Field Values Variable: plugins/docs/victorialogs/go-sdk/variable/field-values.md
+                              - Log Query: plugins/docs/victorialogs/go-sdk/log-query.md
+                              - Time Series Query: plugins/docs/victorialogs/go-sdk/timeseries-query.md
+                      - Panels:
                           - Bar Chart: plugins/docs/barchart/go-sdk.md
+                          - Flame Chart: plugins/docs/flamechart/go-sdk.md
                           - Gauge Chart: plugins/docs/gaugechart/go-sdk.md
+                          - HeatMap Chart: plugins/docs/heatmapchart/go-sdk.md
+                          - Histogram Chart: plugins/docs/histogramchart/go-sdk.md
+                          - Logs Table: plugins/docs/logstable/go-sdk.md
                           - Markdown: plugins/docs/markdown/go-sdk.md
+                          - Pie Chart: plugins/docs/piechart/go-sdk.md
+                          - Scatter Chart: plugins/docs/scatterchart/go-sdk.md
                           - Stat Chart: plugins/docs/statchart/go-sdk.md
+                          - Status History Chart: plugins/docs/statushistorychart/go-sdk.md
+                          - Table: plugins/docs/table/go-sdk.md
                           - Time Series Chart: plugins/docs/timeserieschart/go-sdk.md
-                      - Prometheus:
-                          - Datasource: plugins/docs/prometheus/go-sdk/datasource.md
-                          - Query: plugins/docs/prometheus/go-sdk/query.md
-                          - Label Names Variable: plugins/docs/prometheus/go-sdk/variable/label-names.md
-                          - Label Values Variable: plugins/docs/prometheus/go-sdk/variable/label-values.md
-                          - PromQL Variable: plugins/docs/prometheus/go-sdk/variable/promql.md
-                      - Static List Variable: plugins/docs/staticlistvariable/go-sdk.md
+                          - Time Series Table: plugins/docs/timeseriestable/go-sdk.md
+                          - Trace Table: plugins/docs/tracetable/go-sdk.md
+                          - Tracing Gantt Chart: plugins/docs/tracingganttchart/go-sdk.md
+                      - Variables:
+                          - Datasource Variable: plugins/docs/datasourcevariable/go-sdk.md
+                          - Static List Variable: plugins/docs/staticlistvariable/go-sdk.md
           - Helm Charts:
               - Overview: helm-charts/docs/overview.md
               - Managing Resources:
@@ -183,7 +220,30 @@ nav:
               - Upgrade Guide: helm-charts/docs/upgrade-guide.md
           - Perses CLI (percli): perses/docs/cli.md
           - Plugins:
+              - Bar Chart: plugins/docs/barchart/README.md
+              - ClickHouse: plugins/docs/clickhouse/README.md
+              - Datasource Variable: plugins/docs/datasourcevariable/README.md
+              - Flame Chart: plugins/docs/flamechart/README.md
+              - Gauge Chart: plugins/docs/gaugechart/README.md
+              - HeatMap Chart: plugins/docs/heatmapchart/README.md
+              - Histogram Chart: plugins/docs/histogramchart/README.md
+              - Logs Table: plugins/docs/logstable/README.md
+              - Loki: plugins/docs/loki/README.md
+              - Markdown: plugins/docs/markdown/README.md
+              - Pie Chart: plugins/docs/piechart/README.md
               - Prometheus: plugins/docs/prometheus/README.md
+              - Pyroscope: plugins/docs/pyroscope/README.md
+              - Scatter Chart: plugins/docs/scatterchart/README.md
+              - Stat Chart: plugins/docs/statchart/README.md
+              - Static List Variable: plugins/docs/staticlistvariable/README.md
+              - Status History Chart: plugins/docs/statushistorychart/README.md
+              - Table: plugins/docs/table/README.md
+              - Tempo: plugins/docs/tempo/README.md
+              - Time Series Chart: plugins/docs/timeserieschart/README.md
+              - Time Series Table: plugins/docs/timeseriestable/README.md
+              - Trace Table: plugins/docs/tracetable/README.md
+              - Tracing Gantt Chart: plugins/docs/tracingganttchart/README.md
+              - VictoriaLogs: plugins/docs/victorialogs/README.md
           - Migrate from Grafana: perses/docs/migration.md
           - Troubleshooting:
               - TLS and HTTP Datasource: perses/docs/troubleshooting-tls-plain-http-datasource.md
@@ -205,9 +265,20 @@ nav:
           - Embedding Perses Panels: perses/docs/embedding-panels.md
           - Plugins:
               - Models:
-                  - Panel Plugins:
+                  - Data sources:
+                      - ClickHouse: plugins/docs/clickhouse/model.md
+                      - Loki: plugins/docs/loki/model.md
+                      - Prometheus: plugins/docs/prometheus/model.md
+                      - Pyroscope: plugins/docs/pyroscope/model.md
+                      - Tempo: plugins/docs/tempo/model.md
+                      - VictoriaLogs: plugins/docs/victorialogs/model.md
+                  - Panels:
                       - Bar Chart: plugins/docs/barchart/model.md
+                      - Flame Chart: plugins/docs/flamechart/model.md
                       - Gauge Chart: plugins/docs/gaugechart/model.md
+                      - HeatMap Chart: plugins/docs/heatmapchart/model.md
+                      - Histogram: plugins/docs/histogramchart/model.md
+                      - Logs Table: plugins/docs/logstable/model.md
                       - Markdown: plugins/docs/markdown/model.md
                       - Pie Chart: plugins/docs/piechart/model.md
                       - Scatter Chart: plugins/docs/scatterchart/model.md
@@ -218,9 +289,9 @@ nav:
                       - Time Series Table: plugins/docs/timeseriestable/model.md
                       - Trace Table: plugins/docs/tracetable/model.md
                       - Tracing Gantt Chart: plugins/docs/tracingganttchart/model.md
-                  - Prometheus Plugins: plugins/docs/prometheus/model.md
-                  - Static List Variable: plugins/docs/staticlistvariable/model.md
-                  - Tempo Plugins: plugins/docs/tempo/model.md
+                  - Variables:
+                      - Datasource Variable: plugins/docs/datasourcevariable/model.md
+                      - Static List Variable: plugins/docs/staticlistvariable/model.md
                   - Common definitions: perses/docs/plugins/common.md
               - CUE in Perses: perses/docs/plugins/cue.md
               - Create a plugin: perses/docs/plugins/creation.md
