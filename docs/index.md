@@ -66,6 +66,7 @@ title: Perses
     title="Tracing with Tempo",
     description="Deep dive into your Tempo traces and display them in several ways: scatter plots, Gantt charts, or tables.",
     media="assets/images/home/tracing.mp4",
+    learn_more="plugins/docs/tempo/README.md",
     reverse=True,
 ) }}
 
@@ -73,12 +74,14 @@ title: Perses
     title="Logging with Loki",
     description="Search, filter and make sense of your Loki logs.",
     media="assets/images/home/logging.png",
+    learn_more="plugins/docs/loki/README.md",
 ) }}
 
 {{ feature(
     title="Profiling with Pyroscope",
     description="Visualize your Pyroscope profiling data through interactive flame graphs.",
     media="assets/images/home/profiling.mp4",
+    learn_more="plugins/docs/pyroscope/README.md",
     reverse=True,
 ) }}
 ## Open ecosystem
@@ -87,6 +90,7 @@ title: Perses
     title="Open specification for dashboards",
     description="Perses is also an initiative to define a standardized dashboard specification, fostering interoperability across observability tools.",
     media="assets/images/home/open_spec.png",
+    learn_more="perses/docs/api/dashboard.md",
 ) }}
 
 {{ feature(
