@@ -29,7 +29,7 @@ title: Perses
 
 -   ## Embeddable components
     ---
-    You can use Perses as-is or embed parts of it in your own UI, could it be a single panel or a whole dashboard view.
+    You can use Perses as-is or embed parts of it in your own UI as a single panel or a whole dashboard view.
 
 -   ## DevOps-ready
     ---
