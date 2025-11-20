@@ -84,6 +84,7 @@ title: Perses
     learn_more="plugins/docs/pyroscope/README.md",
     reverse=True,
 ) }}
+
 ## Open ecosystem
 
 {{ feature(
