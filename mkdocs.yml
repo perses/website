@@ -110,6 +110,7 @@ nav:
   - Docs:
       - Overview: perses/docs/overview.md
       - Concepts:
+          - Open Specification: perses/docs/concepts/open-specification.md
           - Plugin: perses/docs/concepts/plugin.md
           - Dashboard-as-Code: perses/docs/concepts/dashboard-as-code.md
           - Datasource: perses/docs/concepts/datasource.md
