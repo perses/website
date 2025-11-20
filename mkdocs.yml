@@ -102,6 +102,7 @@ plugins:
         - name: "helm-charts"
           import_url: https://github.com/perses/helm-charts?branch=main
           imports: [docs/*]
+  - tags
 nav:
   - Home: index.md
   - Blog:
