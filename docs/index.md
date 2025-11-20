@@ -91,7 +91,7 @@ title: Perses
     title="Open specification for dashboards",
     description="Perses is also an initiative to define a standardized dashboard specification, fostering interoperability across observability tools.",
     media="assets/images/home/open_spec.png",
-    learn_more="perses/docs/api/dashboard.md",
+    learn_more="perses/docs/concepts/open-specification.md",
 ) }}
 
 {{ feature(
