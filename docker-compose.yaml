@@ -15,7 +15,7 @@ services:
       - "traefik.http.routers.website.tls.certresolver=myresolver"
 
   demo:
-    image: "docker.io/persesdev/perses:v0.53.0-beta.0"
+    image: "docker.io/persesdev/perses:v0.53.0-beta.3"
     ports:
       - "5000:8080"
     command: "--config=/etc/perses/config/config.yaml"
