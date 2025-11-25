@@ -203,6 +203,7 @@ Perses is a [Cloud Native Computing Foundation](https://cncf.io) sandbox project
 - [![Enlighten logo](assets/images/logos/Enlighten_dark_theme.png#only-dark)](https://enlighten.com) [![Enlighten logo](assets/images/logos/Enlighten_light_theme.png#only-light)](https://enlighten.com)
 - [![GIGAPIPE logo](assets/images/logos/Gigapipe.svg)](https://gigapipe.com)
 - [![Greptime logo](assets/images/logos/Greptime_dark_theme.svg#only-dark)](https://greptime.com/) [![Greptime logo](assets/images/logos/Greptime_light_theme.svg#only-light)](https://greptime.com/)
+- [![Logz logo](assets/images/logos/Logz_dark_theme.svg#only-dark)](https://logz.io/) [![Logz logo](assets/images/logos/Logz_light_theme.svg#only-light)](https://logz.io/)
 - [![Pydantic logo](assets/images/logos/Pydantic_dark_theme.png#only-dark)](https://pydantic.dev/) [![Pydantic logo](assets/images/logos/Pydantic_light_theme.png#only-light)](https://pydantic.dev/)
 - [![RedHat logo](assets/images/logos/RedHat_dark_theme.png#only-dark)](https://www.redhat.com) [![RedHat logo](assets/images/logos/RedHat_light_theme.png#only-light)](https://www.redhat.com)
 - [![SAP logo](assets/images/logos/SAP.svg)](https://www.sap.com)
