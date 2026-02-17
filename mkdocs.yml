@@ -102,6 +102,9 @@ plugins:
         - name: "helm-charts"
           import_url: https://github.com/perses/helm-charts?branch=main
           imports: [docs/*]
+        - name: "perses-operator"
+          import_url: https://github.com/perses/perses-operator?branch=main
+          imports: [docs/user-guide.md, docs/api.md]
   - tags
 nav:
   - Home: index.md
@@ -221,6 +224,9 @@ nav:
                   - Using ConfigMaps: helm-charts/docs/managing-resources-with-configmaps.md
                   - Using OCI Artifacts: helm-charts/docs/packaging-resources-as-oci-artifacts.md
               - Upgrade Guide: helm-charts/docs/upgrade-guide.md
+          - Perses Operator:
+              - User Guide: perses-operator/docs/user-guide.md
+              - API Reference: perses-operator/docs/api.md
           - Perses CLI (percli): perses/docs/cli.md
           - Plugins:
               - Bar Chart: plugins/docs/barchart/README.md
