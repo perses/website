@@ -138,7 +138,7 @@ title: Perses
     title="Perses operator",
     description="Deploy and manage Perses instances and dashboards declaratively using Kubernetes Custom Resources, enabling GitOps workflows and seamless integration with your existing K8s infrastructure.",
     media="assets/images/home/perses_operator.png",
-    learn_more="https://github.com/perses/perses-operator/blob/main/docs/api.md",
+    learn_more="/perses-operator/docs/user-guide/",
 ) }}
 
 {{ feature(
