@@ -223,6 +223,7 @@ nav:
               - Managing Resources:
                   - Using ConfigMaps: helm-charts/docs/managing-resources-with-configmaps.md
                   - Using OCI Artifacts: helm-charts/docs/packaging-resources-as-oci-artifacts.md
+                  - Authentication Secrets: helm-charts/docs/auth-secrets.md
               - Upgrade Guide: helm-charts/docs/upgrade-guide.md
           - Perses Operator:
               - User Guide: perses-operator/docs/user-guide.md
