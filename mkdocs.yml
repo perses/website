@@ -254,6 +254,7 @@ nav:
               - Trace Table: plugins/docs/tracetable/README.md
               - Tracing Gantt Chart: plugins/docs/tracingganttchart/README.md
               - VictoriaLogs: plugins/docs/victorialogs/README.md
+          - Upgrade Guide: perses/docs/upgrade-guide.md
           - Migrate from Grafana: perses/docs/migration.md
           - Troubleshooting:
               - TLS and HTTP Datasource: perses/docs/troubleshooting-tls-plain-http-datasource.md
