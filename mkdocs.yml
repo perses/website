@@ -1,5 +1,6 @@
 site_name: Perses
 site_url: "https://perses.dev"
+site_description: "An open specification for dashboards. The open dashboard tool for Prometheus and other data sources."
 repo_name: "perses/perses"
 repo_url: "https://github.com/perses/perses"
 theme:
@@ -73,6 +74,8 @@ extra:
       link: https://linkedin.com/company/persesdev
     - icon: fontawesome/brands/slack
       link: https://cloud-native.slack.com/messages/C07KQR95WBE
+    - icon: fontawesome/solid/square-rss
+      link: /feed_rss_created.xml
     - icon: fontawesome/brands/docker
       link: https://hub.docker.com/r/persesdev/perses
 
@@ -106,6 +109,13 @@ plugins:
           import_url: https://github.com/perses/perses-operator?branch=main
           imports: [docs/user-guide.md, docs/api.md]
   - tags
+  - rss:
+      match_path: blog/posts/.*
+      date_from_meta:
+        as_creation: date
+      categories:
+        - categories
+        - tags
 nav:
   - Home: index.md
   - Blog:
