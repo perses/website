@@ -12,7 +12,20 @@ security:
       - actions:
           - read
         scopes:
-          - "*"
+          - "Dashboard"
+          - "Datasource"
+          - "EphemeralDashboard"
+          - "Folder"
+          - "GlobalDatasource"
+          - "GlobalRole"
+          - "GlobalRoleBinding"
+          - "GlobalSecret"
+          - "GlobalVariable"
+          - "Project"
+          - "Role"
+          - "RoleBinding"
+          - "Secret"
+          - "Variable"
       - actions:
           - create
         scopes:
