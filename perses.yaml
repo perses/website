@@ -8,28 +8,30 @@ security:
   cookie:
     secure: true
   authorization:
-    guest_permissions:
-      - actions:
-          - read
-        scopes:
-          - "Dashboard"
-          - "Datasource"
-          - "EphemeralDashboard"
-          - "Folder"
-          - "GlobalDatasource"
-          - "GlobalRole"
-          - "GlobalRoleBinding"
-          - "GlobalSecret"
-          - "GlobalVariable"
-          - "Project"
-          - "Role"
-          - "RoleBinding"
-          - "Secret"
-          - "Variable"
-      - actions:
-          - create
-        scopes:
-          - Project
+    provider:
+      native:
+        guest_permissions:
+          - actions:
+              - read
+            scopes:
+              - "Dashboard"
+              - "Datasource"
+              - "EphemeralDashboard"
+              - "Folder"
+              - "GlobalDatasource"
+              - "GlobalRole"
+              - "GlobalRoleBinding"
+              - "GlobalSecret"
+              - "GlobalVariable"
+              - "Project"
+              - "Role"
+              - "RoleBinding"
+              - "Secret"
+              - "Variable"
+          - actions:
+              - create
+            scopes:
+              - Project
 
 ephemeral_dashboard:
   enable: true
