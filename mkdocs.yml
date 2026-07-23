@@ -1,5 +1,6 @@
 site_name: Perses
 site_url: "https://perses.dev"
+site_description: "An open specification for dashboards. The open dashboard tool for Prometheus and other data sources."
 repo_name: "perses/perses"
 repo_url: "https://github.com/perses/perses"
 theme:
@@ -73,6 +74,8 @@ extra:
       link: https://linkedin.com/company/persesdev
     - icon: fontawesome/brands/slack
       link: https://cloud-native.slack.com/messages/C07KQR95WBE
+    - icon: fontawesome/solid/square-rss
+      link: /feed_rss_created.xml
     - icon: fontawesome/brands/docker
       link: https://hub.docker.com/r/persesdev/perses
 
@@ -102,7 +105,17 @@ plugins:
         - name: "helm-charts"
           import_url: https://github.com/perses/helm-charts?branch=main
           imports: [docs/*]
+        - name: "perses-operator"
+          import_url: https://github.com/perses/perses-operator?branch=main
+          imports: [docs/user-guide.md, docs/api.md]
   - tags
+  - rss:
+      match_path: blog/posts/.*
+      date_from_meta:
+        as_creation: date
+      categories:
+        - categories
+        - tags
 nav:
   - Home: index.md
   - Blog:
@@ -220,7 +233,11 @@ nav:
               - Managing Resources:
                   - Using ConfigMaps: helm-charts/docs/managing-resources-with-configmaps.md
                   - Using OCI Artifacts: helm-charts/docs/packaging-resources-as-oci-artifacts.md
+                  - Authentication Secrets: helm-charts/docs/auth-secrets.md
               - Upgrade Guide: helm-charts/docs/upgrade-guide.md
+          - Perses Operator:
+              - User Guide: perses-operator/docs/user-guide.md
+              - API Reference: perses-operator/docs/api.md
           - Perses CLI (percli): perses/docs/cli.md
           - Plugins:
               - Bar Chart: plugins/docs/barchart/README.md
