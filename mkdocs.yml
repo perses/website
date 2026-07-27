@@ -190,6 +190,9 @@ nav:
                               - Datasource: plugins/docs/loki/go-sdk/datasource.md
                               - Log Query: plugins/docs/loki/go-sdk/log-query.md
                               - Time Series Query: plugins/docs/loki/go-sdk/timeseries-query.md
+                          - OpenSearch:
+                              - Datasource: plugins/docs/opensearch/go-sdk/datasource.md
+                              - Log Query: plugins/docs/opensearch/go-sdk/log-query.md
                           - Prometheus:
                               - Datasource: plugins/docs/prometheus/go-sdk/datasource.md
                               - Query: plugins/docs/prometheus/go-sdk/query.md
@@ -250,6 +253,7 @@ nav:
               - Logs Table: plugins/docs/logstable/README.md
               - Loki: plugins/docs/loki/README.md
               - Markdown: plugins/docs/markdown/README.md
+              - OpenSearch: plugins/docs/opensearch/README.md
               - Pie Chart: plugins/docs/piechart/README.md
               - Prometheus: plugins/docs/prometheus/README.md
               - Pyroscope: plugins/docs/pyroscope/README.md
@@ -289,6 +293,7 @@ nav:
                   - Data sources:
                       - ClickHouse: plugins/docs/clickhouse/model.md
                       - Loki: plugins/docs/loki/model.md
+                      - OpenSearch: plugins/docs/opensearch/model.md
                       - Prometheus: plugins/docs/prometheus/model.md
                       - Pyroscope: plugins/docs/pyroscope/model.md
                       - Tempo: plugins/docs/tempo/model.md
