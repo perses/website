@@ -122,19 +122,22 @@ nav:
       - blog/index.md
   - Docs:
       - Overview: perses/docs/overview.md
+      - Getting Started: perses/docs/getting-started.md
       - Concepts:
-          - Open Specification: perses/docs/concepts/open-specification.md
-          - Dashboard: perses/docs/concepts/dashboard.md
-          - Plugin: perses/docs/concepts/plugin.md
-          - Dashboard-as-Code: perses/docs/concepts/dashboard-as-code.md
-          - Datasource: perses/docs/concepts/datasource.md
-          - Variable: perses/docs/concepts/variable.md
-          - Project: perses/docs/concepts/project.md
-          - Datasource & Variable scopes: perses/docs/concepts/datasource-and-variable-scopes.md
           - Authentication: perses/docs/concepts/authentication.md
           - Authorization: perses/docs/concepts/authorization.md
-          - Proxy: perses/docs/concepts/proxy.md
+          - Dashboard: perses/docs/concepts/dashboard.md
+          - Dashboard-as-Code: perses/docs/concepts/dashboard-as-code.md
+          - Datasource: perses/docs/concepts/datasource.md
+          - Datasource & Variable scopes: perses/docs/concepts/datasource-and-variable-scopes.md
           - Ephemeral Dashboard: perses/docs/concepts/ephemeral-dashboard.md
+          - Folder: perses/docs/concepts/folder.md
+          - Open Specification: perses/docs/concepts/open-specification.md
+          - Plugin: perses/docs/concepts/plugin.md
+          - Project: perses/docs/concepts/project.md
+          - Proxy: perses/docs/concepts/proxy.md
+          - Timezone: perses/docs/concepts/timezone.md
+          - Variable: perses/docs/concepts/variable.md
       - User Docs:
           - Installation:
               - Installing Perses from Source: perses/docs/installation/from-source.md
@@ -186,6 +189,11 @@ nav:
                               - Datasource: plugins/docs/clickhouse/go-sdk/datasource.md
                               - Log Query: plugins/docs/clickhouse/go-sdk/log-query.md
                               - Time Series Query: plugins/docs/clickhouse/go-sdk/timeseries-query.md
+                          - GreptimeDB:
+                              - Datasource: plugins/docs/greptimedb/go-sdk/datasource.md
+                              - Log Query: plugins/docs/greptimedb/go-sdk/log-query.md
+                              - Time Series Query: plugins/docs/greptimedb/go-sdk/timeseries-query.md
+                              - Trace Query: plugins/docs/greptimedb/go-sdk/trace-query.md
                           - Loki:
                               - Datasource: plugins/docs/loki/go-sdk/datasource.md
                               - Log Query: plugins/docs/loki/go-sdk/log-query.md
@@ -248,6 +256,7 @@ nav:
               - Datasource Variable: plugins/docs/datasourcevariable/README.md
               - Flame Chart: plugins/docs/flamechart/README.md
               - Gauge Chart: plugins/docs/gaugechart/README.md
+              - GreptimeDB: plugins/docs/greptimedb/README.md
               - HeatMap Chart: plugins/docs/heatmapchart/README.md
               - Histogram Chart: plugins/docs/histogramchart/README.md
               - Logs Table: plugins/docs/logstable/README.md
@@ -278,6 +287,7 @@ nav:
               - Dashboard: perses/docs/api/dashboard.md
               - Datasource: perses/docs/api/datasource.md
               - Ephemeral Dashboard: perses/docs/api/ephemeral-dashboard.md
+              - Folder: perses/docs/api/folder.md
               - Project: perses/docs/api/project.md
               - Role: perses/docs/api/role.md
               - Role Binding: perses/docs/api/rolebinding.md
@@ -285,13 +295,16 @@ nav:
               - User: perses/docs/api/user.md
               - Variable: perses/docs/api/variable.md
               - Migrate: perses/docs/api/migrate.md
+              - Metrics: perses/docs/api/metrics.md
               - Plugins: perses/docs/api/plugins.md
               - Validate: perses/docs/api/validate.md
           - Embedding Perses Panels: perses/docs/embedding-panels.md
+          - UI package architecture: perses/docs/ui-package-architecture.md
           - Plugins:
               - Models:
                   - Data sources:
                       - ClickHouse: plugins/docs/clickhouse/model.md
+                      - GreptimeDB: plugins/docs/greptimedb/model.md
                       - Loki: plugins/docs/loki/model.md
                       - OpenSearch: plugins/docs/opensearch/model.md
                       - Prometheus: plugins/docs/prometheus/model.md
