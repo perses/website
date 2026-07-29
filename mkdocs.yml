@@ -56,8 +56,10 @@ markdown_extensions:
   - admonition
 extra_css:
   - 'css/style.css'
-# extra_javascript:
-#   - 'js/main.js'
+  - 'https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css'
+extra_javascript:
+  - 'https://cdn.jsdelivr.net/npm/glightbox/dist/js/glightbox.min.js'
+  - 'js/lightbox.js'
 
 copyright: |
   The Linux Foundation® (TLF) has registered trademarks and uses trademarks. For a list of TLF trademarks, see <a href='https://www.linuxfoundation.org/trademark-usage/'>Trademark Usage</a>
