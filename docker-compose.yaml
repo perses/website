@@ -47,6 +47,7 @@ services:
       - "--certificatesresolvers.myresolver.acme.tlschallenge=true"
       - "--certificatesresolvers.myresolver.acme.email=perses-team@googlegroups.com"
       - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+    restart: unless-stopped
     ports:
       - "443:443"
     volumes:
