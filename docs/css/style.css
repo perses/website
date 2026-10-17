@@ -7,7 +7,7 @@
     display: inline !important;
 }
 
-.grid.cards a {
+.grid.cards.image-grid a {
     display: flex;
     justify-content: center;
 }
