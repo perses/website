@@ -25,7 +25,7 @@ title: Perses
 
 -   ## Observability display
     ---
-    Perses is first and foremost a dashboard tool that you can use to display a variety of observability data. Today supports Prometheus metrics, Tempo traces, Loki logs & Pyroscope profiles.
+    Perses is first and foremost a dashboard tool that you can use to display a variety of observability data. It supports all four observability pillars through Prometheus metrics, Tempo traces, Loki logs and Pyroscope profiles. Other supported datasources can be found [here](perses/docs/concepts/datasource.md).
 
 -   ## Embeddable components
     ---
@@ -84,6 +84,9 @@ title: Perses
     learn_more="plugins/docs/pyroscope/README.md",
     reverse=True,
 ) }}
+
+Prometheus, Tempo, Loki, and Pyroscope are just the start. Perses also supports
+other datasources. [→ See all supported datasources.](perses/docs/concepts/datasource.md)
 
 ## Open ecosystem
 
