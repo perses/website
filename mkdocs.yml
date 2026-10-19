@@ -125,6 +125,7 @@ nav:
   - Docs:
       - Overview: perses/docs/overview.md
       - Getting Started: perses/docs/getting-started.md
+      - Security: perses/docs/security.md
       - Concepts:
           - Authentication: perses/docs/concepts/authentication.md
           - Authorization: perses/docs/concepts/authorization.md
@@ -176,6 +177,7 @@ nav:
                           - Static List Variable: plugins/docs/staticlistvariable/cue-sdk.md
               - Go:
                   - Go SDK for Dashboard-as-Code: perses/docs/dac/go/README.md
+                  - Annotations: perses/docs/dac/go/annotation.md
                   - Dashboard: perses/docs/dac/go/dashboard.md
                   - Datasource: perses/docs/dac/go/datasource.md
                   - Panel: perses/docs/dac/go/panel.md
@@ -279,7 +281,10 @@ nav:
               - Trace Table: plugins/docs/tracetable/README.md
               - Tracing Gantt Chart: plugins/docs/tracingganttchart/README.md
               - VictoriaLogs: plugins/docs/victorialogs/README.md
-          - Upgrade Guide: perses/docs/upgrade-guide.md
+          - Upgrade Guide:
+              - v0.55.0: perses/docs/upgrade/v0.55.0.md
+              - v0.54.0: perses/docs/upgrade/v0.54.0.md
+              - v0.53.0: perses/docs/upgrade/v0.53.0.md
           - Migrate from Grafana: perses/docs/migration.md
           - Troubleshooting:
               - TLS and HTTP Datasource: perses/docs/troubleshooting-tls-plain-http-datasource.md
