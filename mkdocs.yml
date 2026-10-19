@@ -125,6 +125,7 @@ nav:
   - Docs:
       - Overview: perses/docs/overview.md
       - Getting Started: perses/docs/getting-started.md
+      - Security: perses/docs/security.md
       - Concepts:
           - Authentication: perses/docs/concepts/authentication.md
           - Authorization: perses/docs/concepts/authorization.md
@@ -176,6 +177,7 @@ nav:
                           - Static List Variable: plugins/docs/staticlistvariable/cue-sdk.md
               - Go:
                   - Go SDK for Dashboard-as-Code: perses/docs/dac/go/README.md
+                  - Annotations: perses/docs/dac/go/annotation.md
                   - Dashboard: perses/docs/dac/go/dashboard.md
                   - Datasource: perses/docs/dac/go/datasource.md
                   - Panel: perses/docs/dac/go/panel.md
