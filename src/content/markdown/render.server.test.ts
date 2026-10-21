@@ -1,6 +1,6 @@
 import type { Element, Root } from 'hast';
 import { describe, expect, it } from 'vitest';
-import { extractFrontmatter, renderMarkdown } from './render.server';
+import { extractFrontmatter, markdownTitle, renderMarkdown, stripInlineFormatting } from './render.server';
 
 function findElements(tree: Root, tagName: string): Element[] {
   const found: Element[] = [];
@@ -79,5 +79,22 @@ describe('renderMarkdown', () => {
 
   it('prefers the title of the front matter', async () => {
     expect((await renderMarkdown('---\ntitle: From front matter\n---\n# Heading')).title).toBe('From front matter');
+  });
+});
+
+describe('markdownTitle', () => {
+  it('returns the title of the front matter, the first ATX or setext h1', () => {
+    expect(markdownTitle('---\ntitle: Front\n---\n# Heading')).toBe('Front');
+    expect(markdownTitle('```\n# not a title\n```\n# Release v0.55.0')).toBe('Release v0.55.0');
+    expect(markdownTitle('Adopters Logo\n=============\n')).toBe('Adopters Logo');
+    expect(markdownTitle('No title')).toBeUndefined();
+  });
+});
+
+describe('stripInlineFormatting', () => {
+  it('removes the inline code and emphasis markers only', () => {
+    expect(stripInlineFormatting('The `perses_config` file')).toBe('The perses_config file');
+    expect(stripInlineFormatting('A **bold** and *italic* or _italic_ title')).toBe('A bold and italic or italic title');
+    expect(stripInlineFormatting('snake_case_name and 2 * 3 * 4')).toBe('snake_case_name and 2 * 3 * 4');
   });
 });

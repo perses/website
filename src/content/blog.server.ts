@@ -89,16 +89,9 @@ function truncate(text: string, length: number): string {
   return text.length <= length ? text : `${text.slice(0, text.lastIndexOf(' ', length))}…`;
 }
 
-async function loadPostFile(
-  path: string,
-  markdown: string,
-  resolveUrl: UrlResolver,
-): Promise<BlogPost | undefined> {
+async function loadPostFile(path: string, markdown: string, resolveUrl: UrlResolver): Promise<BlogPost> {
   const rendered = await renderMarkdown(markdown, { resolveUrl, removeTitle: true });
   const { frontmatter } = rendered;
-  if (frontmatter.draft === true && !isDev()) {
-    return undefined;
-  }
   const { date, slug } = postLocation(path, markdown);
   const categories: BlogCategory[] = stringList(frontmatter.categories).map((name) => ({ name, slug: slugify(name) }));
   // Without a `<!-- more -->` marker, the excerpt is the first paragraph.
@@ -131,16 +124,17 @@ export function loadPosts(): Promise<BlogPost[]> {
   const files = existsSync(dir) ? readdirSync(dir).filter((file) => file.endsWith('.md')) : [];
   const key = files.map((file) => `${file}:${statSync(join(dir, file)).mtimeMs}`).join('|');
   if (cache?.key !== key) {
-    const sources = files.map((file) => ({ file, path: join(dir, file), markdown: readFileSync(join(dir, file), 'utf8') }));
+    const sources = files
+      .map((file) => ({ file, path: join(dir, file), markdown: readFileSync(join(dir, file), 'utf8') }))
+      // The drafts are only published by the dev server, so an unfinished draft can't break the build.
+      .filter(({ markdown }) => isDev() || extractFrontmatter(markdown).data.draft !== true);
     const resolveUrl = createBlogUrlResolver(
       new Map(sources.map(({ file, path, markdown }) => [file, postLocation(path, markdown).url])),
     );
     const posts = Promise.all(
       sources.map(({ path, markdown }) => loadPostFile(path, markdown, resolveUrl)),
     ).then((loaded) => {
-      const result = loaded
-        .filter((post): post is BlogPost => post !== undefined)
-        .toSorted((a, b) => b.date.localeCompare(a.date) || a.title.localeCompare(b.title));
+      const result = loaded.toSorted((a, b) => b.date.localeCompare(a.date) || a.title.localeCompare(b.title));
       const urls = new Set<string>();
       for (const post of result) {
         if (urls.has(post.url)) {

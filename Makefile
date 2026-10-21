@@ -14,8 +14,9 @@ build: install
 deploy-website: install
 	pnpm build
 	@mkdir -p site
-	@# The files are copied in place, so the website served by nginx stays available during the build and the copy.
-	rsync -a --delete-after build/client/ site/
+	@# The website served by nginx stays available during the build. The new files are moved in place at the end of
+	@# the copy (--delay-updates), so the pages never reference assets that are not copied yet.
+	rsync -a --delay-updates --delete-after build/client/ site/
 
 .PHONY: lint
 lint: install

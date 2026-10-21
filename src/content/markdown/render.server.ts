@@ -74,6 +74,18 @@ export function extractFrontmatter(markdown: string): { data: Record<string, unk
 }
 
 /**
+ * stripInlineFormatting removes the backticks and the emphasis markers (`*text*`, `**text**`, `_text_`) of a line of
+ * markdown, keeping the other `*` and `_` characters (`perses_config`).
+ */
+export function stripInlineFormatting(text: string): string {
+  return text
+    .replace(/`/g, '')
+    .replace(/(\*\*|__)(?=\S)(.+?)(?<=\S)\1/g, '$2')
+    .replace(/(?<![\w*])\*(?=\S)(.+?)(?<=\S)\*(?![\w*])/g, '$1')
+    .replace(/(?<!\w)_(?=\S)(.+?)(?<=\S)_(?!\w)/g, '$1');
+}
+
+/**
  * markdownTitle returns the title of a markdown document without rendering it: the `title` of its front matter, or
  * its first h1 (ATX `# Title` or setext `Title` followed by `===`), without the inline formatting characters.
  */
@@ -97,7 +109,7 @@ export function markdownTitle(markdown: string): string | undefined {
     const setext = line.trim() !== '' && /^=+\s*$/.test(lines[i + 1] ?? '') ? line.trim() : undefined;
     const title = atx ?? setext;
     if (title !== undefined) {
-      return title.replace(/[`*_]/g, '');
+      return stripInlineFormatting(title);
     }
   }
   return undefined;
