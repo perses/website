@@ -5,7 +5,6 @@ import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
-import { Link as RouterLink } from 'react-router';
 import { parseInlineLinks } from '../../utils/inlineLinks';
 import { isExternalHref } from '../../utils/urls';
 import { SocialIcon, type SocialIconName } from '../SocialIcon/SocialIcon';
@@ -23,17 +22,25 @@ export interface FooterProps {
 
 export function Footer({ trademark, links }: FooterProps) {
   return (
-    <Box component="footer" sx={{ borderTop: 1, borderColor: 'divider', py: 4, mt: 'auto' }}>
+    <Box component="footer" sx={{ borderTop: 1, borderColor: 'divider', py: 3, mt: 'auto' }}>
       <Container maxWidth="lg">
         <Stack
           direction={{ xs: 'column', md: 'row' }}
           spacing={2}
-          sx={{ justifyContent: 'space-between', alignItems: { xs: 'flex-start', md: 'center' }, mb: 2 }}
+          sx={{ justifyContent: 'space-between', alignItems: 'center', textAlign: { xs: 'center', md: 'left' } }}
         >
-          <Link component={RouterLink} to="/adopters/" color="text.secondary">
-            Adopters
-          </Link>
-          <Stack direction="row" spacing={0.5}>
+          <Typography variant="body2" color="text.secondary">
+            {parseInlineLinks(trademark).map((token, index) =>
+              token.type === 'text' ? (
+                token.value
+              ) : (
+                <Link key={index} href={token.href} target="_blank" rel="noopener noreferrer">
+                  {token.label}
+                </Link>
+              ),
+            )}
+          </Typography>
+          <Stack direction="row" spacing={0.5} sx={{ flexShrink: 0 }}>
             {links.map((link) => (
               <Tooltip key={link.href} title={link.name}>
                 <IconButton
@@ -49,17 +56,6 @@ export function Footer({ trademark, links }: FooterProps) {
             ))}
           </Stack>
         </Stack>
-        <Typography variant="body2" color="text.secondary">
-          {parseInlineLinks(trademark).map((token, index) =>
-            token.type === 'text' ? (
-              token.value
-            ) : (
-              <Link key={index} href={token.href} target="_blank" rel="noopener noreferrer">
-                {token.label}
-              </Link>
-            ),
-          )}
-        </Typography>
       </Container>
     </Box>
   );

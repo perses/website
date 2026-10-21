@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest';
 import { Footer } from './Footer';
 
 describe('Footer', () => {
-  it('renders the trademark notice, the social links and the adopters link', () => {
+  it('renders the trademark notice and the social links only', () => {
     const Stub = createRoutesStub([
       {
         path: '/',
@@ -27,7 +27,6 @@ describe('Footer', () => {
     );
     expect(screen.getByRole('link', { name: 'Slack' }).getAttribute('target')).toBe('_blank');
     expect(screen.getByRole('link', { name: 'RSS' }).getAttribute('target')).toBeNull();
-    expect(screen.getByRole('link', { name: 'Adopters' }).getAttribute('href')).toBe('/adopters/');
-    expect(screen.queryByRole('link', { name: 'Blog' })).toBeNull();
+    expect(screen.getAllByRole('link')).toHaveLength(3);
   });
 });
