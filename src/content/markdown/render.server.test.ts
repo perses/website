@@ -97,4 +97,9 @@ describe('stripInlineFormatting', () => {
     expect(stripInlineFormatting('A **bold** and *italic* or _italic_ title')).toBe('A bold and italic or italic title');
     expect(stripInlineFormatting('snake_case_name and 2 * 3 * 4')).toBe('snake_case_name and 2 * 3 * 4');
   });
+
+  it('keeps the content of the inline code', () => {
+    expect(stripInlineFormatting('The `__name__` label')).toBe('The __name__ label');
+    expect(stripInlineFormatting('Glob `**/*.md` files with **care**')).toBe('Glob **/*.md files with care');
+  });
 });

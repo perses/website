@@ -75,14 +75,21 @@ export function extractFrontmatter(markdown: string): { data: Record<string, unk
 
 /**
  * stripInlineFormatting removes the backticks and the emphasis markers (`*text*`, `**text**`, `_text_`) of a line of
- * markdown, keeping the other `*` and `_` characters (`perses_config`).
+ * markdown. The other `*` and `_` characters (`snake_case`) and the content of the inline code (`__name__`) are kept.
  */
 export function stripInlineFormatting(text: string): string {
   return text
-    .replace(/`/g, '')
-    .replace(/(\*\*|__)(?=\S)(.+?)(?<=\S)\1/g, '$2')
-    .replace(/(?<![\w*])\*(?=\S)(.+?)(?<=\S)\*(?![\w*])/g, '$1')
-    .replace(/(?<!\w)_(?=\S)(.+?)(?<=\S)_(?!\w)/g, '$1');
+    .split(/(`[^`]*`)/)
+    .map((part, index) =>
+      index % 2 === 1
+        ? part.slice(1, -1)
+        : part
+            .replace(/`/g, '')
+            .replace(/(\*\*|__)(?=\S)(.+?)(?<=\S)\1/g, '$2')
+            .replace(/(?<![\w*])\*(?=\S)(.+?)(?<=\S)\*(?![\w*])/g, '$1')
+            .replace(/(?<!\w)_(?=\S)(.+?)(?<=\S)_(?!\w)/g, '$1'),
+    )
+    .join('');
 }
 
 /**
