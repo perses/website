@@ -1,0 +1,10 @@
+# Navigation of the Helm charts documentation (main branch).
+# It is used because the repository doesn't contain a docs/nav.yaml file.
+# See website.yaml for the lookup order and the syntax of this file.
+- Overview: overview.md
+- Installation: installation.md
+- Managing Resources:
+    - Using ConfigMaps: managing-resources-with-configmaps.md
+    - Using OCI Artifacts: packaging-resources-as-oci-artifacts.md
+    - Authentication Secrets: auth-secrets.md
+- Upgrade Guide: upgrade-guide.md

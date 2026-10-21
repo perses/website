@@ -1,0 +1,9 @@
+# Navigation of the Perses Operator documentation, used from v0.3 until a version provides its own docs/nav.yaml.
+# See website.yaml for the lookup order and the syntax of this file.
+- User Guide: user-guide.md
+- API Reference: api.md
+- Metrics: metrics.md
+- Install with Helm: /docs/helm-charts/installation/
+- Contributing:
+    - Developer Guide: dev.md
+    - Testing: testing.md

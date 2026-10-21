@@ -1,0 +1,199 @@
+import type { Element, Root as HastRoot, RootContent } from 'hast';
+import { toString } from 'hast-util-to-string';
+import type { Root as MdastRoot } from 'mdast';
+import rehypeRaw from 'rehype-raw';
+import remarkGfm from 'remark-gfm';
+import remarkParse from 'remark-parse';
+import remarkRehype from 'remark-rehype';
+import rehypeShikiFromHighlighter from '@shikijs/rehype/core';
+import { createHighlighter, type HighlighterGeneric } from 'shiki';
+import { unified } from 'unified';
+import { visit } from 'unist-util-visit';
+import { parse as parseYaml } from 'yaml';
+import type { MarkdownContent } from '../types.ts';
+import { convertMkdocsAdmonitions, remarkAdmonitions } from './admonitions.server.ts';
+import { type HeadingsResult, rehypeHeadings } from './headings.server.ts';
+import { rehypeRewriteUrls, type UrlResolver } from './links.server.ts';
+
+const languages = [
+  'yaml',
+  'go',
+  'shellscript',
+  'shellsession',
+  'cue',
+  'json',
+  'jsonc',
+  'json5',
+  'typescript',
+  'tsx',
+  'javascript',
+  'jsx',
+  'docker',
+  'html',
+  'css',
+  'markdown',
+  'diff',
+  'toml',
+  'ini',
+  'sql',
+  'python',
+  'jsonnet',
+  'hcl',
+  'nginx',
+  'xml',
+  'http',
+  'make',
+] as const;
+
+export const shikiThemes = { light: 'github-light', dark: 'github-dark' } as const;
+
+// oxlint-disable-next-line typescript/no-explicit-any
+let highlighterPromise: Promise<HighlighterGeneric<any, any>> | undefined;
+
+function getHighlighter() {
+  highlighterPromise ??= createHighlighter({
+    themes: Object.values(shikiThemes),
+    langs: [...languages],
+    langAlias: { golang: 'go', promql: 'text', tree: 'text', ppl: 'sql', gotmpl: 'go' },
+  });
+  return highlighterPromise;
+}
+
+const frontmatterRegexp = /^---\r?\n([\s\S]*?)\r?\n---[ \t]*(?:\r?\n|$)/;
+
+export function extractFrontmatter(markdown: string): { data: Record<string, unknown>; body: string } {
+  const match = frontmatterRegexp.exec(markdown);
+  if (!match) {
+    return { data: {}, body: markdown };
+  }
+  const data: unknown = parseYaml(match[1] ?? '');
+  return {
+    data: data !== null && typeof data === 'object' ? (data as Record<string, unknown>) : {},
+    body: markdown.slice(match[0].length),
+  };
+}
+
+/**
+ * rehypeMermaid replaces the mermaid code blocks with a `pre.mermaid` element, rendered on the client side.
+ */
+function rehypeMermaid(result: { hasMermaid: boolean }) {
+  return (tree: HastRoot) => {
+    visit(tree, 'element', (node: Element, index, parent) => {
+      if (node.tagName !== 'pre' || parent === undefined || index === undefined) {
+        return;
+      }
+      const [code] = node.children;
+      if (code?.type !== 'element' || code.tagName !== 'code') {
+        return;
+      }
+      const classes = code.properties.className;
+      if (!Array.isArray(classes) || !classes.includes('language-mermaid')) {
+        return;
+      }
+      result.hasMermaid = true;
+      parent.children[index] = {
+        type: 'element',
+        tagName: 'pre',
+        properties: { className: ['mermaid'] },
+        children: [{ type: 'text', value: toString(code) }],
+      };
+    });
+  };
+}
+
+/**
+ * rehypeCleanup removes the positional information to reduce the size of the serialized tree, and inlines the root
+ * nodes inserted by Shiki in place of the code blocks.
+ */
+function rehypeCleanup() {
+  return (tree: HastRoot) => {
+    const flatten = (node: HastRoot | Element) => {
+      // Shiki returns a root node, which is not a valid child type for hast but is inserted as is in the tree.
+      const children = node.children as (typeof node.children[number] | HastRoot)[];
+      node.children = children.flatMap((child) => (child.type === 'root' ? child.children : [child])) as typeof node.children;
+      for (const child of node.children) {
+        if (child.type === 'element') {
+          flatten(child);
+        }
+      }
+    };
+    flatten(tree);
+    visit(tree, (node) => {
+      delete node.position;
+    });
+  };
+}
+
+export interface RenderOptions {
+  resolveUrl?: UrlResolver;
+  /** Remove the first h1 of the document, when the title is displayed separately. */
+  removeTitle?: boolean;
+}
+
+export interface RenderedMarkdown extends MarkdownContent {
+  frontmatter: Record<string, unknown>;
+  /** Content located before the `<!-- more -->` marker, if any. */
+  excerpt?: HastRoot;
+  /** Plain text of the document, used to estimate the reading time. */
+  text: string;
+}
+
+function isMoreMarker(node: RootContent): boolean {
+  return node.type === 'comment' && node.value.trim() === 'more';
+}
+
+function removeFirstH1(tree: HastRoot) {
+  const index = tree.children.findIndex((node) => node.type === 'element' && node.tagName === 'h1');
+  if (index !== -1) {
+    tree.children.splice(index, 1);
+  }
+}
+
+export async function renderMarkdown(markdown: string, options: RenderOptions = {}): Promise<RenderedMarkdown> {
+  const { data, body } = extractFrontmatter(markdown);
+  const headings: HeadingsResult = { toc: [] };
+  const mermaid = { hasMermaid: false };
+  const highlighter = await getHighlighter();
+
+  const processor = unified()
+    .use(remarkParse)
+    .use(remarkGfm)
+    .use(remarkAdmonitions)
+    .use(remarkRehype, { allowDangerousHtml: true })
+    .use(rehypeRaw)
+    .use(rehypeHeadings, headings)
+    .use(rehypeMermaid, mermaid)
+    .use(rehypeShikiFromHighlighter, highlighter, {
+      themes: shikiThemes,
+      defaultColor: false,
+      fallbackLanguage: 'text',
+      defaultLanguage: 'text',
+      addLanguageClass: true,
+    })
+    .use(rehypeCleanup);
+  if (options.resolveUrl) {
+    processor.use(rehypeRewriteUrls, options.resolveUrl);
+  }
+
+  const mdast = processor.parse(convertMkdocsAdmonitions(body)) as MdastRoot;
+  const hast = (await processor.run(mdast)) as HastRoot;
+
+  if (options.removeTitle) {
+    removeFirstH1(hast);
+  }
+
+  const moreIndex = hast.children.findIndex(isMoreMarker);
+  const excerpt: HastRoot | undefined =
+    moreIndex === -1 ? undefined : { type: 'root', children: hast.children.slice(0, moreIndex) };
+
+  const title = typeof data.title === 'string' ? data.title : (headings.title ?? '');
+  return {
+    frontmatter: data,
+    title,
+    toc: headings.toc,
+    hast,
+    excerpt,
+    hasMermaid: mermaid.hasMermaid,
+    text: toString(hast),
+  };
+}

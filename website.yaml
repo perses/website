@@ -1,0 +1,144 @@
+# Main configuration of the Perses website.
+# It describes the site metadata, the top menu, where the documentation comes from and how it is versioned,
+# the footer and the downloads pages.
+
+site:
+  title: Perses
+  description: An open specification for dashboards. The open dashboard tool for Prometheus and other data sources.
+  url: https://perses.dev
+  repository: https://github.com/perses/website
+
+# Entries of the top application bar.
+menu:
+  - title: Docs
+    href: /docs/
+  - title: Plugins
+    href: /docs/plugins/
+  - title: Blog
+    href: /blog/
+  - title: Download
+    href: /download/
+  - title: Demo
+    href: https://demo.perses.dev
+
+# Documentation sources. Each source is pulled from a GitHub repository.
+#
+# The navigation of a source is described by the file `<docsDir>/nav.yaml` in the source itself, so it evolves with
+# the documentation. When it doesn't exist (for example for versions released before this file was introduced),
+# the website looks for:
+#   1. `content/nav/<source>/<version>.yaml` (`<version>` is `vX.Y`, or the branch name for not versioned sources),
+#   2. for versioned sources, the file of the closest lower version in `content/nav/<source>/`,
+#   3. otherwise, the navigation is generated from the files.
+#
+# Syntax of a navigation file (close to the `nav` section of mkdocs):
+#   - overview.md                          # page, the title is the first h1 of the page
+#   - Getting started: getting-started.md  # page with an explicit title
+#   - Concepts:                            # section
+#       - Dashboard: concepts/dashboard.md
+#   - Helm: helm-charts:installation.md    # page of another documentation source (its latest version)
+#   - Plugins: /docs/plugins/              # link to another page of the website
+#   - Demo: https://demo.perses.dev        # external link
+docs:
+  sources:
+    - id: perses
+      title: Perses
+      description: The Perses server, the CLI percli, the dashboard specification and the Dashboard-as-Code SDKs.
+      repository: perses/perses
+      docsDir: docs
+      # Old URL prefix used by the previous website. Pages under this prefix are redirected to the latest version.
+      legacyPath: perses/docs
+      versioning:
+        # Each minor version is published. The docs are taken from the release branch when it exists,
+        # otherwise from the latest patch tag.
+        minVersion: v0.53
+        releaseBranch: release/v{major}.{minor}
+    - id: operator
+      title: Perses Operator
+      description: Manage Perses instances, dashboards and datasources in Kubernetes with Custom Resources.
+      repository: perses/perses-operator
+      docsDir: docs
+      legacyPath: perses-operator/docs
+      versioning:
+        minVersion: v0.3
+        releaseBranch: release/v{major}.{minor}
+    - id: helm-charts
+      title: Helm Charts
+      description: Deploy Perses in Kubernetes with the official Helm charts.
+      repository: perses/helm-charts
+      docsDir: docs
+      legacyPath: helm-charts/docs
+      branch: main
+    - id: plugins
+      title: Plugins
+      description: Datasources, panels, variables and explore plugins maintained by the Perses team.
+      repository: perses/plugins
+      docsDir: docs
+      legacyPath: plugins/docs
+      branch: main
+
+blog:
+  title: Perses Blog
+  description: News, release notes and stories from the Perses community.
+  postsPerPage: 10
+
+footer:
+  trademark: >-
+    The Linux Foundation® (TLF) has registered trademarks and uses trademarks.
+    For a list of TLF trademarks, see [Trademark Usage](https://www.linuxfoundation.org/trademark-usage/).
+  links:
+    - name: GitHub
+      icon: github
+      href: https://github.com/perses/perses
+    - name: Slack
+      icon: slack
+      href: https://cloud-native.slack.com/messages/C07KQR95WBE
+    - name: LinkedIn
+      icon: linkedin
+      href: https://linkedin.com/company/persesdev
+    - name: X
+      icon: x
+      href: https://twitter.com/PersesDev
+    - name: Docker Hub
+      icon: docker
+      href: https://hub.docker.com/r/persesdev/perses
+    - name: RSS
+      icon: rss
+      href: /blog/rss.xml
+
+downloads:
+  # Binaries displayed on the download page, in this order.
+  # The install commands can use the placeholders {version} (e.g. v0.55.0) and {versionNumber} (e.g. 0.55.0).
+  binaries:
+    - id: perses
+      title: Perses
+      description: The Perses server and the command line tool percli.
+      repository: perses/perses
+      install:
+        - label: Docker
+          command: docker run --name perses -d -p 127.0.0.1:8080:8080 persesdev/perses:{version}
+        - label: Homebrew
+          command: brew install perses/tap/perses perses/tap/percli
+        - label: Helm
+          command: |-
+            helm repo add perses https://perses.github.io/helm-charts
+            helm install my-perses perses/perses
+    - id: perses-operator
+      title: Perses Operator
+      description: The Kubernetes operator to manage Perses instances, dashboards and datasources with Custom Resources.
+      repository: perses/perses-operator
+      install:
+        - label: Docker
+          command: docker pull persesdev/perses-operator:{version}
+        - label: Helm
+          command: |-
+            helm repo add perses https://perses.github.io/helm-charts
+            helm install perses-operator perses/perses-operator
+    - id: metrics-usage
+      title: Metrics Usage
+      description: A tool for tracking the usage of metrics across dashboards, alerting rules and recording rules.
+      repository: perses/metrics-usage
+      install:
+        - label: Docker
+          command: docker pull persesdev/metrics-usage:{version}
+  plugins:
+    repository: perses/plugins

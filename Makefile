@@ -1,14 +1,23 @@
-.PHONY: synchronize
-synchronize:
-	@bash ./scripts/synchronize.sh
+.PHONY: install
+install:
+	pnpm install --frozen-lockfile
 
-.PHONY: website-install-depenencies
-website-install-depenencies:
-	@npm install --prefix ./website
+.PHONY: dev
+dev: install
+	pnpm dev
 
-.PHONY: website-preview
-website-preview: website-install-depenencies synchronize
-	@npm run dev --prefix ./website
+.PHONY: build
+build: install
+	pnpm build
+
+.PHONY: lint
+lint: install
+	pnpm lint
+	pnpm typecheck
+
+.PHONY: test
+test: install
+	pnpm test
 
 .PHONY: generate-config
 generate-config:
