@@ -17,6 +17,7 @@ import { theme } from './theme/theme';
 export const links: Route.LinksFunction = () => [
   { rel: 'icon', type: 'image/png', href: '/assets/images/favicon.png' },
   { rel: 'alternate', type: 'application/rss+xml', title: 'Perses Blog', href: '/blog/rss.xml' },
+  { rel: 'alternate', type: 'application/feed+json', title: 'Perses Blog', href: '/blog/feed.json' },
 ];
 
 export function Layout({ children }: { children: ReactNode }) {

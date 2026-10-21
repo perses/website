@@ -5,9 +5,9 @@ import { toString } from 'hast-util-to-string';
 import { slugify } from '../utils/slugify.ts';
 import { blogCategoryUrl, blogPostUrl } from '../utils/urls.ts';
 import { contentDir, isDev, loadConfig } from './config.server.ts';
-import { mapLegacyUrl } from './legacy.server.ts';
-import { isExternalUrl, type UrlResolver } from './markdown/links.server.ts';
-import { renderMarkdown } from './markdown/render.server.ts';
+import { mapLegacyPath, mapLegacyUrl } from './legacy.server.ts';
+import { isExternalUrl, splitUrl, type UrlResolver } from './markdown/links.server.ts';
+import { extractFrontmatter, markdownTitle, renderMarkdown } from './markdown/render.server.ts';
 import type { BlogArchiveYear, BlogCategory, BlogPost, BlogPostSummary } from './types.ts';
 
 function postsDir(): string {
@@ -15,18 +15,49 @@ function postsDir(): string {
 }
 
 /**
- * The posts used to be in `docs/blog/posts/` with the images in `docs/assets/`, so the relative links look like
- * `../../assets/images/...`. They are resolved as if the posts were still at this location.
+ * createBlogUrlResolver resolves the relative links of the blog posts. The posts used to be in `docs/blog/posts/`
+ * of the mkdocs website, with the images in `docs/assets/` and the pages in `docs/`, so the relative links look like
+ * `../../assets/images/...` or `../../adopters.md`. They are resolved as if the posts were still at this location:
+ * - the links to other posts (`./v0.54.0.md`) target the URL of the post,
+ * - the links to markdown pages target their URL (`/adopters/`), with the legacy documentation URLs mapped to the
+ *   new ones,
+ * - the other files (images, videos) are served from `public/`.
  */
-const blogUrlResolver: UrlResolver = (url) => {
-  if (url.startsWith('#')) {
-    return undefined;
+export function createBlogUrlResolver(postUrls: ReadonlyMap<string, string>): UrlResolver {
+  return (url) => {
+    if (url.startsWith('#')) {
+      return undefined;
+    }
+    if (isExternalUrl(url) || url.startsWith('/')) {
+      return mapLegacyUrl(url);
+    }
+    const { path, suffix } = splitUrl(url);
+    const resolved = posix.normalize(posix.join('/blog/posts/', path));
+    if (!/\.md$/i.test(resolved)) {
+      return `${resolved}${suffix}`;
+    }
+    const post = resolved.startsWith('/blog/posts/') ? postUrls.get(posix.basename(resolved)) : undefined;
+    if (post !== undefined) {
+      return `${post}${suffix}`;
+    }
+    const page = `${resolved.replace(/\.md$/i, '').replace(/(^|\/)(README|index)$/i, '').replace(/\/$/, '')}/`;
+    return `${mapLegacyPath(page) ?? page}${suffix}`;
+  };
+}
+
+/**
+ * postLocation computes the slug and the URL of a post from its source, without rendering it.
+ */
+function postLocation(file: string, markdown: string): { date: string; slug: string; url: string } {
+  const { data } = extractFrontmatter(markdown);
+  const date = normalizeDate(data.date, file);
+  const title = markdownTitle(markdown);
+  if (title === undefined) {
+    throw new Error(`${file}: a blog post must have a title (front matter "title" or a h1)`);
   }
-  if (isExternalUrl(url) || url.startsWith('/')) {
-    return mapLegacyUrl(url);
-  }
-  return posix.normalize(posix.join('/blog/posts/', url));
-};
+  const slug = typeof data.slug === 'string' ? data.slug : slugify(title);
+  return { date, slug, url: blogPostUrl(date, slug) };
+}
 
 function normalizeDate(value: unknown, file: string): string {
   if (value instanceof Date) {
@@ -58,18 +89,17 @@ function truncate(text: string, length: number): string {
   return text.length <= length ? text : `${text.slice(0, text.lastIndexOf(' ', length))}…`;
 }
 
-async function loadPostFile(file: string): Promise<BlogPost | undefined> {
-  const path = join(postsDir(), file);
-  const rendered = await renderMarkdown(readFileSync(path, 'utf8'), { resolveUrl: blogUrlResolver, removeTitle: true });
+async function loadPostFile(
+  path: string,
+  markdown: string,
+  resolveUrl: UrlResolver,
+): Promise<BlogPost | undefined> {
+  const rendered = await renderMarkdown(markdown, { resolveUrl, removeTitle: true });
   const { frontmatter } = rendered;
   if (frontmatter.draft === true && !isDev()) {
     return undefined;
   }
-  if (rendered.title === '') {
-    throw new Error(`${path}: a blog post must have a title (front matter "title" or a h1)`);
-  }
-  const date = normalizeDate(frontmatter.date, path);
-  const slug = typeof frontmatter.slug === 'string' ? frontmatter.slug : slugify(rendered.title);
+  const { date, slug } = postLocation(path, markdown);
   const categories: BlogCategory[] = stringList(frontmatter.categories).map((name) => ({ name, slug: slugify(name) }));
   // Without a `<!-- more -->` marker, the excerpt is the first paragraph.
   const firstParagraphNode = rendered.hast.children.find((node) => node.type === 'element' && node.tagName === 'p');
@@ -101,7 +131,13 @@ export function loadPosts(): Promise<BlogPost[]> {
   const files = existsSync(dir) ? readdirSync(dir).filter((file) => file.endsWith('.md')) : [];
   const key = files.map((file) => `${file}:${statSync(join(dir, file)).mtimeMs}`).join('|');
   if (cache?.key !== key) {
-    const posts = Promise.all(files.map(loadPostFile)).then((loaded) => {
+    const sources = files.map((file) => ({ file, path: join(dir, file), markdown: readFileSync(join(dir, file), 'utf8') }));
+    const resolveUrl = createBlogUrlResolver(
+      new Map(sources.map(({ file, path, markdown }) => [file, postLocation(path, markdown).url])),
+    );
+    const posts = Promise.all(
+      sources.map(({ path, markdown }) => loadPostFile(path, markdown, resolveUrl)),
+    ).then((loaded) => {
       const result = loaded
         .filter((post): post is BlogPost => post !== undefined)
         .toSorted((a, b) => b.date.localeCompare(a.date) || a.title.localeCompare(b.title));
@@ -225,7 +261,11 @@ export async function listBlogPaths(): Promise<string[]> {
       `/blog/category/${category.slug}/rss.xml`,
     ]),
     '/blog/rss.xml',
+    '/blog/feed.json',
     '/feed_rss_created.xml',
+    '/feed_rss_updated.xml',
+    '/feed_json_created.json',
+    '/feed_json_updated.json',
     // Archive pages of the previous website, redirected to the blog.
     ...[...new Set(posts.map((post) => post.date.slice(0, 4)))].map((year) => `/blog/archive/${year}/`),
   ];

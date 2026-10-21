@@ -10,6 +10,13 @@ dev: install
 build: install
 	pnpm build
 
+.PHONY: deploy-website
+deploy-website: install
+	pnpm build
+	@mkdir -p site
+	@# The files are copied in place, so the website served by nginx stays available during the build and the copy.
+	rsync -a --delete-after build/client/ site/
+
 .PHONY: lint
 lint: install
 	pnpm lint

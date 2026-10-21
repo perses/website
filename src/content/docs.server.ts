@@ -5,7 +5,7 @@ import { contentDir, isDev, loadConfig, type SourceConfig } from './config.serve
 import { mapLegacyUrl } from './legacy.server.ts';
 import { loadManifest, type ManifestVersion } from './manifest.server.ts';
 import { isExternalUrl, splitUrl, type UrlResolver } from './markdown/links.server.ts';
-import { extractFrontmatter, type RenderedMarkdown, renderMarkdown } from './markdown/render.server.ts';
+import { markdownTitle, type RenderedMarkdown, renderMarkdown } from './markdown/render.server.ts';
 import { generateNav, type NavEntry, parseNav } from './nav.server.ts';
 import type {
   DocsPageData,
@@ -191,28 +191,7 @@ export function pageTitle(page: PageFile): string {
   if (cached !== undefined) {
     return cached;
   }
-  const { data, body } = extractFrontmatter(readFileSync(page.absPath, 'utf8'));
-  let title = typeof data.title === 'string' ? data.title : undefined;
-  if (title === undefined) {
-    const lines = body.split('\n');
-    let inFence = false;
-    for (let i = 0; i < lines.length && title === undefined; i++) {
-      const line = lines[i] ?? '';
-      if (/^\s*(```|~~~)/.test(line)) {
-        inFence = !inFence;
-        continue;
-      }
-      if (inFence) {
-        continue;
-      }
-      const atx = /^#\s+(.+?)\s*#*\s*$/.exec(line);
-      if (atx?.[1]) {
-        title = atx[1];
-      } else if (line.trim() !== '' && /^=+\s*$/.test(lines[i + 1] ?? '')) {
-        title = line.trim();
-      }
-    }
-  }
+  const title = markdownTitle(readFileSync(page.absPath, 'utf8'));
   const result = (title ?? page.slug.split('/').at(-1) ?? page.slug).replace(/`/g, '');
   titleCache.set(key, result);
   return result;
@@ -454,6 +433,23 @@ function versionOptions(source: DocsSource, slug: string): VersionOption[] {
     href: version.pages.has(slug) ? docsUrl(source.config.id, versionSegment(version), slug) : entryUrl(version),
     latest: version.isLatest,
   }));
+}
+
+/**
+ * finalDocsUrl follows the redirections of a documentation URL (for example the root of a version, redirected to
+ * its first page), so a single redirection is needed to reach the page.
+ */
+export function finalDocsUrl(url: string): string {
+  let current = url;
+  for (let i = 0; i < 5; i++) {
+    const match = /^\/docs\/([a-z0-9-]+)\/(.*)$/.exec(current);
+    const route = match?.[1] === undefined ? undefined : resolveDocsRoute(match[1], match[2] ?? '');
+    if (route?.type !== 'redirect') {
+      return current;
+    }
+    current = route.to;
+  }
+  return current;
 }
 
 export async function loadDocsPage(

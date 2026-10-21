@@ -1,5 +1,6 @@
+import { redirect } from 'react-router';
 import { NotFound } from '../../components/NotFound/NotFound';
-import { Redirect, redirectMeta } from '../../components/Redirect/Redirect';
+import { finalDocsUrl } from '../../content/docs.server';
 import { mapLegacyPath } from '../../content/legacy.server';
 import type { Route } from './+types/CatchAll';
 
@@ -11,19 +12,19 @@ export function loader({ url }: Route.LoaderArgs) {
   // `url` is the URL of the page, while `request.url` is the URL of the data request (`.../_.data`).
   const { pathname } = url;
   if (pathname.startsWith('/blog/archive/')) {
-    return { to: '/blog/' };
+    throw redirect('/blog/', 301);
   }
   const to = mapLegacyPath(pathname);
-  return to === undefined ? { to: undefined } : { to };
+  if (to !== undefined) {
+    throw redirect(finalDocsUrl(to), 301);
+  }
+  return { notFound: true };
 }
 
-export function meta({ loaderData }: Route.MetaArgs) {
-  if (loaderData?.to !== undefined) {
-    return redirectMeta(loaderData.to);
-  }
+export function meta() {
   return [{ title: 'Page not found | Perses' }, { name: 'robots', content: 'noindex' }];
 }
 
-export default function CatchAll({ loaderData }: Route.ComponentProps) {
-  return loaderData.to === undefined ? <NotFound /> : <Redirect to={loaderData.to} />;
+export default function CatchAll() {
+  return <NotFound />;
 }

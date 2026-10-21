@@ -7,7 +7,9 @@ services:
     ports:
       - "1313:80"
     volumes:
-      - ./build/client:/usr/share/nginx/html:ro
+      # The website is copied in ./site by `make deploy-website`. The build directory can't be mounted directly:
+      # the build deletes and recreates it, so the container would keep serving the deleted directory.
+      - ./site:/usr/share/nginx/html:ro
       - ./nginx/website.conf:/etc/nginx/conf.d/default.conf:ro
     labels:
       - "traefik.enable=true"

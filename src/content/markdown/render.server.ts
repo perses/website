@@ -74,6 +74,36 @@ export function extractFrontmatter(markdown: string): { data: Record<string, unk
 }
 
 /**
+ * markdownTitle returns the title of a markdown document without rendering it: the `title` of its front matter, or
+ * its first h1 (ATX `# Title` or setext `Title` followed by `===`), without the inline formatting characters.
+ */
+export function markdownTitle(markdown: string): string | undefined {
+  const { data, body } = extractFrontmatter(markdown);
+  if (typeof data.title === 'string') {
+    return data.title;
+  }
+  const lines = body.split('\n');
+  let inFence = false;
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i] ?? '';
+    if (/^\s*(```|~~~)/.test(line)) {
+      inFence = !inFence;
+      continue;
+    }
+    if (inFence) {
+      continue;
+    }
+    const atx = /^#\s+(.+?)\s*#*\s*$/.exec(line)?.[1];
+    const setext = line.trim() !== '' && /^=+\s*$/.test(lines[i + 1] ?? '') ? line.trim() : undefined;
+    const title = atx ?? setext;
+    if (title !== undefined) {
+      return title.replace(/[`*_]/g, '');
+    }
+  }
+  return undefined;
+}
+
+/**
  * rehypeMermaid replaces the mermaid code blocks with a `pre.mermaid` element, rendered on the client side.
  */
 function rehypeMermaid(result: { hasMermaid: boolean }) {

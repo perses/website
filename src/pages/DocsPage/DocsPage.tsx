@@ -8,11 +8,10 @@ import Drawer from '@mui/material/Drawer';
 import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
-import { data, Link as RouterLink, useLocation } from 'react-router';
+import { data, Link as RouterLink, redirect, useLocation } from 'react-router';
 import { DocsSidebar } from '../../components/DocsSidebar/DocsSidebar';
 import { Markdown } from '../../components/Markdown/Markdown';
 import { NotFound } from '../../components/NotFound/NotFound';
-import { Redirect, redirectMeta } from '../../components/Redirect/Redirect';
 import { TableOfContents } from '../../components/TableOfContents/TableOfContents';
 import { loadDocsPage } from '../../content/docs.server';
 import type { DocsPageData } from '../../content/types';
@@ -28,15 +27,17 @@ export async function loader({ params }: Route.LoaderArgs) {
   if (page === undefined) {
     throw data(null, { status: 404 });
   }
+  if ('to' in page) {
+    // At build time, React Router writes a static redirection page and keeps the redirection in the data used by the
+    // client-side navigation.
+    throw redirect(page.to, 301);
+  }
   return page;
 }
 
 export function meta({ loaderData, matches }: Route.MetaArgs) {
   if (loaderData === undefined) {
     return [];
-  }
-  if ('to' in loaderData) {
-    return redirectMeta(loaderData.to);
   }
   const title = loaderData.content.title;
   const version = loaderData.resolvedVersion === undefined ? '' : ` ${loaderData.resolvedVersion}`;
@@ -82,10 +83,6 @@ function SearchFilters({ page }: { page: DocsPageData }) {
 export default function DocsPage({ loaderData }: Route.ComponentProps) {
   const { pathname } = useLocation();
   const [drawerOpen, setDrawerOpen] = useState(false);
-
-  if ('to' in loaderData) {
-    return <Redirect to={loaderData.to} />;
-  }
 
   const page = loaderData;
   const indexed = page.canonical === page.path;

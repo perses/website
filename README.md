@@ -147,14 +147,14 @@ The documentation is written in markdown (GitHub flavored). Both admonition synt
 
 ### Deploy the website
 
-To build the website, run:
+To build the website and publish it in the folder `site/` served by nginx, run:
 
 ```bash
-pnpm install --frozen-lockfile
-pnpm build
+make deploy-website
 ```
 
-Then you can run:
+The website stays available during the build: the new version is copied in `site/` at the end. The first time, start
+the container serving it:
 
 ```bash
 podman-compose up -d website

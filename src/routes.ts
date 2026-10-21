@@ -3,8 +3,12 @@ import { index, layout, route, type RouteConfig } from '@react-router/dev/routes
 export default [
   route('blog/rss.xml', 'resources/BlogFeed/BlogFeed.ts', { id: 'blog-feed' }),
   route('blog/category/:category/rss.xml', 'resources/BlogFeed/BlogFeed.ts', { id: 'blog-category-feed' }),
-  // URL of the RSS feed of the previous website, kept for the existing subscribers.
-  route('feed_rss_created.xml', 'resources/BlogFeed/BlogFeed.ts', { id: 'legacy-blog-feed' }),
+  route('blog/feed.json', 'resources/BlogJsonFeed/BlogJsonFeed.ts', { id: 'blog-json-feed' }),
+  // URLs of the feeds of the previous website, kept for the existing subscribers.
+  route('feed_rss_created.xml', 'resources/BlogFeed/BlogFeed.ts', { id: 'legacy-blog-feed-created' }),
+  route('feed_rss_updated.xml', 'resources/BlogFeed/BlogFeed.ts', { id: 'legacy-blog-feed-updated' }),
+  route('feed_json_created.json', 'resources/BlogJsonFeed/BlogJsonFeed.ts', { id: 'legacy-blog-json-feed-created' }),
+  route('feed_json_updated.json', 'resources/BlogJsonFeed/BlogJsonFeed.ts', { id: 'legacy-blog-json-feed-updated' }),
   route('sitemap.xml', 'resources/Sitemap/Sitemap.ts'),
   layout('pages/Layout/Layout.tsx', [
     index('pages/Home/Home.tsx'),
