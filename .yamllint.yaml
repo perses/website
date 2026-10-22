@@ -1,7 +1,11 @@
 extends: default
 
 ignore: |
-  /site/
+  /node_modules/
+  /build/
+  /.cache/
+  /pnpm-lock.yaml
+  /venv/
 
 rules:
   document-start: disable
