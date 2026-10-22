@@ -1,6 +1,6 @@
 import { execFile } from 'node:child_process';
 import { existsSync } from 'node:fs';
-import { mkdir, rm, writeFile } from 'node:fs/promises';
+import { mkdir, rename, rm, writeFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
@@ -30,25 +30,40 @@ async function lsRemote(repository: string, flags: string[], patterns: string[] 
 
 /**
  * downloadDocs downloads the archive of the repository at the given commit and extracts the docs directory only.
+ * The archive is extracted in a staging directory, which replaces the destination only once the extraction succeeded:
+ * when the download fails, the previous content of the destination, referenced by the previous manifest, is kept.
  */
-async function downloadDocs(source: SourceConfig, sha: string, destination: string): Promise<void> {
+export async function downloadDocs(source: SourceConfig, sha: string, destination: string): Promise<void> {
   const response = await fetch(`https://codeload.github.com/${source.repository}/tar.gz/${sha}`);
   if (!response.ok || response.body === null) {
     throw new Error(`unable to download ${source.repository}@${sha}: ${response.status} ${response.statusText}`);
   }
   const docsDir = source.docsDir.replace(/^\/+|\/+$/g, '');
   const depth = docsDir.split('/').length;
-  await rm(destination, { recursive: true, force: true });
-  await mkdir(destination, { recursive: true });
-  await pipeline(
-    Readable.fromWeb(response.body as NodeReadableStream<Uint8Array>),
-    tar.x({
-      cwd: destination,
-      strip: 1 + depth,
-      // The first segment of each entry is the archive root folder `<repo>-<sha>`.
-      filter: (path) => path.split('/').slice(1, 1 + depth).join('/') === docsDir && path.split('/').length > 1 + depth,
-    }),
-  );
+  const staging = `${destination}.staging`;
+  const previous = `${destination}.previous`;
+  await rm(staging, { recursive: true, force: true });
+  await mkdir(staging, { recursive: true });
+  try {
+    await pipeline(
+      Readable.fromWeb(response.body as NodeReadableStream<Uint8Array>),
+      tar.x({
+        cwd: staging,
+        strip: 1 + depth,
+        // The first segment of each entry is the archive root folder `<repo>-<sha>`.
+        filter: (path) => path.split('/').slice(1, 1 + depth).join('/') === docsDir && path.split('/').length > 1 + depth,
+      }),
+    );
+  } catch (error) {
+    await rm(staging, { recursive: true, force: true });
+    throw error;
+  }
+  await rm(previous, { recursive: true, force: true });
+  if (existsSync(destination)) {
+    await rename(destination, previous);
+  }
+  await rename(staging, destination);
+  await rm(previous, { recursive: true, force: true });
 }
 
 async function resolveSource(source: SourceConfig): Promise<Omit<ManifestVersion, 'dir'>[]> {

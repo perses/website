@@ -85,10 +85,9 @@ function NavItem({ node, depth, pathname, id, open, toggle, onNavigate }: NavIte
   );
 }
 
-/**
- * NavTree displays the navigation of a documentation source. The sections containing the current page are expanded.
- */
-export function NavTree({ nodes, pathname, onNavigate }: NavTreeProps) {
+function NavTreeContent({ nodes, pathname, onNavigate }: NavTreeProps) {
+  // Sections expanded or collapsed by the visitor. By default, only the sections containing the current page are
+  // expanded.
   const [open, setOpen] = useState<Map<string, boolean>>(() => new Map());
   const toggle = (id: string, value: boolean) => setOpen((previous) => new Map(previous).set(id, value));
   return (
@@ -107,4 +106,13 @@ export function NavTree({ nodes, pathname, onNavigate }: NavTreeProps) {
       ))}
     </List>
   );
+}
+
+/**
+ * NavTree displays the navigation of a documentation source. The sections containing the current page are expanded.
+ * The sections expanded or collapsed by the visitor are reset when the page changes, so the current page is always
+ * visible, like on a website where each page is loaded from the server.
+ */
+export function NavTree(props: NavTreeProps) {
+  return <NavTreeContent key={props.pathname} {...props} />;
 }

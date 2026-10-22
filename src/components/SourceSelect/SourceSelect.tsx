@@ -6,12 +6,14 @@ import type { SourceSummary } from '../../content/types';
 export interface SourceSelectProps {
   sources: SourceSummary[];
   current: string;
+  /** Called after navigating to the selected documentation. */
+  onNavigate?: () => void;
 }
 
 /**
  * SourceSelect switches between the documentation sources (Perses, the operator, the Helm charts, the plugins).
  */
-export function SourceSelect({ sources, current }: SourceSelectProps) {
+export function SourceSelect({ sources, current, onNavigate }: SourceSelectProps) {
   const navigate = useNavigate();
   return (
     <TextField
@@ -24,6 +26,7 @@ export function SourceSelect({ sources, current }: SourceSelectProps) {
         const target = sources.find((source) => source.id === event.target.value);
         if (target !== undefined) {
           void navigate(target.href);
+          onNavigate?.();
         }
       }}
     >

@@ -151,8 +151,8 @@ function rehypeMermaid(result: { hasMermaid: boolean }) {
 }
 
 /**
- * rehypeCleanup removes the positional information to reduce the size of the serialized tree, and inlines the root
- * nodes inserted by Shiki in place of the code blocks.
+ * rehypeCleanup removes the positional information to reduce the size of the serialized tree, inlines the root
+ * nodes inserted by Shiki in place of the code blocks and marks the images inside a link.
  */
 function rehypeCleanup() {
   return (tree: HastRoot) => {
@@ -169,6 +169,16 @@ function rehypeCleanup() {
     flatten(tree);
     visit(tree, (node) => {
       delete node.position;
+    });
+    // The images inside a link are not enlarged on click: they can't be rendered as a button inside the link.
+    visit(tree, 'element', (node: Element) => {
+      if (node.tagName === 'a') {
+        visit(node, 'element', (child: Element) => {
+          if (child.tagName === 'img') {
+            child.properties.dataInLink = 'true';
+          }
+        });
+      }
     });
   };
 }

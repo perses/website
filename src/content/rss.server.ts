@@ -18,14 +18,20 @@ function cdata(value: string): string {
 }
 
 /**
- * absolutize makes the links and images of a post absolute, as feed readers don't know the URL of the website.
+ * absolutize makes the links and images of a post absolute, as feed readers don't know the URL of the website. The
+ * links to a section of the post (`#security`) target the section of the post on the website.
  */
-function absolutize(tree: Root, siteUrl: string): Root {
+function absolutize(tree: Root, siteUrl: string, postUrl: string): Root {
   const copy = structuredClone(tree);
   visit(copy, 'element', (node) => {
     for (const property of ['href', 'src', 'poster']) {
       const value = node.properties[property];
-      if (typeof value === 'string' && value.startsWith('/') && !value.startsWith('//')) {
+      if (typeof value !== 'string') {
+        continue;
+      }
+      if (value.startsWith('#')) {
+        node.properties[property] = `${siteUrl}${postUrl}${value}`;
+      } else if (value.startsWith('/') && !value.startsWith('//')) {
         node.properties[property] = `${siteUrl}${value}`;
       }
     }
@@ -76,7 +82,7 @@ export async function generateJsonFeed(feedPath: string): Promise<string> {
         url: `${siteUrl}${post.url}`,
         title: post.title,
         summary: post.description,
-        content_html: toHtml(absolutize(post.content.hast, siteUrl)),
+        content_html: toHtml(absolutize(post.content.hast, siteUrl, post.url)),
         date_published: `${post.date}T00:00:00Z`,
         tags: post.categories.map((category) => category.name),
         ...(post.authors.length > 0 ? { authors: post.authors.map((name) => ({ name })) } : {}),
@@ -110,7 +116,7 @@ export async function generateFeed(categorySlug?: string): Promise<string | unde
       ...post.authors.map((author) => `      <dc:creator>${escapeXml(author)}</dc:creator>`),
       ...post.categories.map((c) => `      <category>${escapeXml(c.name)}</category>`),
       `      <description>${escapeXml(post.description)}</description>`,
-      `      <content:encoded>${cdata(toHtml(absolutize(post.content.hast, siteUrl)))}</content:encoded>`,
+      `      <content:encoded>${cdata(toHtml(absolutize(post.content.hast, siteUrl, post.url)))}</content:encoded>`,
       '    </item>',
     ].join('\n');
   });

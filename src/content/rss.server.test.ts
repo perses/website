@@ -9,6 +9,12 @@ describe('feeds', () => {
     expect(feed).toContain('<atom:link href="https://perses.dev/blog/rss.xml" rel="self"');
   });
 
+  it('makes the links absolute, including the links to a section of the post', async () => {
+    const feed = await generateFeed();
+    expect(feed).toContain('href="https://perses.dev/blog/2026/10/21/release-v0550/#breaking-changes"');
+    expect(feed).not.toMatch(/(href|src)="[#/][^/]/);
+  });
+
   it('generates the RSS feed of a category and rejects an unknown category', async () => {
     expect(await generateFeed('community')).not.toContain('release-v0550');
     expect(await generateFeed('unknown')).toBeUndefined();

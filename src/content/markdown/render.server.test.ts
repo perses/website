@@ -42,6 +42,11 @@ describe('renderMarkdown', () => {
     ]);
   });
 
+  it('keeps the ids written in the document and never duplicates them', async () => {
+    const result = await renderMarkdown('## Usage\n\n<h2 id="usage">Explicit</h2>\n\n## Usage\n');
+    expect(result.toc.map((item) => item.id)).toEqual(['usage_1', 'usage', 'usage_2']);
+  });
+
   it('renders both admonition syntaxes', async () => {
     const result = await renderMarkdown('!!! warning "Be careful"\n    Text\n\n> [!TIP]\n> GitHub syntax\n');
     const asides = findElements(result.hast, 'aside');

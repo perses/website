@@ -17,11 +17,21 @@ export function TableOfContents({ items }: { items: TocItem[] }) {
     if (headings.length === 0) {
       return;
     }
+    // The observer only reports the headings whose visibility changed: the visible ones are tracked across the calls.
+    const visible = new Set<string>();
     const observer = new IntersectionObserver(
       (entries) => {
-        const visible = entries.filter((entry) => entry.isIntersecting).map((entry) => entry.target.id);
-        if (visible.length > 0) {
-          setActive(items.find((item) => visible.includes(item.id))?.id);
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            visible.add(entry.target.id);
+          } else {
+            visible.delete(entry.target.id);
+          }
+        }
+        // When no heading is in the area, the section being read is still the last active one.
+        const first = items.find((item) => visible.has(item.id));
+        if (first !== undefined) {
+          setActive(first.id);
         }
       },
       { rootMargin: '-80px 0px -70% 0px' },
@@ -47,6 +57,7 @@ export function TableOfContents({ items }: { items: TocItem[] }) {
               href={`#${item.id}`}
               underline="hover"
               color={active === item.id ? 'primary' : 'text.secondary'}
+              aria-current={active === item.id ? 'location' : undefined}
               sx={{ fontSize: '0.8125rem', fontWeight: active === item.id ? 600 : 400, display: 'block' }}
             >
               {item.title}

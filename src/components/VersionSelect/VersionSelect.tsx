@@ -6,13 +6,15 @@ import type { VersionOption } from '../../content/types';
 export interface VersionSelectProps {
   versions: VersionOption[];
   current: string;
+  /** Called after navigating to the selected version. */
+  onNavigate?: () => void;
 }
 
 /**
  * VersionSelect switches between the versions of a documentation source. It stays on the same page when it exists in
  * the selected version.
  */
-export function VersionSelect({ versions, current }: VersionSelectProps) {
+export function VersionSelect({ versions, current, onNavigate }: VersionSelectProps) {
   const navigate = useNavigate();
   return (
     <TextField
@@ -25,6 +27,7 @@ export function VersionSelect({ versions, current }: VersionSelectProps) {
         const target = versions.find((version) => version.id === event.target.value);
         if (target !== undefined) {
           void navigate(target.href);
+          onNavigate?.();
         }
       }}
     >

@@ -19,8 +19,8 @@ export function DocsSidebar({ sources, source, versions, version, nav, pathname,
   return (
     <Box component="nav" aria-label="Documentation">
       <Stack spacing={2} sx={{ p: 2, pb: 1 }}>
-        <SourceSelect sources={sources} current={source} />
-        {versions.length > 0 && version !== undefined && <VersionSelect versions={versions} current={version} />}
+        <SourceSelect sources={sources} current={source} onNavigate={onNavigate} />
+        {versions.length > 0 && version !== undefined && <VersionSelect versions={versions} current={version} onNavigate={onNavigate} />}
       </Stack>
       <Box sx={{ px: 1, pb: 4 }}>
         <NavTree nodes={nav} pathname={pathname} onNavigate={onNavigate} />
