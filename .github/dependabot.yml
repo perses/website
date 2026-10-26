@@ -1,0 +1,13 @@
+version: 2
+updates:
+  # Go module of the Dashboard-as-Code of the demo, also used by the license check.
+  # Only the Perses dependencies are updated, in a single pull request, as each release of the plugins requires a
+  # recent version of perses/perses.
+  - package-ecosystem: "gomod"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      perses:
+        patterns:
+          - "github.com/perses/*"
