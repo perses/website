@@ -1,7 +1,7 @@
 version: 2
 updates:
   # Go module of the Dashboard-as-Code of the demo, also used by the license check.
-  # Only the Perses dependencies are updated, in a single pull request, as each release of the plugins requires a
+  # The Perses dependencies are updated together, in a single pull request, as each release of the plugins requires a
   # recent version of perses/perses.
   - package-ecosystem: "gomod"
     directory: "/"
@@ -11,3 +11,29 @@ updates:
       perses:
         patterns:
           - "github.com/perses/*"
+
+  # Dependencies of the website, managed with pnpm (package.json and pnpm-lock.yaml).
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      # Packages released together are updated together, including for the major versions.
+      react-router:
+        patterns:
+          - "react-router"
+          - "@react-router/*"
+      mui:
+        patterns:
+          - "@mui/*"
+          - "@emotion/*"
+      # The other minor and patch updates are grouped in a single pull request. The other major updates have their own
+      # pull request, as they can require changes in the code.
+      npm-minor-and-patch:
+        update-types:
+          - "minor"
+          - "patch"
+    ignore:
+      # The types must match the version of Node.js used by the website (.nvmrc).
+      - dependency-name: "@types/node"
+        update-types: ["version-update:semver-major"]
