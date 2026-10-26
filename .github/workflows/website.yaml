@@ -28,6 +28,17 @@ jobs:
         env:
           # Avoid the rate limit of the GitHub API when fetching the releases for the download pages.
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  checklicense:
+    name: check license headers
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: perses/github-actions@v0.13.0
+      - uses: ./.github/perses-ci/actions/setup_environment
+        with:
+          enable_go: true
+      - name: check license headers
+        run: make checklicense
   nginx:
     runs-on: ubuntu-latest
     steps:

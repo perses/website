@@ -1,3 +1,5 @@
+GO ?= go
+
 .PHONY: install
 install:
 	pnpm install --frozen-lockfile
@@ -27,6 +29,16 @@ deploy-website: install
 lint: install
 	pnpm lint
 	pnpm typecheck
+
+.PHONY: checklicense
+checklicense:
+	@echo ">> checking license"
+	$(GO) run ./scripts/check-license --check
+
+.PHONY: fixlicense
+fixlicense:
+	@echo ">> adding license header where it's missing"
+	$(GO) run ./scripts/check-license --fix
 
 .PHONY: test
 test: install

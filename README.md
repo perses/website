@@ -94,7 +94,8 @@ The build synchronizes the content, prerenders every page, copies the images of 
 search index with [Pagefind](https://pagefind.app). Set `GITHUB_TOKEN` to avoid the rate limit of the GitHub API when
 fetching the releases.
 
-Other commands: `pnpm lint` (oxlint), `pnpm typecheck`, `pnpm test` (vitest).
+Other commands: `pnpm lint` (oxlint), `pnpm typecheck`, `pnpm test` (vitest), `make checklicense` (license headers of
+the source files, requires Go; `make fixlicense` adds the missing ones).
 
 ### Organization of the website
 
