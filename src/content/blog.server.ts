@@ -1,0 +1,279 @@
+// Copyright The Perses Authors
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
+import { join, posix } from 'node:path';
+import type { Root as HastRoot } from 'hast';
+import { toString } from 'hast-util-to-string';
+import { slugify } from '../utils/slugify.ts';
+import { blogCategoryUrl, blogPostUrl } from '../utils/urls.ts';
+import { contentDir, isDev, loadConfig } from './config.server.ts';
+import { mapLegacyPath, mapLegacyUrl } from './legacy.server.ts';
+import { isExternalUrl, splitUrl, type UrlResolver } from './markdown/links.server.ts';
+import { extractFrontmatter, markdownTitle, renderMarkdown } from './markdown/render.server.ts';
+import type { BlogArchiveYear, BlogCategory, BlogPost, BlogPostSummary } from './types.ts';
+
+function postsDir(): string {
+  return join(contentDir(), 'blog', 'posts');
+}
+
+/**
+ * createBlogUrlResolver resolves the relative links of the blog posts. The posts used to be in `docs/blog/posts/`
+ * of the mkdocs website, with the images in `docs/assets/` and the pages in `docs/`, so the relative links look like
+ * `../../assets/images/...` or `../../adopters.md`. They are resolved as if the posts were still at this location:
+ * - the links to other posts (`./v0.54.0.md`) target the URL of the post,
+ * - the links to markdown pages target their URL (`/adopters/`), with the legacy documentation URLs mapped to the
+ *   new ones,
+ * - the other files (images, videos) are served from `public/`.
+ */
+export function createBlogUrlResolver(postUrls: ReadonlyMap<string, string>): UrlResolver {
+  return (url) => {
+    if (url.startsWith('#')) {
+      return undefined;
+    }
+    if (isExternalUrl(url) || url.startsWith('/')) {
+      return mapLegacyUrl(url);
+    }
+    const { path, suffix } = splitUrl(url);
+    const resolved = posix.normalize(posix.join('/blog/posts/', path));
+    if (!/\.md$/i.test(resolved)) {
+      return `${resolved}${suffix}`;
+    }
+    const post = resolved.startsWith('/blog/posts/') ? postUrls.get(posix.basename(resolved)) : undefined;
+    if (post !== undefined) {
+      return `${post}${suffix}`;
+    }
+    const page = `${resolved.replace(/\.md$/i, '').replace(/(^|\/)(README|index)$/i, '').replace(/\/$/, '')}/`;
+    return `${mapLegacyPath(page) ?? page}${suffix}`;
+  };
+}
+
+/**
+ * postLocation computes the slug and the URL of a post from its source, without rendering it.
+ */
+function postLocation(file: string, markdown: string): { date: string; slug: string; url: string } {
+  const { data } = extractFrontmatter(markdown);
+  const date = normalizeDate(data.date, file);
+  const title = markdownTitle(markdown);
+  if (title === undefined) {
+    throw new Error(`${file}: a blog post must have a title (front matter "title" or a h1)`);
+  }
+  const slug = typeof data.slug === 'string' ? data.slug : slugify(title);
+  return { date, slug, url: blogPostUrl(date, slug) };
+}
+
+function normalizeDate(value: unknown, file: string): string {
+  if (value instanceof Date) {
+    return value.toISOString().slice(0, 10);
+  }
+  if (typeof value === 'string' && /^\d{4}-\d{2}-\d{2}/.test(value)) {
+    return value.slice(0, 10);
+  }
+  throw new Error(`${file}: the front matter must define a "date" (YYYY-MM-DD)`);
+}
+
+function stringList(value: unknown): string[] {
+  if (typeof value === 'string') {
+    return [value];
+  }
+  return Array.isArray(value) ? value.filter((v): v is string => typeof v === 'string') : [];
+}
+
+function firstParagraph(tree: HastRoot): string {
+  for (const node of tree.children) {
+    if (node.type === 'element' && node.tagName === 'p') {
+      return toString(node).replace(/\s+/g, ' ').trim();
+    }
+  }
+  return '';
+}
+
+function truncate(text: string, length: number): string {
+  return text.length <= length ? text : `${text.slice(0, text.lastIndexOf(' ', length))}…`;
+}
+
+async function loadPostFile(path: string, markdown: string, resolveUrl: UrlResolver): Promise<BlogPost> {
+  const rendered = await renderMarkdown(markdown, { resolveUrl, removeTitle: true });
+  const { frontmatter } = rendered;
+  const { date, slug } = postLocation(path, markdown);
+  const categories: BlogCategory[] = stringList(frontmatter.categories).map((name) => ({ name, slug: slugify(name) }));
+  // Without a `<!-- more -->` marker, the excerpt is the first paragraph.
+  const firstParagraphNode = rendered.hast.children.find((node) => node.type === 'element' && node.tagName === 'p');
+  const excerpt: HastRoot = rendered.excerpt ?? { type: 'root', children: firstParagraphNode ? [firstParagraphNode] : [] };
+  const description =
+    typeof frontmatter.description === 'string' ? frontmatter.description : truncate(firstParagraph(rendered.hast), 200);
+  return {
+    slug,
+    url: blogPostUrl(date, slug),
+    title: rendered.title,
+    date,
+    description,
+    categories,
+    authors: stringList(frontmatter.authors),
+    readingTime: Math.max(1, Math.round(rendered.text.split(/\s+/).length / 200)),
+    excerpt,
+    hasMore: rendered.excerpt !== undefined,
+    content: { title: rendered.title, toc: rendered.toc, hast: rendered.hast, hasMermaid: rendered.hasMermaid },
+  };
+}
+
+let cache: { key: string; posts: Promise<BlogPost[]> } | undefined;
+
+/**
+ * loadPosts returns every blog post, from the most recent to the oldest.
+ */
+export function loadPosts(): Promise<BlogPost[]> {
+  const dir = postsDir();
+  const files = existsSync(dir) ? readdirSync(dir).filter((file) => file.endsWith('.md')) : [];
+  const key = files.map((file) => `${file}:${statSync(join(dir, file)).mtimeMs}`).join('|');
+  if (cache?.key !== key) {
+    const sources = files
+      .map((file) => ({ file, path: join(dir, file), markdown: readFileSync(join(dir, file), 'utf8') }))
+      // The drafts are only published by the dev server, so an unfinished draft can't break the build.
+      .filter(({ markdown }) => isDev() || extractFrontmatter(markdown).data.draft !== true);
+    const resolveUrl = createBlogUrlResolver(
+      new Map(sources.map(({ file, path, markdown }) => [file, postLocation(path, markdown).url])),
+    );
+    const posts = Promise.all(
+      sources.map(({ path, markdown }) => loadPostFile(path, markdown, resolveUrl)),
+    ).then((loaded) => {
+      const result = loaded.toSorted((a, b) => b.date.localeCompare(a.date) || a.title.localeCompare(b.title));
+      const urls = new Set<string>();
+      for (const post of result) {
+        if (urls.has(post.url)) {
+          throw new Error(`two blog posts have the same URL ${post.url}, set a different "slug" in one of them`);
+        }
+        urls.add(post.url);
+      }
+      return result;
+    });
+    cache = { key, posts };
+  }
+  return cache.posts;
+}
+
+export function toSummary({ content: _content, ...summary }: BlogPost): BlogPostSummary {
+  return summary;
+}
+
+export interface BlogCategorySummary extends BlogCategory {
+  url: string;
+  count: number;
+}
+
+export async function loadCategories(): Promise<BlogCategorySummary[]> {
+  const categories = new Map<string, BlogCategorySummary>();
+  for (const post of await loadPosts()) {
+    for (const category of post.categories) {
+      const existing = categories.get(category.slug);
+      if (existing) {
+        existing.count++;
+      } else {
+        categories.set(category.slug, { ...category, url: blogCategoryUrl(category.slug), count: 1 });
+      }
+    }
+  }
+  return [...categories.values()].toSorted((a, b) => a.name.localeCompare(b.name));
+}
+
+/**
+ * buildArchive groups the posts by year, keeping their order (from the most recent to the oldest).
+ */
+export function buildArchive(posts: Pick<BlogPost, 'title' | 'url' | 'date'>[]): BlogArchiveYear[] {
+  const years: BlogArchiveYear[] = [];
+  for (const { title, url, date } of posts) {
+    const year = date.slice(0, 4);
+    let group = years.at(-1);
+    if (group?.year !== year) {
+      group = { year, posts: [] };
+      years.push(group);
+    }
+    group.posts.push({ title, url, date });
+  }
+  return years;
+}
+
+export interface BlogListData {
+  title: string;
+  description: string;
+  category?: BlogCategorySummary;
+  categories: BlogCategorySummary[];
+  posts: BlogPostSummary[];
+  /** Every post of the blog, whatever the category and the page, grouped by year. */
+  archive: BlogArchiveYear[];
+  page: number;
+  totalPages: number;
+}
+
+/**
+ * loadBlogList returns a page of the list of posts, optionally restricted to a category.
+ * It returns undefined when the category or the page doesn't exist.
+ */
+export async function loadBlogList(page: number, categorySlug?: string): Promise<BlogListData | undefined> {
+  const config = loadConfig();
+  const categories = await loadCategories();
+  const category = categorySlug === undefined ? undefined : categories.find((c) => c.slug === categorySlug);
+  if (categorySlug !== undefined && category === undefined) {
+    return undefined;
+  }
+  const allPosts = await loadPosts();
+  const posts = allPosts.filter(
+    (post) => category === undefined || post.categories.some((c) => c.slug === category.slug),
+  );
+  const perPage = config.blog.postsPerPage;
+  const totalPages = Math.max(1, Math.ceil(posts.length / perPage));
+  if (!Number.isInteger(page) || page < 1 || page > totalPages) {
+    return undefined;
+  }
+  return {
+    title: category === undefined ? config.blog.title : category.name,
+    description: config.blog.description,
+    category,
+    categories,
+    posts: posts.slice((page - 1) * perPage, page * perPage).map(toSummary),
+    archive: buildArchive(allPosts),
+    page,
+    totalPages,
+  };
+}
+
+export async function loadPost(year: string, month: string, day: string, slug: string): Promise<BlogPost | undefined> {
+  return (await loadPosts()).find((post) => post.date === `${year}-${month}-${day}` && post.slug === slug);
+}
+
+/**
+ * listBlogPaths returns every URL of the blog to prerender.
+ */
+export async function listBlogPaths(): Promise<string[]> {
+  const config = loadConfig();
+  const posts = await loadPosts();
+  const categories = await loadCategories();
+  const pages = (count: number, url: (page: number) => string) =>
+    Array.from({ length: Math.max(1, Math.ceil(count / config.blog.postsPerPage)) }, (_, index) => url(index + 1));
+  return [
+    ...pages(posts.length, (page) => (page === 1 ? '/blog/' : `/blog/page/${page}/`)),
+    ...posts.map((post) => post.url),
+    ...categories.flatMap((category) => [
+      ...pages(category.count, (page) => blogCategoryUrl(category.slug, page)),
+      `/blog/category/${category.slug}/rss.xml`,
+    ]),
+    '/blog/rss.xml',
+    '/blog/feed.json',
+    '/feed_rss_created.xml',
+    '/feed_rss_updated.xml',
+    '/feed_json_created.json',
+    '/feed_json_updated.json',
+    // Archive pages of the previous website, redirected to the blog.
+    ...[...new Set(posts.map((post) => post.date.slice(0, 4)))].map((year) => `/blog/archive/${year}/`),
+  ];
+}

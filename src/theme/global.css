@@ -1,0 +1,43 @@
+/* Global styles that can't be expressed easily with MUI. MUI styles live in the `mui` cascade layer,
+   so the rules below take precedence over them. */
+
+html {
+  scroll-padding-top: 88px;
+}
+
+/* Syntax highlighting generated at build time by Shiki, with a light and a dark theme. */
+.shiki {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+}
+
+.shiki span {
+  color: var(--shiki-light);
+}
+
+.dark .shiki {
+  color: var(--shiki-dark);
+  background-color: var(--shiki-dark-bg);
+}
+
+.dark .shiki span {
+  color: var(--shiki-dark);
+}
+
+/* Images that exist in a light and a dark variant. */
+.dark .only-light,
+.light .only-dark {
+  display: none !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  html:not(.light):not(.dark) .only-light {
+    display: none !important;
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  html:not(.light):not(.dark) .only-dark {
+    display: none !important;
+  }
+}

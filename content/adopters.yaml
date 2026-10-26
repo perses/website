@@ -1,0 +1,49 @@
+# Companies using or contributing to Perses, displayed on the home page and on the adopters page.
+# See content/pages/adopters.md to add your company.
+- name: Amadeus
+  url: https://amadeus.com
+  logo:
+    light: /assets/images/logos/Amadeus_light_theme.png
+    dark: /assets/images/logos/Amadeus_dark_theme.png
+- name: Chronosphere
+  url: https://chronosphere.io/
+  logo:
+    light: /assets/images/logos/Chronosphere_light_theme.svg
+    dark: /assets/images/logos/Chronosphere_dark_theme.svg
+- name: Dash0
+  url: https://www.dash0.com/
+  logo:
+    light: /assets/images/logos/Dash0.svg
+- name: Enlighten
+  url: https://enlighten.com
+  logo:
+    light: /assets/images/logos/Enlighten_light_theme.png
+    dark: /assets/images/logos/Enlighten_dark_theme.png
+- name: GIGAPIPE
+  url: https://gigapipe.com
+  logo:
+    light: /assets/images/logos/Gigapipe.svg
+- name: Greptime
+  url: https://greptime.com/
+  logo:
+    light: /assets/images/logos/Greptime_light_theme.svg
+    dark: /assets/images/logos/Greptime_dark_theme.svg
+- name: Logz.io
+  url: https://logz.io/
+  logo:
+    light: /assets/images/logos/Logz_light_theme.svg
+    dark: /assets/images/logos/Logz_dark_theme.svg
+- name: Pydantic
+  url: https://pydantic.dev/
+  logo:
+    light: /assets/images/logos/Pydantic_light_theme.png
+    dark: /assets/images/logos/Pydantic_dark_theme.png
+- name: Red Hat
+  url: https://www.redhat.com
+  logo:
+    light: /assets/images/logos/RedHat_light_theme.png
+    dark: /assets/images/logos/RedHat_dark_theme.png
+- name: SAP
+  url: https://www.sap.com
+  logo:
+    light: /assets/images/logos/SAP.svg

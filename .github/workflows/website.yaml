@@ -4,15 +4,44 @@ on:
     branches:
       - main
   pull_request:
+  workflow_dispatch:
 jobs:
-  mkdocs:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v5
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v5
         with:
-          python-version: 3.x
+          node-version-file: .nvmrc
+          cache: pnpm
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: pnpm install --frozen-lockfile
+      - name: Lint
+        run: pnpm lint
+      - name: Type check
+        run: pnpm typecheck
+      - name: Test
+        run: pnpm test
       - name: Build website
-        run: mkdocs build --strict
+        run: pnpm build
+        env:
+          # Avoid the rate limit of the GitHub API when fetching the releases for the download pages.
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  checklicense:
+    name: check license headers
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: perses/github-actions@v0.13.0
+      - uses: ./.github/perses-ci/actions/setup_environment
+        with:
+          enable_go: true
+      - name: check license headers
+        run: make checklicense
+  nginx:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - name: Validate the nginx configuration
+        run: docker run --rm -v "$PWD/nginx/website.conf:/etc/nginx/conf.d/default.conf:ro" nginx nginx -t
