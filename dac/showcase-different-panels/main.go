@@ -21,7 +21,6 @@ import (
 	"github.com/perses/perses/go-sdk/dashboard"
 	"github.com/perses/perses/go-sdk/panel"
 	panelgroup "github.com/perses/perses/go-sdk/panel-group"
-	v1Common "github.com/perses/perses/pkg/model/api/v1/common"
 	barchart "github.com/perses/plugins/barchart/sdk/go"
 	gauge "github.com/perses/plugins/gaugechart/sdk/go"
 	heatmapchart "github.com/perses/plugins/heatmapchart/sdk/go"
@@ -46,7 +45,6 @@ func main() {
 	flag.Parse()
 	exec := sdk.NewExec()
 	decimalUnit := common.DecimalUnit
-	lastCalculation := string(common.LastCalculation)
 
 	// DASHBOARD
 	builder, buildErr := dashboard.New("showcase-different-panels",
@@ -78,13 +76,10 @@ func main() {
 				),
 			),
 			panelgroup.AddPanel("Pie Chart",
-				panel.Plugin(v1Common.Plugin{
-					Kind: piechart.PluginKind,
-					Spec: map[string]any{
-						"calculation": lastCalculation,
-						"radius":      80,
-					},
-				}),
+				piechart.Chart(
+					piechart.Calculation(common.LastCalculation),
+					piechart.WithVisual(piechart.Visual{OuterRadius: 80}),
+				),
 				panel.AddQuery(
 					promquery.PromQL(sharedRawPromQL, promquery.SeriesNameFormat("{{handler}}")),
 				),
@@ -116,10 +111,7 @@ func main() {
 				),
 			),
 			panelgroup.AddPanel("Time Series Table",
-				panel.Plugin(v1Common.Plugin{
-					Kind: timeseriestable.PluginKind,
-					Spec: map[string]any{},
-				}),
+				timeseriestable.Chart(),
 				panel.AddQuery(
 					promquery.PromQL(sharedRawPromQL),
 				),
