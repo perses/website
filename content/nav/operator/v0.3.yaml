@@ -3,7 +3,6 @@
 - User Guide: user-guide.md
 - API Reference: api.md
 - Metrics: metrics.md
-- Install with Helm: /docs/helm-charts/installation/
 - Contributing:
     - Developer Guide: dev.md
     - Testing: testing.md
