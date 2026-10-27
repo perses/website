@@ -81,7 +81,10 @@ export async function downloadDocs(source: SourceConfig, sha: string, destinatio
 
 async function resolveSource(source: SourceConfig): Promise<Omit<ManifestVersion, 'dir'>[]> {
   if (source.versioning) {
-    const output = await lsRemote(source.repository, ['--tags', '--heads']);
+    const output = await lsRemote(
+      source.repository,
+      source.versioning.releaseBranch === undefined ? ['--tags'] : ['--tags', '--heads'],
+    );
     return resolveVersions(parseLsRemote(output), source.versioning);
   }
   const branch = source.branch ?? 'main';

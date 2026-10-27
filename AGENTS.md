@@ -45,9 +45,10 @@ Before editing, read `README.md` for the local setup, the organization of the co
   `perses.yaml`, `prometheus.yml`, `scripts/generate_config.sh`, the other services of `docker-compose.yaml`.
 
 The documentation is not written here. It is pulled at build time from perses/perses, perses/perses-operator,
-perses/helm-charts and perses/plugins (`docs/` of each repository). Versioned sources publish every minor version from
-its release branch `release/vX.Y`, or its latest patch tag. Fix the content of the documentation in its repository,
-and the navigation in the `docs/nav.yaml` of that repository; `content/nav/` is only a fallback for old versions.
+perses/helm-charts, perses/plugins and perses/metrics-usage (`docs/` of each repository). Versioned sources publish
+every minor version from its release branch `release/vX.Y`, or its latest patch tag. Fix the content of the
+documentation in its repository, and the navigation in the `docs/nav.yaml` of that repository; `content/nav/` is only a
+fallback for old versions.
 
 ## Engineering rules
 

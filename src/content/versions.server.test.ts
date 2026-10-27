@@ -69,6 +69,14 @@ describe('resolveVersions', () => {
     expect(versions).toEqual([{ id: 'v1.2', ref: 'release-1.2', sha: 'b', release: 'v1.2.0' }]);
   });
 
+  it('uses the latest patch tag of every version without release branch', () => {
+    const versions = resolveVersions(refs, { minVersion: 'v0.54' });
+    expect(versions).toEqual([
+      { id: 'v0.55', ref: 'v0.55.1', sha: 'fff1', release: 'v0.55.1' },
+      { id: 'v0.54', ref: 'v0.54.0', sha: 'ggg1', release: 'v0.54.0' },
+    ]);
+  });
+
   it('rejects an invalid minimum version', () => {
     expect(() => resolveVersions(refs, { minVersion: '0.53', releaseBranch: 'release/v{major}.{minor}' })).toThrow('invalid minor version');
   });

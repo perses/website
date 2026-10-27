@@ -49,7 +49,7 @@ docs:
       legacyPath: perses/docs
       versioning:
         # Each minor version is published. The docs are taken from the release branch when it exists,
-        # otherwise from the latest patch tag.
+        # otherwise from the latest patch tag. Without `releaseBranch`, only the tags are used.
         minVersion: v0.53
         releaseBranch: release/v{major}.{minor}
     - id: operator
@@ -75,6 +75,14 @@ docs:
       docsDir: docs
       legacyPath: plugins/docs
       branch: main
+    - id: metrics-usage
+      title: Metrics Usage
+      description: Track the usage of metrics across dashboards, alerting rules and recording rules.
+      repository: perses/metrics-usage
+      docsDir: docs
+      versioning:
+        # No release branch: each minor version is taken from its latest patch tag.
+        minVersion: v0.8
 
 blog:
   title: Perses Blog
