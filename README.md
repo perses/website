@@ -53,9 +53,10 @@ It contains:
 - the home page, the adopters page and the blog, written in this repository (`content/`),
 - the documentation of [perses/perses](https://github.com/perses/perses),
   [perses/perses-operator](https://github.com/perses/perses-operator),
-  [perses/helm-charts](https://github.com/perses/helm-charts) and [perses/plugins](https://github.com/perses/plugins),
-  pulled from these repositories at build time. Perses and the operator are versioned: every minor version is
-  published (from the release branch when it exists, the latest patch tag otherwise),
+  [perses/helm-charts](https://github.com/perses/helm-charts), [perses/plugins](https://github.com/perses/plugins) and
+  [perses/metrics-usage](https://github.com/perses/metrics-usage), pulled from these repositories at build time.
+  Perses, the operator and metrics-usage are versioned: every minor version is published (from the release branch
+  when it exists, the latest patch tag otherwise),
 - the download pages, built from the latest GitHub releases. In the browser, the pages also check GitHub for the
   releases published since the build and display them (cached 10 minutes; if GitHub is not reachable or rate limits
   the visitor, the releases of the build are displayed).

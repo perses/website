@@ -23,7 +23,8 @@ const linkSchema = z.object({
 
 const versioningSchema = z.object({
   minVersion: z.string().regex(/^v\d+\.\d+$/, 'minVersion must look like vX.Y'),
-  releaseBranch: z.string().default('release/v{major}.{minor}'),
+  // Without release branch, each minor version is taken from its latest patch tag.
+  releaseBranch: z.string().optional(),
 });
 
 const sourceSchema = z

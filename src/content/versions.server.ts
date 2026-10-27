@@ -84,13 +84,14 @@ function compareSemver(a: Semver, b: Semver): number {
  * resolveVersions computes the list of published versions of a source, sorted from the most recent to the oldest.
  * Only minor versions having at least one final release (no pre-release) are published, so a release branch
  * created for a release candidate doesn't appear before the release is out.
+ * Without releaseBranch, every version is taken from its latest patch tag.
  */
 export function resolveVersions(
   refs: GitRef[],
-  options: { minVersion: string; releaseBranch: string },
+  options: { minVersion: string; releaseBranch?: string },
 ): ResolvedVersion[] {
   const min = parseMinorVersion(options.minVersion);
-  const branchMatcher = branchRegexp(options.releaseBranch);
+  const branchMatcher = options.releaseBranch === undefined ? undefined : branchRegexp(options.releaseBranch);
   const latestTags = new Map<string, { semver: Semver; ref: GitRef }>();
   const branches = new Map<string, GitRef>();
 
@@ -108,7 +109,7 @@ export function resolveVersions(
       }
       continue;
     }
-    const branch = branchMatcher.exec(ref.name);
+    const branch = branchMatcher?.exec(ref.name);
     if (branch?.groups) {
       branches.set(`v${Number(branch.groups.major)}.${Number(branch.groups.minor)}`, ref);
     }
