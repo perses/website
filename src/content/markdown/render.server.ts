@@ -136,6 +136,27 @@ export function markdownTitle(markdown: string): string | undefined {
 }
 
 /**
+ * rehypeLowercaseLanguages lowercases the `language-*` class of the code blocks. GitHub ignores the case of the
+ * language of a fenced code block (`typeScript`), whereas the language ids of Shiki are case-sensitive.
+ */
+function rehypeLowercaseLanguages() {
+  return (tree: HastRoot) => {
+    visit(tree, 'element', (node: Element, _index, parent) => {
+      if (node.tagName !== 'code' || parent?.type !== 'element' || parent.tagName !== 'pre') {
+        return;
+      }
+      const classes = node.properties.className;
+      if (!Array.isArray(classes)) {
+        return;
+      }
+      node.properties.className = classes.map((name) =>
+        typeof name === 'string' && name.startsWith('language-') ? name.toLowerCase() : name,
+      );
+    });
+  };
+}
+
+/**
  * rehypeMermaid replaces the mermaid code blocks with a `pre.mermaid` element, rendered on the client side.
  */
 function rehypeMermaid(result: { hasMermaid: boolean }) {
@@ -234,6 +255,7 @@ export async function renderMarkdown(markdown: string, options: RenderOptions = 
     .use(remarkRehype, { allowDangerousHtml: true })
     .use(rehypeRaw)
     .use(rehypeHeadings, headings)
+    .use(rehypeLowercaseLanguages)
     .use(rehypeMermaid, mermaid)
     .use(rehypeShikiFromHighlighter, highlighter, {
       themes: shikiThemes,
