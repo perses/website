@@ -77,6 +77,13 @@ describe('renderMarkdown', () => {
     expect(result.hasMermaid).toBe(true);
   });
 
+  it('ignores the case of the language of the code blocks, like GitHub', async () => {
+    const mixedCase = await renderMarkdown('```typeScript\nconst a = 1;\n```\n');
+    const lowerCase = await renderMarkdown('```typescript\nconst a = 1;\n```\n');
+    expect(mixedCase.hast).toEqual(lowerCase.hast);
+    expect(findElements(mixedCase.hast, 'code')[0]?.properties.class).toEqual(['language-typescript']);
+  });
+
   it('rewrites the URLs with the resolver', async () => {
     const result = await renderMarkdown('[page](./other.md#anchor) ![image](img.png) [external](https://example.com)', {
       resolveUrl: (url, kind) => (url.startsWith('http') ? undefined : `/resolved/${kind}/${url}`),
