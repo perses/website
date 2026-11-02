@@ -99,6 +99,7 @@ export default function DocsPage({ loaderData }: Route.ComponentProps) {
 
   const page = loaderData;
   const indexed = page.canonical === page.path;
+  const latestVersion = page.versions.find((v) => v.latest);
   const trail = findTrail(page.nav, pathname).slice(0, -1);
   const sidebar = (onNavigate?: () => void) => (
     <DocsSidebar
@@ -147,8 +148,9 @@ export default function DocsPage({ loaderData }: Route.ComponentProps) {
         {!page.isLatest && page.resolvedVersion !== undefined && (
           <Alert severity="warning" sx={{ mb: 3 }}>
             You are reading the documentation of {page.source.title} {page.resolvedVersion}.{' '}
-            <Link component={RouterLink} to={page.versions.find((v) => v.latest)?.href ?? docsUrl(page.source.id, LATEST)}>
-              Go to the latest version ({page.source.latestRelease}).
+            <Link component={RouterLink} to={latestVersion?.href ?? docsUrl(page.source.id, LATEST)}>
+              {/* The minor version, not the patch release: a patch release doesn't change the pages of the old versions. */}
+              Go to the latest version{latestVersion === undefined ? '' : ` (${latestVersion.id})`}.
             </Link>
           </Alert>
         )}

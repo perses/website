@@ -1,0 +1,93 @@
+// Copyright The Perses Authors
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+// https://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+import { existsSync, mkdtempSync, rmSync, utimesSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import {
+  pageCacheKey,
+  pruneRenderCache,
+  readCacheEntry,
+  renderCacheDir,
+  renderCacheStats,
+  writeCacheEntry,
+} from './render-cache.server';
+
+describe('render cache entries', () => {
+  let root: string;
+
+  beforeEach(() => {
+    root = mkdtempSync(join(tmpdir(), 'perses-website-render-cache-'));
+    vi.stubEnv('WEBSITE_ROOT', root);
+  });
+
+  afterEach(() => {
+    vi.unstubAllEnvs();
+    rmSync(root, { recursive: true, force: true });
+  });
+
+  it('reads the entries written before', () => {
+    const { reused, rendered } = renderCacheStats();
+    const before = { reused: reused.pages, rendered: rendered.pages };
+
+    expect(readCacheEntry('pages', 'abc')).toBeUndefined();
+    writeCacheEntry('pages', 'abc', '<html></html>');
+    expect(readCacheEntry('pages', 'abc')).toBe('<html></html>');
+    expect(readCacheEntry('markdown', 'abc')).toBeUndefined();
+
+    expect(renderCacheStats().reused.pages - before.reused).toBe(1);
+    expect(renderCacheStats().rendered.pages - before.rendered).toBe(1);
+  });
+
+  it('removes the entries that were not used since the given time', () => {
+    writeCacheEntry('pages', 'unused', 'unused');
+    writeCacheEntry('markdown', 'used', '{}');
+    const old = new Date(Date.now() - 60_000);
+    utimesSync(join(renderCacheDir(), 'pages', 'unused.html'), old, old);
+    utimesSync(join(renderCacheDir(), 'markdown', 'used.json'), old, old);
+    const since = Date.now() - 10_000;
+
+    expect(readCacheEntry('markdown', 'used')).toBe('{}');
+    expect(pruneRenderCache(since)).toBe(1);
+
+    expect(existsSync(join(renderCacheDir(), 'pages', 'unused.html'))).toBe(false);
+    expect(readCacheEntry('markdown', 'used')).toBe('{}');
+  });
+});
+
+describe('pageCacheKey', () => {
+  const serverBuildDir = join(tmpdir(), 'perses-website-missing-server-build');
+  const key = (path: string, status: number, data: unknown) => pageCacheKey(serverBuildDir, path, status, data);
+  const data = { loaderData: { 'pages/Layout/Layout': { menu: [{ title: 'Docs', href: '/docs/' }] } } };
+
+  it('is the same for the same page', () => {
+    expect(key('/docs/', 200, data)).toBe(key('/docs/', 200, structuredClone(data)));
+  });
+
+  it('changes with the path, the status and the data', () => {
+    const reference = key('/docs/', 200, data);
+    expect(key('/blog/', 200, data)).not.toBe(reference);
+    expect(key('/docs/', 404, data)).not.toBe(reference);
+    expect(key('/docs/', 200, { loaderData: { 'pages/Layout/Layout': { menu: [] } } })).not.toBe(reference);
+    expect(key('/docs/', 200, { ...data, errors: undefined })).not.toBe(reference);
+  });
+
+  it('is undefined when the data cannot be serialized exactly', () => {
+    expect(key('/docs/', 200, { loaderData: new Map() })).toBeUndefined();
+    expect(key('/docs/', 200, { loaderData: { error: new Error('not found') } })).toBeUndefined();
+    expect(key('/docs/', 200, { loaderData: { promise: Promise.resolve() } })).toBeUndefined();
+    expect(key('/docs/', 200, { loaderData: { callback: () => undefined } })).toBeUndefined();
+    expect(key('/docs/', 200, { loaderData: { count: Number.NaN } })).toBeUndefined();
+  });
+});

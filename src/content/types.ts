@@ -46,6 +46,7 @@ export interface SourceSummary {
   description: string;
   href: string;
   versioned: boolean;
+  /** Latest release of a versioned source, only provided to the documentation index. */
   latestRelease?: string;
 }
 
