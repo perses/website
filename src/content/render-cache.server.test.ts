@@ -11,7 +11,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { existsSync, mkdtempSync, rmSync, utimesSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, rmSync, utimesSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
@@ -30,10 +30,12 @@ describe('render cache entries', () => {
   beforeEach(() => {
     root = mkdtempSync(join(tmpdir(), 'perses-website-render-cache-'));
     vi.stubEnv('WEBSITE_ROOT', root);
+    vi.spyOn(console, 'warn').mockImplementation(() => undefined);
   });
 
   afterEach(() => {
     vi.unstubAllEnvs();
+    vi.restoreAllMocks();
     rmSync(root, { recursive: true, force: true });
   });
 
@@ -64,6 +66,29 @@ describe('render cache entries', () => {
     expect(existsSync(join(renderCacheDir(), 'pages', 'unused.html'))).toBe(false);
     expect(readCacheEntry('markdown', 'used')).toBe('{}');
   });
+
+  it('continues without the cache when an entry cannot be written', () => {
+    mkdirSync(renderCacheDir(), { recursive: true });
+    // A file in place of the directory of the entries makes every write fail, even for root.
+    writeFileSync(join(renderCacheDir(), 'pages'), '');
+
+    expect(() => writeCacheEntry('pages', 'abc', '<html></html>')).not.toThrow();
+    expect(readCacheEntry('pages', 'abc')).toBeUndefined();
+  });
+
+  it('continues to prune the other entries when an entry cannot be removed', () => {
+    writeCacheEntry('pages', 'unused', 'unused');
+    // A directory in place of an entry can't be removed by the pruning, even for root.
+    const blocking = join(renderCacheDir(), 'pages', 'blocking.html');
+    mkdirSync(blocking);
+    writeFileSync(join(blocking, 'file'), '');
+    const old = new Date(Date.now() - 60_000);
+    utimesSync(join(renderCacheDir(), 'pages', 'unused.html'), old, old);
+    utimesSync(blocking, old, old);
+
+    expect(pruneRenderCache(Date.now() - 10_000)).toBe(1);
+    expect(existsSync(join(renderCacheDir(), 'pages', 'unused.html'))).toBe(false);
+  });
 });
 
 describe('pageCacheKey', () => {
@@ -89,5 +114,12 @@ describe('pageCacheKey', () => {
     expect(key('/docs/', 200, { loaderData: { promise: Promise.resolve() } })).toBeUndefined();
     expect(key('/docs/', 200, { loaderData: { callback: () => undefined } })).toBeUndefined();
     expect(key('/docs/', 200, { loaderData: { count: Number.NaN } })).toBeUndefined();
+    // A Date is converted to a string by its toJSON method: it would get the key of the string.
+    expect(key('/docs/', 200, { loaderData: { date: new Date(0) } })).toBeUndefined();
+  });
+
+  it('is undefined when the data contains the string representing undefined', () => {
+    expect(key('/docs/', 200, { loaderData: { value: '\0undefined' } })).toBeUndefined();
+    expect(key('/docs/', 200, { loaderData: { value: undefined } })).toBeDefined();
   });
 });

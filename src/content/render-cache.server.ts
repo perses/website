@@ -107,7 +107,11 @@ export function writeCacheEntry(kind: RenderCacheKind, key: string, contents: st
     renameSync(temporary, path);
     renderCacheStats().rendered[kind]++;
   } catch (error) {
-    rmSync(temporary, { force: true });
+    try {
+      rmSync(temporary, { force: true });
+    } catch {
+      // The original error is reported below.
+    }
     warnCacheError(error);
   }
 }
@@ -115,6 +119,7 @@ export function writeCacheEntry(kind: RenderCacheKind, key: string, contents: st
 /**
  * pruneRenderCache removes the entries that were not used since the given time, by default the start of the process:
  * at the end of a build, only the entries used by this build are kept. It returns the number of removed entries.
+ * A failure is reported but doesn't fail the build.
  */
 export function pruneRenderCache(since = performance.timeOrigin): number {
   let removed = 0;
@@ -123,15 +128,22 @@ export function pruneRenderCache(since = performance.timeOrigin): number {
     let files: string[];
     try {
       files = readdirSync(dir);
-    } catch {
+    } catch (error) {
+      if ((error as NodeJS.ErrnoException).code !== 'ENOENT') {
+        warnCacheError(error);
+      }
       continue;
     }
     for (const file of files) {
       const path = join(dir, file);
-      // Margin for the file systems storing the modification time with a precision of one or two seconds.
-      if (statSync(path).mtimeMs < since - 2000) {
-        rmSync(path, { force: true });
-        removed++;
+      try {
+        // Margin for the file systems storing the modification time with a precision of one or two seconds.
+        if (statSync(path).mtimeMs < since - 2000) {
+          rmSync(path, { force: true });
+          removed++;
+        }
+      } catch (error) {
+        warnCacheError(error);
       }
     }
   }
@@ -193,19 +205,28 @@ export function fingerprint(paths: string[]): string {
 
 const undefinedValue = '\0undefined';
 
-function plainValue(_key: string, value: unknown): unknown {
-  if (value === undefined) {
+/**
+ * plainValue is the replacer serializing the loader data in the key of a page. It throws when the serialization is not
+ * exact: only the plain objects, the arrays and the JSON primitives are supported.
+ */
+function plainValue(this: unknown, key: string, value: unknown): unknown {
+  // The value before the call of its toJSON method: a Date is converted to a string before reaching the replacer.
+  const original = (this as Record<string, unknown>)[key];
+  if (original === undefined) {
     // Keep the difference between a property set to undefined and a missing property.
     return undefinedValue;
   }
-  if (typeof value === 'function' || typeof value === 'symbol' || typeof value === 'bigint') {
-    throw new TypeError(`unsupported value of type ${typeof value}`);
+  if (original === undefinedValue) {
+    throw new TypeError('unsupported string, reserved to represent undefined');
   }
-  if (typeof value === 'number' && !Number.isFinite(value)) {
-    throw new TypeError(`unsupported number ${value}`);
+  if (typeof original === 'function' || typeof original === 'symbol' || typeof original === 'bigint') {
+    throw new TypeError(`unsupported value of type ${typeof original}`);
   }
-  if (typeof value === 'object' && value !== null) {
-    const prototype: unknown = Object.getPrototypeOf(value);
+  if (typeof original === 'number' && !Number.isFinite(original)) {
+    throw new TypeError(`unsupported number ${original}`);
+  }
+  if (typeof original === 'object' && original !== null) {
+    const prototype: unknown = Object.getPrototypeOf(original);
     if (prototype !== Object.prototype && prototype !== Array.prototype && prototype !== null) {
       throw new TypeError('unsupported object, only the plain objects and the arrays are supported');
     }
