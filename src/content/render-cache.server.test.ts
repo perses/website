@@ -91,6 +91,12 @@ describe('render cache entries', () => {
   });
 });
 
+function pageWithToJSON(title: string) {
+  const page = { title };
+  Object.defineProperty(page, 'toJSON', { value: () => 'constant' });
+  return { loaderData: { page } };
+}
+
 describe('pageCacheKey', () => {
   const serverBuildDir = join(tmpdir(), 'perses-website-missing-server-build');
   const key = (path: string, status: number, data: unknown) => pageCacheKey(serverBuildDir, path, status, data);
@@ -113,13 +119,38 @@ describe('pageCacheKey', () => {
     expect(key('/docs/', 200, { loaderData: { error: new Error('not found') } })).toBeUndefined();
     expect(key('/docs/', 200, { loaderData: { promise: Promise.resolve() } })).toBeUndefined();
     expect(key('/docs/', 200, { loaderData: { callback: () => undefined } })).toBeUndefined();
-    expect(key('/docs/', 200, { loaderData: { count: Number.NaN } })).toBeUndefined();
-    // A Date is converted to a string by its toJSON method: it would get the key of the string.
     expect(key('/docs/', 200, { loaderData: { date: new Date(0) } })).toBeUndefined();
+    expect(key('/docs/', 200, { loaderData: { page: { title: 'Overview', toJSON: () => 'constant' } } })).toBeUndefined();
+    const circular: Record<string, unknown> = {};
+    circular.self = circular;
+    expect(key('/docs/', 200, { loaderData: circular })).toBeUndefined();
   });
 
-  it('is undefined when the data contains the string representing undefined', () => {
-    expect(key('/docs/', 200, { loaderData: { value: '\0undefined' } })).toBeUndefined();
-    expect(key('/docs/', 200, { loaderData: { value: undefined } })).toBeDefined();
+  it('distinguishes the values that JSON.stringify confuses', () => {
+    const withHole: unknown[] = [];
+    withHole.length = 1;
+    const value = (v: unknown) => key('/docs/', 200, { loaderData: { value: v } });
+    const keys = [
+      key('/docs/', 200, { loaderData: {} }),
+      value(undefined),
+      value('\0undefined'),
+      value(null),
+      value(Number.NaN),
+      value(Number.POSITIVE_INFINITY),
+      value(0),
+      value(-0),
+      value('0'),
+      value([undefined]),
+      value(withHole),
+      value({}),
+      value(Object.create(null)),
+    ];
+    expect(keys).not.toContain(undefined);
+    expect(new Set(keys).size).toBe(keys.length);
+  });
+
+  it('ignores toJSON, which could hide the content of a value', () => {
+    // React Router doesn't call toJSON: the title is serialized in the page.
+    expect(key('/docs/', 200, pageWithToJSON('Overview'))).not.toBe(key('/docs/', 200, pageWithToJSON('Concepts')));
   });
 });

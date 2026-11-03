@@ -203,35 +203,71 @@ export function fingerprint(paths: string[]): string {
   return result;
 }
 
-const undefinedValue = '\0undefined';
-
 /**
- * plainValue is the replacer serializing the loader data in the key of a page. It throws when the serialization is not
- * exact: only the plain objects, the arrays and the JSON primitives are supported.
+ * serializeLoaderData serializes the data of the loaders for the key of a page. Its encoding is exact for the values
+ * that React Router serializes as is in the page (turbo-stream): the plain objects (their own enumerable string keys),
+ * the arrays (with their holes), the strings, the numbers (with -0, NaN and the infinities), the booleans, null and
+ * undefined. Unlike JSON.stringify, it never calls toJSON, which could hide the content of a value, and it keeps the
+ * difference between undefined, a missing property and a hole. It throws for the other values (class instances such as
+ * Date, functions, circular references).
  */
-function plainValue(this: unknown, key: string, value: unknown): unknown {
-  // The value before the call of its toJSON method: a Date is converted to a string before reaching the replacer.
-  const original = (this as Record<string, unknown>)[key];
-  if (original === undefined) {
-    // Keep the difference between a property set to undefined and a missing property.
-    return undefinedValue;
+function serializeLoaderData(value: unknown, parts: string[], ancestors: Set<object>): void {
+  switch (typeof value) {
+    case 'undefined':
+      parts.push('u');
+      return;
+    case 'boolean':
+      parts.push(value ? 't' : 'f');
+      return;
+    case 'number':
+      // String(-0) is '0'.
+      parts.push(Object.is(value, -0) ? 'n-0' : `n${value}`);
+      return;
+    case 'string':
+      parts.push(JSON.stringify(value));
+      return;
+    case 'object':
+      break;
+    default:
+      throw new TypeError(`unsupported value of type ${typeof value}`);
   }
-  if (original === undefinedValue) {
-    throw new TypeError('unsupported string, reserved to represent undefined');
+  if (value === null) {
+    parts.push('z');
+    return;
   }
-  if (typeof original === 'function' || typeof original === 'symbol' || typeof original === 'bigint') {
-    throw new TypeError(`unsupported value of type ${typeof original}`);
+  if (ancestors.has(value)) {
+    throw new TypeError('unsupported circular reference');
   }
-  if (typeof original === 'number' && !Number.isFinite(original)) {
-    throw new TypeError(`unsupported number ${original}`);
-  }
-  if (typeof original === 'object' && original !== null) {
-    const prototype: unknown = Object.getPrototypeOf(original);
-    if (prototype !== Object.prototype && prototype !== Array.prototype && prototype !== null) {
-      throw new TypeError('unsupported object, only the plain objects and the arrays are supported');
+  ancestors.add(value);
+  const prototype: unknown = Object.getPrototypeOf(value);
+  if (Array.isArray(value)) {
+    if (prototype !== Array.prototype) {
+      throw new TypeError('unsupported array subclass');
     }
+    parts.push('[');
+    for (let i = 0; i < value.length; i++) {
+      if (i > 0) {
+        parts.push(',');
+      }
+      if (i in value) {
+        serializeLoaderData(value[i], parts, ancestors);
+      } else {
+        parts.push('h');
+      }
+    }
+    parts.push(']');
+  } else if (prototype === Object.prototype || prototype === null) {
+    // The objects without prototype are serialized differently by React Router.
+    parts.push(prototype === null ? 'N{' : '{');
+    Object.keys(value).forEach((key, index) => {
+      parts.push(index > 0 ? ',' : '', JSON.stringify(key), ':');
+      serializeLoaderData((value as Record<string, unknown>)[key], parts, ancestors);
+    });
+    parts.push('}');
+  } else {
+    throw new TypeError('unsupported object, only the plain objects and the arrays are supported');
   }
-  return value;
+  ancestors.delete(value);
 }
 
 /**
@@ -240,11 +276,11 @@ function plainValue(this: unknown, key: string, value: unknown): unknown {
  * data can't be serialized exactly (class instances, promises...): the page is then always rendered.
  */
 export function pageCacheKey(serverBuildDir: string, path: string, status: number, data: unknown): string | undefined {
-  let serialized: string;
+  const parts: string[] = [];
   try {
-    serialized = JSON.stringify(data, plainValue);
+    serializeLoaderData(data, parts, new Set());
   } catch {
     return undefined;
   }
-  return hashOf(fingerprint([serverBuildDir, 'pnpm-lock.yaml']), path, String(status), serialized);
+  return hashOf(fingerprint([serverBuildDir, 'pnpm-lock.yaml']), path, String(status), parts.join(''));
 }
