@@ -36,6 +36,8 @@ Before editing, read `README.md` for the local setup, the organization of the co
   python-markdown, Shiki highlighting with light and dark themes, mermaid, URL rewriting). It produces a HAST tree
   rendered with React components by `src/components/Markdown`.
 - `src/utils/`: code shared by the build and the browser (URLs, slugs, search scopes, releases, platform detection).
+- `src/content/render-cache.server.ts`: cache of the rendered markdown and of the prerendered pages between builds
+  (`.cache/render/`), used by `renderDocsPage` and `src/entry.server.tsx`, pruned at the end of the build.
 - `src/theme/`: Material UI theme, colors of the Perses design system, Emotion cache, global CSS.
 - `scripts/sync-content.ts`: synchronizes the documentation sources and the releases into `.cache/` (git ignored).
 - `nginx/website.conf`, `docker-compose.yaml`, `Makefile` (`deploy-website`): deployment.
@@ -56,6 +58,11 @@ fallback for old versions.
 - The website must stay static: data comes from loaders running at build time. Code needing Node.js APIs belongs in a
   `*.server.ts` module, used by route modules in their `loader` only: `meta` and the components also run in the
   browser.
+- The render cache reuses a prerendered page when the server build, the path and the loader data are the same: a page
+  must render only from its loader data (no clock, randomness or file read while rendering), and the loader data must
+  be plain JSON to be cached. Keep the data of a page to what it displays, so a release or a change of another page
+  doesn't invalidate it. The rendered markdown is keyed by the page, its version and the content of `src/content`,
+  `src/utils`, `website.yaml` and `pnpm-lock.yaml`: code changing the rendered markdown must live there.
 - Build-time modules import each other with explicit `.ts` extensions, so `scripts/sync-content.ts` runs with the type
   stripping of Node.js (`node scripts/sync-content.ts`), without bundler.
 - Keep the URLs stable. The URLs of the previous mkdocs website (`/perses/docs/...`, `/plugins/docs/...`, blog posts,

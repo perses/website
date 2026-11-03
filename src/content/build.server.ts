@@ -16,6 +16,7 @@ import { existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import * as pagefind from 'pagefind';
 import { getDocsIndex } from './docs.server.ts';
+import { pruneRenderCache, renderCacheStats } from './render-cache.server.ts';
 
 /**
  * copyDocsAssets copies the files of the documentation sources that are not markdown (images, examples...) to
@@ -70,4 +71,10 @@ export async function finalizeBuild(clientDir: string): Promise<void> {
   }
   const pages = await buildSearchIndex(clientDir);
   console.log(`✓ ${pages} pages indexed for the search`);
+  const { reused, rendered } = renderCacheStats();
+  const removed = pruneRenderCache();
+  console.log(
+    `✓ render cache: ${reused.pages}/${reused.pages + rendered.pages} pages and ` +
+      `${reused.markdown}/${reused.markdown + rendered.markdown} markdown documents reused, ${removed} unused entries removed`,
+  );
 }

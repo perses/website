@@ -18,10 +18,12 @@ import { contentDir, isDev, loadConfig, type SourceConfig } from './config.serve
 import { mapLegacyUrl } from './legacy.server.ts';
 import { loadManifest, type ManifestVersion } from './manifest.server.ts';
 import { isExternalUrl, splitUrl, type UrlResolver } from './markdown/links.server.ts';
-import { markdownTitle, type RenderedMarkdown, renderMarkdown } from './markdown/render.server.ts';
+import { markdownTitle, renderMarkdown } from './markdown/render.server.ts';
 import { generateNav, type NavEntry, parseNav } from './nav.server.ts';
+import { fingerprint, hashOf, readCacheEntry, renderCacheEnabled, writeCacheEntry } from './render-cache.server.ts';
 import type {
   DocsPageData,
+  MarkdownContent,
   NavNode,
   RedirectData,
   SourceSummary,
@@ -297,7 +299,12 @@ export function assetUrl(version: DocsVersion, relPath: string): string {
  * corresponding pages, images and other files are served from `/docs-assets/` and links to the previous website are
  * converted to the new URLs.
  */
-export function createDocsUrlResolver(version: DocsVersion, page: PageFile, segment: string | undefined): UrlResolver {
+export function createDocsUrlResolver(
+  version: DocsVersion,
+  page: PageFile,
+  segment: string | undefined,
+  warn: (message: string) => void = warnOnce,
+): UrlResolver {
   return (url, kind) => {
     if (url.startsWith('#')) {
       return undefined;
@@ -332,21 +339,107 @@ export function createDocsUrlResolver(version: DocsVersion, page: PageFile, segm
       return `${docsUrl(version.source.id, segment, target.slug)}${suffix}`;
     }
     if (kind === 'link') {
-      warnOnce(`${version.source.id} ${version.manifest.id} ${page.relPath}: broken link "${url}"`);
+      warn(`${version.source.id} ${version.manifest.id} ${page.relPath}: broken link "${url}"`);
     }
     return `${githubUrl(version, cleaned)}${suffix}`;
   };
 }
 
-const renderCache = new Map<string, Promise<RenderedMarkdown>>();
+// The code and the configuration used to render the markdown of the documentation (pipeline, URL resolution, legacy
+// URLs, dependencies). The pages rendered by a previous build are reused as long as they don't change.
+const markdownCodeInputs = ['src/content', 'src/utils', 'website.yaml', 'pnpm-lock.yaml'];
 
-export function renderDocsPage(version: DocsVersion, page: PageFile, segment: string | undefined) {
+const versionFilesHashes = new WeakMap<DocsVersion, string>();
+
+function versionFilesHash(version: DocsVersion): string {
+  let hash = versionFilesHashes.get(version);
+  if (hash === undefined) {
+    hash = hashOf([...version.files.keys()].toSorted().join('\n'), [...version.assets].toSorted().join('\n'));
+    versionFilesHashes.set(version, hash);
+  }
+  return hash;
+}
+
+/**
+ * markdownCacheKey identifies the rendering of a page: its content, everything used to resolve its links (location of
+ * the page, files of the version, version segment of the URL) and the code rendering it.
+ */
+function markdownCacheKey(version: DocsVersion, page: PageFile, segment: string | undefined, markdown: string): string {
+  return hashOf(
+    fingerprint(markdownCodeInputs),
+    JSON.stringify([version.source.id, version.manifest.id, version.manifest.ref, segment ?? null, page.relPath]),
+    versionFilesHash(version),
+    markdown,
+  );
+}
+
+interface CachedMarkdown {
+  content: MarkdownContent;
+  /** Warnings reported while rendering the page (broken links), displayed again when the page is reused. */
+  warnings: string[];
+}
+
+function parseCachedMarkdown(serialized: string | undefined): CachedMarkdown | undefined {
+  if (serialized === undefined) {
+    return undefined;
+  }
+  try {
+    return JSON.parse(serialized) as CachedMarkdown;
+  } catch {
+    return undefined;
+  }
+}
+
+async function renderDocsPageContent(
+  version: DocsVersion,
+  page: PageFile,
+  segment: string | undefined,
+): Promise<MarkdownContent> {
+  const markdown = readFileSync(page.absPath, 'utf8');
+  const cacheKey = renderCacheEnabled() ? markdownCacheKey(version, page, segment, markdown) : undefined;
+  const cached = cacheKey === undefined ? undefined : parseCachedMarkdown(readCacheEntry('markdown', cacheKey));
+  if (cached !== undefined) {
+    cached.warnings.forEach(warnOnce);
+    return cached.content;
+  }
+  const warnings: string[] = [];
+  const rendered = await renderMarkdown(markdown, {
+    resolveUrl: createDocsUrlResolver(version, page, segment, (message) => {
+      warnings.push(message);
+      warnOnce(message);
+    }),
+  });
+  const content: MarkdownContent = {
+    title: rendered.title,
+    toc: rendered.toc,
+    hast: rendered.hast,
+    hasMermaid: rendered.hasMermaid,
+  };
+  if (cacheKey === undefined) {
+    return content;
+  }
+  const serialized = JSON.stringify({ content, warnings } satisfies CachedMarkdown);
+  writeCacheEntry('markdown', cacheKey, serialized);
+  // The page is built from the serialized content, as when it is reused by the next build, so that the data of the
+  // loader, and therefore the key of the prerendered page, are the same.
+  return (JSON.parse(serialized) as CachedMarkdown).content;
+}
+
+const renderCache = new Map<string, Promise<MarkdownContent>>();
+
+/**
+ * renderDocsPage renders the markdown of a documentation page. In the production build, the result is stored in the
+ * render cache (see render-cache.server.ts) and reused by the next builds as long as the page and the code don't change.
+ */
+export function renderDocsPage(
+  version: DocsVersion,
+  page: PageFile,
+  segment: string | undefined,
+): Promise<MarkdownContent> {
   const key = `${page.absPath}:${statSync(page.absPath).mtimeMs}:${segment ?? ''}`;
   let rendered = renderCache.get(key);
   if (rendered === undefined) {
-    rendered = renderMarkdown(readFileSync(page.absPath, 'utf8'), {
-      resolveUrl: createDocsUrlResolver(version, page, segment),
-    });
+    rendered = renderDocsPageContent(version, page, segment);
     renderCache.set(key, rendered);
   }
   return rendered;
@@ -381,6 +474,11 @@ export function entryUrl(version: DocsVersion, segment = versionSegment(version)
   return docsUrl(version.source.id, segment, page?.slug ?? '');
 }
 
+/**
+ * sourceSummary describes a source in the data of the documentation pages. It doesn't contain the latest release: a
+ * new patch release must not change the pages of the other versions and sources, so they can be reused from the
+ * render cache.
+ */
 export function sourceSummary(source: DocsSource): SourceSummary {
   const latest = source.versions[0];
   return {
@@ -389,12 +487,17 @@ export function sourceSummary(source: DocsSource): SourceSummary {
     description: source.config.description,
     href: latest === undefined ? docsUrl(source.config.id, undefined) : entryUrl(latest),
     versioned: source.versioned,
-    latestRelease: source.versioned ? latest?.manifest.release : undefined,
   };
 }
 
+/**
+ * listSourceSummaries describes the sources for the documentation index, with their latest release.
+ */
 export function listSourceSummaries(): SourceSummary[] {
-  return [...getDocsIndex().sources.values()].map(sourceSummary);
+  return [...getDocsIndex().sources.values()].map((source) => ({
+    ...sourceSummary(source),
+    latestRelease: source.versioned ? source.versions[0]?.manifest.release : undefined,
+  }));
 }
 
 type ResolvedRoute =

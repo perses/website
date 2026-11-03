@@ -95,6 +95,12 @@ The build synchronizes the content, prerenders every page, copies the images of 
 search index with [Pagefind](https://pagefind.app). Set `GITHUB_TOKEN` to avoid the rate limit of the GitHub API when
 fetching the releases.
 
+The build keeps the rendered markdown and the prerendered pages in `.cache/render/`: a page is rendered again only when
+its content, its data (navigation, versions...) or the code of the website changed since the previous build. For
+example, a new patch release of Perses doesn't render the pages of the previous versions again, unless their
+documentation changed. A change of the code or of the dependencies renders every page again. Delete `.cache/render/` to
+start from an empty cache.
+
 Other commands: `pnpm lint` (oxlint), `pnpm typecheck`, `pnpm test` (vitest), `make checklicense` (license headers of
 the source files, requires Go; `make fixlicense` adds the missing ones).
 

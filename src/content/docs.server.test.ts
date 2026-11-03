@@ -11,8 +11,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import { describe, expect, it } from 'vitest';
-import { createDocsUrlResolver, type DocsVersion, type PageFile, slugFromPath } from './docs.server';
+import { mkdtempSync, readdirSync, readFileSync, rmSync, utimesSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { createDocsUrlResolver, type DocsVersion, type PageFile, renderDocsPage, slugFromPath } from './docs.server';
+import { renderCacheStats } from './render-cache.server';
 
 describe('slugFromPath', () => {
   it('removes the extension and the README/index file names', () => {
@@ -57,5 +61,60 @@ describe('createDocsUrlResolver', () => {
   it('leaves the anchors and the external links untouched', () => {
     expect(resolve('#section', 'link')).toBeUndefined();
     expect(resolve('https://example.com', 'link')).toBeUndefined();
+  });
+});
+
+describe('renderDocsPage', () => {
+  let root: string;
+
+  beforeEach(() => {
+    root = mkdtempSync(join(tmpdir(), 'perses-website-docs-'));
+    vi.stubEnv('WEBSITE_ROOT', root);
+    vi.stubEnv('NODE_ENV', 'production');
+    vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+  });
+
+  afterEach(() => {
+    vi.unstubAllEnvs();
+    vi.restoreAllMocks();
+    rmSync(root, { recursive: true, force: true });
+  });
+
+  it('reuses the rendered markdown of the previous builds while the page does not change', async () => {
+    const overview = { relPath: 'overview.md', slug: 'overview', absPath: join(root, 'overview.md') };
+    writeFileSync(overview.absPath, '# Overview\n\nSee [the guide](guide.md) and [this page](missing.md).\n');
+    const version = {
+      source: { id: 'perses', repository: 'perses/perses', docsDir: 'docs' },
+      manifest: { id: 'v0.55', ref: 'release/v0.55', sha: 'abc', release: 'v0.55.0', dir: root },
+      versioned: true,
+      isLatest: true,
+      pages: new Map([['overview', overview]]),
+      files: new Map([['overview.md', overview]]),
+      assets: new Set<string>(),
+      nav: [],
+      navOrigin: 'test',
+    } as unknown as DocsVersion;
+    const cacheEntries = () => readdirSync(join(root, '.cache', 'render', 'markdown'));
+
+    const rendered = await renderDocsPage(version, overview, 'latest');
+    expect(rendered.title).toBe('Overview');
+    expect(cacheEntries()).toHaveLength(1);
+    const entry = JSON.parse(readFileSync(join(root, '.cache', 'render', 'markdown', cacheEntries()[0] ?? ''), 'utf8'));
+    expect(entry.warnings).toEqual([
+      'perses v0.55 overview.md: broken link "guide.md"',
+      'perses v0.55 overview.md: broken link "missing.md"',
+    ]);
+
+    // A new modification time bypasses the in-memory cache, as a new build would do.
+    const reused = renderCacheStats().reused.markdown;
+    const later = new Date(Date.now() + 5000);
+    utimesSync(overview.absPath, later, later);
+    expect(await renderDocsPage(version, overview, 'latest')).toEqual(rendered);
+    expect(renderCacheStats().reused.markdown - reused).toBe(1);
+
+    writeFileSync(overview.absPath, '# Overview of Perses\n');
+    utimesSync(overview.absPath, new Date(Date.now() + 10_000), new Date(Date.now() + 10_000));
+    expect((await renderDocsPage(version, overview, 'latest')).title).toBe('Overview of Perses');
+    expect(cacheEntries()).toHaveLength(2);
   });
 });
