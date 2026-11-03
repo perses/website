@@ -21,6 +21,7 @@ import {
   readCacheEntry,
   renderCacheDir,
   renderCacheStats,
+  serverBuildFingerprint,
   writeCacheEntry,
 } from './render-cache.server';
 
@@ -97,8 +98,70 @@ function pageWithToJSON(title: string) {
   return { loaderData: { page } };
 }
 
+// The declaration of the prerendered paths, as written by React Router in the server build.
+function prerender(paths: string[]): string {
+  return `var prerender = [\n${paths.map((path) => `\t${JSON.stringify(path)}`).join(',\n')}\n];`;
+}
+
+describe('serverBuildFingerprint', () => {
+  const roots: string[] = [];
+
+  beforeEach(() => {
+    vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+  });
+
+  afterEach(() => {
+    vi.unstubAllEnvs();
+    vi.restoreAllMocks();
+    roots.splice(0).forEach((root) => rmSync(root, { recursive: true, force: true }));
+  });
+
+  // Each server build is in `build/server` of its own website root, as the location of the files is hashed too.
+  function serverBuild(code: string): string {
+    const root = mkdtempSync(join(tmpdir(), 'perses-website-server-build-'));
+    roots.push(root);
+    vi.stubEnv('WEBSITE_ROOT', root);
+    const dir = join(root, 'build', 'server');
+    mkdirSync(dir, { recursive: true });
+    writeFileSync(join(dir, 'index.js'), code);
+    return dir;
+  }
+
+  it('ignores the list of the prerendered paths', () => {
+    const reference = serverBuildFingerprint(serverBuild(`var ssr = false;\n${prerender(['/', '/docs/'])}\nexport { prerender };\n`));
+    const withNewPost = `var ssr = false;\n${prerender(['/', '/docs/', '/blog/2026/11/03/new-post/'])}\nexport { prerender };\n`;
+
+    expect(serverBuildFingerprint(serverBuild(withNewPost))).toBe(reference);
+    expect(console.warn).not.toHaveBeenCalled();
+  });
+
+  it('changes with the code of the server build', () => {
+    const reference = serverBuildFingerprint(serverBuild(`var ssr = false;\n${prerender(['/'])}\nexport { prerender };\n`));
+
+    expect(serverBuildFingerprint(serverBuild(`var ssr = true;\n${prerender(['/'])}\nexport { prerender };\n`))).not.toBe(
+      reference,
+    );
+  });
+
+  it('hashes the whole server build when the list of the prerendered paths is not found', () => {
+    const reference = serverBuildFingerprint(serverBuild('var prerender = ["/"].concat(paths);\n'));
+
+    expect(serverBuildFingerprint(serverBuild('var prerender = ["/docs/"].concat(paths);\n'))).not.toBe(reference);
+    expect(console.warn).toHaveBeenCalledWith(expect.stringContaining('list of the prerendered paths was not found'));
+  });
+});
+
 describe('pageCacheKey', () => {
   const serverBuildDir = join(tmpdir(), 'perses-website-missing-server-build');
+
+  beforeEach(() => {
+    vi.spyOn(console, 'warn').mockImplementation(() => undefined);
+  });
+
+  afterEach(() => {
+    vi.restoreAllMocks();
+  });
+
   const key = (path: string, status: number, data: unknown) => pageCacheKey(serverBuildDir, path, status, data);
   const data = { loaderData: { 'pages/Layout/Layout': { menu: [{ title: 'Docs', href: '/docs/' }] } } };
 

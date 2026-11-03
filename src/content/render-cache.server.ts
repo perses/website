@@ -161,14 +161,19 @@ export function hashOf(...parts: string[]): string {
 
 const ignoredFile = /\.test\.[jt]sx?$/;
 
-function hashPath(hash: Hash, path: string) {
+/** FileContents returns the content of a file to hash, possibly normalized. */
+type FileContents = (path: string, contents: Buffer) => Buffer | string;
+
+const rawContents: FileContents = (_path, contents) => contents;
+
+function hashPath(hash: Hash, path: string, contentsOf: FileContents) {
   let entries;
   try {
     entries = readdirSync(path, { withFileTypes: true });
   } catch {
     hash.update(`${relative(rootDir(), path)}\0`);
     try {
-      hash.update(readFileSync(path));
+      hash.update(contentsOf(path, readFileSync(path)));
     } catch {
       // A missing file is part of the fingerprint too.
     }
@@ -177,9 +182,18 @@ function hashPath(hash: Hash, path: string) {
   }
   for (const entry of entries.toSorted((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0))) {
     if (entry.isDirectory() || (entry.isFile() && !ignoredFile.test(entry.name))) {
-      hashPath(hash, join(path, entry.name));
+      hashPath(hash, join(path, entry.name), contentsOf);
     }
   }
+}
+
+function computeFingerprint(paths: string[], contentsOf: FileContents): string {
+  const hash = createHash('sha256');
+  hash.update(`${formatVersion}\0${process.version}\0`);
+  for (const path of paths) {
+    hashPath(hash, resolve(rootDir(), path), contentsOf);
+  }
+  return hash.digest('hex');
 }
 
 const fingerprints = new Map<string, string>();
@@ -192,13 +206,44 @@ export function fingerprint(paths: string[]): string {
   const id = paths.join('\0');
   let result = fingerprints.get(id);
   if (result === undefined) {
-    const hash = createHash('sha256');
-    hash.update(`${formatVersion}\0${process.version}\0`);
-    for (const path of paths) {
-      hashPath(hash, resolve(rootDir(), path));
-    }
-    result = hash.digest('hex');
+    result = computeFingerprint(paths, rawContents);
     fingerprints.set(id, result);
+  }
+  return result;
+}
+
+// React Router writes the list of the prerendered paths in the server build. It is only used to check that the
+// requested path is prerendered, which is always the case of the page being prerendered: it is left out of the
+// fingerprint of the server build, so that adding a page (a blog post, a page of the documentation) doesn't render all
+// the other pages again. Only an array of string literals matches: if the format changes, the list is hashed again.
+const prerenderPathsDeclaration = /^var prerender = \[(?:\s*"(?:[^"\\\r\n]|\\.)*",?)*\s*\];$/m;
+
+const serverBuildFingerprints = new Map<string, string>();
+
+/**
+ * serverBuildFingerprint hashes the server build, without the list of the prerendered paths, and the dependencies. It
+ * is computed once per process.
+ */
+export function serverBuildFingerprint(serverBuildDir: string): string {
+  let result = serverBuildFingerprints.get(serverBuildDir);
+  if (result === undefined) {
+    let found = false;
+    result = computeFingerprint([serverBuildDir, 'pnpm-lock.yaml'], (path, contents) => {
+      if (!/\.[cm]?js$/.test(path)) {
+        return contents;
+      }
+      return contents.toString('utf8').replace(prerenderPathsDeclaration, () => {
+        found = true;
+        return 'var prerender = [];';
+      });
+    });
+    if (!found) {
+      console.warn(
+        '⚠ render cache: the list of the prerendered paths was not found in the server build, adding a page will ' +
+          'render all the pages again',
+      );
+    }
+    serverBuildFingerprints.set(serverBuildDir, result);
   }
   return result;
 }
@@ -282,5 +327,5 @@ export function pageCacheKey(serverBuildDir: string, path: string, status: numbe
   } catch {
     return undefined;
   }
-  return hashOf(fingerprint([serverBuildDir, 'pnpm-lock.yaml']), path, String(status), parts.join(''));
+  return hashOf(serverBuildFingerprint(serverBuildDir), path, String(status), parts.join(''));
 }
