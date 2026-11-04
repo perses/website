@@ -33,6 +33,11 @@
   logo:
     light: /assets/images/logos/Logz_light_theme.svg
     dark: /assets/images/logos/Logz_dark_theme.svg
+- name: Office 1
+  url: https://office1.bg/en
+  logo:
+    light: /assets/images/logos/Office1_light_theme.svg
+    dark: /assets/images/logos/Office1_dark_theme.svg
 - name: Pydantic
   url: https://pydantic.dev/
   logo:
