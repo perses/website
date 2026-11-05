@@ -5,6 +5,11 @@
   logo:
     light: /assets/images/logos/Amadeus_light_theme.png
     dark: /assets/images/logos/Amadeus_dark_theme.png
+- name: Apache HertzBeat
+  url: https://hertzbeat.apache.org/
+  logo:
+    light: /assets/images/logos/HertzBeat_light_theme.svg
+    dark: /assets/images/logos/HertzBeat_dark_theme.svg
 - name: Chronosphere
   url: https://chronosphere.io/
   logo:
@@ -52,3 +57,8 @@
   url: https://www.sap.com
   logo:
     light: /assets/images/logos/SAP.svg
+- name: SigNoz
+  url: https://signoz.io/
+  logo:
+    light: /assets/images/logos/SigNoz_light_theme.svg
+    dark: /assets/images/logos/SigNoz_dark_theme.svg
