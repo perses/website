@@ -10,6 +10,11 @@
   logo:
     light: /assets/images/logos/HertzBeat_light_theme.svg
     dark: /assets/images/logos/HertzBeat_dark_theme.svg
+- name: AppsCode
+  url: https://appscode.com/
+  logo:
+    light: /assets/images/logos/AppsCode_light_theme.svg
+    dark: /assets/images/logos/AppsCode_dark_theme.svg
 - name: Chronosphere
   url: https://chronosphere.io/
   logo:
@@ -33,6 +38,10 @@
   logo:
     light: /assets/images/logos/Greptime_light_theme.svg
     dark: /assets/images/logos/Greptime_dark_theme.svg
+- name: HyperAgency
+  url: https://h9y.ai/
+  logo:
+    light: /assets/images/logos/HyperAgency.svg
 - name: Logz.io
   url: https://logz.io/
   logo:
@@ -62,3 +71,13 @@
   logo:
     light: /assets/images/logos/SigNoz_light_theme.svg
     dark: /assets/images/logos/SigNoz_dark_theme.svg
+- name: SUANOVA
+  url: https://www.isuanova.com/
+  logo:
+    light: /assets/images/logos/Suanova_light_theme.png
+    dark: /assets/images/logos/Suanova_dark_theme.png
+- name: VictoriaMetrics
+  url: https://victoriametrics.com/
+  logo:
+    light: /assets/images/logos/VictoriaMetrics_light_theme.svg
+    dark: /assets/images/logos/VictoriaMetrics_dark_theme.svg
