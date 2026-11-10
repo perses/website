@@ -20,8 +20,10 @@ export interface ManifestVersion {
   id: string;
   ref: string;
   sha: string;
-  /** Latest released tag of the version. Empty for not versioned sources. */
+  /** Latest released tag of the version, latest pre-release tag for a preview. Empty for not versioned sources. */
   release: string;
+  /** True for the preview of the next version of a versioned source, which has pre-releases only. */
+  preview?: boolean;
   /** Directory containing the markdown files, relative to the root of the website when it is inside it. */
   dir: string;
 }
@@ -29,7 +31,10 @@ export interface ManifestVersion {
 export interface ManifestSource {
   id: string;
   versioned: boolean;
-  /** Versions sorted from the most recent to the oldest. The first one is the latest. */
+  /**
+   * Versions sorted from the most recent to the oldest. The preview of the next version comes first when there is one:
+   * the latest version is the first one that is not a preview.
+   */
   versions: ManifestVersion[];
 }
 
@@ -72,7 +77,9 @@ export function readManifest(): Manifest | undefined {
 
 function applyLocalOverride(source: ManifestSource, config: SourceConfig, localRepo: string): ManifestSource {
   const dir = join(localRepo, config.docsDir);
-  const [latest, ...others] = source.versions;
+  // The preview of the next version is kept.
+  const index = source.versions.findIndex((v) => v.preview !== true);
+  const latest = source.versions[index];
   const local: ManifestVersion = {
     id: latest?.id ?? 'local',
     ref: 'local',
@@ -80,7 +87,7 @@ function applyLocalOverride(source: ManifestSource, config: SourceConfig, localR
     release: latest?.release ?? '',
     dir,
   };
-  return { ...source, versions: [local, ...others] };
+  return { ...source, versions: index === -1 ? [...source.versions, local] : source.versions.with(index, local) };
 }
 
 let cachedManifest: Manifest | undefined;
@@ -106,7 +113,10 @@ export function loadManifest(): Manifest {
       continue;
     }
     const base = source ?? { id: config.id, versioned: config.versioning !== undefined, versions: [] };
-    const resolved = local ? applyLocalOverride(base, config, local) : base;
+    // A previous synchronization, kept when the network is not available, can contain a preview that the configuration
+    // doesn't enable anymore.
+    const enabled = { ...base, versions: base.versions.filter((v) => v.preview !== true || config.versioning?.preview) };
+    const resolved = local ? applyLocalOverride(enabled, config, local) : enabled;
     sources[config.id] = {
       ...resolved,
       versions: resolved.versions.map((v) => ({ ...v, dir: isAbsolute(v.dir) ? v.dir : join(rootDir(), v.dir) })),

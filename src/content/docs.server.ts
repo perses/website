@@ -42,6 +42,8 @@ export interface DocsVersion {
   manifest: ManifestVersion;
   versioned: boolean;
   isLatest: boolean;
+  /** True for the preview of the next version, which is not released yet. */
+  isPreview: boolean;
   /** Pages indexed by slug. */
   pages: Map<string, PageFile>;
   /** Pages indexed by path relative to the docs directory. */
@@ -56,8 +58,10 @@ export interface DocsVersion {
 export interface DocsSource {
   config: SourceConfig;
   versioned: boolean;
-  /** Sorted from the most recent to the oldest. */
+  /** Sorted from the most recent to the oldest, starting with the preview of the next version when there is one. */
   versions: DocsVersion[];
+  /** Latest version, undefined when the source has no released version. */
+  latest?: DocsVersion;
 }
 
 export interface DocsIndex {
@@ -147,7 +151,8 @@ function buildIndex(): DocsIndex {
       continue;
     }
     const versioned = sourceConfig.versioning !== undefined;
-    const versions = manifestSource.versions.map((version, index): DocsVersion => {
+    const latestManifest = manifestSource.versions.find((version) => version.preview !== true);
+    const versions = manifestSource.versions.map((version): DocsVersion => {
       const files = walk(version.dir);
       const markdownFiles = files.filter((f) => f.toLowerCase().endsWith('.md'));
       const pages = new Map<string, PageFile>();
@@ -165,7 +170,8 @@ function buildIndex(): DocsIndex {
         source: sourceConfig,
         manifest: version,
         versioned,
-        isLatest: index === 0,
+        isLatest: version === latestManifest,
+        isPreview: version.preview === true,
         pages,
         files: byPath,
         assets: new Set(files.filter((f) => !f.toLowerCase().endsWith('.md'))),
@@ -173,7 +179,12 @@ function buildIndex(): DocsIndex {
         navOrigin: origin,
       };
     });
-    sources.set(sourceConfig.id, { config: sourceConfig, versioned, versions });
+    sources.set(sourceConfig.id, {
+      config: sourceConfig,
+      versioned,
+      versions,
+      latest: versions.find((version) => version.isLatest),
+    });
   }
   return { sources };
 }
@@ -242,7 +253,7 @@ function resolveNavEntries(index: DocsIndex, version: DocsVersion, entries: NavE
         return [{ title: entry.title, href: entry.href, external: isExternalUrl(entry.href) }];
       case 'page': {
         if (entry.source !== undefined && entry.source !== version.source.id) {
-          const target = index.sources.get(entry.source)?.versions[0];
+          const target = index.sources.get(entry.source)?.latest;
           const page = target && findPage(target, entry.path);
           if (target === undefined || page === undefined) {
             warnOnce(`${version.navOrigin}: page "${entry.source}:${entry.path}" not found`);
@@ -480,7 +491,7 @@ export function entryUrl(version: DocsVersion, segment = versionSegment(version)
  * render cache.
  */
 export function sourceSummary(source: DocsSource): SourceSummary {
-  const latest = source.versions[0];
+  const { latest } = source;
   return {
     id: source.config.id,
     title: source.config.title,
@@ -496,7 +507,7 @@ export function sourceSummary(source: DocsSource): SourceSummary {
 export function listSourceSummaries(): SourceSummary[] {
   return [...getDocsIndex().sources.values()].map((source) => ({
     ...sourceSummary(source),
-    latestRelease: source.versioned ? source.versions[0]?.manifest.release : undefined,
+    latestRelease: source.versioned ? source.latest?.manifest.release : undefined,
   }));
 }
 
@@ -506,7 +517,7 @@ type ResolvedRoute =
 
 export function resolveDocsRoute(sourceId: string, splat: string): ResolvedRoute | undefined {
   const source = getDocsIndex().sources.get(sourceId);
-  const latest = source?.versions[0];
+  const latest = source?.latest;
   if (source === undefined || latest === undefined) {
     return undefined;
   }
@@ -539,13 +550,21 @@ export function resolveDocsRoute(sourceId: string, splat: string): ResolvedRoute
   return undefined;
 }
 
+function versionLabel(version: DocsVersion): string {
+  if (version.isLatest) {
+    return `${version.manifest.id} (latest)`;
+  }
+  // Not the pre-release tag: a new pre-release must not change the pages of the other versions.
+  return version.isPreview ? `${version.manifest.id} (preview)` : version.manifest.id;
+}
+
 function versionOptions(source: DocsSource, slug: string): VersionOption[] {
   if (!source.versioned) {
     return [];
   }
   return source.versions.map((version) => ({
     id: version.manifest.id,
-    label: version.isLatest ? `${version.manifest.id} (latest)` : version.manifest.id,
+    label: versionLabel(version),
     href: version.pages.has(slug) ? docsUrl(source.config.id, versionSegment(version), slug) : entryUrl(version),
     latest: version.isLatest,
   }));
@@ -589,6 +608,7 @@ export async function loadDocsPage(
     version: segment,
     resolvedVersion: source.versioned ? version.manifest.id : undefined,
     isLatest: version.isLatest,
+    prerelease: version.isPreview ? version.manifest.release : undefined,
     versions: versionOptions(source, slug),
     nav: resolveNavEntries(index, version, version.nav),
     sources: [...index.sources.values()].map(sourceSummary),
@@ -625,7 +645,7 @@ export function listDocsPaths(): string[] {
         }
       }
     }
-    const latest = source.versions[0];
+    const { latest } = source;
     if (source.config.legacyPath && latest) {
       for (const slug of ['', ...latest.pages.keys()]) {
         paths.add(`/${source.config.legacyPath}/${slug}${slug === '' ? '' : '/'}`);

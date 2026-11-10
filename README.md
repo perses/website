@@ -56,7 +56,8 @@ It contains:
   [perses/helm-charts](https://github.com/perses/helm-charts), [perses/plugins](https://github.com/perses/plugins) and
   [perses/metrics-usage](https://github.com/perses/metrics-usage), pulled from these repositories at build time.
   Perses, the operator and metrics-usage are versioned: every minor version is published (from the release branch
-  when it exists, the latest patch tag otherwise),
+  when it exists, the latest patch tag otherwise). The next minor version of Perses is also published as a preview,
+  from its first pre-release (beta, release candidate) to its final release (`preview` in `website.yaml`),
 - the download pages, built from the latest GitHub releases. In the browser, the pages also check GitHub for the
   releases published since the build and display them (cached 10 minutes; if GitHub is not reachable or rate limits
   the visitor, the releases of the build are displayed).

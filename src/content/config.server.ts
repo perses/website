@@ -25,6 +25,8 @@ const versioningSchema = z.object({
   minVersion: z.string().regex(/^v\d+\.\d+$/, 'minVersion must look like vX.Y'),
   // Without release branch, each minor version is taken from its latest patch tag.
   releaseBranch: z.string().optional(),
+  // Publish the next minor version as a preview while it has pre-releases only (beta, release candidate...).
+  preview: z.boolean().default(false),
 });
 
 const sourceSchema = z
