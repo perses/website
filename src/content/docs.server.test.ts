@@ -271,6 +271,14 @@ describe('preview of the next version', () => {
     expect(data.versions.map((v) => v.id)).toEqual(['v0.55', 'v0.54']);
   });
 
+  it('hides a source left without version when the preview is disabled', async () => {
+    writeManifest([preview]);
+    writeFileSync(join(root, 'website.yaml'), previewConfig(false));
+    expect(listDocsPaths().filter((path) => path.startsWith('/docs/perses/'))).toEqual([]);
+    expect(listSourceSummaries()).toEqual([]);
+    expect(await loadDocsPage('perses', '')).toBeUndefined();
+  });
+
   it('replaces the latest version with a local clone, not the preview', () => {
     const clone = join(root, 'clone');
     vi.stubEnv('WEBSITE_LOCAL_SOURCES', `perses=${clone}`);

@@ -124,6 +124,9 @@ export async function syncSources({ force = false, log = console.log }: SyncOpti
         sources[source.id] = fallback;
         return;
       }
+      if (resolved.length === 0) {
+        log(`⚠ ${source.id}: no version to publish, the source is not displayed`);
+      }
       const versions = await Promise.all(
         resolved.map(async (version) => {
           const destination = join(sourcesCacheDir(), source.id, version.id);

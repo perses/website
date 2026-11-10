@@ -93,7 +93,8 @@ function applyLocalOverride(source: ManifestSource, config: SourceConfig, localR
 let cachedManifest: Manifest | undefined;
 
 /**
- * loadManifest returns the list of sources and versions available locally, with the local overrides applied.
+ * loadManifest returns the list of sources and versions available locally, with the local overrides applied. The
+ * sources without any version to publish are left out, as they have no page.
  * It throws when the content has never been synchronized.
  */
 export function loadManifest(): Manifest {
@@ -117,6 +118,10 @@ export function loadManifest(): Manifest {
     // doesn't enable anymore.
     const enabled = { ...base, versions: base.versions.filter((v) => v.preview !== true || config.versioning?.preview) };
     const resolved = local ? applyLocalOverride(enabled, config, local) : enabled;
+    // For example a versioned source not released yet, without preview: listing it would publish pages not found.
+    if (resolved.versions.length === 0) {
+      continue;
+    }
     sources[config.id] = {
       ...resolved,
       versions: resolved.versions.map((v) => ({ ...v, dir: isAbsolute(v.dir) ? v.dir : join(rootDir(), v.dir) })),
