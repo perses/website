@@ -159,6 +159,19 @@ downloads:
     repository: perses/plugins
 `;
 
+// The prerendering fails on a page not found: every listed path of the documentation must be a page or a redirection.
+async function expectPrerenderable() {
+  const paths = listDocsPaths().filter((path) => path.startsWith('/docs/perses/'));
+  const routes = await Promise.all(
+    paths.map(async (path) => {
+      const [, source = '', splat = ''] = /^\/docs\/([a-z0-9-]+)\/(.*)$/.exec(path) ?? [];
+      return { path, data: await loadDocsPage(source, splat) };
+    }),
+  );
+  expect(paths.length).toBeGreaterThan(1);
+  expect(routes.filter(({ data }) => data === undefined).map(({ path }) => path)).toEqual([]);
+}
+
 describe('preview of the next version', () => {
   let root: string;
 
@@ -169,6 +182,16 @@ describe('preview of the next version', () => {
       writeFileSync(join(dir, `${slug}.md`), `# ${slug} ${id}\n`);
     }
     writeFileSync(join(dir, 'nav.yaml'), slugs.map((slug) => `- ${slug}.md`).join('\n'));
+  }
+
+  const preview = { id: 'v0.56', ref: 'release/v0.56', sha: 'c', release: 'v0.56.0-rc.1', preview: true, dir: 'docs/v0.56' };
+
+  function writeManifest(versions: object[]) {
+    mkdirSync(join(root, '.cache', 'sources'), { recursive: true });
+    writeFileSync(
+      join(root, '.cache', 'sources', 'manifest.json'),
+      JSON.stringify({ generatedAt: '', sources: { perses: { id: 'perses', versioned: true, versions } } }),
+    );
   }
 
   beforeEach(() => {
@@ -182,16 +205,11 @@ describe('preview of the next version', () => {
     writeVersion('v0.56', ['overview', 'new-feature']);
     writeVersion('v0.55', ['overview']);
     writeVersion('v0.54', ['overview']);
-    const versions = [
-      { id: 'v0.56', ref: 'release/v0.56', sha: 'c', release: 'v0.56.0-rc.1', preview: true, dir: 'docs/v0.56' },
+    writeManifest([
+      preview,
       { id: 'v0.55', ref: 'release/v0.55', sha: 'b', release: 'v0.55.1', dir: 'docs/v0.55' },
       { id: 'v0.54', ref: 'release/v0.54', sha: 'a', release: 'v0.54.0', dir: 'docs/v0.54' },
-    ];
-    mkdirSync(join(root, '.cache', 'sources'), { recursive: true });
-    writeFileSync(
-      join(root, '.cache', 'sources', 'manifest.json'),
-      JSON.stringify({ generatedAt: '', sources: { perses: { id: 'perses', versioned: true, versions } } }),
-    );
+    ]);
   });
 
   afterEach(() => {
@@ -228,6 +246,22 @@ describe('preview of the next version', () => {
     ]);
     expect(listDocsPaths()).toContain('/docs/perses/v0.56/new-feature/');
     expect(listDocsPaths()).not.toContain('/docs/perses/latest/new-feature/');
+    await expectPrerenderable();
+  });
+
+  it('leads to the preview while no version is released', async () => {
+    writeManifest([preview]);
+    expect(await loadDocsPage('perses', '')).toEqual({ to: '/docs/perses/v0.56/overview/' });
+    expect(await loadDocsPage('perses', 'overview')).toEqual({ to: '/docs/perses/v0.56/overview/' });
+    expect(await loadDocsPage('perses', 'latest/overview')).toBeUndefined();
+    const data = (await loadDocsPage('perses', 'v0.56/overview')) as DocsPageData;
+    expect(data).toMatchObject({ resolvedVersion: 'v0.56', isLatest: false, prerelease: 'v0.56.0-rc.1' });
+    expect(data.versions).toEqual([
+      { id: 'v0.56', label: 'v0.56 (preview)', href: '/docs/perses/v0.56/overview/', latest: false },
+    ]);
+    expect(listSourceSummaries()).toMatchObject([{ href: '/docs/perses/v0.56/overview/', latestRelease: undefined }]);
+    expect(listDocsPaths().some((path) => path.startsWith('/docs/perses/latest/'))).toBe(false);
+    await expectPrerenderable();
   });
 
   it('hides the preview when the configuration does not enable it anymore', async () => {

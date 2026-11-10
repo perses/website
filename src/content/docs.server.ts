@@ -253,7 +253,8 @@ function resolveNavEntries(index: DocsIndex, version: DocsVersion, entries: NavE
         return [{ title: entry.title, href: entry.href, external: isExternalUrl(entry.href) }];
       case 'page': {
         if (entry.source !== undefined && entry.source !== version.source.id) {
-          const target = index.sources.get(entry.source)?.latest;
+          const targetSource = index.sources.get(entry.source);
+          const target = targetSource && mainVersion(targetSource);
           const page = target && findPage(target, entry.path);
           if (target === undefined || page === undefined) {
             warnOnce(`${version.navOrigin}: page "${entry.source}:${entry.path}" not found`);
@@ -486,17 +487,25 @@ export function entryUrl(version: DocsVersion, segment = versionSegment(version)
 }
 
 /**
+ * mainVersion returns the version a source leads to by default: its latest version, or the preview of its next version
+ * while no version is released yet.
+ */
+function mainVersion(source: DocsSource): DocsVersion | undefined {
+  return source.latest ?? source.versions.find((version) => version.isPreview);
+}
+
+/**
  * sourceSummary describes a source in the data of the documentation pages. It doesn't contain the latest release: a
  * new patch release must not change the pages of the other versions and sources, so they can be reused from the
  * render cache.
  */
 export function sourceSummary(source: DocsSource): SourceSummary {
-  const { latest } = source;
+  const main = mainVersion(source);
   return {
     id: source.config.id,
     title: source.config.title,
     description: source.config.description,
-    href: latest === undefined ? docsUrl(source.config.id, undefined) : entryUrl(latest),
+    href: main === undefined ? docsUrl(source.config.id, undefined) : entryUrl(main),
     versioned: source.versioned,
   };
 }
@@ -517,8 +526,8 @@ type ResolvedRoute =
 
 export function resolveDocsRoute(sourceId: string, splat: string): ResolvedRoute | undefined {
   const source = getDocsIndex().sources.get(sourceId);
-  const latest = source?.latest;
-  if (source === undefined || latest === undefined) {
+  const main = source && mainVersion(source);
+  if (source === undefined || main === undefined) {
     return undefined;
   }
   const segments = splat.split('/').filter((s) => s !== '');
@@ -528,24 +537,24 @@ export function resolveDocsRoute(sourceId: string, splat: string): ResolvedRoute
       ? { type: 'redirect', to: entryUrl(version, segment) }
       : { type: 'page', source, version, segment, slug };
   if (!source.versioned) {
-    return page(latest, undefined, segments.join('/'));
+    return page(main, undefined, segments.join('/'));
   }
   const [first, ...rest] = segments;
   const slug = rest.join('/');
   if (first === undefined) {
-    return { type: 'redirect', to: entryUrl(latest) };
+    return { type: 'redirect', to: entryUrl(main) };
   }
   if (first === LATEST) {
-    return page(latest, LATEST, slug);
+    return source.latest === undefined ? undefined : page(source.latest, LATEST, slug);
   }
   const version = source.versions.find((v) => v.manifest.id === first);
   if (version !== undefined) {
     return page(version, version.manifest.id, slug);
   }
-  // URL without version, for example a link written by hand: redirect to the latest version when the page exists.
+  // URL without version, for example a link written by hand: redirect to the main version when the page exists.
   const unversionedSlug = segments.join('/');
-  if (latest.pages.has(unversionedSlug)) {
-    return { type: 'redirect', to: docsUrl(sourceId, LATEST, unversionedSlug) };
+  if (main.pages.has(unversionedSlug)) {
+    return { type: 'redirect', to: docsUrl(sourceId, versionSegment(main), unversionedSlug) };
   }
   return undefined;
 }

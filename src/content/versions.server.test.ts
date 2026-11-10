@@ -126,5 +126,12 @@ describe('resolveVersions', () => {
       const major = parseLsRemote(['a\trefs/tags/v0.55.0', 'b\trefs/tags/v0.56.0-rc.0', 'c\trefs/tags/v1.0.0-beta.0'].join('\n'));
       expect(resolveVersions(major, { minVersion: 'v0.55', preview: true }).map((v) => v.id)).toEqual(['v1.0', 'v0.55']);
     });
+
+    it('publishes the preview of the first version, before any release', () => {
+      const firstBetas = parseLsRemote(['a\trefs/tags/v0.1.0-beta.1', 'b\trefs/tags/v0.1.0-beta.2'].join('\n'));
+      expect(resolveVersions(firstBetas, { minVersion: 'v0.1', preview: true })).toEqual([
+        { id: 'v0.1', ref: 'v0.1.0-beta.2', sha: 'b', release: 'v0.1.0-beta.2', preview: true },
+      ]);
+    });
   });
 });

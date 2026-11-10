@@ -137,7 +137,7 @@ interface LatestTag {
  * created for a release candidate doesn't appear before the release is out.
  * With `preview`, the next minor version is also published while it has pre-releases only (beta, release
  * candidate...), flagged as preview: it is the most recent minor version having a pre-release, when it is more recent
- * than every released version.
+ * than every released version, or when no version is released yet.
  * Without releaseBranch, every version is taken from its latest patch tag (pre-release tag for the preview).
  */
 export function resolveVersions(

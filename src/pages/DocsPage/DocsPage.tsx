@@ -30,7 +30,7 @@ import type { DocsPageData } from '../../content/types';
 import { pageMeta, siteUrlFrom } from '../../utils/meta';
 import { findTrail } from '../../utils/nav';
 import { LATEST_SCOPE, versionScope } from '../../utils/search';
-import { docsUrl, LATEST } from '../../utils/urls';
+import { docsUrl } from '../../utils/urls';
 import type { Route } from './+types/DocsPage';
 import { PageNavigation } from './PageNavigation';
 
@@ -149,8 +149,7 @@ export default function DocsPage({ loaderData }: Route.ComponentProps) {
             source={page.source.title}
             version={page.resolvedVersion}
             prerelease={page.prerelease}
-            latestVersion={latestVersion?.id}
-            latestHref={latestVersion?.href ?? docsUrl(page.source.id, LATEST)}
+            latest={latestVersion}
           />
         )}
         {trail.length > 0 && (
