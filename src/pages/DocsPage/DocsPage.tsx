@@ -13,25 +13,24 @@
 
 import EditOutlined from '@mui/icons-material/EditOutlined';
 import MenuOpen from '@mui/icons-material/MenuOpen';
-import Alert from '@mui/material/Alert';
 import Box from '@mui/material/Box';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Button from '@mui/material/Button';
 import Drawer from '@mui/material/Drawer';
-import Link from '@mui/material/Link';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
-import { data, Link as RouterLink, redirect, useLocation } from 'react-router';
+import { data, redirect, useLocation } from 'react-router';
 import { DocsSidebar } from '../../components/DocsSidebar/DocsSidebar';
 import { Markdown } from '../../components/Markdown/Markdown';
 import { NotFound } from '../../components/NotFound/NotFound';
 import { TableOfContents } from '../../components/TableOfContents/TableOfContents';
+import { VersionNotice } from '../../components/VersionNotice/VersionNotice';
 import { loadDocsPage } from '../../content/docs.server';
 import type { DocsPageData } from '../../content/types';
 import { pageMeta, siteUrlFrom } from '../../utils/meta';
 import { findTrail } from '../../utils/nav';
 import { LATEST_SCOPE, versionScope } from '../../utils/search';
-import { docsUrl, LATEST } from '../../utils/urls';
+import { docsUrl } from '../../utils/urls';
 import type { Route } from './+types/DocsPage';
 import { PageNavigation } from './PageNavigation';
 
@@ -145,14 +144,13 @@ export default function DocsPage({ loaderData }: Route.ComponentProps) {
         >
           {page.source.title} documentation
         </Button>
-        {!page.isLatest && page.resolvedVersion !== undefined && (
-          <Alert severity="warning" sx={{ mb: 3 }}>
-            You are reading the documentation of {page.source.title} {page.resolvedVersion}.{' '}
-            <Link component={RouterLink} to={latestVersion?.href ?? docsUrl(page.source.id, LATEST)}>
-              {/* The minor version, not the patch release: a patch release doesn't change the pages of the old versions. */}
-              Go to the latest version{latestVersion === undefined ? '' : ` (${latestVersion.id})`}.
-            </Link>
-          </Alert>
+        {page.resolvedVersion !== undefined && !page.isLatest && (
+          <VersionNotice
+            source={page.source.title}
+            version={page.resolvedVersion}
+            prerelease={page.prerelease}
+            latest={latestVersion}
+          />
         )}
         {trail.length > 0 && (
           <Breadcrumbs sx={{ mb: 2, fontSize: '0.875rem' }} aria-label="Breadcrumb">

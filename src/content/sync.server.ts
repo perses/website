@@ -124,16 +124,20 @@ export async function syncSources({ force = false, log = console.log }: SyncOpti
         sources[source.id] = fallback;
         return;
       }
+      if (resolved.length === 0) {
+        log(`⚠ ${source.id}: no version to publish, the source is not displayed`);
+      }
       const versions = await Promise.all(
         resolved.map(async (version) => {
           const destination = join(sourcesCacheDir(), source.id, version.id);
           const dir = relative(rootDir(), destination);
+          const label = `${source.id} ${version.id}${version.preview ? ' (preview)' : ''}`;
           const before = previous?.sources[source.id]?.versions.find((v) => v.id === version.id);
           if (!force && before?.sha === version.sha && existsSync(destination)) {
-            log(`✓ ${source.id} ${version.id} up to date (${version.ref})`);
+            log(`✓ ${label} up to date (${version.ref})`);
             return { ...version, dir };
           }
-          log(`↓ ${source.id} ${version.id} from ${version.ref} (${version.sha.slice(0, 7)})`);
+          log(`↓ ${label} from ${version.ref} (${version.sha.slice(0, 7)})`);
           await downloadDocs(source, version.sha, destination);
           return { ...version, dir };
         }),

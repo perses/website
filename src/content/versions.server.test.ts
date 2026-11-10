@@ -80,4 +80,58 @@ describe('resolveVersions', () => {
   it('rejects an invalid minimum version', () => {
     expect(() => resolveVersions(refs, { minVersion: '0.53', releaseBranch: 'release/v{major}.{minor}' })).toThrow('invalid minor version');
   });
+
+  describe('with preview', () => {
+    const options = { minVersion: 'v0.53', releaseBranch: 'release/v{major}.{minor}', preview: true };
+
+    it('publishes first the next minor version having pre-releases only, from its release branch', () => {
+      const versions = resolveVersions(refs, options);
+      expect(versions.map((v) => v.id)).toEqual(['v0.56', 'v0.55', 'v0.54', 'v0.53']);
+      expect(versions[0]).toEqual({ id: 'v0.56', ref: 'release/v0.56', sha: 'ddd1', release: 'v0.56.0-rc.0', preview: true });
+      expect(versions.slice(1).some((v) => v.preview)).toBe(false);
+    });
+
+    it('uses the latest pre-release tag without release branch, following the semver precedence', () => {
+      const prereleases = parseLsRemote(
+        ['a\trefs/tags/v0.55.0', 'b\trefs/tags/v0.56.0-beta.10', 'c\trefs/tags/v0.56.0-beta.9', 'd\trefs/tags/v0.56.0-alpha.0'].join('\n'),
+      );
+      expect(resolveVersions(prereleases, { minVersion: 'v0.55', preview: true })[0]).toEqual({
+        id: 'v0.56',
+        ref: 'v0.56.0-beta.10',
+        sha: 'b',
+        release: 'v0.56.0-beta.10',
+        preview: true,
+      });
+      const withRc = parseLsRemote(['a\trefs/tags/v0.55.0', 'b\trefs/tags/v0.56.0-beta.10', 'e\trefs/tags/v0.56.0-rc.0'].join('\n'));
+      expect(resolveVersions(withRc, { minVersion: 'v0.55', preview: true })[0]?.release).toBe('v0.56.0-rc.0');
+    });
+
+    it('stops the preview once the version is released', () => {
+      const released = parseLsRemote(`${lsRemote}\nlll1\trefs/tags/v0.56.0`);
+      const versions = resolveVersions(released, options);
+      expect(versions[0]).toEqual({ id: 'v0.56', ref: 'release/v0.56', sha: 'ddd1', release: 'v0.56.0' });
+      expect(versions.some((v) => v.preview)).toBe(false);
+    });
+
+    it('ignores the pre-releases of the versions older than the latest release', () => {
+      const older = parseLsRemote(
+        ['a\trefs/tags/v0.55.0', 'b\trefs/tags/v0.55.1-rc.0', 'c\trefs/tags/v0.54.0-rc.0', 'd\trefs/heads/release/v0.54'].join('\n'),
+      );
+      expect(resolveVersions(older, { ...options, minVersion: 'v0.50' })).toEqual([
+        { id: 'v0.55', ref: 'v0.55.0', sha: 'a', release: 'v0.55.0' },
+      ]);
+    });
+
+    it('publishes the most recent unreleased version, including a new major version', () => {
+      const major = parseLsRemote(['a\trefs/tags/v0.55.0', 'b\trefs/tags/v0.56.0-rc.0', 'c\trefs/tags/v1.0.0-beta.0'].join('\n'));
+      expect(resolveVersions(major, { minVersion: 'v0.55', preview: true }).map((v) => v.id)).toEqual(['v1.0', 'v0.55']);
+    });
+
+    it('publishes the preview of the first version, before any release', () => {
+      const firstBetas = parseLsRemote(['a\trefs/tags/v0.1.0-beta.1', 'b\trefs/tags/v0.1.0-beta.2'].join('\n'));
+      expect(resolveVersions(firstBetas, { minVersion: 'v0.1', preview: true })).toEqual([
+        { id: 'v0.1', ref: 'v0.1.0-beta.2', sha: 'b', release: 'v0.1.0-beta.2', preview: true },
+      ]);
+    });
+  });
 });

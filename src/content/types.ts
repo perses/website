@@ -57,6 +57,8 @@ export interface DocsPageData {
   /** Concrete version id (`vX.Y`), undefined for not versioned sources. */
   resolvedVersion?: string;
   isLatest: boolean;
+  /** Latest pre-release (`vX.Y.Z-rc.N`) of the preview of the next version, undefined for the other versions. */
+  prerelease?: string;
   versions: VersionOption[];
   nav: NavNode[];
   sources: SourceSummary[];

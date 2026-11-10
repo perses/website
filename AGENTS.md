@@ -48,7 +48,9 @@ Before editing, read `README.md` for the local setup, the organization of the co
 
 The documentation is not written here. It is pulled at build time from perses/perses, perses/perses-operator,
 perses/helm-charts, perses/plugins and perses/metrics-usage (`docs/` of each repository). Versioned sources publish
-every minor version from its release branch `release/vX.Y`, or its latest patch tag. Fix the content of the
+every minor version from its release branch `release/vX.Y`, or its latest patch tag. With `versioning.preview`, the
+next minor version is also published as a preview while it has pre-releases only: it comes first in the versions of the
+source, which is why the latest version is `DocsSource.latest`, not the first version. Fix the content of the
 documentation in its repository, and the navigation in the `docs/nav.yaml` of that repository; `content/nav/` is only a
 fallback for old versions.
 

@@ -43,7 +43,7 @@ import type { Route } from './+types/DownloadPlugins';
 
 export function loader() {
   const downloads = loadDownloads();
-  const pluginDocs = getDocsIndex().sources.get('plugins')?.versions[0];
+  const pluginDocs = getDocsIndex().sources.get('plugins')?.latest;
   return {
     repository: loadConfig().downloads.plugins.repository,
     plugins: downloads?.plugins,
