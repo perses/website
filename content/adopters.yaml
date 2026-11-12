@@ -15,6 +15,11 @@
   logo:
     light: /assets/images/logos/AppsCode_light_theme.svg
     dark: /assets/images/logos/AppsCode_dark_theme.svg
+- name: Astrona
+  url: https://astrona.io
+  logo:
+    light: /assets/images/logos/Astrona_light_theme.svg
+    dark: /assets/images/logos/Astrona_dark_theme.svg
 - name: Chronosphere
   url: https://chronosphere.io/
   logo:
