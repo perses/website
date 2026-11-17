@@ -178,7 +178,3 @@ were re-run or excluded.
 
 If you have feedback, please open an issue in the
 [Perses MCP Server repository](https://github.com/perses/mcp-server/issues).
-
-Thanks to everyone who contributed to this release: [@ibakshay](https://github.com/ibakshay) and
-[@Nexucis](https://github.com/Nexucis).
-
