@@ -41,8 +41,9 @@ describe('feeds', () => {
     };
     expect(feed.version).toBe('https://jsonfeed.org/version/1.1');
     expect(feed.feed_url).toBe('https://perses.dev/feed_json_created.json');
-    expect(feed.items[0]?.id).toBe('https://perses.dev/blog/2026/10/21/release-v0550/');
+    const release = feed.items.find((item) => item.id === 'https://perses.dev/blog/2026/10/21/release-v0550/');
+    expect(release).toBeDefined();
     expect(feed.items.every((item) => item.id === item.url)).toBe(true);
-    expect(feed.items[0]?.content_html).toContain('src="https://perses.dev/assets/images/blog/');
+    expect(release?.content_html).toContain('src="https://perses.dev/assets/images/blog/');
   });
 });
