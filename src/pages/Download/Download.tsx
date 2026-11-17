@@ -53,7 +53,7 @@ export function loader() {
 export function meta({ matches }: Route.MetaArgs) {
   return pageMeta({
     title: 'Download',
-    description: 'Download the latest releases of Perses, the Perses operator and metrics-usage.',
+    description: 'Download the latest releases of Perses, the Perses operator, metrics-usage and the Perses MCP server.',
     canonical: '/download/',
     siteUrl: siteUrlFrom(matches),
   });

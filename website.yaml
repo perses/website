@@ -89,6 +89,15 @@ docs:
       versioning:
         # No release branch: each minor version is taken from its latest patch tag.
         minVersion: v0.8
+    - id: mcp-server
+      title: Perses MCP Server
+      description: Let AI assistants and agents interact with Perses through the Model Context Protocol (MCP).
+      repository: perses/mcp-server
+      docsDir: docs
+      versioning:
+        # No release branch: each minor version is taken from its latest patch tag. The documentation is available
+        # since v0.3.
+        minVersion: v0.3
 
 blog:
   title: Perses Blog
@@ -154,5 +163,12 @@ downloads:
       install:
         - label: Docker
           command: docker pull persesdev/metrics-usage:{version}
+    - id: mcp-server
+      title: Perses MCP Server
+      description: The Model Context Protocol (MCP) server letting AI assistants and agents interact with Perses.
+      repository: perses/mcp-server
+      install:
+        - label: Docker
+          command: docker pull persesdev/mcp-server:{version}
   plugins:
     repository: perses/plugins

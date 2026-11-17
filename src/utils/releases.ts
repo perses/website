@@ -70,19 +70,25 @@ export interface GitHubRelease {
   assets: GitHubAsset[];
 }
 
+// The archives use either the Go naming (`perses_0.55.0_linux_amd64.tar.gz`) or the `uname` one
+// (`perses-mcp-server_Linux_x86_64.tar.gz`). The platform is always reported with the Go naming, like the detected
+// platform of the visitor.
 const platformRegexp =
-  /_(linux|darwin|windows|freebsd|netbsd|openbsd)_(amd64|arm64|armv6|armv7|386|ppc64le|s390x|riscv64)\.(tar\.gz|zip)$/;
+  /_(linux|darwin|windows|freebsd|netbsd|openbsd)_(amd64|x86_64|arm64|armv6|armv7|386|i386|ppc64le|s390x|riscv64)\.(tar\.gz|zip)$/i;
+
+const unameArchs: Record<string, string> = { x86_64: 'amd64', i386: '386' };
 
 export function parseAsset(asset: GitHubAsset): DownloadAsset {
   const platform = platformRegexp.exec(asset.name);
+  const arch = platform?.[2]?.toLowerCase();
   const sha256 = asset.digest?.startsWith('sha256:') ? asset.digest.slice('sha256:'.length) : undefined;
   return {
     name: asset.name,
     url: asset.browser_download_url,
     size: asset.size,
     sha256,
-    os: platform?.[1],
-    arch: platform?.[2],
+    os: platform?.[1]?.toLowerCase(),
+    arch: arch === undefined ? undefined : (unameArchs[arch] ?? arch),
     kind: platform ? 'archive' : /checksums?\.txt$/.test(asset.name) ? 'checksums' : /\.(tar\.gz|zip)$/.test(asset.name) ? 'archive' : 'other',
   };
 }

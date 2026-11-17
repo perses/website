@@ -28,6 +28,11 @@ const asset = (name: string, digest?: string) => ({
   digest,
 });
 
+const platformOf = (name: string) => {
+  const { os, arch, kind } = parseAsset(asset(name));
+  return { os, arch, kind };
+};
+
 describe('parseAsset', () => {
   it('extracts the platform and the checksum of an archive', () => {
     expect(parseAsset(asset('perses_0.55.0_linux_arm64.tar.gz', 'sha256:abc'))).toEqual({
@@ -44,6 +49,13 @@ describe('parseAsset', () => {
   it('identifies the checksums file and the other files', () => {
     expect(parseAsset(asset('perses_0.55.0_checksums.txt')).kind).toBe('checksums');
     expect(parseAsset(asset('ui-sbom.cdx.json')).kind).toBe('other');
+  });
+
+  it('reports the platform of the archives named like uname with the Go naming', () => {
+    expect(platformOf('perses-mcp-server_Darwin_x86_64.tar.gz')).toEqual({ os: 'darwin', arch: 'amd64', kind: 'archive' });
+    expect(platformOf('perses-mcp-server_Linux_arm64.tar.gz')).toEqual({ os: 'linux', arch: 'arm64', kind: 'archive' });
+    expect(platformOf('perses-mcp-server_Windows_i386.zip')).toEqual({ os: 'windows', arch: '386', kind: 'archive' });
+    expect(platformOf('mcp-server_0.3.0_checksums.txt')).toEqual({ os: undefined, arch: undefined, kind: 'checksums' });
   });
 });
 
